@@ -39,13 +39,13 @@
                     </form>
 
                     <!--Register-->
-                    <form action="" class="formulario__register">
-                        <h2>Regístrarse</h2>
-                        <input type="text" placeholder="Nombre completo">
-                        <input type="text" placeholder="Correo Electronico">
-                        <input type="text" placeholder="Usuario">
-                        <input type="password" placeholder="Contraseña">
-                        <button>Regístrarse</button>
+                    <form action="../Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register">
+                        <h2>Regístrate</h2>
+                        <input type="text" placeholder="Nombre completo" name="nombre_completo">
+                        <input type="email" placeholder="Correo Electronico" name="email">
+                        <input type="text" placeholder="Usuario" name="user">
+                        <input type="password" placeholder="Contraseña" name="password">
+                        <button >Registrarse</button>
                     </form>
                 </div>
             </div>
