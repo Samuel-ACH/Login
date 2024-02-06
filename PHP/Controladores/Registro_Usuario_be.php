@@ -7,11 +7,14 @@ include 'Conexion_be.php';
 $nombre_completo = $_POST['nombre_completo'];
 $correo = $_POST['email'];
 $usuario = $_POST['user'];
+// Encriptar contraseña
 $clave = $_POST['password'];
+$encrypt_password = password_hash($clave, PASSWORD_DEFAULT);
+
 
 // Query para insertar los datos en la tabla de la base de datos
 $query = "INSERT INTO usuario(Nombre_Completo, Correo, Usuario, Clave) 
-          VALUES ('$nombre_completo', '$correo', '$usuario', '$clave')";
+          VALUES ('$nombre_completo', '$correo', '$usuario', '$encrypt_password')";
 
 // Consulta a la BD para verificar la existencia de un correo o usuario
 $consultar_Email = "SELECT * FROM usuario WHERE Correo = '$correo' ";
