@@ -62,3 +62,10 @@ anchoPage();
             caja_trasera_login.style.opacity = "1";
         }
 }
+
+const tipodni = document.getElementById("tipodni");
+
+tipodni.addEventListener("change", function() {
+  const selectedValue = this.value;
+  console.log(selectedValue);
+});
