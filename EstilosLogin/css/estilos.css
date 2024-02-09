@@ -174,3 +174,21 @@ main{
         position: relative;
     }
 }
+
+/* Acomodar los Radio Button */
+
+.gender-options label {
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre los botones de opción */
+}
+
+.gender-options input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gender-options span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px; /* Espacio entre el botón y el texto de la opción */
+}

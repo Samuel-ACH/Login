@@ -76,23 +76,22 @@ mysqli_close($conexion);
  -->
  <?php
 include 'Conexion_be.php';
-
-$tipodni = $_POST['tipodni'];
 $dni = $_POST['dni'];
 $usuario = $_POST['usuario'];
 $correo = $_POST['correo'];
 $nombre = $_POST['nombre'];
 $direccion = $_POST['direccion'];
-$fechanacimiento = $_POST['fechanacimiento'];
+$fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $genero = $_POST['genero'];
 $clave = $_POST['clave'];
 
 $clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
 
-$query1 = "INSERT INTO tbl_tipo_Documento(Descripcion) VALUES ('$tipodni')";
-$query2 = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena) 
-                             VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', '$clave_encriptada')";
-$query3 = "INSERT INTO tbl_genero(Descripcion) VALUES ('$genero')";
+//$query1 = "INSERT INTO tbl_tipo_Documento(Descripcion) VALUES ('$tipodni')";
+$query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena, IdGenero) 
+                             VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', 
+                             '$clave_encriptada', '$genero')";
+//$query3 = "INSERT INTO tbl_genero(Descripcion) VALUES ('$genero')";
 
 $consultar_Email = "SELECT * FROM tbl_ms_usuario WHERE Correo = '$correo'";
 $consultar_User = "SELECT * FROM tbl_ms_usuario WHERE Usuario = '$usuario'";
@@ -120,12 +119,12 @@ if(mysqli_num_rows($verificar_usuario) > 0){
 }
 
 // Aquí deberías ejecutar las consultas de inserción después de que las verificaciones sean exitosas
-$resultado_query1 = mysqli_query($conexion, $query1);
-$resultado_query2 = mysqli_query($conexion, $query2);
-$resultado_query3 = mysqli_query($conexion, $query3);
+//$resultado_query1 = mysqli_query($conexion, $query1);
+$resultado_query = mysqli_query($conexion, $query);
+//$resultado_query3 = mysqli_query($conexion, $query3);
 
 // Comprueba si todas las consultas de inserción fueron exitosas
-if($resultado_query1 && $resultado_query2 && $resultado_query3){
+if($resultado_query){
     echo'
             <script>
                 alert("Usuario almacenado correctamente.")
@@ -143,4 +142,3 @@ if($resultado_query1 && $resultado_query2 && $resultado_query3){
 
 mysqli_close($conexion);
 ?>
--
