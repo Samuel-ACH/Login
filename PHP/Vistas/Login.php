@@ -1,3 +1,14 @@
+<?php
+
+// Sí existe una sesión iniciada, no permite regresar al login sin antes cerrar la sesión
+session_start();
+
+if (isset($_SESSION["usuario"])){
+    header("location: Main.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,8 +42,8 @@
                     <!--Login-->
                     <form action="../Controladores/LoginController_be.php" method="POST" class="formulario__login">
                         <h2>Iniciar Sesión</h2>
-                        <input type="text" placeholder="Corre" name="correo">
-                        <input type="password" placeholder="Contraseña" name="Contraseña">
+                        <input type="text" placeholder="Correo" name="correo">
+                        <input type="password" placeholder="Contraseña" name="clave">
                         <button>Entrar</button>
                     </form>
 

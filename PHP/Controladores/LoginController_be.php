@@ -8,12 +8,13 @@ include('Conexion_be.php');
 // Capturar valores ingresados en la vista de usuario
 $correo = $_POST['correo'];
 $clave = $_POST['clave'];
+$clave_encriptada = md5($clave);
 
 // Validar que los datos son correctos en el inicio de sesión
-$consultar_Login = "SELECT * FROM tbl_ms_usuario WHERE Correo='$correo' AND Clave = '$clave'";
+$consultar_Login = "SELECT * FROM tbl_ms_usuario WHERE Correo='$correo' AND Contrasena = '$clave_encriptada'";
 $verificar_login = mysqli_query($conexion, $consultar_Login);
 
-if(mysqli_num_rows($verificar_login) > 0){
+if(mysqli_num_rows($verificar_login) > 0) {
     $_SESSION['usuario'] = $correo; // Almacena el usuario/correo que inició sesión en el sistema.
     header("location: ../Vistas/Main.php");
     exit();

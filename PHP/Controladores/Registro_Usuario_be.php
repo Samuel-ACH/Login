@@ -84,8 +84,7 @@ $direccion = $_POST['direccion'];
 $fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $genero = $_POST['genero'];
 $clave = $_POST['clave'];
-
-$clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
+$clave_encriptada = md5($clave);
 
 //$query1 = "INSERT INTO tbl_tipo_Documento(Descripcion) VALUES ('$tipodni')";
 $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena, IdGenero) 
