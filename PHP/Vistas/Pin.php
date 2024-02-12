@@ -10,7 +10,7 @@
 <body>
     <main>
         <div>
-            <form method="POST">
+        <form action="../Controladores/pincontroller.php" method="POST" class="Pin_seguridad">
                 <h2>Pin de Seguridad</h2>
                 <p>Ingresa un nuevo Pin</p> 
 
@@ -19,12 +19,13 @@
                     <img class="input-icon" src="../../Imagenes/password.svg" alt="">
                 </div>
                 <div class="input-wrapper">
-                    <input type="int" name="pin" placeholder="Ingresa nuevamente tu Pin">
+                    <input type="int" name="pinvalidado" placeholder="Ingresa nuevamente tu Pin">
                     <img class="input-icon" src="../../Imagenes/password.svg" alt="">
                 </div>
                 <input class="btn" type="submit" name="register" value="Enviar">
             </form>
         </div>
     </main>
+<?php include 'pincontroller.php'?>
 </body>
 </html>
