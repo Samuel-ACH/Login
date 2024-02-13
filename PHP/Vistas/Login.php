@@ -3,7 +3,7 @@
 // Sí existe una sesión iniciada, no permite regresar al login sin antes cerrar la sesión
 session_start();
 
-if (isset($_SESSION["usuario"])){
+if (isset($_SESSION["correo"])){
     header("location: Main.php");
 }
 
@@ -12,6 +12,9 @@ if (isset($_SESSION["usuario"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../Recursos/Bootstrap5/bootstrap.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login y Register - MagtimusPro</title>
@@ -42,8 +45,12 @@ if (isset($_SESSION["usuario"])){
                     <!--Login-->
                     <form action="../Controladores/LoginController_be.php" method="POST" class="formulario__login">
                         <h2>Iniciar Sesión</h2>
-                        <input type="text" placeholder="Correo" name="correo">
-                        <input type="password" placeholder="Contraseña" name="clave">
+                        <?php
+                        include('../Controladores/Conexion_be.php');
+                        include('../Controladores/LoginController_be.php');
+                        ?>
+                        <input type="text" placeholder="Correo" name="correo" required >
+                        <input type="password" placeholder="Contraseña" name="clave" required >
                         <button>Entrar</button>
                     </form>
 
@@ -57,16 +64,16 @@ if (isset($_SESSION["usuario"])){
                              <option value="3">Identidad Extranjera</option>
                         </select>  -->
 
-                        <input type="int" placeholder="DNI" name="dni">
-                        <input type="text" placeholder="Usuario" name="usuario">
-                        <input type="email" placeholder="Correo" name="correo">
-                        <input type="text" placeholder="Nombre y Apellido" name="nombre">
-                        <input type="text" placeholder="Direccion" name="direccion">
-                        <input type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento">
-                        <input type="password" placeholder="Clave" name="clave">
+                        <input type="int" placeholder="DNI" name="dni" required>
+                        <input type="text" placeholder="Usuario" name="usuario" required>
+                        <input type="email" placeholder="Correo" name="correo" required>
+                        <input type="text" placeholder="Nombre y Apellido" name="nombre" required>
+                        <input type="text" placeholder="Direccion" name="direccion" required>
+                        <input type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento" required>
+                        <input type="password" placeholder="Clave" name="clave" required>
                         <div class="gender-options">
                             <label>Genero</label>
-                            <select type="int" name="genero" placeholder="Genero">
+                            <select type="int" name="genero" placeholder="Genero" required>
                             <option value="0" selected></option>
                               <option value="1" >Masculino</option>
                              <option value="2">Femenino</option>
@@ -78,5 +85,6 @@ if (isset($_SESSION["usuario"])){
             </div>
         </main>
         <script src="../../EstilosLogin/js/script.js"></script>
+        <script> src="../../Recursos/Bootstrap5/bootstrap.bundle.min.js" </script>
 </body>
 </html>

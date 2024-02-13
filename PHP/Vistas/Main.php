@@ -3,7 +3,7 @@
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
 session_start();
 
-if (!isset($_SESSION["usuario"])){
+if (!isset($_SESSION["correo"])){
     echo'
             <script>
                 alert("Por favor, debes iniciar sesión.")
@@ -26,6 +26,9 @@ if (!isset($_SESSION["usuario"])){
 </head>
 <body>
     <h1>Bienvenido a Clínica RED</h1>
-    <a href="../Controladores/Logout.php">Cerrar Sesión</a>
+    <?php
+    echo $_SESSION['correo'];
+    ?>
+    <p><a href="../Controladores/Logout.php">Cerrar Sesión</a></p>
 </body>
 </html>
