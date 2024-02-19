@@ -1,5 +1,7 @@
  <?php
 include 'Conexion_be.php';
+include('../../Recursos/SweetAlerts.php');
+
 $dni = $_POST['dni'];
 $usuario = $_POST['usuario'];
 $correo = $_POST['correo'];
@@ -38,15 +40,13 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
                                 if ($resultado_query) { // Validar que se insertó correctamente el registro
                                     echo '
                                         <script>
-                                            alert("Usuario almacenado correctamente.")
-                                            window.location = "../Vistas/Login.php";
+                                            MostrarAlerta("success", "!GENIAL¡", "Usuario almacenado correctamente.", "../Vistas/Index.php");
                                         </script>
                                     ';
                                 } else {
                                     echo '
                                         <script>
-                                            alert("Inténtalo de nuevo, usuario no almacenado.")
-                                            window.location = "../Vistas/Login.php";
+                                            MostrarAlerta("error", "ERROR", "Inténtalo de nuevo, usuario no almacenado.", "../Vistas/Index.php");
                                         </script>
                                     ';
                                     exit();
@@ -54,8 +54,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
                             } else {
                                 echo '
                                     <script>
-                                        alert("El nombre de usuario ya está registrado, intenta con un nuevo nombre de usuario.")
-                                        window.location = "../Vistas/Login.php";
+                                        MostrarAlerta("error", "ERROR", "El nombre de usuario ya está registrado, intenta con un nuevo nombre de usuario.", "../Vistas/Index.php");
                                     </script>
                                 ';
                                 exit();
@@ -63,8 +62,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
                         } else {
                             echo '
                                 <script>
-                                    alert("Este correo electrónico ya está registrado, intenta con otro correo electrónico diferente.")
-                                    window.location = "../Vistas/Login.php";
+                                    MostrarAlerta("error", "ERROR", "Este correo electrónico ya está registrado, intenta con otro correo electrónico diferente.", "../Vistas/Index.php");
                                 </script>
                             ';
                             exit();
@@ -72,8 +70,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
                     } else {
                         echo '
                             <script>
-                                alert("El correo electrónico no es válido, porque tiene un punto al final.")
-                                window.location = "../Vistas/Login.php";
+                                MostrarAlerta("error", "ERROR", "El correo electrónico no es válido, porque finaliza con un punto.", "../Vistas/Index.php");
                             </script>
                         ';
                         exit();
@@ -81,8 +78,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
                 } else {
                     echo '
                         <script>
-                            alert("El correo electrónico no es válido porque contiene 2 "@".")
-                            window.location = "../Vistas/Login.php";
+                            MostrarAlerta("error", "ERROR", "El correo electrónico no coincide con el formato establecido.", "../Vistas/Index.php");
                         </script>
                     ';
                     exit();
@@ -90,8 +86,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
             } else {
                 echo '
                     <script>
-                        alert("No se permiten números o caracteres especiales en el campo Nombre.")
-                        window.location = "../Vistas/Login.php";
+                        MostrarAlerta("error", "ERROR", "No se permiten números o caracteres especiales en el campo Nombre.", "../Vistas/Index.php");
                     </script>
                 ';
                 exit();
@@ -99,21 +94,17 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
         } else {
             echo '
                 <script>
-                    alert("No se permiten letras en el campo DNI.")
-                    window.location = "../Vistas/Login.php";
+                    MostrarAlerta("error", "ERROR", "No se permiten letras en el campo DNI.", "../Vistas/Index.php");
                 </script>
             ';
         }
 } else {
     echo '
         <script>
-            alert("Por favor, llena todos los campos del registro.")
-            window.location = "../Vistas/Login.php";
+            MostrarAlerta("error", "ERROR", "Por favor, llena todos los campos del registro.", "../Vistas/Index.php");
         </script>
     ';
     exit();
 }
-
-
 mysqli_close($conexion);
 ?>

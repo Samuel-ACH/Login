@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2024 a las 22:44:40
+-- Tiempo de generación: 19-02-2024 a las 04:01:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -186,6 +186,14 @@ CREATE TABLE `tbl_genero` (
   `Descripcion` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_genero`
+--
+
+INSERT INTO `tbl_genero` (`IdGenero`, `Descripcion`) VALUES
+(1, 'Masculino'),
+(2, 'Femenino');
+
 -- --------------------------------------------------------
 
 --
@@ -284,6 +292,13 @@ CREATE TABLE `tbl_ms_roles` (
   `Fecha_Modificacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_ms_roles`
+--
+
+INSERT INTO `tbl_ms_roles` (`Id_Rol`, `Rol`, `Descripcion`, `Creado_Por`, `Fecha_Creacion`, `Modificado_Por`, `Fecha_Modificacion`) VALUES
+(1, 'Administrador', 'Tiene acceso a todo el sistema', 'user1', '2024-02-13 05:01:09', 'user2', '2024-02-13 05:01:09');
+
 -- --------------------------------------------------------
 
 --
@@ -292,7 +307,7 @@ CREATE TABLE `tbl_ms_roles` (
 
 CREATE TABLE `tbl_ms_usuario` (
   `Id_Usuario` int(11) NOT NULL,
-  `DNI` int(11) DEFAULT NULL,
+  `DNI` int(13) DEFAULT NULL,
   `Usuario` varchar(15) DEFAULT NULL,
   `Correo` varchar(40) DEFAULT NULL,
   `Nombre` varchar(80) DEFAULT NULL,
@@ -300,7 +315,7 @@ CREATE TABLE `tbl_ms_usuario` (
   `FechaNacimiento` date DEFAULT NULL,
   `FechaContratacion` datetime DEFAULT NULL,
   `Estado_Usuario` int(11) DEFAULT NULL,
-  `Contrasena` varchar(100) DEFAULT NULL,
+  `Contrasena` varchar(35) DEFAULT NULL,
   `IdRol` int(11) DEFAULT NULL,
   `IdGenero` int(11) DEFAULT NULL,
   `Fecha_Ultima_Conexion` datetime DEFAULT NULL,
@@ -310,6 +325,14 @@ CREATE TABLE `tbl_ms_usuario` (
   `Fecha_Creacion` datetime DEFAULT NULL,
   `Numero_Inicio_Sesion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_ms_usuario`
+--
+
+INSERT INTO `tbl_ms_usuario` (`Id_Usuario`, `DNI`, `Usuario`, `Correo`, `Nombre`, `Direccion`, `FechaNacimiento`, `FechaContratacion`, `Estado_Usuario`, `Contrasena`, `IdRol`, `IdGenero`, `Fecha_Ultima_Conexion`, `Primer_Inicio_Sesion`, `Fecha_Vencimiento`, `Creado_Por`, `Fecha_Creacion`, `Numero_Inicio_Sesion`) VALUES
+(1, 2147483647, 'ADMIN', 'redelectrodiagnostico@gmail.com', 'Administrador del Sistema', 'San Pedro Sula', '2024-02-16', NULL, NULL, '9ac17fc47347d505c92e3ca31fee675d', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2147483647, 'ADMINI', 'red1electrodiagnostico@gmail.com', 'Administrador del Sistema', 'San Pedro Sula', '2024-02-16', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -348,13 +371,22 @@ CREATE TABLE `tbl_paciente` (
 
 CREATE TABLE `tbl_pin` (
   `Id_Pin` int(11) NOT NULL,
-  `Pin` int(11) NOT NULL,
-  `Id_Usuario` int(11) NOT NULL,
-  `Fecha_Creacion` datetime NOT NULL,
-  `Creado_Por` varchar(15) NOT NULL,
-  `Modificado_Por` varchar(15) NOT NULL,
-  `Fecha_Modificacion` datetime NOT NULL
+  `Pin` int(11) DEFAULT NULL,
+  `Id_Usuario` int(11) DEFAULT NULL,
+  `Fecha_Creacion` datetime DEFAULT NULL,
+  `Creado_Por` varchar(15) DEFAULT NULL,
+  `Modificado_Por` varchar(15) DEFAULT NULL,
+  `Fecha_Modificacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_pin`
+--
+
+INSERT INTO `tbl_pin` (`Id_Pin`, `Pin`, `Id_Usuario`, `Fecha_Creacion`, `Creado_Por`, `Modificado_Por`, `Fecha_Modificacion`) VALUES
+(1, 12345, NULL, '2024-02-12 23:20:16', NULL, NULL, NULL),
+(2, 12345, NULL, '2024-02-13 22:54:03', NULL, NULL, NULL),
+(3, 12345, NULL, '2024-02-14 16:20:34', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -440,6 +472,15 @@ CREATE TABLE `tbl_tipo_documento` (
   `Id_Tipo_Documento` int(11) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_tipo_documento`
+--
+
+INSERT INTO `tbl_tipo_documento` (`Id_Tipo_Documento`, `Descripcion`) VALUES
+(10, 'Identidad'),
+(11, 'Pasaporte'),
+(12, 'Identidad Extranjera');
 
 -- --------------------------------------------------------
 
@@ -762,7 +803,7 @@ ALTER TABLE `tbl_expediente`
 -- AUTO_INCREMENT de la tabla `tbl_genero`
 --
 ALTER TABLE `tbl_genero`
-  MODIFY `IdGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_horario`
@@ -798,19 +839,25 @@ ALTER TABLE `tbl_ms_permisos`
 -- AUTO_INCREMENT de la tabla `tbl_ms_roles`
 --
 ALTER TABLE `tbl_ms_roles`
-  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_ms_usuario`
 --
 ALTER TABLE `tbl_ms_usuario`
-  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_paciente`
 --
 ALTER TABLE `tbl_paciente`
   MODIFY `Id_Paciente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_pin`
+--
+ALTER TABLE `tbl_pin`
+  MODIFY `Id_Pin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_resultado_evaluacion`
@@ -852,7 +899,7 @@ ALTER TABLE `tbl_tipo_distribucion`
 -- AUTO_INCREMENT de la tabla `tbl_tipo_documento`
 --
 ALTER TABLE `tbl_tipo_documento`
-  MODIFY `Id_Tipo_Documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id_Tipo_Documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_terapia`

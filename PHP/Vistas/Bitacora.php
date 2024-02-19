@@ -1,74 +1,314 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Bitácora</title>
-    <!-- Agregar las bibliotecas de Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-    </style>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../assets/img/red-logo.jpeg" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#tablaAgenda').DataTable();
+    });
+  </script>
 </head>
+
 <body>
 
-    <!-- Agregar el panel de control de Bootstrap -->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="text-center">Formulario de Bitácora</h2>
-                    </div>
-                    <div class="card-body">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
-                        <!-- Formulario de Bitácora -->
-                            <div class="form-group">
-                                <label for="objeto">Objeto:</label>
-                                <input type="text" class="form-control" name="objeto" required>
-                            </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="../../assets/img/red-logo.jpeg" alt="">
+        <span class="d-none d-lg-block">CLÍNICA RED</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-                            <div class="form-group">
-                                <label for="tipo_objeto">Tipo Objeto:</label>
-                                <input type="text" class="form-control" name="tipo_objeto" required>
-                            </div>
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+      </form>
+    </div><!-- End Search Bar -->
 
-                            <div class="form-group">
-                                <label for="creado_por">Creado Por:</label>
-                                <input type="text" class="form-control" name="creado_por" required>
-                            </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
 
-                            <div class="form-group">
-                                <label for="fecha_creacion">Fecha Creación:</label>
-                                <input type="datetime-local" class="form-control" name="fecha_creacion" required>
-                            </div>
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
 
-                            <div class="form-group">
-                                <label for="modificado_por">Modificado Por:</label>
-                                <input type="text" class="form-control" name="modificado_por" required>
-                            </div>
+        <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          </a><!-- End Profile Iamge Icon -->
 
-                            <div class="form-group">
-                                <label for="fecha_modificacion">Fecha y Hora de Modificación:</label>
-                                <input type="datetime-local" class="form-control" name="fecha_modificacion" required>
-                            </div>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
 
-                            <button type="submit" class="btn btn-primary">Agregar Registro</button>
-                        </form>
+              <h6><?php
+                  echo $_SESSION['correo'];
+                  ?>
+              </h6>
+              <span>Rol</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
 
-                    </div>
-                </div>
-            </div>
-        </div>
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="index.php">
+          <i class="bi bi-grid"></i>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+
+            <a href="components-alerts.php">
+
+              <i class="bi bi-circle"></i><span>Gestion Paciente</span>
+            </a>
+          </li>
+          <li>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Registrar </span>
+            </a>
+          </li>
+
+
+        </ul>
+      </li><!-- Fin modulo paciente -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Citas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>Gestion Cita</span>
+            </a>
+        </ul>
+      </li><!-- Fin modulo citas -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="tables-general.html">
+              <i class="bi bi-circle"></i><span>Gestion Expediente</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>Historial Expediente</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- Fin modulo expediente -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-tools"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="charts-chartjs.html">
+              <i class="bi bi-circle"></i><span>Empleados</span>
+            </a>
+          </li>
+          <li>
+            <a href="charts-apexcharts.html">
+              <i class="bi bi-circle"></i><span>Permisos</span>
+            </a>
+          </li>
+          <li>
+            <a href="charts-echarts.html">
+              <i class="bi bi-circle"></i><span>Roles</span>
+            </a>
+          </li>
+          <li>
+           <!-- Enlace al formulario de bitácora -->
+            <a href="Bitacora.php">
+              <i class="bi bi-circle"></i><span>Bitacora</span>
+            </a>
+          </li>
+          <li>
+            <a href="charts-echarts.html">
+              <i class="bi bi-circle"></i><span>Objetos</span>
+            </a>
+          </li>
+          <li>
+            <a href="charts-echarts.html">
+              <i class="bi bi-circle"></i><span>Parametros</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- Fin modulo  Mantenimiento -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Bitácora</h1>
+    </div><!-- End Page Title -->
+    <div class="card-body">
+        <label class="text mr-2">Seleccionar Rango:</label>
+        <!-- Desde a Hasta en una sola línea -->
+    <div class="form-inline mb-3">
+    <label for="startDate" class="mr-sm-2">Desde:</label>
+    <input type="date" id="startDate" class="form-inline mr-sm-2">
+
+    <label for="endDate" class="mr-sm-2">Hasta:</label>
+    <input type="date" id="endDate" class="form-inline mr-sm-2">
+    <button type="button" class="btn btn-danger" style="padding: 2px 100px;">
+    <i class="fas fa-trash"></i> Depurar Bitácora
+</button>
+    <button type="button" class="btn btn-secondary" style="padding: 2px 100px;" display="inline-block;"><i class="fas fa-file-pdf"></i> Generar PDF</button>
     </div>
 
-    <!-- Incluir las bibliotecas de Bootstrap y jQuery al final del cuerpo para mejorar el rendimiento -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+        <!-- Inserta la imagen centrada aquí -->
+        <div class="text-center mb-4">
+    </div>
+    
+    <?php
+
+    include("../PHP/Controladores/Conexion_be.php");
+
+    ?>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-10">
+
+          <table class="table " id="tablaAgenda">
+            <thead class="encabezado bg-light table-info">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Fecha y Hora</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Objeto</th>
+                <th scope="col">Accion</th>
+                <th scope="col">Descripcion</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+                                        <th scope="row">1</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>Login</td>
+                                        <td>Iniciar Sesion</td>
+                                        <td>El administrador Sesion</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>NewPassword</td>
+                                        <td>Nueva Contraseña</td>
+                                        <td>Cambiar contraseña de usuario</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>Login</td>
+                                        <td>Iniciar Sesion</td>
+                                        <td>El administrador Sesion</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>Login</td>
+                                        <td>Iniciar Sesion</td>
+                                        <td>El administrador Sesion</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>NewPassword</td>
+                                        <td>Nueva Contraseña</td>
+                                        <td>Cambiar contraseña de usuario</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>2024-2-6 19:20:20</td>
+                                        <td>Administrador</td>
+                                        <td>Login</td>
+                                        <td>Iniciar Sesion</td>
+                                        <td>El administrador Sesion</td>
+                                    </tr>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="../../assets/vendor/echarts/echarts.min.js"></script>
+  <script src="../../assets/vendor/quill/quill.min.js"></script>
+  <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../../assets/js/main.js"></script>
 </body>
+
 </html>
