@@ -5,27 +5,21 @@
     <meta http-equivs="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../EstilosLogin/css/EstilosPin.css">
-    <title>Solicitud de Pin de Seguridad</title>
+    <title>Verificacion 2AF</title>
 </head>
 <body>
     <main>
         <div>
-        <form action="../Controladores/pincontroller.php" method="POST" class="Pin_seguridad">
-                <h2>Pin de Seguridad</h2>
-                <p>Ingresa un nuevo Pin</p> 
-
+        <?php if(isset($error)) { echo "<p>$error</p>"; } ?>
+        <form action="../Controladores/verificarOTP.php" method="POST" class="OTP">
+        <label for="codigo_otp">Ingrese el código OTP recibido por correo electrónico:</label><br>
                 <div class="input-wrapper">
-                    <input type="password" name="pin" placeholder="Ingresa tu pin de seguridad">
-                    <img class="input-icon" src="../../Imagenes/password.svg" alt="">
-                </div>
-                <div class="input-wrapper">
-                    <input type="password" name="pinvalidado" placeholder="Ingresa nuevamente tu Pin">
+                <input type="text" id="codigo_otp" name="codigo_otp" required><br>
                     <img class="input-icon" src="../../Imagenes/password.svg" alt="">
                 </div>
                 <input class="btn" type="submit" name="register" value="Enviar">
             </form>
         </div>
     </main>
-<?php include 'pincontroller.php'?>
 </body>
 </html>
