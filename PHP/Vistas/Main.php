@@ -1,8 +1,15 @@
 <?php
 
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
+// Iniciar sesión
 session_start();
 
+// Validar si se ha verificado el OTP
+if (!isset($_SESSION['otp_verificado'])) {
+  // Redirigir a la página de inicio de sesión
+  header("Location: Index.php");
+  exit();
+}
 if (!isset($_SESSION["correo"])) {
   echo '
             <script>

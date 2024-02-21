@@ -1,43 +1,25 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['correo']) || !isset($_SESSION['codigo_otp'])) {
-    header("location: index.php");
+include('../PHPMailer/controllermail.php');
+// Verificar si el usuario ha iniciado sesión y tiene un código OTP almacenado en la sesión
+if(!isset($_SESSION['correo']) || !isset($_SESSION['otp'])) {
+    // Si no, redirigir al usuario a la página de inicio de sesión
+    header("location: ../Vistas/Index.php");
     exit();
 }
 
-if (isset($_POST['codigo_otp'])) {
-    if ($_POST['codigo_otp'] === $_SESSION['codigo_otp']) {
+// Verificar si se ha enviado un formulario con el código OTP
+if(isset($_POST['otp'])) {
+    // Verificar que el código ingresado coincida con el código almacenado en la sesión
+    if($_POST['otp'] === $_SESSION['otp']) {
+        // Si la verificación es exitosa, iniciar sesión
         $_SESSION['autenticado'] = true;
         header("location: ../Vistas/Main.php");
         exit();
     } else {
+        // Si el código es incorrecto, mostrar un mensaje de error
         $error = "Código OTP incorrecto";
     }
-}
-// Función para generar un código OTP único
-function generarCodigoOTP($length = 6) {
-    $characters = '0123456789';
-    $characters_length = strlen($characters);
-    $otp = '';
-    for ($i = 0; $i < $length; $i++) {
-        $otp .= $characters[rand(0, $characters_length - 1)];
-    }
-    return $otp;
-}
-
-// Función para enviar un correo electrónico con el código OTP
-function enviarCorreoOTP($destinatario, $codigo_otp) {
-    // Configurar los parámetros del correo electrónico
-    $para = $destinatario;
-    $asunto = 'Código OTP para inicio de sesión';
-    $mensaje = 'Su código OTP para iniciar sesión es: ' . $codigo_otp;
-    $cabeceras = 'From: redelectrodiagnostico@gmail.com' . "\r\n" .
-                 'Reply-To: redelectrodiagnostico@gmail.com' . "\r\n" .
-                 'X-Mailer: PHP/' . phpversion();
-
-    // Enviar el correo electrónico
-    return mail($para, $asunto, $mensaje, $cabeceras);
 }
 
 ?>

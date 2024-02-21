@@ -1,43 +1,44 @@
 <?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
+// Requerir archivos de PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
-//Create an instance; passing `true` enables exceptions
-function enviarCorreoOTP($destinatario, $codigo_otp) {
-    $mail = new PHPMailer(true);
+// Requerir archivos de PHPMailer
+require_once '../PHPMailer/Exception.php';
+require_once '../PHPMailer/PHPMailer.php';
+require_once '../PHPMailer/SMTP.php';
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'redelectrodiagnostico@gmail.com';                     //SMTP username
-    $mail->Password   = 'neaafkydjwicywfx';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+// Función para enviar correo electrónico con OTP
+function enviarCorreoOTP($destinatario, $otp) {
+  // Crear una instancia de PHPMailer
+  $mail = new PHPMailer(true);
 
-  // Configurar remitente y destinatario
-  $mail->setFrom('tu_correo@example.com', 'Nombre remitente'); // Cambia 'tu_correo@example.com' por tu correo electrónico
-  $mail->addAddress($destinatario); // Agrega el destinatario
-  
-  // Contenido del correo
-  $mail->isHTML(true);
-  $mail->Subject = 'Código OTP para inicio de sesión';
-  $mail->Body    = 'Su código OTP para iniciar sesión es: ' . $codigo_otp;
+  try {
+    // Configuración del servidor
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Habilitar salida de depuración detallada
+    $mail->isSMTP(); // Enviar usando SMTP
+    $mail->Host = 'smtp.gmail.com'; // Establecer el servidor SMTP para enviar a través de
+    $mail->SMTPAuth = true; // Habilitar la autenticación SMTP
+    $mail->Username = 'redelectrodiagnostico@gmail.com'; // Nombre de usuario SMTP
+    $mail->Password = 'TechTitans'; // Contraseña SMTP
+    $mail->SMTPSecure = "tls"; // Habilitar el cifrado TLS implícito
+    $mail->Port = 587; // Puerto TCP para conectarse; use 587 si ha establecido `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-  // Enviar el correo
-  $mail->send();
-  return true;
-} catch (Exception $e) {
-  // Manejar errores
-  return false;
-}
+    // Configuración del correo electrónico
+    $mail->setFrom('redelectrodiagnostico@gmail.com', 'Clinica RED'); // Remitente
+    $mail->addAddress($destinatario); // Destinatario
+    $mail->Subject = 'Verificación de OTP'; // Asunto
+    $mail->Body = "Su código OTP para iniciar sesión es: " . $otp . "\n\nEste código caduca en 15 minutos."; // Mensaje
+
+    // Enviar correo electrónico
+    if (!$mail->send()) {
+      echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
+    } else {
+      echo "Correo electrónico enviado correctamente";
+    }
+  } catch (Exception $e) {
+    echo "Error al enviar el correo electrónico: " . $e->getMessage();
+  }
 }
 ?>
