@@ -35,7 +35,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
         
                                 $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena, IdGenero) 
                                           VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', '$clave_encriptada', '$genero')";
-        
+
                                 $resultado_query = mysqli_query($conexion, $query);
                                 if ($resultado_query) { // Validar que se insertó correctamente el registro
                                     echo '

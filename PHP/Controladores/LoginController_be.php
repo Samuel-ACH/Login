@@ -22,12 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Actualizar código OTP y fecha de expiración en la base de datos
             $update_codigo_otp = "UPDATE tbl_ms_usuario SET CodigoOTP = '$otp', FechaExpiracionOTP = DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE Correo = '$correo'";
             $resultado_update = mysqli_query($conexion, $update_codigo_otp);
-
+               
             if ($resultado_update) {
                 // Enviar correo electrónico con el OTP
                 enviarCorreoOTP($correo, $otp);
-
-                // Redirigir a la página de verificación OTP
+                 // Redirigir a la página de verificación OTP
                 header("location: ../Vistas/Pin.php");
                 exit();
             } else {

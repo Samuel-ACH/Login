@@ -21,7 +21,7 @@ if (!isset($_SESSION["correo"])) {
   die(); // el código se detiene en esta línea 
 
 }
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
