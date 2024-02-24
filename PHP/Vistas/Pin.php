@@ -17,7 +17,7 @@ include('../Controladores/verificarOTP.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../EstilosLogin/css/EstilosPin.css">
     <title>Verificacion OTP</title>
-    <link rel="shortcut icon" href="../../EstilosLogin/images/pestaña.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../EstilosLogin/images/pestana.png" type="image/x-icon">
 </head>
 <body>
     <main>
