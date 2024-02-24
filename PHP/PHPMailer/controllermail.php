@@ -3,12 +3,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
 // Requerir archivos de PHPMailer
 require_once '../PHPMailer/Exception.php';
 require_once '../PHPMailer/PHPMailer.php';
 require_once '../PHPMailer/SMTP.php';
-
 // Función para enviar correo electrónico con OTP
 function enviarCorreoOTP($destinatario, $otp) {
   // Crear una instancia de PHPMailer
@@ -30,16 +28,13 @@ function enviarCorreoOTP($destinatario, $otp) {
     $mail->addAddress($destinatario); // Destinatario
     $mail->Subject = 'Verificacion de OTP'; // Asunto
     $mail->Body = "Bienvenido\n\n Su código OTP para iniciar sesión es: 
-    " . $otp . "\n\nEste código caduca en 15 minutos."; // Mensaje
+    " . $otp . "\n\nEste código caduca en 5 minutos."; // Mensaje
 
     // Enviar correo electrónico
     if (!$mail->send()) {
       echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
     } else {
       echo "Correo electrónico enviado correctamente";
-              // Redirigir a la página de verificación OTP
-              header("location: ../Vistas/Pin.php");
-              exit();
     }
   } catch (Exception $e) {
     echo "Error al enviar el correo electrónico: " . $e->getMessage();

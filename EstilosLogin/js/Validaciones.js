@@ -1,5 +1,7 @@
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
+const clave = document.getElementById('password');
+const icon = document.querySelector('.ver_password');
 
 const expresiones = {
 	usuario: /^[a-zA-Z\_\-]{5,15}$/, // Letras, numeros, guion y guion_bajo
@@ -49,6 +51,18 @@ const validarCampo = (expresion, input, campo) => {
 inputs.forEach((input) => {
 	input.addEventListener('keyup', validarFormulario); // Verificar el campo después de presionar una tecla
 	input.addEventListener('blur', validarFormulario); // Comprobar cuando da clic fuera del campo
+});
+
+icon.addEventListener('click', e => {
+	if (clave.type === "password") {
+		clave.type = "text";
+		icon.classList.remove('fa-eye');
+		icon.classList.add('fa-eye-slash');
+	} else {
+		clave.type = "password";
+		icon.classList.remove('fa-eye-slash');
+		icon.classList.add('fa-eye');
+	}
 });
 
 // formulario.addEventListener('submit', (e) => {

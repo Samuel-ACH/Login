@@ -158,7 +158,7 @@
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Empleados</span>
+              <i class="bi bi-circle"></i><span>Usuarios</span>
             </a>
           </li>
           <li>

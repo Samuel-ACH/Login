@@ -7,7 +7,7 @@
 }
 
 body{
-    background-image: url(../images/bg4.jpg);
+    background-image: url(../images/bg6.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -24,7 +24,7 @@ main{
 .contenedor__todo{
     width: 100%;
     max-width: 800px;
-    margin: auto;
+    margin: 100px auto;
     position: relative;
 }
 
@@ -35,7 +35,7 @@ main{
     justify-content: center;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 128, 255, 0.5);
+    background-color: rgba(0, 106, 255, 0.347);
 
 }
 
@@ -95,7 +95,7 @@ main{
 
 .contenedor__login-register form{
     width: 100%;
-    padding: 80px 20px;
+    padding: 60px 20px;
     background: white;
     position: absolute;
     border-radius: 20px;
@@ -225,6 +225,16 @@ main{
 	transition: .3s ease all;
 }
 
+.formulario__grupo {
+    margin-bottom: 10px; /* Espacio entre los grupos de campos */
+}
+
+.formulario__label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: -20px; /* Espacio entre el label y el input */
+}
+
 .formulario__input:focus {
 	border: 3px solid #0075FF;
 	outline: none;
@@ -253,10 +263,10 @@ main{
 .ver_password {
 	position: absolute;
 	right: 40px;
-	bottom: 3px;
+	bottom: 15px;
 	z-index: 100;
-	font-size: 10px;
-	opacity: 0.8;
+	/* font-size: 16px; */
+	opacity: 1;
 }
 
 .formulario__checkbox {
@@ -321,4 +331,27 @@ main{
 
 .formulario__grupo-incorrecto .formulario__input {
 	border: 3px solid #bb2929;
+}
+
+/*Logo del Login */
+.logo {
+    display: block;
+    margin: -40px auto 10px auto; 
+    width: 140px; /* Ajusta el ancho de acuerdo a tu diseño */
+    
+}
+
+.combobox {
+    height: 30px;
+    width: 330px;
+    
+}
+.fecha-nacimiento-label {
+    margin-bottom: 0; /* Elimina el margen inferior del label */
+    /* Otros estilos si es necesario */
+}
+
+.fecha-nacimiento-input {
+    margin-top: 0px; /* Ajusta el margen superior del input */
+    /* Otros estilos si es necesario */
 }

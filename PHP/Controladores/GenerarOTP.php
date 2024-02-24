@@ -21,9 +21,5 @@ if (isset($_POST['iniciar_sesion'])) {
 
   // Almacenar código OTP en la variable de sesión
   $_SESSION['otp'] = $otp;
-
-  // Redirigir a la página de verificación OTP
-  header("Location: ../verificarOTP.php");
-  exit();
 }
 ?>

@@ -1,25 +1,24 @@
 <?php
 session_start();
-include('../PHPMailer/controllermail.php');
-// Verificar si el usuario ha iniciado sesión y tiene un código OTP almacenado en la sesión
-if(!isset($_SESSION['correo']) || !isset($_SESSION['otp'])) {
-    // Si no, redirigir al usuario a la página de inicio de sesión
-    header("location: ../Vistas/Index.php");
-    exit();
-}
+require_once '../Controladores/GenerarOTP.php';
+// Verificar si se ha enviado el formulario con el código OTP
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codigo_otp'])) {
+    // Obtener el código OTP enviado por el usuario
+    $codigo_otp_ingresado = $_POST['codigo_otp'];
 
-// Verificar si se ha enviado un formulario con el código OTP
-if(isset($_POST['otp'])) {
-    // Verificar que el código ingresado coincida con el código almacenado en la sesión
-    if($_POST['otp'] === $_SESSION['otp']) {
-        // Si la verificación es exitosa, iniciar sesión
-        $_SESSION['autenticado'] = true;
-        header("location: ../Vistas/Main.php");
+    // Obtener el código OTP almacenado en la sesión
+    $codigo_otp_correcto = $_SESSION['otp'];
+
+    // Validar el código OTP ingresado por el usuario
+    if ($codigo_otp_ingresado == $codigo_otp_correcto) {
+        // El código OTP es correcto, iniciar sesión
+        $_SESSION['autenticado'] = true; // Indicar que el usuario está autenticado
+        header("location: ../Vistas/Main.php"); // Redirigir al usuario a la página principal
         exit();
     } else {
-        // Si el código es incorrecto, mostrar un mensaje de error
-        $error = "Código OTP incorrecto";
+        // El código OTP es incorrecto, mostrar mensaje de error
+        $_SESSION['error'] = "Codigo OTP Incorrecto";
+        header("location: ../Vistas/Pin.php"); // Redirigir a la página de verificación de pin
     }
 }
-
-?>
+?>;

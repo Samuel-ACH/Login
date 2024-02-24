@@ -1,14 +1,12 @@
 <?php
-
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
 // Iniciar sesión
 session_start();
-
-// Validar si se ha verificado el OTP
-if (!isset($_SESSION['otp_verificado'])) {
-  // Redirigir a la página de inicio de sesión
-  header("Location: Index.php");
-  exit();
+// Validar si se ha verificado el OTP y si el usuario está autenticado
+if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
+    // Redirigir a la página de inicio de sesión
+   // header("Location: Index.php");
+    exit();
 }
 if (!isset($_SESSION["correo"])) {
   echo '
@@ -19,27 +17,19 @@ if (!isset($_SESSION["correo"])) {
         ';
   session_destroy(); // Destruye la sesión
   die(); // el código se detiene en esta línea 
-
 }
 ?> 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
   <!-- Favicons -->
   <link href="../../assets/img/red-logo.jpeg" rel="icon">
   <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-
 
   <!-- Vendor CSS Files -->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +49,11 @@ if (!isset($_SESSION["correo"])) {
 
   <script>
     $(document).ready(function() {
-      $('#tablaAgenda').DataTable();
+      $('#tablaAgenda').DataTable({
+      language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json" 
+        } //codigo para el lenguaje del archivo JSON
+      });
     });
   </script>
 </head>
@@ -228,8 +222,8 @@ if (!isset($_SESSION["correo"])) {
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Empleados</span>
+            <a href="Usuario.php">
+              <i class="bi bi-circle"></i><span>Usuarios</span>
             </a>
           </li>
           <li>

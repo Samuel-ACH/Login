@@ -1,7 +1,6 @@
  <?php
 include 'Conexion_be.php';
 include('../../Recursos/SweetAlerts.php');
-
 $dni = $_POST['dni'];
 $usuario = $_POST['usuario'];
 $correo = $_POST['correo'];
@@ -11,7 +10,6 @@ $fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $genero = $_POST['genero'];
 $clave = $_POST['clave'];
 $clave_encriptada = md5($clave);
-
 if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !empty($direccion) 
     && !empty($fechanacimiento) && !empty($genero) && !empty($clave)) { // Validar que ninguno de los campos esté vacío
 
@@ -35,12 +33,12 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
         
                                 $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena, IdGenero) 
                                           VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', '$clave_encriptada', '$genero')";
-
+        
                                 $resultado_query = mysqli_query($conexion, $query);
                                 if ($resultado_query) { // Validar que se insertó correctamente el registro
                                     echo '
                                         <script>
-                                            MostrarAlerta("success", "!GENIAL¡", "Usuario almacenado correctamente.", "../Vistas/Index.php");
+                                            MostrarAlerta("success", "¡GENIAL!", "Usuario almacenado correctamente.", "../Vistas/Index.php");
                                         </script>
                                     ';
                                 } else {
