@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once 'GenerarOTPcontra.php';
 
 // Verificar si se ha enviado el formulario con el código OTP
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codigo_otp2'])) {
