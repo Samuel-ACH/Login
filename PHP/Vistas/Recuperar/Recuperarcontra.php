@@ -1,13 +1,3 @@
-<?php
-//session_start();
-// // Si ya existe una sesión autenticada, redirigir al usuario a la página principal
-// if (isset($_SESSION['autenticado']) && $_SESSION['correo'] === true) {
-//     header("Location: Index.php");
-//     exit();
-// }
-// // Incluir el script verificarOTP.php
-//require_once('../../Controladores/recuperarcontra/ValidarOTPcontra.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +15,7 @@
     <main>
         <div>
             <?php if(isset($error)) { echo "<p>$error</p>";} ?>
-            <form action="" method="POST" class="OTP" id="formCambiarClave" >
+            <form action="../../Controladores/recuperarcontra/update.php" method="POST" class="OTP" id="formCambiarClave" >
                 <label for="password2"><strong>Ingresa tu nueva contraseña:</strong></label><br>
                 <div class="input-wrapper">
                     <!-- <input type="text" id="correo" name="correo" required maxlength="40" autocomplete="off"><br>
