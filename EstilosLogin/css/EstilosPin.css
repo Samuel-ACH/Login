@@ -35,6 +35,12 @@ form p {
     margin-bottom: 35px; 
 }
 
+.formulario__input{
+    border-radius: 25px;
+    width: 325px;
+    text-indent: 50px;
+}
+
 .input-wrapper{
     position: relative;
     width: 305px;
@@ -55,6 +61,7 @@ input{
 input::placeholder {
     font-size: 16px;
     color: #0D0D0D;
+    text-indent: 50px;
 }
 
 .input-icon {
@@ -96,6 +103,17 @@ input::placeholder {
     top: 50px;
     color: #E02D00;
     font-size: 18px;
+}
+
+.ver_password {
+	position: absolute;
+	right: -55px;
+	bottom: 15px;
+	z-index: 100;
+	font-size: 17px;
+	opacity: 1;
+    top: 35%;
+
 }
 
 @media(max-width:991px) {

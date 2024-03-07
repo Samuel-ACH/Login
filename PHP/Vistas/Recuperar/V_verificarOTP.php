@@ -18,7 +18,7 @@
                 unset($_SESSION['error']); // Limpiar el mensaje de error de la sesión después de mostrarlo
             } 
             ?>
-            <form action="../../Controladores/recuperarcontra/ValidarOTPcontra.php" method="POST" class="OTP">
+            <form action="./Recuperarcontra.php" method="POST" class="OTP">
                 <label for="codigo_otp2">Ingrese el código OTP recibido por correo electrónico:</label><br>
                 <div class="input-wrapper">
                     <input type="text" id="codigo_otp2" name="codigo_otp2" required maxlength="6" autocomplete="off"><br>
