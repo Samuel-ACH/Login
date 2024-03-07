@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-02-2024 a las 04:01:55
+-- Tiempo de generación: 05-03-2024 a las 05:26:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -154,6 +154,26 @@ CREATE TABLE `tbl_estado_cita` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_estado_usuario`
+--
+
+CREATE TABLE `tbl_estado_usuario` (
+  `Id_Estado` int(11) NOT NULL,
+  `Descripcion` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_estado_usuario`
+--
+
+INSERT INTO `tbl_estado_usuario` (`Id_Estado`, `Descripcion`) VALUES
+(1, 'ACTIVO'),
+(2, 'INACTIVO'),
+(3, 'BLOQUEADO');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_evaluacion`
 --
 
@@ -256,6 +276,14 @@ CREATE TABLE `tbl_ms_parametros` (
   `Fecha_Modificacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_ms_parametros`
+--
+
+INSERT INTO `tbl_ms_parametros` (`Id_Parametro`, `Parametro`, `Valor`, `Id_Usuario`, `Fecha_Creacion`, `Fecha_Modificacion`) VALUES
+(1, 'CANT_MIN_CLAVE', '8', 1, '2024-03-01 05:08:58', '2024-03-01 05:08:58'),
+(2, 'CANT_MAX_CLAVE', '35', 1, '2024-03-01 05:08:58', '2024-03-01 05:08:58');
+
 -- --------------------------------------------------------
 
 --
@@ -297,7 +325,9 @@ CREATE TABLE `tbl_ms_roles` (
 --
 
 INSERT INTO `tbl_ms_roles` (`Id_Rol`, `Rol`, `Descripcion`, `Creado_Por`, `Fecha_Creacion`, `Modificado_Por`, `Fecha_Modificacion`) VALUES
-(1, 'Administrador', 'Tiene acceso a todo el sistema', 'user1', '2024-02-13 05:01:09', 'user2', '2024-02-13 05:01:09');
+(1, 'SUPERADMINISTRADOR', 'TIENE ACCESO A TODO EL SISTEMA', '1', '2024-02-13 05:01:09', '1', '2024-02-13 05:01:09'),
+(2, 'DEFECTO', 'ROL ESPECÍFICO PARA EL AUTOREGISTRO', '1', '2024-03-04 00:38:03', '1', '2024-03-04 00:38:03'),
+(3, 'USUARIO', 'ROL PARA USUARIOS CON ACCESO AL SISTEMA', '1', '2024-03-04 21:39:12', '1', '2024-03-04 21:39:12');
 
 -- --------------------------------------------------------
 
@@ -307,7 +337,7 @@ INSERT INTO `tbl_ms_roles` (`Id_Rol`, `Rol`, `Descripcion`, `Creado_Por`, `Fecha
 
 CREATE TABLE `tbl_ms_usuario` (
   `Id_Usuario` int(11) NOT NULL,
-  `DNI` int(13) DEFAULT NULL,
+  `DNI` varchar(13) DEFAULT NULL,
   `Usuario` varchar(15) DEFAULT NULL,
   `Correo` varchar(40) DEFAULT NULL,
   `Nombre` varchar(80) DEFAULT NULL,
@@ -323,16 +353,17 @@ CREATE TABLE `tbl_ms_usuario` (
   `Fecha_Vencimiento` date DEFAULT NULL,
   `Creado_Por` varchar(15) DEFAULT NULL,
   `Fecha_Creacion` datetime DEFAULT NULL,
-  `Numero_Inicio_Sesion` int(11) DEFAULT NULL
+  `Numero_Inicio_Sesion` int(11) DEFAULT NULL,
+  `CodigoOTP` int(6) NOT NULL,
+  `FechaExpiracionOTP` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_ms_usuario`
 --
 
-INSERT INTO `tbl_ms_usuario` (`Id_Usuario`, `DNI`, `Usuario`, `Correo`, `Nombre`, `Direccion`, `FechaNacimiento`, `FechaContratacion`, `Estado_Usuario`, `Contrasena`, `IdRol`, `IdGenero`, `Fecha_Ultima_Conexion`, `Primer_Inicio_Sesion`, `Fecha_Vencimiento`, `Creado_Por`, `Fecha_Creacion`, `Numero_Inicio_Sesion`) VALUES
-(1, 2147483647, 'ADMIN', 'redelectrodiagnostico@gmail.com', 'Administrador del Sistema', 'San Pedro Sula', '2024-02-16', NULL, NULL, '9ac17fc47347d505c92e3ca31fee675d', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 2147483647, 'ADMINI', 'red1electrodiagnostico@gmail.com', 'Administrador del Sistema', 'San Pedro Sula', '2024-02-16', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tbl_ms_usuario` (`Id_Usuario`, `DNI`, `Usuario`, `Correo`, `Nombre`, `Direccion`, `FechaNacimiento`, `FechaContratacion`, `Estado_Usuario`, `Contrasena`, `IdRol`, `IdGenero`, `Fecha_Ultima_Conexion`, `Primer_Inicio_Sesion`, `Fecha_Vencimiento`, `Creado_Por`, `Fecha_Creacion`, `Numero_Inicio_Sesion`, `CodigoOTP`, `FechaExpiracionOTP`) VALUES
+(1, '0802200289432', 'ADMIN', 'redelectrodiagnostico@gmail.com', 'ADMINISTRADOR DEL SISTEMA', 'SPS', '2024-03-02', '2024-03-04 22:25:36', 1, 'd2a1e5441f59e167f290d9cd79796ebc', 1, 1, '2024-03-04 22:25:06', '2024-03-04 22:25:16', NULL, NULL, NULL, NULL, 782349, '2024-03-03 15:36:20');
 
 -- --------------------------------------------------------
 
@@ -584,6 +615,12 @@ ALTER TABLE `tbl_estado_cita`
   ADD KEY `FK_EstadoCita_CitaTerapeutica_idx` (`Id_Cita_Terapia`);
 
 --
+-- Indices de la tabla `tbl_estado_usuario`
+--
+ALTER TABLE `tbl_estado_usuario`
+  ADD PRIMARY KEY (`Id_Estado`);
+
+--
 -- Indices de la tabla `tbl_evaluacion`
 --
 ALTER TABLE `tbl_evaluacion`
@@ -650,7 +687,8 @@ ALTER TABLE `tbl_ms_roles`
 ALTER TABLE `tbl_ms_usuario`
   ADD PRIMARY KEY (`Id_Usuario`),
   ADD KEY `FK_Empleado_Genero_idx` (`IdGenero`),
-  ADD KEY `FK_Usuario_Rol_idx` (`IdRol`);
+  ADD KEY `FK_Usuario_Rol_idx` (`IdRol`),
+  ADD KEY `Estado_Usuario` (`Estado_Usuario`);
 
 --
 -- Indices de la tabla `tbl_observacion_fisioterapeuta`
@@ -788,6 +826,12 @@ ALTER TABLE `tbl_estado_cita`
   MODIFY `Id_Estado_Cita` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_estado_usuario`
+--
+ALTER TABLE `tbl_estado_usuario`
+  MODIFY `Id_Estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_evaluacion`
 --
 ALTER TABLE `tbl_evaluacion`
@@ -827,7 +871,7 @@ ALTER TABLE `tbl_ms_objetos`
 -- AUTO_INCREMENT de la tabla `tbl_ms_parametros`
 --
 ALTER TABLE `tbl_ms_parametros`
-  MODIFY `Id_Parametro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Parametro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_ms_permisos`
@@ -839,13 +883,13 @@ ALTER TABLE `tbl_ms_permisos`
 -- AUTO_INCREMENT de la tabla `tbl_ms_roles`
 --
 ALTER TABLE `tbl_ms_roles`
-  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_ms_usuario`
 --
 ALTER TABLE `tbl_ms_usuario`
-  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_paciente`

@@ -1,16 +1,18 @@
- <?php
+<?php
 include 'Conexion_be.php';
 include('../../Recursos/SweetAlerts.php');
+
 $dni = $_POST['dni'];
-$usuario = $_POST['usuario'];
-$correo = $_POST['correo'];
-$nombre = $_POST['nombre'];
-$direccion = $_POST['direccion'];
+$usuario = strtoupper($_POST['usuario']);
+$correo = $_POST['correo2'];
+$nombre = strtoupper($_POST['nombre']);
+// $direccion = $_POST['direccion'];
 $fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $genero = $_POST['genero'];
-$clave = $_POST['clave'];
+$clave = $_POST['password3'];
 $clave_encriptada = md5($clave);
-if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !empty($direccion) 
+
+if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) 
     && !empty($fechanacimiento) && !empty($genero) && !empty($clave)) { // Validar que ninguno de los campos esté vacío
 
         if (!preg_match('/[A-Z]/', $dni) && !preg_match('/[a-z]/', $dni)) { // Validar que en el DNI no se acepten caracteres alfabéticos.
@@ -31,8 +33,8 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo) && !e
         
                             if (mysqli_num_rows($verificar_usuario) == 0) { // Validar que el nuevo usuario no existe en la BD
         
-                                $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, Contrasena, IdGenero) 
-                                          VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', '$clave_encriptada', '$genero')";
+                                $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, FechaNacimiento, Contrasena, IdGenero) 
+                                          VALUES ('$dni', '$usuario', '$correo', '$nombre', '$fechanacimiento', '$clave_encriptada', '$genero')";
         
                                 $resultado_query = mysqli_query($conexion, $query);
                                 if ($resultado_query) { // Validar que se insertó correctamente el registro

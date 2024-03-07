@@ -1,40 +1,44 @@
 <?php
+
 session_start();
 include('Conexion_be.php');
 include('../../Recursos/SweetAlerts.php');
-require_once('../Controladores/GenerarOTP.php');
-require_once('../PHPMailer/controllermail.php');
+include('../../Seguridad/Roles.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+require_once('EnvioOTP/EnviarOTP.php');
+// require_once('Captcha.php');
+
 $correo = $_POST['correo'];
 $clave = $_POST['password'];
 $clave_encriptada = md5($clave);
+
 if (!empty($correo) && !empty($clave_encriptada)) { // Validar que el correo y contraseña no estén vacíos.
-    $consultar_Login = "SELECT * FROM tbl_ms_usuario WHERE Correo='$correo' AND Contrasena = '$clave_encriptada'";
+    // $consultar_Login = "SELECT * FROM tbl_ms_usuario WHERE Correo='$correo' AND Contrasena = '$clave_encriptada'";
+    $consultar_Login = "SELECT estU.Descripcion, u.Correo, u.Contrasena, u.Usuario, u.Nombre, r.Rol FROM tbl_estado_usuario AS estU INNER JOIN tbl_ms_usuario AS u ON estU.Id_Estado = u.Estado_Usuario
+                        INNER JOIN tbl_ms_roles AS r ON u.IdRol = r.Id_Rol
+                        WHERE estU.Id_Estado = 1 AND u.Correo = '$correo' AND u.Contrasena = '$clave_encriptada'";
+                        
     $verificar_login = mysqli_query($conexion, $consultar_Login); // Validar que existe una conexión a la BD y se realiza una consulta
+    $fila = $verificar_login->fetch_assoc();
+    
     if (mysqli_num_rows($verificar_login) > 0) { // Validar que existe el registro en la base de datos para iniciar sesión
         $_SESSION['correo'] = $correo;  // Almacena el usuario/correo que inició sesión en el sistema.
-        $otp = generarCodigoOTP(); // Generar OTP
-        // Almacenar OTP en la sesión
-        $_SESSION['otp'] = $otp;
-        // Actualizar código OTP y fecha de expiración en la base de datos
-        $update_codigo_otp = "UPDATE tbl_ms_usuario SET CodigoOTP = '$otp', FechaExpiracionOTP = DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE Correo = '$correo'";
-        $resultado_update = mysqli_query($conexion, $update_codigo_otp);  
-        if ($resultado_update) {
-            header("location: ../Vistas/Pin.php"); // Redirigir a la página de verificación de pin
-            // Enviar correo electrónico con el OTP
-            enviarCorreoOTP($correo, $otp);
-            
-        } else {
-            echo '<script>alert("Error al actualizar el código OTP en la base de datos.");</script>';
-        }
+        $_SESSION['rol'] = $fila['Rol'];
+        $_SESSION['usuario'] = $fila['Usuario'];
+        $_SESSION['nombre'] = $fila['Nombre'];
+       //comentar la linea de abajo y descomentar el header y el Exit de Main para desactivar el OTP
+        enviarOTP($conexion, $correo);
+        //header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
+        // exit();
     } else {
-        echo '<script>alert("Datos de inicio de sesión incorrectos."); window.location = "../Vistas/Index.php";</script>';
-        exit();
+        $mensajeError = "Correo o contraseña incorrectos.";
     }
 } else {
-    echo '<script>alert("Los campos están vacíos."); window.location = "../Vistas/Index.php";</script>';
-    exit();
+    $mensajeError = "Los campos están vacíos.";
 }
+
+if (!empty($mensajeError)) {
+    header("location: ../Vistas/Index.php?error=" . urlencode($mensajeError));
+    exit();
 }
 ?>

@@ -1,6 +1,9 @@
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
-const clave = document.getElementById('password');
+const clave  = document.getElementById('password');
+const clave2 = document.getElementById('password2');
+const clave3 = document.getElementById('password3');
+// const clave = document.querySelectorAll('#password');
 const icon = document.querySelector('.ver_password');
 
 const expresiones = {
@@ -8,7 +11,8 @@ const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{10,80}$/, // Letras y espacios, pueden llevar acentos.
 	password: /^.{5,30}$/, // 4 a 12 digitos.
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-	telefono: /^\d{8,12}$/ // 7 a 14 numeros.
+	telefono: /^\d{8,12}$/, // 7 a 14 numeros.
+	direccion: /^[a-zA-Z0-9À-ÿ\s]{5,80}$/
 }
 
 const campos = {
@@ -24,8 +28,26 @@ const validarFormulario = (e) => {
     case "correo":
         validarCampo(expresiones.correo, e.target, 'correo');
         break;
-    case "password":
-        validarCampo(expresiones.password, e.target, 'password');
+	case "correo2":
+        validarCampo(expresiones.correo, e.target, 'correo2');
+        break;
+	case "password":
+			validarCampo(expresiones.password, e.target, 'password');
+		break;
+	case "password2":
+			validarCampo(expresiones.password, e.target, 'password2');
+		break;
+	case "password3":
+			validarCampo(expresiones.password, e.target, 'password3');
+		break;
+	case "usuario":
+        validarCampo(expresiones.usuario, e.target, 'usuario');
+        break;
+	case "direccion":
+        validarCampo(expresiones.direccion, e.target, 'direccion');
+        break;
+	case "nombre":
+        validarCampo(expresiones.nombre, e.target, 'nombre');
         break;
    }
 }
@@ -54,16 +76,38 @@ inputs.forEach((input) => {
 });
 
 icon.addEventListener('click', e => {
-	if (clave.type === "password") {
+	if (clave.type === "password" ||
+		clave2.type === "password" ||
+		clave3.type === "password"
+	) {
 		clave.type = "text";
+		clave2.type = "text";
+		clave3.type = "text";
 		icon.classList.remove('fa-eye');
 		icon.classList.add('fa-eye-slash');
 	} else {
 		clave.type = "password";
+		clave2.type = "password";
+		clave3.type = "password";
 		icon.classList.remove('fa-eye-slash');
 		icon.classList.add('fa-eye');
 	}
 });
+// function togglePasswordVisibility(clave, icon) {
+//     if (clave.type === "password") {
+//         clave.type = "text";
+//         icon.classList.remove('fa-eye');
+//         icon.classList.add('fa-eye-slash');
+//     } else {
+//         clave.type = "password";
+//         icon.classList.remove('fa-eye-slash');
+//         icon.classList.add('fa-eye');
+//     }
+// }
+
+// icon.addEventListener('click', () => {
+//     togglePasswordVisibility(clave, icon);
+// });
 
 // formulario.addEventListener('submit', (e) => {
 

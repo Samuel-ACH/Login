@@ -1,24 +1,33 @@
 <?php
+
 // Sí existe una sesión iniciada, no permite regresar al login sin antes cerrar la sesión
-//session_start();
+session_start();
+
 if (isset($_SESSION["correo"])) {
     header("location: Main.php");
 }
 include('../Controladores/Conexion_be.php');
 //include('../Controladores/LoginController_be.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica RED</title>
     <link rel="shortcut icon" href="../../EstilosLogin/images/pestana.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../../EstilosLogin/css/estilos.css">
+
+   <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
 </head>
 
 <body>
@@ -29,7 +38,6 @@ include('../Controladores/Conexion_be.php');
                     <h3>¿Ya tienes una cuenta?</h3>
                     <p>Inicia sesión para entrar en la página</p>
                     <button id="btn__iniciar-sesion">Iniciar Sesión</button>
-
                 </div>
                 <div class="caja__trasera-register">
                     <h3>¿Aún no tienes una cuenta?</h3>
@@ -39,51 +47,75 @@ include('../Controladores/Conexion_be.php');
             </div>
 
             <!--Formulario de Login y registro-->
-            <div class="contenedor__login-register">
+            <div class="contenedor__login-register" id="formulario">
                 <!--Login-->
-                <form action="../Controladores/LoginController_be.php" method="POST" class="formulario__login" id="formulario">
-                <img src="../../EstilosLogin/images/logo.png" alt="Logo" class="logo">
+                <form action="../Controladores/LoginController_be.php" method="POST" class="formulario__login"id="loginForm" >
+                    <img src="../../EstilosLogin/images/logo.png" alt="Logo" class="logo">
                     <h2>Iniciar Sesión</h2>
+
                     <!-- <?php
-                            include('../Controladores/Conexion_be.php');
-                            // include('../Controladores/LoginController_be.php');
-                            ?> -->
+                    // include('../Controladores/Conexion_be.php');
+                    // include('../Controladores/LoginController_be.php');
+                    ?> -->
 
                     <!-- Grupo: Correo -->
                     <div class="formulario__grupo" id="grupo__correo">
                         <label for="correo" class="formulario__label">Correo Electrónico</label>
                         <div class="formulario__grupo-input">
-                            <input type="email" class="formulario__input" name="correo" id="correo" placeholder="usuario@dominio.com" maxlength="40">
-                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                            <input type="email" class="formulario__input" name="correo" id="correo"
+                                placeholder="usuario@dominio.com" maxlength="40">
                         </div>
-                        <p class="formulario__input-error">El correo solo admite caracteres alfanuméricos, puntos, guiones y guion bajo.</p>
+                        <p class="formulario__input-error"></p>
                     </div>
 
                     <!-- Grupo: Contraseña -->
                     <div class="formulario__grupo" id="grupo__password">
                         <label for="password" class="formulario__label">Contraseña</label>
                         <div class="formulario__grupo-input">
-                            <input type="password" class="formulario__input" name="password" id="password" placeholder="Contraseña" maxlength="30">
-                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                            <input type="password" class="formulario__input" name="password" id="password"
+                                placeholder="Contraseña" maxlength="30">
                             <i class="ver_password fas fa-eye"></i>
                         </div>
-                        <p class="formulario__input-error">La contraseña tiene que ser de 5 a 10 dígitos.</p>
+                        <p class="formulario__input-error"></p>
                     </div>
 
-                    <!-- Mensaje de advertencia -->
-                    <div class="formulario__mensaje" id="formulario__mensaje">
-                        <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Datos incorrectos.</p>
-                    </div>
+                    <!-- Mensaje de error -->
+                    <?php
+                    if (isset($_GET['error'])) {
+                        $mensajeError = urldecode($_GET['error']);
+                        echo '<h6 id="mensajeError" class="alert alert-danger">' . $mensajeError . '</h6>';
+                    }
+                    ?>
 
+                    <script>
+                        // Esperar 5 segundos y ocultar el mensaje de error
+                        setTimeout(function() {
+                            var mensajeError = document.getElementById('mensajeError');
+                            if (mensajeError) {
+                                mensajeError.style.display = 'none';
+                            }
+                        }, 5000); // 5000 milisegundos = 5 segundos
+                    </script>
+
+                    
                     <!-- Botón entrar -->
                     <div class="formulario__grupo formulario__grupo-btn-enviar">
-                        <button type="submit" class="formulario__btn">Entrar</button>
+                        <button type="submit" class="formulario__btn" id="btn_login">Entrar</button>
                     </div>
+
+                    <div>  
+                    <a href="Recuperar/V_Correorecovery.php">¿No recuerdas tu contraseña?</a>
+                    </div>
+                        <!-- Recapcha -->
+                    <!-- <div> 
+                        <div class="g-recaptcha" data-sitekey="6Ldm1oIpAAAAAFjhCC3eCHHfVd1kDqIQFQN1wFSX"></div>
+                    </div>   -->
+
                 </form>
 
                 <!--Register-->
-                <form action="../Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register">
-                <img src="../../EstilosLogin/images/logo.png" alt="Logo" class="logo">
+                <form action="../Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register" id="registerForm">
+                    <img src="../../EstilosLogin/images/logo.png" alt="Logo" class="logo">
                     <h2>Regístrate</h2>
                     <!-- <label>Selecciona una opción</label>
                         <select type="int" name="tipodni" placeholder="TIPODNI">
@@ -92,31 +124,125 @@ include('../Controladores/Conexion_be.php');
                              <option value="3">Identidad Extranjera</option>
                         </select>  -->
 
-                    <input type="int" placeholder="DNI" name="dni" required maxlength="13">
-                    <input type="text" placeholder="Usuario" name="usuario" required maxlength="15">
-                    <input type="email" placeholder="Correo" name="correo" required maxlength="40">
-                    <input type="text" placeholder="Nombre y Apellido" name="nombre" required maxlength="80">
-                    <input type="text" placeholder="Direccion" name="direccion" required maxlength="80">
-                    <label for="fechanacimiento" class="fecha-nacimiento-label">Fecha de Nacimiento:</label>
-                    <input type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento" required class="fecha-nacimiento-input">
-                    <input type="password" placeholder="Clave" name="clave" required maxlength="30">
-                    <div class="gender-options">
-                        <label>Genero:</label>
-                        <div></div>
-                        <select type="int" name="genero" placeholder="Genero" required class="combobox">
-                            <option value="0" selected></option>
-                            <option value="1">Masculino</option>
-                            <option value="2">Femenino</option>
-                        </select>
+                    <!-- GRUPO DNI -->
+                    <div class="formulario__grupo" id="grupo__dni">
+                        <label for="dni" class="formulario__label">DNI</label>
+                        <div class="formulario__grupo-input">
+                            <input type="int" class="formulario__input" name="dni" id="dni" placeholder="DNI"
+                                maxlength="13">
+                        </div>
+                        <p class="formulario__input-error"></p>
                     </div>
-                    <button>Registrarse</button>
+
+                    <!-- GRUPO NOMBRE COMPLETO -->
+                    <div class="formulario__grupo" id="grupo__nombre">
+                        <label for="nombre" class="formulario__label">Nombre Completo</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input mayuscula" name="nombre" id="nombre"
+                                placeholder="Nombre completo" maxlength="80">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
+
+                    <!-- GRUPO CORREO -->
+                    <div class="formulario__grupo" id="grupo__correo2">
+                        <label for="correo" class="formulario__label">Correo Electrónico</label>
+                        <div class="formulario__grupo-input">
+                            <input type="email" class="formulario__input" name="correo2" id="correo2"
+                                placeholder="usuario@dominio.com" maxlength="40">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
+
+                    <!-- GRUPO USUARIO -->
+                    <div class="formulario__grupo" id="grupo__usuario">
+                        <label for="usuario" class="formulario__label">Usuario</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input mayuscula" name="usuario" id="usuario"
+                                placeholder="Usuario" maxlength="15">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
+
+                    <!-- GRUPO CONTRASEÑA -->
+                    <div class="formulario__grupo" id="grupo__password2">
+                        <label for="password2" class="formulario__label">Contraseña</label>
+                        <div class="formulario__grupo-input">
+                            <input type="password" class="formulario__input" name="password2" id="password2"
+                                placeholder="Contraseña" maxlength="30">
+                            <i class="ver_password fas fa-eye"></i>
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
+                    <!-- GRUPO CONFIRMACION CONTRASEÑA -->
+                    <div class="formulario__grupo" id="grupo__password3">
+                        <label for="password3" class="formulario__label">Confirmar Contraseña</label>
+                        <div class="formulario__grupo-input">
+                            <input type="password" class="formulario__input" name="password3" id="password3"
+                                placeholder="Confirmar contraseña" maxlength="30">
+                            <i class="ver_password fas fa-eye"></i>
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
+
+                    <!-- GRUPO DIRECCION -->
+                    <!-- <div class="formulario__grupo" id="grupo__direccion"> -->
+                    <!-- <label for="direccion" class="formulario__label">DIRECCION</label> -->
+                    <!-- <div class="formulario__grupo-input">
+                            <input type="email" class="formulario__input" name="direccion" id="direccion" placeholder="direccion" maxlength="80">
+                        </div>
+                        <p class="formulario__input-error">La direccion solo permite caracteres alfanuméricos, puntos y
+                            guiones.</p>
+                    </div> -->
+
+                    <!-- GRUPO FECHA DE NACIMIENTO -->
+                    <div class="formulario__grupo" id="grupo__fecha">
+                        <label for="fechanacimiento" class="formulario__label">Fecha de Nacimiento:</label>
+                        <input type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento" id="fechanacimiento"
+                         class="fecha-nacimiento-input">
+                        <p id="mensajeFechaNacimiento" class="mensaje_error" style="color: #bb2929;" ></p>
+                    </div>
+
+                    <!-- GRUPO GENERO -->
+                    <div class="gender-options">
+                    <label for="genero" class="formulario__label">Género</label>
+                    <div></div>
+                    <select type="int" name="genero" id="mensajeGenero1" placeholder="Genero" class="combobox">
+                        <option value="0" selected>Seleccione</option>
+                        <?php
+                        // Conexión a la base de datos
+                    
+                        // Consulta SQL para obtener los géneros
+                        $query = "SELECT idGenero, Descripcion FROM tbl_genero";
+                        $resultado = mysqli_query($conexion, $query);
+
+                        // Iterar sobre los resultados y generar las opciones del select
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['idGenero'] . '">' . $fila['Descripcion'] . '</option>';
+                        }
+                        // Liberar resultado
+                        mysqli_free_result($resultado);
+                        // Cerrar conexión
+                        mysqli_close($conexion);
+                        ?>
+                    </select>
+                    <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p>
+                </div>
+
+                    <!-- Botón entrar -->
+                    <div class="formulario__grupo formulario__grupo-btn-enviar">
+                        <button type="submit" class="formulario__btn" id="btn_registrar" disabled >Registrarme</button>
+                    </div>
                 </form>
             </div>
         </div>
     </main>
     <script src="../../EstilosLogin/js/script.js"></script>
-    <script src="../../EstilosLogin/js/Validaciones.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- <script type="module" src="../javascript/validacionIndex.js"></script> -->
+    <script type="module" src="../javascript/validacionAutoRegistro.js"></script>
 </body>
 
 </html>
