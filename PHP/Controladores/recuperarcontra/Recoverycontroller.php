@@ -23,7 +23,7 @@ if (!empty($correo2)) {
             } else {
                 echo '
                                 <script>
-                                    MostrarAlerta("error", "ERROR", "Este correo electrónico no está registrado.", "../Vistas/Recuperar/V_Correorecovery.php");
+                                    MostrarAlerta("error", "ERROR", "Este correo electrónico no está registrado.", "../../Vistas/Recuperar/V_Correorecovery.php");
                                 </script>
                             ';
                 exit();
@@ -31,7 +31,7 @@ if (!empty($correo2)) {
         } else {
             echo '
                             <script>
-                                MostrarAlerta("error", "ERROR", "El correo electrónico no es válido, porque finaliza con un punto.", "../Vistas/Recuperar/V_Correorecovery.php");
+                                MostrarAlerta("error", "ERROR", "El correo electrónico no es válido, porque finaliza con un punto.", "../../Vistas/Recuperar/V_Correorecovery.php");
                             </script>
                         ';
             exit();
@@ -40,7 +40,7 @@ if (!empty($correo2)) {
         // Agrega manejo para el caso de que el correo tenga 2 '@' o no tenga '@'.
         echo '
                         <script>
-                            MostrarAlerta("error", "ERROR", "El correo electrónico no es válido.", "../Vistas/Recuperar/V_Correorecovery.php");
+                            MostrarAlerta("error", "ERROR", "El correo electrónico no es válido.", "../../Vistas/Recuperar/V_Correorecovery.php");
                         </script>
                     ';
         exit();
