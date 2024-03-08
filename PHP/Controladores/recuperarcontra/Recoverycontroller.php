@@ -4,9 +4,12 @@ include('../Conexion_be.php');
 include('../../../Recursos/SweetAlerts.php');
 include('../recuperarcontra/EnviarOTPcontra.php');
 
-// Asegúrate de asignar primero el valor de $correo2
-$correo2 = isset($_POST['correo3']) ? $_POST['correo3'] : '';
-$_SESSION['correo3'] = $correo2;
+if (isset($_POST['correo3'])) {
+    $correo2 = $_POST['correo3']; // Asignar a la variable local $correo2
+    $_SESSION['correo3'] = $correo2; // También guardar en la sesión
+} else {
+   echo 'No se ingreso el correo'; // Asignar un valor predeterminado si correo3 no se envió
+}
 if (!empty($correo2)) {
     if (substr_count($correo2, '@') == 1) { // Validar que el correo no tenga 2 '@' o ','
 

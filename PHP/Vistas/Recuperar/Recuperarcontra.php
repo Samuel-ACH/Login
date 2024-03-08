@@ -15,7 +15,7 @@
     <main>
         <div>
             <?php if(isset($error)) { echo "<p>$error</p>";} ?>
-            <form action="../../Controladores/recuperarcontra/update.php" method="POST" class="OTP" id="formCambiarClave" >
+            <form action="../../Controladores/recuperarcontra/updatebd.php" method="POST" class="OTP" id="formCambiarClave" >
                 <label for="password2"><strong>Ingresa tu nueva contraseña:</strong></label><br>
                 <div class="input-wrapper">
                     <!-- <input type="text" id="correo" name="correo" required maxlength="40" autocomplete="off"><br>
