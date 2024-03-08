@@ -29,8 +29,9 @@ include('../Controladores/EnvioOTP/verificarOTP.php');
                     <input type="password" id="codigo_otp" name="codigo_otp" required maxlength="6" autocomplete="off"><br>
                     <img class="input-icon" src="../../Imagenes/password.svg" alt="">
                 </div>
-                <input class="btn" type="submit" name="register" value="Enviar">  
-                 <a href="Index.php">Regresar al Login</a>
+                <input class="btn" type="submit" name="register" value="Enviar">
+                <a href="Index.php">Regresar al Login</a>
+
             </form>
         </div>
     </main>

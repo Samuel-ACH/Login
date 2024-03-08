@@ -10,11 +10,10 @@ $_SESSION['otp'] = $otp;
 $update_codigo_otp = "UPDATE tbl_ms_usuario SET CodigoOTP = '$otp', FechaExpiracionOTP = DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE Correo = '$correo'";
 $resultado_update = mysqli_query($conexion, $update_codigo_otp);  
 if ($resultado_update) {
-        // Enviar correo electrónico con el OTP
-        enviarCorreo($correo, $asuntoOTP, $mensajeOTP, $otp);
-    
     header("location: ../Vistas/Pin.php"); // Redirigir a la página de verificación de pin
-
+    // Enviar correo electrónico con el OTP
+    enviarCorreo($correo, $asuntoOTP, $mensajeOTP, $otp);
+    
 } else {
     echo '<script>alert("Error al actualizar el código OTP en la base de datos.");</script>';
 }

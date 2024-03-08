@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Encriptar la contraseña antes de almacenarla en la base de datos
-    $hashed_password = md5($password3, PASSWORD_DEFAULT);
+    $hashed_password = md5($password3);
 
     // Preparar la consulta SQL usando sentencias preparadas para evitar inyección SQL
     $actualizarUsuarioQuery2 = "UPDATE tbl_ms_usuario SET Contrasena = ? WHERE Correo = ?";
