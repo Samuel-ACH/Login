@@ -3,14 +3,14 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 // Requerir archivos de PHPMailer
-require_once '../PHPMailer/Exception.php';
-require_once '../PHPMailer/PHPMailer.php';
-require_once '../PHPMailer/SMTP.php';
-require_once('../Controladores/EnvioOTP/EnviarOTP.php');
+require_once 'Exception.php';
+require_once 'PHPMailer.php';
+require_once 'SMTP.php';
     
 // Función para enviar correo electrónico con OTP
-function enviarCorreo($destinatario, $otp) {
+function enviarCorreo2($destinatario, $otp2) {
   // Crear una instancia de PHPMailer
   $mail = new PHPMailer(true);
 
@@ -28,9 +28,10 @@ function enviarCorreo($destinatario, $otp) {
     // Configuración del correo electrónico
     $mail->setFrom('redelectrodiagnostico@gmail.com', 'Clinica RED'); // Remitente
     $mail->addAddress($destinatario); // Destinatario
-    $mail->Subject = 'Verificacion de OTP'; // Asunto
-    $mail->Body = "Bienvenido\n\n Su código OTP para iniciar sesión es: 
-    " . $otp . "\n\nEste código caduca en 5 minutos."; // Mensaje
+    $mail->Subject = 'RECUPERAR CONTRASENA';
+    $mail->Body = "Bienvenido\n\n Su código OTP para recuperar la contraseña es: " . $otp2 . "\n\nEste código caduca en 5 minutos.";
+    //"Bienvenido\n\n Su código OTP para iniciar sesión es: 
+    //" . $otp . "\n\nEste código caduca en 5 minutos."; // Mensaje
 
     // Enviar correo electrónico
     if (!$mail->send()) {
@@ -41,7 +42,5 @@ function enviarCorreo($destinatario, $otp) {
   } catch (Exception $e) {
     echo "Error al enviar el correo electrónico: " . $e->getMessage();
   }
-
-  
 }
 ?>

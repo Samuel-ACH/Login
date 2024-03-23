@@ -6,5 +6,4 @@ if (session_status() === PHP_SESSION_NONE) {
     if(!array_key_exists('rol', $_SESSION) || !in_array($_SESSION['rol'], $roles_permitidos))
         header("Location: ../Vistas/Index.php");
 }
-
 ?>

@@ -5,10 +5,10 @@ session_start();
 include('../Controladores/Conexion/Conexion_be.php');
 include('../../Recursos/SweetAlerts.php');
 include('../../Seguridad/Roles.php');
-//include('./bitacora.php');
+include('./bitacora.php');
+
 require_once('EnvioOTP/EnviarOTP.php');
-// require_once('../Seguridad/OTP/C_2AF/C_enviar_token_2af.php');
-// require_once('Captcha.php');
+//require_once('Captcha.php');
 
 $correo = $_POST['correo'];
 $clave = $_POST['password'];
@@ -56,14 +56,15 @@ if (mysqli_num_rows($verificar_login) > 0) {
             $_SESSION['nombre'] = $fila['Nombre'];
             $_SESSION['id_D'] = $fila['Id_Usuario'];
             //comentar la linea de abajo y descomentar el header y el Exit de Main para desactivar el OTP
-            //$fecha = date("Y-m-d H:i:s");
-            // $n= $fila['Id_Usuario'];
-            // $a='INICIO DE SESIÓN';
-            // $d= $_SESSION['usuario']  .' INICIÓ SESIÓN';
-            // bitacora($n,$a,$d);
-             enviarOTP($conexion, $correo);
+            
+            $fecha = date("Y-m-d H:i:s");
+            $n= $fila['Id_Usuario'];
+            $a='INICIO DE SESIÓN';
+            $d= $_SESSION['usuario']  .' INICIÓ SESIÓN';
+            bitacora($n,$a,$d);
+            enviarOTP($conexion, $correo);
             //  header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
-             // exit();
+            //  exit();
         }
     } else {
         $mensajeError = "Es necesario completar el captcha para el primer inicio de sesión.";
@@ -77,4 +78,4 @@ if (!empty($mensajeError)) {
     exit();
 }
 }
-?>;
+?>

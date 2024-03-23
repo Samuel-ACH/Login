@@ -54,13 +54,13 @@ function obtenerRegistros() {
 // Función para generar el PDF con los registros de la bitácora
 function generarPDF($registros) {
     // Crear un nuevo objeto TCPDF
-    $pdf = new TCPDF();
+    // $pdf = new TCPDF();
 
     // Establecer el título del documento
-    $pdf->SetTitle('Bitácora');
+    // $pdf->SetTitle('Bitácora');
 
     // Agregar una página
-    $pdf->AddPage();
+    // $pdf->AddPage();
 
     // Crear la tabla para mostrar los registros
     $html = '<table border="1">';
@@ -78,10 +78,10 @@ function generarPDF($registros) {
     $html .= '</table>';
 
     // Agregar la tabla al documento PDF
-    $pdf->writeHTML($html, true, false, true, false, '');
+    // $pdf->writeHTML($html, true, false, true, false, '');
 
     // Generar el PDF y mostrarlo al usuario para descargar
-    $pdf->Output('bitacora.pdf', 'D');
+    // $pdf->Output('bitacora.pdf', 'D');
     exit();
 }
 

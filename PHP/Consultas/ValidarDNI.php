@@ -1,6 +1,5 @@
 <?php
-require_once('../Controladores/Conexion/conexiondb.php');
-
+require_once('../Controladores/conexiondb.php');
 // Recibir el DNI desde la solicitud POST
 if (isset($_POST["dni"])) {
     $dni = $_POST["dni"];
