@@ -1,7 +1,7 @@
 <?php
 // Función para generar un código OTP aleatorio
 function generarCodigoOTP() {
-  $otp = random_int(100000, 999999);
+  $otp = rand(100000, 999999);
   return $otp;
 }
 

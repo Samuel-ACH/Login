@@ -3,19 +3,17 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
 // Requerir archivos de PHPMailer
-require_once 'Exception.php';
-require_once 'PHPMailer.php';
-require_once 'SMTP.php';
-//require_once '../Controladores/Parametros/Parametros_mail.php';
-//require_once('../Controladores/EnvioOTP/EnviarOTP.php');
+require_once '../PHPMailer/Exception.php';
+require_once '../PHPMailer/PHPMailer.php';
+require_once '../PHPMailer/SMTP.php';
+require_once('../Controladores/EnvioOTP/EnviarOTP.php');
     
 // Función para enviar correo electrónico con OTP
-function enviarCorreo3($destinatario, $correo3, $contrasenatemp) {
+function enviarCorreo($destinatario, $asunto, $mensaje, $otp) {
   // Crear una instancia de PHPMailer
   $mail = new PHPMailer(true);
- // $Datos_Servidor = Parametro::dataServerEmail();
+
   try {
     // Configuración del servidor
     $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Habilitar salida de depuración detallada
@@ -30,18 +28,30 @@ function enviarCorreo3($destinatario, $correo3, $contrasenatemp) {
     // Configuración del correo electrónico
     $mail->setFrom('redelectrodiagnostico@gmail.com', 'Clinica RED'); // Remitente
     $mail->addAddress($destinatario); // Destinatario
-    $mail->Subject = "Sistema RED";
-    $mail->Body = "Bienvenido\n\n Su correo para ingresar al sistema es: " . $correo3 .
-     "\n\nSu contraseña temporal es: " . $contrasenatemp;
+    $mail->Subject = $asunto; // Asunto
+    $mail->Body = $mensaje . $otp;
+    //"Bienvenido\n\n Su código OTP para iniciar sesión es: 
+    //" . $otp . "\n\nEste código caduca en 5 minutos."; // Mensaje
 
     // Enviar correo electrónico
     if (!$mail->send()) {
       echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
     } else {
-     // echo "Correo electrónico enviado correctamente";
+      echo "Correo electrónico enviado correctamente";
     }
   } catch (Exception $e) {
     echo "Error al enviar el correo electrónico: " . $e->getMessage();
   }
+
+  
 }
+// Para enviar OTP
+$asuntoOTP = 'Verificacion de OTP';
+$mensajeOTP = "Bienvenido\n\n Su código OTP para iniciar sesión es: " . $otp . "\n\nEste código caduca en 5 minutos.";
+enviarCorreo($destinatario, $asuntoOTP, $mensajeOTP, $otp);
+
+  // Para enviar correo de recuperación de contraseña
+  $asuntoRecuperacion = 'Recuperacion de contraseña';
+  $mensajeRecuperacion = "Hemos recibido una solicitud para restablecer tu contraseña.". $otp ."/n/n";
+  enviarCorreo($destinatario, $asuntoRecuperacion, $mensajeRecuperacion, $otp);
 ?>
