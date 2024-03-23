@@ -1,0 +1,58 @@
+/* <!-- Agrega tu CSS personalizado --> */
+  
+    /* Estilo para los botones de DataTables */
+  
+    .dt-button {
+      /* Estilos generales para todos los botones */
+      border-radius: 5px; /* Bordes redondeados */
+      padding: 8px 12px; /* Padding interno */
+      font-size: 14px; /* Tamaño de fuente */
+      margin-right: 5px; /* Espacio entre botones */
+      border: 1px solid black;
+    }
+
+    /* Estilo específico para el botón de Excel */
+    .buttons-excel {
+      background-color: #4caf50; /* Color de fondo verde */
+      color: #fff; /* Color de texto blanco */
+      /* margin-right: 40px; */
+    }
+
+    /* Estilo específico para el botón de PDF */
+    .buttons-pdf {
+      background-color: #f44336; /* Color de fondo rojo */
+      color: #fff; /* Color de texto blanco */
+      /* margin-top: -1000; */
+    }
+    .dataTables_filter.pull-right {
+        float: right;
+    }
+    /* Estilo para los botones de exportación de DataTables */
+
+
+/* Estilo para el contenedor de los botones de exportación */
+.dataTables_wrapper .dt-buttons {
+  margin-top: -45px;
+  float: left; /* Ejemplo de alinear a la derecha */
+  margin-bottom: 10px; /* Ejemplo de margen inferior */
+  /* Otros estilos según tus necesidades */
+}
+
+.buttons-html5,
+.buttons-pdf {
+  margin-left: 20px;
+    /* margin-right: 10px; Ajusta el margen derecho según tu diseño */
+    width: 80px;
+    padding: auto;
+    margin-top: 40px;
+   
+}
+/* .buttons-html5, */
+.buttons-excel {
+    margin-left: -40px; /* Ajusta el margen derecho según tu diseño */
+    width: 80px;
+}
+
+/* .btn-depurar{
+  width: 900px;
+} */

@@ -9,7 +9,7 @@ session_start();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
+    <title>Clínica RED - Rehabilitación y Electrodiagnóstico </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -59,12 +59,12 @@ session_start();
     <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
 
-<div class="search-bar">
+<!-- <div class="search-bar">
     <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
-</div><!-- End Search Bar -->
+</div>End Search Bar -->
 
 <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
@@ -183,7 +183,7 @@ session_start();
                 </a>
                 <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="Usuario.php">
+                        <a href="../../Vistas/Usuario.php">
                             <i class="bi bi-circle"></i><span>Usuarios</span>
                         </a>
                     </li>
@@ -209,7 +209,7 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
+                        <a href="../Seguridad/Parametros/Modal_Parametros.php">
                             <i class="bi bi-circle"></i><span>Parametros</span>
                         </a>
                     </li>

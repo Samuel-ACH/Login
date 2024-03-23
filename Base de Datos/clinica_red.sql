@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-03-2024 a las 05:26:27
+-- Tiempo de generación: 12-03-2024 a las 05:48:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -348,6 +348,7 @@ CREATE TABLE `tbl_ms_usuario` (
   `Contrasena` varchar(35) DEFAULT NULL,
   `IdRol` int(11) DEFAULT NULL,
   `IdGenero` int(11) DEFAULT NULL,
+  `primer_ingreso` int(11) NOT NULL,
   `Fecha_Ultima_Conexion` datetime DEFAULT NULL,
   `Primer_Inicio_Sesion` datetime DEFAULT NULL,
   `Fecha_Vencimiento` date DEFAULT NULL,
@@ -355,15 +356,17 @@ CREATE TABLE `tbl_ms_usuario` (
   `Fecha_Creacion` datetime DEFAULT NULL,
   `Numero_Inicio_Sesion` int(11) DEFAULT NULL,
   `CodigoOTP` int(6) NOT NULL,
-  `FechaExpiracionOTP` datetime DEFAULT NULL
+  `FechaExpiracionOTP` datetime DEFAULT NULL,
+  `Fecha_Modificado` datetime DEFAULT NULL,
+  `Modificado_Por` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_ms_usuario`
 --
 
-INSERT INTO `tbl_ms_usuario` (`Id_Usuario`, `DNI`, `Usuario`, `Correo`, `Nombre`, `Direccion`, `FechaNacimiento`, `FechaContratacion`, `Estado_Usuario`, `Contrasena`, `IdRol`, `IdGenero`, `Fecha_Ultima_Conexion`, `Primer_Inicio_Sesion`, `Fecha_Vencimiento`, `Creado_Por`, `Fecha_Creacion`, `Numero_Inicio_Sesion`, `CodigoOTP`, `FechaExpiracionOTP`) VALUES
-(1, '0802200289432', 'ADMIN', 'redelectrodiagnostico@gmail.com', 'ADMINISTRADOR DEL SISTEMA', 'SPS', '2024-03-02', '2024-03-04 22:25:36', 1, 'd2a1e5441f59e167f290d9cd79796ebc', 1, 1, '2024-03-04 22:25:06', '2024-03-04 22:25:16', NULL, NULL, NULL, NULL, 782349, '2024-03-03 15:36:20');
+INSERT INTO `tbl_ms_usuario` (`Id_Usuario`, `DNI`, `Usuario`, `Correo`, `Nombre`, `Direccion`, `FechaNacimiento`, `FechaContratacion`, `Estado_Usuario`, `Contrasena`, `IdRol`, `IdGenero`, `primer_ingreso`, `Fecha_Ultima_Conexion`, `Primer_Inicio_Sesion`, `Fecha_Vencimiento`, `Creado_Por`, `Fecha_Creacion`, `Numero_Inicio_Sesion`, `CodigoOTP`, `FechaExpiracionOTP`, `Fecha_Modificado`, `Modificado_Por`) VALUES
+(1, '0802200289432', 'ADMIN', 'redelectrodiagnostico@gmail.com', 'ADMINISTRADOR DEL SISTEMA', 'SPS', '2024-03-02', '2024-03-04 22:25:36', 1, 'd2a1e5441f59e167f290d9cd79796ebc', 1, 1, 1, '2024-03-04 22:25:06', '2024-03-04 22:25:16', NULL, NULL, NULL, NULL, 782349, '2024-03-03 15:36:20', NULL, '');
 
 -- --------------------------------------------------------
 

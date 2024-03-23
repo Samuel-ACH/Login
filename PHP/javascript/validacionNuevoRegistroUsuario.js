@@ -4,14 +4,15 @@ const inputs = document.querySelectorAll('#registerFormUser');
 const icon = document.querySelectorAll('.ver_password');
 
 const expresiones = {
-    usuario: /^[a-zA-Z]{1,15}$/, // Letras, numeros, guion y guion_bajo
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
-    correo: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    // telefono: /^\d{8,12}$/, // 7 a 14 numeros.
-    direccion: /^[a-zA-ZÀ-ÿ0-9\s,.-_#+]+$/, // /^[a-zA-Z0-9\s:,.-_#+]+$/,
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/, // Validar sin espacios una minúscula, una mayúscula, un número y un caracter especial.
-    dni: /^(?!00)(?!.*0{5}$)[0-9]{1,13}$/,
-    dniN: /^[0-9]{1,13}$/
+  usuario: /^[a-zA-Z]{1,15}$/, // Letras, numeros, guion y guion_bajo
+  nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
+  correo: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  direccion: /^[a-zA-Z0-9,.-_#+\s]{1,80}$/,
+  // telefono: /^\d{8,12}$/, // 7 a 14 numeros.
+  // direccion: /^[a-zA-Z0-9À-ÿ\s]{5,80}$/,
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/, // Validar sin espacios una minúscula, una mayúscula, un número y un caracter especial.
+  dni: /^(?!00)(?!.*0{5}$)[0-9]{1,13}$/,
+  dniN:/^[0-9]{1,13}$/
 
 }
 
@@ -56,21 +57,21 @@ inputs.forEach((input) => {
 
 icon.forEach(icon => {
     icon.addEventListener('click', function () {
-        // Obtener el campo de contraseña asociado al icono actual
-        const clave = this.parentElement.querySelector('.formulario__input');
-
-        // Alternar el tipo de campo de contraseña entre 'password' y 'text'
-        if (clave.type === "password") {
-            clave.type = "text";
-            this.classList.remove('fa-eye');
-            this.classList.add('fa-eye-slash');
-        } else {
-            clave.type = "password";
-            this.classList.remove('fa-eye-slash');
-            this.classList.add('fa-eye');
-        }
+      // Obtener el campo de contraseña asociado al icono actual
+      const clave = this.parentElement.querySelector('.formulario__input');
+  
+      // Alternar el tipo de campo de contraseña entre 'password' y 'text'
+      if (clave.type === "password") {
+        clave.type = "text";
+        this.classList.remove('fa-eye');
+        this.classList.add('fa-eye-slash');
+      } else {
+        clave.type = "password";
+        this.classList.remove('fa-eye-slash');
+        this.classList.add('fa-eye');
+      }
     });
-});
+  });
 
 // validar inputs de correo parametrizado
 let validarInputCorreo = (e, campo) => {
@@ -100,7 +101,7 @@ let validarInputPassword = (e, campo) => {
 
     estadoValidacion.estadoCV
         ? (estadoValidacion.estadoER = funciones.validarExpresionRegular(expresiones.password, e.target, `${campo}`,
-            'Debe contener sin espacios una mayúscula, una minúscula, un número y un caracter especial')) : "";
+            'Solo se permiten mayúsculas, minúsculas, números y caracter especial')) : "";
 
     estadoValidacion.estadoCV
         ? (estadoValidacion.estadoCC = funciones.coincidirClave('password3', 'La contraseña no coincide con la anterior')) : "";
@@ -174,25 +175,27 @@ let validarInputNombre = (e) => {
     return estadoValidacion;
 };
 
+// validar input dirección
 let validarInputDireccion = (e) => {
     let estadoValidacion = {
-        estadoCV: false,
-        estadoER: false,
-        estadoUE: false,
-        estadoMC: false,
+      estadoCV: false,
+      estadoER: false,
+      estadoMC: false,
+      estadoUE: false,
     };
-    estadoValidacion.estadoCV = funciones.validarCampoVacio(e.target, 'direccion', 'Por favor, ingresa la dirección');
-
+    estadoValidacion.estadoCV = funciones.validarCampoVacio(e.target, 'direccion', 'Por favor, ingresa tu dirección');
+  
     estadoValidacion.estadoCV
-        ? (estadoValidacion.estadoER = funciones.validarExpresionRegular(expresiones.direccion, e.target, 'direccion', 'Caracter no válido')) : "";
-
-    estadoValidacion.estadoER
-        ? (estadoValidacion.estadoMC = funciones.validarMismoCaracter(e.target, 'direccion', 'No debe colocar el mismo caracter +2 veces seguidas')) : "";
-
-    estadoValidacion.estadoMC
-        ? (estadoValidacion.estadoUE = funciones.validarEspacios(/\s\s/g, e.target, 'direccion', 'Debe limitarse a un espacio')) : "";
-    return estadoValidacion;
-}
+    ? (estadoValidacion.estadoUE = funciones.validarEspacios(/\s\s/g, e.target, 'direccion', 'Debe limitarse a un espacio')) : "";
+  
+    estadoValidacion.estadoUE
+      ? (estadoValidacion.estadoER = funciones.validarExpresionRegular(expresiones.direccion, e.target, 'direccion', 'Caracter no válido')) : "";
+  
+    estadoValidacion.estadoUE
+      ? (estadoValidacion.estadoMC = funciones.validarMismoCaracter(e.target, 'direccion', 'No debe colocar el mismo caracter +2 veces seguidas')) : "";
+  
+      return estadoValidacion;
+  };
 
 document.addEventListener('DOMContentLoaded', function () {
     var estadoValidacion = { isDniExist: false };

@@ -24,7 +24,7 @@ main{
 .contenedor__todo{
     width: 100%;
     max-width: 800px;
-    margin: 140px auto;
+    margin: 100px auto;
     position: relative;
 }
 
@@ -131,9 +131,6 @@ main{
     transition: .1s ease all;
     border-radius: 3px;
 }
-
-
-
 
 .formulario__login{
     opacity: 1;
@@ -387,4 +384,8 @@ main{
 
 .mayuscula {
     text-transform: uppercase;
+}
+
+.captcha {
+  display: none;
 }

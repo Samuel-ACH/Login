@@ -17,22 +17,21 @@
 }
 /* Estilo de encabezado tabla Citas Proximas */
 .hero{
-  background-image: url(../img/fisio.jpeg);
+  background-image: url(../img/fisio.png);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 250px;
+  height: 280px;
+  width: 100%;
   position: relative; 
 }
 /* Estilo de imagen para las citas proximas */
 
 .contenido-hero{
   position: absolute;
-  background-color: rgba(0,0,0, .7);
+  background-color: rgba(0,0,0, .1);
   width: 100%;
   height: 100%;
-
-  display: flex;
-  flex-direction: column;
+ 
   align-items: center;
   justify-content: center;
 
@@ -48,6 +47,20 @@
     width: 45px;
     background-color: #a1ecdf;
     border: none;
+}
+
+.pencil {
+  font-size: 15px;
+  width: 45px;
+  background-color: #00b7ff;
+  border: none;
+}
+
+.trash {
+  font-size: 15px;
+  width: 45px;
+  background-color: #ff3a3aed;
+  border: none;
 }
 
 :root {
@@ -107,6 +120,7 @@ h6 {
   margin-bottom: 0;
   font-weight: 600;
   color: rgb(14, 5, 136);
+  text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -243,6 +257,14 @@ h6 {
 
 .dropdown-menu .dropdown-item:hover {
   background-color: #f6f9ff;
+}
+.ver_password {
+	position: absolute;
+	right: 10px;
+	bottom: 15px;
+	z-index: 100;
+	font-size: 16px;
+	opacity: 1;
 }
 
 @media (min-width: 768px) {

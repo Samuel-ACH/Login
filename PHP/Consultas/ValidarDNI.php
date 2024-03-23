@@ -1,42 +1,5 @@
 <?php
-require_once('../Controladores/conexiondb.php');
-
-$arreglo_tbl_bd = array(
-    "tbl_bitacora",
-    "tbl_cita_terapeutica",
-    "tbl_contacto_paciente",
-    "tbl_contacto_usuario",
-    "tbl_detalle_expediente",
-    "tbl_detalle_terapia",
-    "tbl_detalle_terapia_tratamiento",
-    "tbl_dia_feriado",
-    "tbl_estado_cita",
-    "tbl_evaluacion",
-    "tbl_expediente",
-    "tbl_genero",
-    "tbl_horario",
-    "tbl_ms_hist_contrasena",
-    "tbl_ms_objetos",
-    "tbl_ms_parametros",
-    "tbl_ms_permisos",
-    "tbl_ms_roles",
-    "tbl_ms_usuario",
-    "tbl_observacion_fisioterapeuta",
-    "tbl_paciente",
-    "tbl_pin",
-    "tbl_resultado_evaluacion",
-    "tbl_resultado_expediente",
-    "tbl_terapia_expediente",
-    "tbl_tipo_cita",
-    "tbl_tipo_contacto",
-    "tbl_tipo_distribucion",
-    "tbl_tipo_documento",
-    "tbl_tipo_terapia",
-    "tbl_tipo_tratamiento"
-);
-
-// Imprimir el arreglo
-// print_r($tablas);
+require_once('../Controladores/Conexion/conexiondb.php');
 
 // Recibir el DNI desde la solicitud POST
 if (isset($_POST["dni"])) {

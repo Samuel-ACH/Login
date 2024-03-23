@@ -1,5 +1,5 @@
 <?php
-require_once('../Controladores/conexiondb.php');
+require_once('../Controladores/Conexion/conexiondb.php');
 
 if (isset($_POST["correo2"])) {
     $correo2 = $_POST["correo2"];

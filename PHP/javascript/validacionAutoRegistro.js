@@ -7,6 +7,7 @@ const expresiones = {
   usuario: /^[a-zA-Z]{1,15}$/, // Letras, numeros, guion y guion_bajo
   nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
   correo: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  direccion: /^[a-zA-Z0-9,.-_#+\s]{1,80}$/,
   // telefono: /^\d{8,12}$/, // 7 a 14 numeros.
   // direccion: /^[a-zA-Z0-9À-ÿ\s]{5,80}$/,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/, // Validar sin espacios una minúscula, una mayúscula, un número y un caracter especial.
@@ -42,7 +43,9 @@ const validarInputs = (e) => {
     case "dni":     
       validarInputDNI(e);
     break;
-    
+    case "direccion":     
+      validarInputDireccion(e);
+    break;
   }
 }
 
@@ -172,6 +175,28 @@ let validarInputNombre = (e) => {
 
   estadoValidacion.estadoUE
     ? (estadoValidacion.estadoMC = funciones.validarMismoCaracter(e.target, 'nombre', 'No debe colocar el mismo caracter +2 veces seguidas')) : "";
+
+    return estadoValidacion;
+};
+
+// validar input dirección
+let validarInputDireccion = (e) => {
+  let estadoValidacion = {
+    estadoCV: false,
+    estadoER: false,
+    estadoMC: false,
+    estadoUE: false,
+  };
+  estadoValidacion.estadoCV = funciones.validarCampoVacio(e.target, 'direccion', 'Por favor, ingresa tu dirección');
+
+  estadoValidacion.estadoCV
+  ? (estadoValidacion.estadoUE = funciones.validarEspacios(/\s\s/g, e.target, 'direccion', 'Debe limitarse a un espacio')) : "";
+
+  estadoValidacion.estadoUE
+    ? (estadoValidacion.estadoER = funciones.validarExpresionRegular(expresiones.direccion, e.target, 'direccion', 'Caracter no válido')) : "";
+
+  estadoValidacion.estadoUE
+    ? (estadoValidacion.estadoMC = funciones.validarMismoCaracter(e.target, 'direccion', 'No debe colocar el mismo caracter +2 veces seguidas')) : "";
 
     return estadoValidacion;
 };
@@ -422,14 +447,6 @@ formulario2.addEventListener("submit", function (event) {
         // MostrarAlerta('', '¡ERROR!', 'Hay errores en el formulario. Por favor, corrígelos antes de enviarlo.');
     }   
 });
-
-
-
-
-
-
-
-
 
 const formulario_Registro = document.getElementById('registerForm');
 const botonEnviar = formulario_Registro.querySelector('button[type="submit"]'); // Obtener el botón de envío

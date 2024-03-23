@@ -1,5 +1,7 @@
 import * as funciones from "./validacionGeneral.js";
 
+const formulario_Registro = document.getElementById('formCambiarClave');
+
 const inputs = document.querySelectorAll('#formCambiarClave');
 const icon = document.querySelectorAll('.ver_password');
 
@@ -62,3 +64,18 @@ let validarInputPassword = (e, campo) => {
   
       return estadoValidacion;
   };
+
+  formulario_Registro.addEventListener('submit', function (e) {
+    const error_Formulario_Registro = document.querySelectorAll(".formulario__grupo-incorrecto");
+    const error_Formulario = document.querySelectorAll(".formulario__input-error-activo");
+
+    // Comprueba si hay errores de validación
+    if (error_Formulario_Registro.length > 0 || error_Formulario.length > 0) {
+        e.preventDefault();
+        // funciones.MostrarAlerta('', '¡ERROR!', 'Hay errores en el formulario. Por favor, corrígelos antes de enviarlo.');
+        funciones.MostrarAlerta('error', '¡ERROR!', 'Hay errores en el formulario. Por favor, corrígelos antes de enviarlo.');
+    } else {
+        // Si no hay errores, permite el envío del formulario
+        // Si llegas a este punto, el formulario se enviará
+    }
+});

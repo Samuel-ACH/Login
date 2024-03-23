@@ -1,11 +1,13 @@
 <?php
-include 'Conexion_be.php';
+include './Conexion/Conexion_be.php';
+include './bitacora.php';
 include('../../Recursos/SweetAlerts.php');
 
 $dni = $_POST['dni'];
 $usuario = strtoupper($_POST['usuario']);
 $correo = $_POST['correo2'];
 $nombre = strtoupper($_POST['nombre']);
+$direccion = strtoupper($_POST['direccion']);
 // $direccion = $_POST['direccion'];
 $fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $genero = $_POST['genero'];
@@ -33,11 +35,20 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
         
                             if (mysqli_num_rows($verificar_usuario) == 0) { // Validar que el nuevo usuario no existe en la BD
         
-                                $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, FechaNacimiento, Contrasena, IdGenero) 
-                                          VALUES ('$dni', '$usuario', '$correo', '$nombre', '$fechanacimiento', '$clave_encriptada', '$genero')";
+                                $query = "INSERT INTO tbl_ms_usuario(DNI, Usuario, Correo, Nombre, Direccion, FechaNacimiento, FechaContratacion, Estado_Usuario, 
+                                                                    Contrasena, IdRol, IdGenero, primer_ingreso, Creado_Por, Fecha_Creacion, Numero_Inicio_Sesion) 
+                                          VALUES ('$dni', '$usuario', '$correo', '$nombre', '$direccion', '$fechanacimiento', NOW(), 2, '$clave_encriptada', 2, '$genero', 
+                                          0, 'AUTOREGISTRO', NOW(), 0)";
         
                                 $resultado_query = mysqli_query($conexion, $query);
                                 if ($resultado_query) { // Validar que se insertó correctamente el registro
+                                    $query2=  "SELECT * FROM tbl_ms_usuario WHERE Usuario LIKE '$usuario'";
+                                    $n= mysqli_query($conexion, $query2);
+                                    $fila = $n->fetch_assoc();
+                                    $n2= $fila['Id_Usuario'];
+                                    $a='AUTOREGISTRO';
+                                    $d= 'USUARIO '.$fila['Usuario'].' SE HA REGISTRADO.';
+                                    bitacora($n2,$a,$d);
                                     echo '
                                         <script>
                                             MostrarAlerta("success", "¡GENIAL!", "Usuario almacenado correctamente.", "../Vistas/Index.php");

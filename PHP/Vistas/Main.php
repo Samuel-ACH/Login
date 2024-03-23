@@ -12,14 +12,14 @@ if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
 session_destroy(); // Destruye la sesión
 die(); 
 }
-// // // // // // // // // Ingresa al main sin el OTP
+// // // // // // Ingresa al main sin el OTP
 // if (!isset($_SESSION["correo"])) {
-//   echo '
-//             <script>
-//                 alert("Por favor, debes iniciar sesión.")
+//  echo '
+//           <script>
+//                  alert("Por favor, debes iniciar sesión.")
 //                 window.location = "Index.php";
 //             </script>
-//         ';
+//        ';
 //   session_destroy(); // Destruye la sesión
 //   die(); // el código se detiene en esta línea 
 // }
@@ -83,12 +83,6 @@ die();
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
         </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
@@ -120,37 +114,13 @@ die();
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
-                        <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li> -->
-
-                        <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li> -->
-
-                        <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li> -->
-
+                       <li>
+                           <a class="dropdown-item d-flex align-items-center" href="Perfil.php?id=<?php echo $_SSESION['usuario']; ?>">
+                                <i class="bi bi-person"></i>
+                                <span>Ver Perfil</span>
+                           </a>
+                        </li> 
+                        
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="../Controladores/Logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
@@ -172,9 +142,9 @@ die();
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="index.php">
+                <a class="nav-link " href="./Main.php">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>Inicio</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
@@ -238,7 +208,7 @@ die();
                 </a>
                 <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="Usuario.php">
+                        <a href="../Seguridad/Usuario/V_Usuario/V_usuario.php">
                             <i class="bi bi-circle"></i><span>Usuarios</span>
                         </a>
                     </li>
@@ -254,7 +224,7 @@ die();
                     </li>
                     <li>
                         <!-- Enlace al formulario de bitácora -->
-                        <a href="bitacora.php">
+                        <a href="./Bitacora.php">
                             <i class="bi bi-circle"></i><span>Bitacora</span>
                         </a>
                     </li>
@@ -264,22 +234,12 @@ die();
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>Parametros</span>
+                        <a href="../Seguridad/Parametros/V_Parametros/V_modal_parametros.php">
+                            <i class="bi bi-circle"></i><span>Parámetros</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- Fin modulo  Mantenimiento -->
-
-
-            <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="../Controladores/Logout.php">
-          <i class="bi bi-box-arrow-in-left"></i>
-          <span>Salir</span>
-        </a>
-      </li>End Login Page Nav -->
-
-
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -298,26 +258,9 @@ die();
         </div><!-- End Page Title -->
 
         <?php
-
-    include("../PHP/Controladores/Conexion_be.php");
-    // $sql = "SELECT Id_Paciente, Descripcion_Cita, Fecha_Cita, Hora_Cita FROM tbl_cita_terapeutica";
-    // $resultSet = mysqli_query($conexion, $sql);
     ?>
         <section class="hero">
             <div class="contenido-hero">
-                <h3>Citas Pendientes</h3>
-
-                <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-clock"
-                        width="88" height="88" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3" />
-                        <path d="M16 3v4" />
-                        <path d="M8 3v4" />
-                        <path d="M4 11h10" />
-                        <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                        <path d="M18 16.5v1.5l.5 .5" />
-                    </svg></p>
             </div>
         </section>
         <div class="container mt-4">

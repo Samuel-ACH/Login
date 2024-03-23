@@ -16,6 +16,7 @@ include('../Controladores/EnvioOTP/verificarOTP.php');
     <meta http-equivs="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../EstilosLogin/css/EstilosPin.css">
+    <link rel="stylesheet" href="../../EstilosLogin/css/EstilosValidaciones.css">
     <title>Verificacion OTP</title>
     <link rel="shortcut icon" href="../../EstilosLogin/images/pestana.png" type="image/x-icon">
 </head>
@@ -23,17 +24,29 @@ include('../Controladores/EnvioOTP/verificarOTP.php');
     <main>
         <div>
             <?php if(isset($error)) { echo "<p>$error</p>";} ?>
-            <form action="../Controladores/EnvioOTP/verificarOTP.php" method="POST" class="OTP">
-                <label for="codigo_otp">Ingrese el código OTP recibido por correo electrónico:</label><br>
+            
+            <form action="../Controladores/EnvioOTP/verificarOTP.php" method="POST" class="OTP" id="form_OTPMain">
+            <img src="../../../EstilosLogin/images/logo.png" alt="">
+                <h4 for="codigo_otp">Ingrese el código OTP recibido por correo electrónico:</h4><br>
                 <div class="input-wrapper">
-                    <input type="password" id="codigo_otp" name="codigo_otp" required maxlength="6" autocomplete="off"><br>
-                    <img class="input-icon" src="../../Imagenes/password.svg" alt="">
+                    <!-- GRUPO CODIGO OTP -->
+                    <div class="formulario__grupo" id="grupo__codigo_otp">
+                        <!-- <label for="codigo_otp" class="formulario__label">Confirmar Contraseña</label> -->
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="codigo_otp" id="codigo_otp"
+                                placeholder="Ingresa el código OTP" required maxlength="6" autocomplete="off">
+                                <img class="input-icon" src="../../../Imagenes/password.svg" alt="">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div>
                 </div>
-                <input class="btn" type="submit" name="register" value="Enviar">
-                <a href="Index.php">Regresar al Login</a>
-
+                <input class="btn" type="submit" name="register" value="Enviar"><br>
+                 <a href="Index.php">Regresar al Login</a>
             </form>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../javascript/validacionOTPMain.js"></script>
 </body>
 </html>
