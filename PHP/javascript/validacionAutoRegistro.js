@@ -13,7 +13,6 @@ const expresiones = {
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/, // Validar sin espacios una minúscula, una mayúscula, un número y un caracter especial.
   dni: /^(?!00)(?!.*0{5}$)[0-9]{1,13}$/,
   dniN:/^[0-9]{1,13}$/
-
 } 
 
 const validarInputs = (e) => {
@@ -48,11 +47,6 @@ const validarInputs = (e) => {
     break;
   }
 }
-
-inputs.forEach((input) => {
-  input.addEventListener('keyup', validarInputs); // Verificar el campo después de presionar una tecla
-  input.addEventListener('blur', validarInputs); // Comprobar cuando da clic fuera del campo
-});
 
 inputs.forEach((input) => {
   input.addEventListener('keyup', validarInputs); // Verificar el campo después de presionar una tecla

@@ -8,35 +8,28 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>CLÍNICA RED</title>
+    
     <!-- Favicons -->
     <link href="../../../../assets/img/red-logo.jpeg" rel="icon">
     <link href="../../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <!-- Vendor CSS Files -->
-    <link href="../../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
     
-    <!-- Estilos y librerias para reportes -->
-   
-    <link href="../../../../assets/css/style.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../../CSSReportes/botones.css">  
-    <link rel="stylesheet" href="../../../CSSReportes/EstilosModal.css">  
+    <link rel="stylesheet" href="../../../../librerias/librerias.css"> <!-- archivo de encapsulamiento de librerias CSS -->
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
-
-
-    <!-- librerias css -->
-    <link rel="stylesheet" href="../../../../librerias/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../../../../librerias/alertifyjs/css/alertify.css">
-    <link rel="stylesheet" href="../../../../librerias/alertifyjs/css/themes/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  
+    <script type="module" src="../../../../librerias/librerias.js"></script>
+
+     <!-- ----------------CODIGO PARA GENERAR REPORTES------------------>
+     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> <!-- ESTILOS DE LA TABLA -->
+     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> <!-- MOSTRAR BOTONES DE REPORTE -->
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> LIBRERIA DE EXCEL  -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> <!-- IMPRIME PDF -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
+     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
+     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
+
     <!-- librerias javascript -->
     <script src="../C_Parametros/C_funciones_parametros.js"></script> <!-- Funciones para el CRUD -->
     <script src="../../../../librerias/bootstrap/js/bootstrap.js" ></script> <!-- libreria Bootstrap -->
@@ -242,10 +235,29 @@ session_start();
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
+
+        <!-- GRUPO PARÁMETRO -->
+        <!-- <div class="formulario__grupo" id="grupo__parametro">
+            <label for="parametro" class="formulario__label">Parámetro:</label>
+            <div class="formulario__grupo-input">
+                <input type="text" class="form-control formulario__input input-sm" style="text-transform: uppercase" name="parametro" id="parametro" placeholder="Parámetro" maxlength="50">
+            </div>
+            <p class="formulario__input-error"></p>
+        </div> -->
+
+        <!-- GRUPO VALOR PARÁMETRO -->
+        <!-- <div class="formulario__grupo" id="grupo__valorParametro">
+            <label for="valorParametro" class="formulario__label">Valor:</label>
+            <div class="formulario__grupo-input">
+                <input type="text" class="formulario__input input-sm" name="valorParametro" id="valorParametro" placeholder="Valor del parámetro" maxlength="50">
+            </div>
+            <p class="formulario__input-error"></p>
+        </div> -->
+        
         <label for="parametro">Parámetro:</label>
-        <input type="text" id="parametro" class="form-control input-sm">
+        <input type="text" id="parametro" placeholder="Parámetro" class="form-control input-sm">
         <label for="valorParametro">Valor:</label>
-        <input type="text" id="valorParametro" class="form-control input-sm">
+        <input type="text" id="valorParametro" placeholder="Valor del parámetro" class="form-control input-sm">
     
       </div>
       <div class="modal-footer">
@@ -321,31 +333,11 @@ session_start();
 
     </footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
 
-  
- <!-- Vendor JS Files -->
- <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="../../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../../assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="../../../../assets/vendor/echarts/echarts.min.js"></script>
-    <script src="../../../../assets/vendor/quill/quill.min.js"></script>
-    <script src="../../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="../../../../assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="../../../../assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../../../assets/js/main.js"></script>
-
-    <!-- ----------------CODIGO PARA GENERAR REPORTES------------------>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> <!-- ESTILOS DE LA TABLA -->
-        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> <!-- MOSTRAR BOTONES DE REPORTE -->
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> LIBRERIA DE EXCEL  -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> <!-- IMPRIME PDF -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
-        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
-        <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
+    <script type="module" src="../C_Parametros/C_validacion_parametros.js"></script> <!-- Funciones de validación -->      
 
 </body>
 </html>
