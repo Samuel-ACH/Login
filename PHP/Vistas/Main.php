@@ -1,7 +1,7 @@
 <?php
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
 session_start();
-// Validar si se ha verificado el OTP y si el usuario está autenticado
+// // // Validar si se ha verificado el OTP y si el usuario está autenticado
 if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
   echo '
   <script>
@@ -12,7 +12,7 @@ if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
 session_destroy(); // Destruye la sesión
 die(); 
 }
-// // // // // // Ingresa al main sin el OTP
+// // // // Ingresa al main sin el OTP
 // if (!isset($_SESSION["correo"])) {
 //  echo '
 //           <script>
@@ -23,7 +23,6 @@ die();
 //   session_destroy(); // Destruye la sesión
 //   die(); // el código se detiene en esta línea 
 // }
-
  ?>
 
 <!DOCTYPE html>
