@@ -397,14 +397,65 @@ session_start();
                 <label for="nombrePaciente_E">Nombre Paciente:</label>
                 <input type="text" id="nombrePaciente_E" name="nombrePaciente_E" readonly class="form-control input-sm">
                 
-                <label for="tipoCita_E">Tipo Cita:</label>
-                <input type="text" id="tipoCita_E" name="tipoCita_E" class="form-control input-sm">
+                <!-- <label for="tipoCita_E">Tipo Cita:</label>
+                <input type="text" id="tipoCita_E" name="tipoCita_E" class="form-control input-sm"> -->
+
+                <div class="doctor-options">
+                        <label for="tipoCita_E" class="formulario__label">Tipo Cita:</label>
+                        <select type="int" autocomplete="off" name="tipoCita_E" id="tipoCita_E" class="combobox form-control input-sm">
+                            <option value="0" selected>Seleccione:</option>
+                            
+                            <?php
+                            // Conexión a la base de datos
+                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                        
+                            // Consulta SQL para obtener los géneros
+                            $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
+                            $resultado = mysqli_query($conexion, $query);
+                            
+                            // Iterar sobre los resultados y generar las opciones del select
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                echo '<option value="' . $fila['Id_Tipo_Cita'] . '">' . $fila['Descripcion'] . '</option>';
+                            }
+                            // Liberar resultado
+                            mysqli_free_result($resultado);
+                            // Cerrar conexión
+                            mysqli_close($conexion);
+                            ?>
+                        </select>
+                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+                    </div>
                 
                 <label for="motivoCita_E">Motivo:</label>
                 <input type="text" id="motivoCita_E" name="motivoCita_E" class="form-control input-sm">
                 
-                <label for="nombreDoctor_E">Doctor:</label>
-                <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm">
+                <!-- <label for="nombreDoctor_E">Doctor:</label>
+                <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm"> -->
+
+                <div class="doctor-options">
+                        <label for="nombreDoctor_E" class="formulario__label">Encargado:</label>
+                        <select type="int" autocomplete="off" name="nombreDoctor_E" id="nombreDoctor_E" class="combobox form-control input-sm">
+                            <option value="0" selected>Seleccione:</option>
+                            <?php
+                            // Conexión a la base de datos
+                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                            
+                            // Consulta SQL para obtener los géneros
+                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (6, 7)";
+                            $resultado = mysqli_query($conexion, $query);
+                            
+                            // Iterar sobre los resultados y generar las opciones del select
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                echo '<option value="' . $fila['Id_Usuario'] . '">' . $fila['Nombre'] . '</option>';
+                            }
+                            // Liberar resultado
+                            mysqli_free_result($resultado);
+                            // Cerrar conexión
+                            mysqli_close($conexion);
+                            ?>
+                        </select>
+                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+                    </div>
                 
                 <label for="fechaCita_E">Fecha Cita:</label>
                 <input type="date" id="fechaCita_E" name="fechaCita_E" class="form-control input-sm">
@@ -459,7 +510,7 @@ session_start();
         });
         
         $('#actualizarCita').click(function(){
-            actualizaParametro();
+            actualizarCita();
         });
     });
 </script>

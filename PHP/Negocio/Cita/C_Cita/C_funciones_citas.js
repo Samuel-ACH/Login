@@ -44,14 +44,21 @@ function cargarDatos(datos) {
     $('#horaCita_E').val(extraerDatos[6]);   
 }
 
-function actualizaParametro() {
-    Id_Parametro = $('#Id_Parametro').val();
-    parametroE = $('#parametroE').val();
-    valorParametroE = $('#valorParametroE').val();
+function actualizarCita() {
 
-    cadena = "Id_Parametro=" + Id_Parametro +
-        "&parametroE=" + parametroE +
-        "&valorParametroE=" + valorParametroE;
+    idCita_E = $('#idCita_E').val();
+    tipoCita_E = $('#tipoCita_E').val();
+    motivoCita_E = $('#motivoCita_E').val();
+    nombreDoctor_E = $('#nombreDoctor_E').val();
+    fechaCita_E = $('#fechaCita_E').val(); 
+    horaCita_E = $('#horaCita_E').val();   
+
+    cadena = "idCita_E=" + idCita_E +
+        "&tipoCita_E=" + tipoCita_E +
+        "&motivoCita_E=" + motivoCita_E +
+        "&nombreDoctor_E=" + nombreDoctor_E +
+        "&fechaCita_E=" + fechaCita_E +
+        "&horaCita_E=" + horaCita_E;
 
     $.ajax({
         type: 'POST',
