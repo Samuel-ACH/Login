@@ -190,7 +190,7 @@ if (!isset($_SESSION["correo"])) {
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="tables-general.html">
+                        <a href="../Negocio/Expediente/V_Expediente/V_modal_expediente.php">
                             <i class="bi bi-circle"></i><span>Gestion Expediente</span>
                         </a>
                     </li>
