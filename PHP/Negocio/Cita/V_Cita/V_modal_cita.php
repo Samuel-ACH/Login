@@ -35,9 +35,7 @@ session_start();
     <!-- <script type="module" src="../C_Parametros/C_validacion_parametros.js"></script> Funciones de validación -->
     <script src="../../../../librerias/bootstrap/js/bootstrap.js" ></script> <!-- libreria Bootstrap -->
     <script src="../../../../librerias/alertifyjs/js/alertify.js" ></script> <!-- libreria Alertify -->
-    <!-- Buscar el paciente por su numero de id -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../C_Cita/C_funciones_citas.js"></script>
+
 </head>
 
 <body>
@@ -259,40 +257,11 @@ session_start();
                     </div> -->
                     
                     <label for="DNI">DNI:</label>
-                        <input type="text"  name="DNI" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
-
-                        <label for="nombrePaciente">Nombre Paciente:</label>
-                        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente"  name="nombrePaciente" class="form-control input-sm" readonly>
-                        <script>buscarPaciente(DNI)</script>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).ready(function() {
-                                $('#DNI').on('input', function() {
-                                    var dni = $(this).val();
-                                    if (dni !== '') {
-                                        // Realizar consulta AJAX para buscar el nombre asociado al DNI
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: '../C_Cita/C_buscar_paciente.php', // Ruta al script PHP para buscar el nombre
-                                            data: {
-                                                dni: dni
-                                            },
-                                            success: function(response) {
-                                                // Mostrar el nombre en el campo de entrada correspondiente
-                                                $('#nombrePaciente').val(response);
-                                            },
-                                            error: function() {
-                                                alert('Error al buscar el nombre.');
-                                            }
-                                        });
-                                    } else {
-                                        // Limpiar el campo de nombre si el campo de DNI está vacío
-                                        $('#nombrePaciente').val('');
-                                    }
-                                });
-                            });
-                        </script>
-                  
+                    <input type="text" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
+                    
+                    <label for="nombrePaciente">Nombre Paciente:</label>
+                    <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" class="form-control input-sm">
+                    
                     <!-- <label for="tipoCita">Tipo Cita:</label>
                     <input type="text" id="tipoCita" class="form-control input-sm"> -->
                     
