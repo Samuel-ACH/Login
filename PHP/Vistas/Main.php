@@ -1,28 +1,29 @@
 <?php
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
 session_start();
-// // // Validar si se ha verificado el OTP y si el usuario está autenticado
-if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
-  echo '
-  <script>
-      alert("Por favor, debes iniciar sesión.")
-      window.location = "Index.php";
-  </script>
-';
-session_destroy(); // Destruye la sesión
-die(); 
-}
-// // // // Ingresa al main sin el OTP
-// if (!isset($_SESSION["correo"])) {
-//  echo '
-//           <script>
-//                  alert("Por favor, debes iniciar sesión.")
-//                 window.location = "Index.php";
-//             </script>
-//        ';
-//   session_destroy(); // Destruye la sesión
-//   die(); // el código se detiene en esta línea 
+// Validar si se ha verificado el OTP y si el usuario está autenticado
+// if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
+//   echo '
+//   <script>
+//       alert("Por favor, debes iniciar sesión.")
+//       window.location = "Index.php";
+//   </script>
+// ';
+// session_destroy(); // Destruye la sesión
+// die(); 
 // }
+// // // // // Ingresa al main sin el OTP
+if (!isset($_SESSION["correo"])) {
+ echo '
+          <script>
+                 alert("Por favor, debes iniciar sesión.")
+                window.location = "Index.php";
+            </script>
+       ';
+  session_destroy(); // Destruye la sesión
+  die(); // el código se detiene en esta línea 
+}
+
  ?>
 
 <!DOCTYPE html>
@@ -176,7 +177,7 @@ die();
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="forms-elements.html">
+                        <a href="../Negocio/Cita/V_Cita/V_modal_cita.php">
                             <i class="bi bi-circle"></i><span>Gestion Cita</span>
                         </a>
                 </ul>

@@ -97,7 +97,6 @@ include('../Controladores/Conexion/Conexion_be.php');
 					</div>
 					<!-- fin del recaptcha-->
                     
-                    
                     <!-- Botón entrar -->
                     <div class="formulario__grupo formulario__grupo-btn-enviar">
                         <button type="submit" class="formulario__btn" id="btn_login">Entrar</button>

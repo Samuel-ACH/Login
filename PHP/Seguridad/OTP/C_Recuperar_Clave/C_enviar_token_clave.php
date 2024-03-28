@@ -2,7 +2,7 @@
 ob_start(); // Iniciar el buffer de salida para capturar toda la salida y evitar este tipo de errores.
 function enviarOTP2($conexion, $correo2) {
     require_once './C_generar_token_clave.php';
-    require_once('../../../PHPMailer/controllermail2.php');
+    require_once('../../../PHPMailer/C_correo_clave.php');
     
     // Iniciar sesión si no está iniciada
 $otp2 = generarCodigoOTP2(); // Generar OTP

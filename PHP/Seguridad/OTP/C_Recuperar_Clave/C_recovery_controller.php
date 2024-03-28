@@ -73,6 +73,6 @@ if (!empty($correo2)) {
     <script>
       MostrarAlerta("error", "ERROR", "No se ingresó ningun correo.", "../V_Recuperar_Clave/V_verificar_token.php");
     </script>
-  ';
+';
 }
 ?>
