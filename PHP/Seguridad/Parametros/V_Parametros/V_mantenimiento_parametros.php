@@ -8,7 +8,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaParametrosLoad" class="table">        
             <!-- <br><h2>Mantenimiento de Parámetros</h2> -->
-            <button class="btn btn-primary btn-agregar" data-toggle="modal" data-target="#modalNuevoParametro">
+            <button id="agregarParametro" class="btn btn-primary btn-agregar" data-toggle="modal" data-target="#modalNuevoParametro">
                 <i class="fa-solid fa-plus"></i> Agregar Parámetro</button>
 
                 <thead class="encabezado bg-light table-info">

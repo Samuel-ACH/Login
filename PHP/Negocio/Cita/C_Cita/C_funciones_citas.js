@@ -35,9 +35,13 @@ function cargarDatosLectura(datos) {
 function cargarDatos(datos) {
     extraerDatos = datos.split('||');
 
-    $('#Id_Parametro').val(extraerDatos[0]);
-    $('#parametroE').val(extraerDatos[1]);
-    $('#valorParametroE').val(extraerDatos[2]);
+    $('#idCita_E').val(extraerDatos[0]);
+    $('#tipoCita_E').val(extraerDatos[1]);
+    $('#motivoCita_E').val(extraerDatos[2]);
+    $('#nombrePaciente_E').val(extraerDatos[3]);
+    $('#nombreDoctor_E').val(extraerDatos[4]);
+    $('#fechaCita_E').val(extraerDatos[5]); 
+    $('#horaCita_E').val(extraerDatos[6]);   
 }
 
 function actualizaParametro() {

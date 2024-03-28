@@ -226,216 +226,215 @@ session_start();
     <div class="container mt-4">
         <div id="tablaCitas"></div>
     </div>
-
-   <!-- MODAL AGENDAR CITA -->
-<div class="modal fade" id="modalAgendarCita" tabindex="-1" aria-labelledby="modalAgendarCitaLabel" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalAgendarCitaLabel">Agendar Cita</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-
-        <!-- GRUPO PARÁMETRO -->
-        <!-- <div class="formulario__grupo" id="grupo__parametro">
-            <label for="parametro" class="formulario__label">Parámetro:</label>
-            <div class="formulario__grupo-input">
-                <input type="text" class="form-control formulario__input" style="text-transform: uppercase" name="parametro" id="parametro" placeholder="Parámetro" maxlength="50">
-            </div>
-            <p class="formulario__input-error"></p>
-        </div> -->
-
-        <!-- GRUPO VALOR PARÁMETRO -->
-        <!-- <div class="formulario__grupo" id="grupo__valorParametro">
-            <label for="valorParametro" class="formulario__label">Valor:</label>
-            <div class="formulario__grupo-input">
-                <input type="text" class="form-control formulario__input" name="valorParametro" id="valorParametro" placeholder="Valor del parámetro" maxlength="50">
-            </div>
-            <p class="formulario__input-error"></p>
-        </div> -->
-        
-        <label for="DNI">DNI:</label>
-        <input type="text" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
-
-        <label for="nombrePaciente">Nombre Paciente:</label>
-        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" class="form-control input-sm">
-        
-        <!-- <label for="tipoCita">Tipo Cita:</label>
-        <input type="text" id="tipoCita" class="form-control input-sm"> -->
-
-        <div class="doctor-options">
-                    <label for="tipoCita" class="formulario__label">Tipo Cita:</label>
-                    <div></div>
-                    <select type="int" autocomplete="off" name="tipoCita" id="tipoCita" class="combobox form-control input-sm">
-                        <option value="0" selected>Seleccione:</option>
-                        <?php
-                        // Conexión a la base de datos
-                        include ('../../../Controladores/Conexion/Conexion_be.php');
-                    
-                        // Consulta SQL para obtener los géneros
-                        $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
-                        $resultado = mysqli_query($conexion, $query);
-
-                        // Iterar sobre los resultados y generar las opciones del select
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['Id_Tipo_Cita'] . '">' . $fila['Descripcion'] . '</option>';
-                        }
-                        // Liberar resultado
-                        mysqli_free_result($resultado);
-                        // Cerrar conexión
-                        mysqli_close($conexion);
-                        ?>
-                    </select>
-                    <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
-        </div>
-
-        <label for="motivoCita">Motivo:</label>
-        <input type="text" id="motivoCita" placeholder="Motivo de la cita" class="form-control input-sm">
-
-        <!-- <label for="nombreDoctor">Doctor:</label>
-        <input type="text" id="nombreDoctor" class="form-control input-sm"> -->
-
-        <div class="doctor-options">
-                    <label for="nombreDoctor" class="formulario__label">Encargado:</label>
-                    <div></div>
-                    <select type="int" autocomplete="off" name="nombreDoctor" id="nombreDoctor" class="combobox form-control input-sm">
-                        <option value="0" selected>Seleccione:</option>
-                        <?php
-                        // Conexión a la base de datos
-                        include ('../../../Controladores/Conexion/Conexion_be.php');
-                    
-                        // Consulta SQL para obtener los géneros
-                        $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (6, 7)";
-                        $resultado = mysqli_query($conexion, $query);
-
-                        // Iterar sobre los resultados y generar las opciones del select
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['Id_Usuario'] . '">' . $fila['Nombre'] . '</option>';
-                        }
-                        // Liberar resultado
-                        mysqli_free_result($resultado);
-                        // Cerrar conexión
-                        mysqli_close($conexion);
-                        ?>
-                    </select>
-                    <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
-        </div>
     
-        <label for="fechaCita">Fecha Cita:</label>
-        <input type="date" id="fechaCita" class="form-control input-sm">
+    <!-- MODAL AGENDAR CITA -->
+    <div class="modal fade" id="modalAgendarCita" tabindex="-1" aria-labelledby="modalAgendarCitaLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalAgendarCitaLabel">Agendar Cita</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
 
-        <label for="horaCita">Hora Cita:</label>
-        <input type="time" id="horaCita" class="form-control input-sm">
+                <div class="modal-body">
+                    
+                    <!-- GRUPO PARÁMETRO -->
+                    <!-- <div class="formulario__grupo" id="grupo__parametro">
+                        <label for="parametro" class="formulario__label">Parámetro:</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="form-control formulario__input" style="text-transform: uppercase" name="parametro" id="parametro" placeholder="Parámetro" maxlength="50">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div> -->
+                    
+                    <!-- GRUPO VALOR PARÁMETRO -->
+                    <!-- <div class="formulario__grupo" id="grupo__valorParametro">
+                        <label for="valorParametro" class="formulario__label">Valor:</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="form-control formulario__input" name="valorParametro" id="valorParametro" placeholder="Valor del parámetro" maxlength="50">
+                        </div>
+                        <p class="formulario__input-error"></p>
+                    </div> -->
+                    
+                    <label for="DNI">DNI:</label>
+                    <input type="text" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
+                    
+                    <label for="nombrePaciente">Nombre Paciente:</label>
+                    <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" class="form-control input-sm">
+                    
+                    <!-- <label for="tipoCita">Tipo Cita:</label>
+                    <input type="text" id="tipoCita" class="form-control input-sm"> -->
+                    
+                    <div class="doctor-options">
+                        <label for="tipoCita" class="formulario__label">Tipo Cita:</label>
+                        <select type="int" autocomplete="off" name="tipoCita" id="tipoCita" class="combobox form-control input-sm">
+                            <option value="0" selected>Seleccione:</option>
+                            
+                            <?php
+                            // Conexión a la base de datos
+                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                        
+                            // Consulta SQL para obtener los géneros
+                            $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
+                            $resultado = mysqli_query($conexion, $query);
+                            
+                            // Iterar sobre los resultados y generar las opciones del select
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                echo '<option value="' . $fila['Id_Tipo_Cita'] . '">' . $fila['Descripcion'] . '</option>';
+                            }
+                            // Liberar resultado
+                            mysqli_free_result($resultado);
+                            // Cerrar conexión
+                            mysqli_close($conexion);
+                            ?>
+                        </select>
+                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+                    </div>
+                    
+                    <label for="motivoCita">Motivo:</label>
+                    <input type="text" id="motivoCita" placeholder="Motivo de la cita" class="form-control input-sm">
 
+                    <!-- <label for="nombreDoctor">Doctor:</label>
+                    <input type="text" id="nombreDoctor" class="form-control input-sm"> -->
+                    
+                    <div class="doctor-options">
+                        <label for="nombreDoctor" class="formulario__label">Encargado:</label>
+                        <select type="int" autocomplete="off" name="nombreDoctor" id="nombreDoctor" class="combobox form-control input-sm">
+                            <option value="0" selected>Seleccione:</option>
+                            <?php
+                            // Conexión a la base de datos
+                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                            
+                            // Consulta SQL para obtener los géneros
+                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (6, 7)";
+                            $resultado = mysqli_query($conexion, $query);
+                            
+                            // Iterar sobre los resultados y generar las opciones del select
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                echo '<option value="' . $fila['Id_Usuario'] . '">' . $fila['Nombre'] . '</option>';
+                            }
+                            // Liberar resultado
+                            mysqli_free_result($resultado);
+                            // Cerrar conexión
+                            mysqli_close($conexion);
+                            ?>
+                        </select>
+                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+                    </div>
+    
+                    <label for="fechaCita">Fecha Cita:</label>
+                    <input type="date" id="fechaCita" class="form-control input-sm">
+
+                    <label for="horaCita">Hora Cita:</label>
+                    <input type="time" id="horaCita" class="form-control input-sm">
+                </div>
+                
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
+                    <button type="submit" id="guardarCita" class="btn btn-primary btn-block">Guardar</button>
+                </div>
+            </div>
+        </div>
     </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
-        <button type="submit" id="guardarCita" class="btn btn-primary btn-block">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- MODAL PARA VER CITA -->
 <div class="modal fade" id="modalVerCita" tabindex="-1" aria-labelledby="modalVerCitaLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalVerCitaLabel">Ver Cita</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalVerCitaLabel">Ver Cita</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                
+                <label for="idCita_L" hidden>Id Cita:</label>
+                <input type="text" id="idCita_L" hidden readonly class="form-control input-sm">
+                
+                <!-- <label for="DNI_L">DNI:</label>
+                <input type="text" id="DNI_L" readonly class="form-control input-sm"> -->
 
-        <label for="idCita_L" hidden>Id Cita:</label>
-        <input type="text" id="idCita_L" hidden readonly class="form-control input-sm">
+                <label for="nombrePaciente_L">Nombre Paciente:</label>
+                <input type="text" id="nombrePaciente_L" readonly class="form-control input-sm">
+                
+                <label for="tipoCita_L">Tipo Cita:</label>
+                <input type="text" id="tipoCita_L" readonly class="form-control input-sm">
 
-        <!-- <label for="DNI_L">DNI:</label>
-        <input type="text" id="DNI_L" readonly class="form-control input-sm"> -->
-
-        <label for="nombrePaciente_L">Nombre Paciente:</label>
-        <input type="text" id="nombrePaciente_L" readonly class="form-control input-sm">
-        
-        <label for="tipoCita_L">Tipo Cita:</label>
-        <input type="text" id="tipoCita_L" readonly class="form-control input-sm">
-
-        <label for="motivoCita_L">Motivo:</label>
-        <input type="text" id="motivoCita_L" readonly class="form-control input-sm">
-
-        <label for="nombreDoctor_L">Doctor:</label>
-        <input type="text" id="nombreDoctor_L" readonly class="form-control input-sm">
-    
-        <label for="fechaCita_L">Fecha Cita:</label>
-        <input type="date" id="fechaCita_L" readonly class="form-control input-sm">
-
-        <label for="horaCita_L">Hora Cita:</label>
-        <input type="time" id="horaCita_L" readonly class="form-control input-sm">
-
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="VerParametro" class="btn btn-primary">Actualizar</button> -->
-      </div>
+                <label for="motivoCita_L">Motivo:</label>
+                <input type="text" id="motivoCita_L" readonly class="form-control input-sm">
+                
+                <label for="nombreDoctor_L">Doctor:</label>
+                <input type="text" id="nombreDoctor_L" readonly class="form-control input-sm">
+                
+                <label for="fechaCita_L">Fecha Cita:</label>
+                <input type="date" id="fechaCita_L" readonly class="form-control input-sm">
+                
+                <label for="horaCita_L">Hora Cita:</label>
+                <input type="time" id="horaCita_L" readonly class="form-control input-sm">
+            </div>
+            
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="VerParametro" class="btn btn-primary">Actualizar</button> -->
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- MODAL PARA EDITAR CITA -->
 <div class="modal fade" id="modalEditarCita" tabindex="-1" aria-labelledby="modalEditarCitaLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalEditarCitaLabel">Editar Cita</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-      
-      <label for="idCita_E" hidden>Id Cita:</label>
-        <input type="text" id="idCita_E" hidden class="form-control input-sm">
-
-        <label for="DNI_E">DNI:</label>
-        <input type="text" id="DNI_E" readonly class="form-control input-sm">
-
-        <label for="nombrePaciente_E">Nombre Paciente:</label>
-        <input type="text" id="nombrePaciente_E" readonly class="form-control input-sm">
-        
-        <label for="tipoCita_E">Tipo Cita:</label>
-        <input type="text" id="tipoCita_E" class="form-control input-sm">
-
-        <label for="motivoCita_E">Motivo:</label>
-        <input type="text" id="motivoCita_E" class="form-control input-sm">
-
-        <label for="nombreDoctor_E">Doctor:</label>
-        <input type="text" id="nombreDoctor_E" class="form-control input-sm">
-    
-        <label for="fechaCita_E">Fecha Cita:</label>
-        <input type="date" id="fechaCita_E" class="form-control input-sm">
-
-        <label for="horaCita_E">Hora Cita:</label>
-        <input type="time" id="horaCita_E" class="form-control input-sm">
-      
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
-        <button type="button" id="actualizarCita" class="btn btn-primary btn-block">Actualizar</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEditarCitaLabel">Editar Cita</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            
+            <div class="modal-body">
+          
+                <!-- <label for="idCita_E" hidden>Id Cita:</label> -->
+                <input type="text" id="idCita_E" name="idCita_E" hidden class="form-control input-sm">
+                
+                <label for="nombrePaciente_E">Nombre Paciente:</label>
+                <input type="text" id="nombrePaciente_E" name="nombrePaciente_E" readonly class="form-control input-sm">
+                
+                <label for="tipoCita_E">Tipo Cita:</label>
+                <input type="text" id="tipoCita_E" name="tipoCita_E" class="form-control input-sm">
+                
+                <label for="motivoCita_E">Motivo:</label>
+                <input type="text" id="motivoCita_E" name="motivoCita_E" class="form-control input-sm">
+                
+                <label for="nombreDoctor_E">Doctor:</label>
+                <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm">
+                
+                <label for="fechaCita_E">Fecha Cita:</label>
+                <input type="date" id="fechaCita_E" name="fechaCita_E" class="form-control input-sm">
+                
+                <label for="horaCita_E">Hora Cita:</label>
+                <input type="time" id="horaCita_E" name="horaCita_E" class="form-control input-sm">
+                
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
+                <button type="button" id="actualizarCita" class="btn btn-primary btn-block">Actualizar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-   
-</main> 
+
+</main>
 <!-- dentro del main va la tabla o informacion -->
 
- <!-- ======= Footer ======= -->
- <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>TechTitans</span></strong>. Derechos Reservados
-        </div>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>TechTitans</span></strong>. Derechos Reservados
+    </div>
+    
+</footer><!-- End Footer -->
 
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-        <i class="bi bi-arrow-up-short"></i>
-    </a>   
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>   
 
 </body>
 </html>
@@ -458,9 +457,10 @@ session_start();
             nombreDoctor = $('#nombreDoctor').val();
             insertarCita(motivoCita, fechaCita, horaCita, nombrePaciente, tipoCita, nombreDoctor)
         });
-
+        
         $('#actualizarCita').click(function(){
-          actualizaParametro();
+            actualizaParametro();
         });
     });
 </script>
+

@@ -51,7 +51,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalVerCita" onclick="cargarDatosLectura('<?php echo $datos; ?>')">
                                 <i class="fa-solid fa-eye"></i></button>
 
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalEditarCita">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalEditarCita" onclick="cargarDatos('<?php echo $datos; ?>')">
                                 <i class="fa-solid fa-pen-to-square"></i></button>
 
                             <button class="btn btn-danger" onclick="validarSiNo('<?php echo $filas[0]; ?>')"><i class="fa-solid fa-trash-can"></i></button>
