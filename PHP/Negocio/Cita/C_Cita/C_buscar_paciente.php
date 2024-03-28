@@ -18,11 +18,10 @@ if ($resultado) {
     if ($fila) {
         // Obtener el nombre del resultado
         $nombre = $fila['Nombre'];
-        $paciente = $fila['Id_Paciente'];
-        $id_paciente = preg_replace("/[^0-9]/" , "", $paciente);
+        $id_paciente = intval($fila['Id_Paciente']);
     } else {
         // No se encontraron resultados para el DNI proporcionado
-        $nombre = "No se Encontró Paciente"; // Mensaje de error más descriptivo
+        $nombre = "No se encontró el paciente"; // Mensaje de error más descriptivo
     }
 } else {
     // Hubo un error en la consulta SQL
@@ -30,9 +29,7 @@ if ($resultado) {
 }
 
 // Imprimir el nombre (o enviarlo de vuelta como JSON si prefieres)
-echo $nombre;
- // Esto enviará el nombre de vuelta a la solicitud AJAX
- echo $id_paciente;
+echo $nombre . "||" . $id_paciente;
 // Liberar resultado
 mysqli_free_result($resultado);
 

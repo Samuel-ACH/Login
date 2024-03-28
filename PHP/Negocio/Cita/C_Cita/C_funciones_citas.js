@@ -1,8 +1,8 @@
-function insertarCita(motivoCita, fechaCita, horaCita, nombrePaciente, tipoCita, nombreDoctor) {
+function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, nombreDoctor) {
     cadena = "motivoCita=" + motivoCita +
         "&fechaCita=" + fechaCita +
         "&horaCita=" + horaCita +
-        "&nombrePaciente=" + nombrePaciente +
+        "&Id_Paciente=" + Id_Paciente +
         "&tipoCita=" + tipoCita +
         "&nombreDoctor=" + nombreDoctor;
     $.ajax({

@@ -259,9 +259,12 @@ session_start();
                     <label for="DNI">DNI:</label>
                         <input type="text"  name="DNI" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
 
+                        <label for="Id_Paciente" hidden>Id Paciente:</label>
+                        <input type="text" id="Id_Paciente" hidden name="Id_Paciente" placeholder="Id del paciente" class="form-control input-sm" readonly>
+                        
                         <label for="nombrePaciente">Nombre Paciente:</label>
                         <input type="text" id="nombrePaciente" placeholder="Nombre del paciente"  name="nombrePaciente" class="form-control input-sm" readonly>
-                        <input type="text" id="Id_Paciente"  name="Id_Paciente" class="form-control input-sm" readonly>
+                        
                         <script>
                             $(document).ready(function() {
                                 $('#DNI').on('input', function() {
@@ -275,17 +278,19 @@ session_start();
                                                 dni: dni
                                             },
                                             success: function(response) {
-                                                // Mostrar el nombre en el campo de entrada correspondiente
-                                                $('#nombrePaciente').val(response);
-                                                 $('#Id_Paciente').val(response);
+                                                var datos = response.split("||");
+                                                // Asignar el nombre y el ID del paciente a los campos correspondientes
+                                                $('#nombrePaciente').val(datos[0]); // Asignar el nombre al campo nombrePaciente
+                                                $('#Id_Paciente').val(datos[1]); // Asignar el ID del paciente al campo Id_Paciente
                                             },
                                             error: function() {
-                                                alert('Error al buscar el nombre.');
+                                                alert('Error al buscar el paciente.');
                                             }
                                         });
                                     } else {
                                         // Limpiar el campo de nombre si el campo de DNI está vacío
                                         $('#nombrePaciente').val('');
+                                        $('#Id_Paciente').val('');
                                     }
                                 });
                             });
@@ -531,10 +536,10 @@ session_start();
             motivoCita = $('#motivoCita').val();
             fechaCita = $('#fechaCita').val() 
             horaCita = $('horaCita').val() 
-            nombrePaciente = $('#nombrePaciente').val() 
+            Id_Paciente = $('#Id_Paciente').val() 
             tipoCita = $('#tipoCita').val() 
             nombreDoctor = $('#nombreDoctor').val();
-            insertarCita(motivoCita, fechaCita, horaCita, nombrePaciente, tipoCita, nombreDoctor)
+            insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, nombreDoctor)
         });
         
         $('#actualizarCita').click(function(){

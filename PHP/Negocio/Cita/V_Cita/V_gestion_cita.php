@@ -37,7 +37,6 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 while ($filas = mysqli_fetch_row($resultado)) {
                     $datos = $filas[0] . "||" . $filas[1] . "||" . $filas[2] . "||" . $filas[3] . "||" . $filas[4] . "||" . $filas[5] . "||" . $filas[6];
                 ?>
-
                     <tr>
                         <td><?php echo $correlativo ?></td>
                         <td><?php echo $filas[1] ?></td>
