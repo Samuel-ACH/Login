@@ -5,7 +5,7 @@ include('../../../Controladores/Conexion/Conexion_be.php');
 $motivoCita = strtoupper($_POST['motivoCita']);
 $fechaCita = date("Y-m-d", strtotime($_POST['fechaCita']));
 $horaCita = $_POST['horaCita'];
-$id_Paciente = $_POST['nombrePaciente'];
+$id_Paciente = $_POST['Id_Paciente'];
 $id_Usuario = $_SESSION['id_D'];
 $id_Tipo_Cita = $_POST['tipoCita'];
 $id_Doctor = $_POST['nombreDoctor'] ;
