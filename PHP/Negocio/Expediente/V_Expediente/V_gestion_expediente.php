@@ -17,18 +17,21 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                     <td>Fecha Creación</td>
                     <td>Creado Por</td>
                     <td>Paciente</td>
-                    <td>Encargado</td>
+                    <!-- <td>Encargado</td> -->
                     <td>Acciones</td>
                 </tr>
             </thead>
 
             <tbody>
                 <?php
-                $sql = "SELECT CT.id_Cita_Terapia, TC.Descripcion, CT.Descripcion_Cita, P.Nombre, U.Nombre, CT.Fecha_Cita, CT.Hora_Cita 
-                        FROM `tbl_cita_terapeutica` AS CT 
-                            LEFT JOIN tbl_tipo_cita AS TC ON CT.Id_Tipo_Cita = TC.Id_Tipo_Cita
-                            INNER JOIN tbl_ms_usuario AS U ON CT.Id_Doctor = U.Id_Usuario
-                            INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = p.Id_Paciente";
+                $sql = "SELECT E.Fecha_Creacion, US.Nombre AS CreadoPor, P.Nombre AS Paciente, U.Nombre AS Encargado, -- Datos que se muestran en la vista
+                               E.id_Usuario, CT.id_Cita_Terapia, CT.Id_Tipo_Cita, TC.Descripcion, P.Id_Paciente, CT.Id_Doctor -- Datos extras sobre las citas
+                               FROM `tbl_expediente` AS E
+                                INNER JOIN tbl_ms_usuario AS US ON US.Id_Usuario = E.id_Usuario
+                                INNER JOIN tbl_cita_terapeutica AS CT ON e.id_Cita_Terapia = CT.id_Cita_Terapia
+                                INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                INNER JOIN tbl_tipo_cita AS TC ON CT.Id_Tipo_Cita = TC.Id_Tipo_Cita
+                                INNER JOIN tbl_ms_usuario AS U ON CT.Id_Doctor = U.Id_Usuario";
 
                 $resultado = mysqli_query($conexion, $sql);
                 $correlativo = 1; // Inicializamos el correlativo en 1
@@ -37,10 +40,10 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 ?>
                     <tr>
                         <td><?php echo $correlativo ?></td>
+                        <td><?php echo $filas[0] ?></td>
                         <td><?php echo $filas[1] ?></td>
                         <td><?php echo $filas[2] ?></td>
-                        <td><?php echo $filas[3] ?></td>
-                        <td><?php echo $filas[4] ?></td>
+                        <!-- <td>?php echo $filas[3] ?></td> -->
                         <td>
 
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modalVerCita" onclick="cargarDatosLectura('<?php echo $datos; ?>')">
@@ -100,7 +103,7 @@ $(document).ready(function () {
             orientation: 'portrait',
             customize: function (doc) {
                 // Agregar un título al reporte
-                var title = 'Reporte de Citas';
+                var title = 'Reporte de Expediente';
                 // Obtener la fecha y hora actual
                 var now = new Date();
                 var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();

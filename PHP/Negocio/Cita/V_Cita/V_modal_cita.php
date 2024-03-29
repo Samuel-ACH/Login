@@ -466,15 +466,15 @@ session_start();
                 <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm"> -->
 
                 <div class="doctor-options">
-                        <label for="nombreDoctor_E" class="formulario__label">Encargado:</label>
-                        <select type="int" autocomplete="off" name="nombreDoctor_E" id="nombreDoctor_E" class="combobox form-control input-sm">
+                        <label for="IdFisiatra_E" class="formulario__label">Fisiatra:</label>
+                        <select type="int" autocomplete="off" name="IdFisiatra_E" id="IdFisiatra_E" class="combobox form-control input-sm">
                             <option value="0" selected>Seleccione:</option>
                             <?php
                             // Conexión a la base de datos
                             include ('../../../Controladores/Conexion/Conexion_be.php');
                             
                             // Consulta SQL para obtener los géneros
-                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (6, 7)";
+                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol = 6";
                             $resultado = mysqli_query($conexion, $query);
                             
                             // Iterar sobre los resultados y generar las opciones del select
@@ -535,11 +535,11 @@ session_start();
             $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
             motivoCita = $('#motivoCita').val();
             fechaCita = $('#fechaCita').val() 
-            horaCita = $('horaCita').val() 
+            horaCita = $('#horaCita').val() 
             Id_Paciente = $('#Id_Paciente').val() 
             tipoCita = $('#tipoCita').val() 
-            nombreDoctor = $('#nombreDoctor').val();
-            insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, nombreDoctor)
+            Id_Fisiatra = $('#Id_Fisiatra').val();
+            insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, Id_Fisiatra)
         });
         
         $('#actualizarCita').click(function(){

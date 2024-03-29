@@ -39,7 +39,7 @@ function cargarDatos(datos) {
     $('#tipoCita_E').val(extraerDatos[1]);
     $('#motivoCita_E').val(extraerDatos[2]);
     $('#nombrePaciente_E').val(extraerDatos[3]);
-    $('#nombreDoctor_E').val(extraerDatos[4]);
+    $('#IdFisiatra_E').val(extraerDatos[4]);
     $('#fechaCita_E').val(extraerDatos[5]); 
     $('#horaCita_E').val(extraerDatos[6]);   
 }
@@ -49,14 +49,14 @@ function actualizarCita() {
     idCita_E = $('#idCita_E').val();
     tipoCita_E = $('#tipoCita_E').val();
     motivoCita_E = $('#motivoCita_E').val();
-    nombreDoctor_E = $('#nombreDoctor_E').val();
+    IdFisiatra_E = $('#IdFisiatra_E').val();
     fechaCita_E = $('#fechaCita_E').val(); 
     horaCita_E = $('#horaCita_E').val();   
 
     cadena = "idCita_E=" + idCita_E +
         "&tipoCita_E=" + tipoCita_E +
         "&motivoCita_E=" + motivoCita_E +
-        "&nombreDoctor_E=" + nombreDoctor_E +
+        "&IdFisiatra_E=" + IdFisiatra_E +
         "&fechaCita_E=" + fechaCita_E +
         "&horaCita_E=" + horaCita_E;
 
