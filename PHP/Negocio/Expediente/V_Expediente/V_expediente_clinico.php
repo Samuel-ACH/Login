@@ -223,7 +223,7 @@
     <div class="container mt-4">
         <div class="col-12">
             <center>
-                <h2>Expediente Clinico</h2>
+                <h2>Expediente Clínico</h2>
             </center>
             <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
@@ -233,7 +233,7 @@
                             <tbody>
 
 <?php
-// include('../../../Controladores/Conexion/Conexion_be.php');
+include('../../../Controladores/Conexion/Conexion_be.php');
 
 // Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
 $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
@@ -249,28 +249,34 @@ if ($result->num_rows > 0) {
     $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
     
     // Mostrar los datos en labels y generar inputs
-    echo '<label for="">' . $evaluacionDescripcion . '</label>';
+    echo '<div class="divEvaluacion">
+            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
+          </div>';
     echo '<form method="POST">';
+    // Agregar un contenedor div para las columnas
+    echo '<div class="divDescripcionEvaluacion">';
+    echo '<div class="columnas">';
     foreach ($rows as $row) {
         // Obtener la descripción y el ID_Resultado dentro del bucle
         $descripcion = $row["Descripcion"];
         $id_resultado = $row["Id_Resultado_Evaluacion"];
         
         // Generar el input con el ID y el nombre basados en el ID_Resultado
+
         echo '<div class="form-group">';
         echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" class="formulario__input input-sm" id="' . $id_resultado . '" name="' . $id_resultado . '">';
+        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
         echo '</div>';
     }
-    // echo '<input type="submit" value="Guardar">';
+    echo '</div>'; // Cerrar el contenedor de columnas
+    echo '</div>';
     echo '</form>';
-    echo '<br>';
+    // echo '<br>';
 } else {
     echo "No se encontraron resultados.";
 }
 $conexion->close();
-?>                 
-
+?> 
 <?php
 include('../../../Controladores/Conexion/Conexion_be.php');
 
@@ -288,29 +294,34 @@ if ($result->num_rows > 0) {
     $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
     
     // Mostrar los datos en labels y generar inputs
-    echo '<label for="">' . $evaluacionDescripcion . '</label>';
+    echo '<div class="divEvaluacion">
+            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
+          </div>';
     echo '<form method="POST">';
+    // Agregar un contenedor div para las columnas
+    echo '<div class="divDescripcionEvaluacion">';
+    echo '<div class="columnas">';
     foreach ($rows as $row) {
         // Obtener la descripción y el ID_Resultado dentro del bucle
         $descripcion = $row["Descripcion"];
         $id_resultado = $row["Id_Resultado_Evaluacion"];
         
         // Generar el input con el ID y el nombre basados en el ID_Resultado
+
         echo '<div class="form-group">';
         echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" id="' . $id_resultado . '" name="' . $id_resultado . '">'. '  '. $id_resultado;
+        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
         echo '</div>';
     }
-    // echo '<input type="submit" value="Guardar">';
+    echo '</div>'; // Cerrar el contenedor de columnas
+    echo '</div>';
     echo '</form>';
-    echo '<br>';
-
+    // echo '<br>';
 } else {
     echo "No se encontraron resultados.";
 }
 $conexion->close();
-?>
-
+?> 
 <?php
 include('../../../Controladores/Conexion/Conexion_be.php');
 
@@ -328,30 +339,36 @@ if ($result->num_rows > 0) {
     $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
     
     // Mostrar los datos en labels y generar inputs
-    echo '<label for="">' . $evaluacionDescripcion . '</label>';
+    echo '<div class="divEvaluacion">
+            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
+          </div>';
     echo '<form method="POST">';
+    // Agregar un contenedor div para las columnas
+    echo '<div class="divDescripcionEvaluacion">';
+    echo '<div class="columnas">';
     foreach ($rows as $row) {
         // Obtener la descripción y el ID_Resultado dentro del bucle
         $descripcion = $row["Descripcion"];
         $id_resultado = $row["Id_Resultado_Evaluacion"];
         
         // Generar el input con el ID y el nombre basados en el ID_Resultado
+
         echo '<div class="form-group">';
         echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" id="' . $id_resultado . '" name="' . $id_resultado . '">'. '  '. $id_resultado;
+        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
         echo '</div>';
     }
-    echo '<input type="submit" value="Guardar">';
-    echo '</form><br>';
-    ;
+    echo '</div>'; // Cerrar el contenedor de columnas
+    echo '</div>';
+    echo '</form>';
+    // echo '<br>';
 } else {
     echo "No se encontraron resultados.";
 }
 $conexion->close();
-?>                 
+?>
 
-
-                                        <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>      
+<button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>      
                             </tbody>
                         </table>
                     </div>

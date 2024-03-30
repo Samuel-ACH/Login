@@ -26,7 +26,7 @@
 .formulario__label {
    display: block;
    font-weight: 700;
-   margin-bottom: -20px; /* Espacio entre el label y el input */
+   margin-bottom: 2px; /* Espacio entre el label y el input */
 }
 
 .formulario__grupo-input {
@@ -209,4 +209,30 @@
 
 .mayuscula {
    text-transform: uppercase;
+}
+
+.columnas {
+   column-count: 2;
+   column-gap: 40px;
+}
+
+.labelEvaluacion {
+   font-weight: bold;
+   padding: 10px;
+   font-size: 16px;
+}
+
+.divEvaluacion {
+   text-align: center;
+   border: 1px solid #000; /* Borde sólido de 2px */
+   padding: 1px; /* Espaciado interno */
+   border-radius: 5px;
+   margin-bottom: 10px;
+}
+
+.divDescripcionEvaluacion {
+   border: 1px solid #000;
+   border-radius: 5px;
+   padding: 15px;
+   margin-bottom: 10px;
 }
