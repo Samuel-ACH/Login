@@ -227,47 +227,135 @@
             </center>
             <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
-                <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser">
+                <!-- <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser"> -->
                 <div class="contenedor__todo">
                         <table class="table" style:"align-items-center">
                             <tbody>
 
-                                <?php
-                                include('../../../Controladores/Conexion/Conexion_be.php');
-
+<?php
+// include('../../../Controladores/Conexion/Conexion_be.php');
 
 // Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
-$sql = "SELECT RE.Descripcion FROM tbl_evaluacion AS E
+$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
 INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
 WHERE E.Id_Evaluacion = 1";
 $result = $conexion->query($sql);
 
 if ($result->num_rows > 0) {
+    // Almacenar todos los resultados en un arreglo
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Obtener la descripción de la evaluación fuera del bucle
+    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
+    
     // Mostrar los datos en labels y generar inputs
+    echo '<label for="">' . $evaluacionDescripcion . '</label>';
     echo '<form method="POST">';
-    while($row = $result->fetch_assoc()) {
-        foreach ($row as $key => $value) {
-            echo '<div class="form-group">';
-            echo '<label for="' . $key . '">' . ucwords($value) . ':</label>';
-            echo '<input type="text" id="' . $key . '" name="' . $key . '">';
-            echo '</div>';
-        }
+    foreach ($rows as $row) {
+        // Obtener la descripción y el ID_Resultado dentro del bucle
+        $descripcion = $row["Descripcion"];
+        $id_resultado = $row["Id_Resultado_Evaluacion"];
+        
+        // Generar el input con el ID y el nombre basados en el ID_Resultado
+        echo '<div class="form-group">';
+        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
+        echo '<input type="text" class="formulario__input input-sm" id="' . $id_resultado . '" name="' . $id_resultado . '">';
+        echo '</div>';
     }
-    echo '<input type="submit" value="Guardar">';
+    // echo '<input type="submit" value="Guardar">';
     echo '</form>';
+    echo '<br>';
+} else {
+    echo "No se encontraron resultados.";
+}
+$conexion->close();
+?>                 
+
+<?php
+include('../../../Controladores/Conexion/Conexion_be.php');
+
+// Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
+$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
+INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
+WHERE E.Id_Evaluacion = 2";
+$result = $conexion->query($sql);
+
+if ($result->num_rows > 0) {
+    // Almacenar todos los resultados en un arreglo
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Obtener la descripción de la evaluación fuera del bucle
+    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
+    
+    // Mostrar los datos en labels y generar inputs
+    echo '<label for="">' . $evaluacionDescripcion . '</label>';
+    echo '<form method="POST">';
+    foreach ($rows as $row) {
+        // Obtener la descripción y el ID_Resultado dentro del bucle
+        $descripcion = $row["Descripcion"];
+        $id_resultado = $row["Id_Resultado_Evaluacion"];
+        
+        // Generar el input con el ID y el nombre basados en el ID_Resultado
+        echo '<div class="form-group">';
+        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
+        echo '<input type="text" id="' . $id_resultado . '" name="' . $id_resultado . '">'. '  '. $id_resultado;
+        echo '</div>';
+    }
+    // echo '<input type="submit" value="Guardar">';
+    echo '</form>';
+    echo '<br>';
+
 } else {
     echo "No se encontraron resultados.";
 }
 $conexion->close();
 ?>
 
+<?php
+include('../../../Controladores/Conexion/Conexion_be.php');
 
-                                
+// Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
+$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
+INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
+WHERE E.Id_Evaluacion = 3";
+$result = $conexion->query($sql);
+
+if ($result->num_rows > 0) {
+    // Almacenar todos los resultados en un arreglo
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Obtener la descripción de la evaluación fuera del bucle
+    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
+    
+    // Mostrar los datos en labels y generar inputs
+    echo '<label for="">' . $evaluacionDescripcion . '</label>';
+    echo '<form method="POST">';
+    foreach ($rows as $row) {
+        // Obtener la descripción y el ID_Resultado dentro del bucle
+        $descripcion = $row["Descripcion"];
+        $id_resultado = $row["Id_Resultado_Evaluacion"];
+        
+        // Generar el input con el ID y el nombre basados en el ID_Resultado
+        echo '<div class="form-group">';
+        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
+        echo '<input type="text" id="' . $id_resultado . '" name="' . $id_resultado . '">'. '  '. $id_resultado;
+        echo '</div>';
+    }
+    echo '<input type="submit" value="Guardar">';
+    echo '</form><br>';
+    ;
+} else {
+    echo "No se encontraron resultados.";
+}
+$conexion->close();
+?>                 
+
+
                                         <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>      
                             </tbody>
                         </table>
                     </div>
-                </form>
+                <!-- </form> -->
         </div>
     </div>
 </main>
