@@ -8,6 +8,7 @@
  border: 10px; /* Puedes ajustar el color y grosor del borde según tus preferencias */
  padding: 20px; /* Ajusta el espaciado interno del contenedor */
  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Agrega sombra al contenedor */
+ background: white;
 }
 
 .row d-flex {
@@ -224,15 +225,50 @@
 
 .divEvaluacion {
    text-align: center;
-   border: 1px solid #000; /* Borde sólido de 2px */
+   /* border: 1px solid #000; Borde sólido de 2px */
    padding: 1px; /* Espaciado interno */
    border-radius: 5px;
    margin-bottom: 10px;
 }
 
 .divDescripcionEvaluacion {
-   border: 1px solid #000;
+   /* border: 1px solid #000; */
    border-radius: 5px;
    padding: 15px;
    margin-bottom: 10px;
 }
+
+
+/* --------------NUEVO---------------------- */
+ /* Estilos para las tarjetas */
+   .card {
+        padding: 20px;
+        background-color: #ffffff;
+        max-width: 900px;
+        margin: -20px auto;
+    }
+
+    /* Estilos para los labels */
+    .labelEvaluacion {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #007bff; /* Color azul representativo */
+    }
+
+    /* Estilos para los inputs */
+    .formulario__input {
+        width: calc(100% - 12px);
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+
+    }
+
+    .form_group {
+      margin-top: 50px;
+      
+    }
+    
+    
+   

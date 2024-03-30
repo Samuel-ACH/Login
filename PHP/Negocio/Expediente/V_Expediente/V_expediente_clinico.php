@@ -228,55 +228,58 @@
             <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
                 <!-- <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser"> -->
-                <div class="contenedor__todo">
+                <div class="contenedor__todo" >
                         <table class="table" style:"align-items-center">
                             <tbody>
+                            <div class="py-5">
 
-<?php
-include('../../../Controladores/Conexion/Conexion_be.php');
+<div class="card">
+    <?php
+    include('../../../Controladores/Conexion/Conexion_be.php');
 
-// Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
-$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
-INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
-WHERE E.Id_Evaluacion = 1";
-$result = $conexion->query($sql);
+    // Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
+    $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
+    INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
+    WHERE E.Id_Evaluacion = 1";
+    $result = $conexion->query($sql);
 
-if ($result->num_rows > 0) {
-    // Almacenar todos los resultados en un arreglo
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    if ($result->num_rows > 0) {
+        // Almacenar todos los resultados en un arreglo
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Obtener la descripción de la evaluación fuera del bucle
-    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
-    
-    // Mostrar los datos en labels y generar inputs
-    echo '<div class="divEvaluacion">
-            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
-          </div>';
-    echo '<form method="POST">';
-    // Agregar un contenedor div para las columnas
-    echo '<div class="divDescripcionEvaluacion">';
-    echo '<div class="columnas">';
-    foreach ($rows as $row) {
-        // Obtener la descripción y el ID_Resultado dentro del bucle
-        $descripcion = $row["Descripcion"];
-        $id_resultado = $row["Id_Resultado_Evaluacion"];
-        
-        // Generar el input con el ID y el nombre basados en el ID_Resultado
+        // Obtener la descripción de la evaluación fuera del bucle
+        $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
 
-        echo '<div class="form-group">';
-        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
+        // Mostrar los datos en labels y generar inputs
+        echo '<div class="divEvaluacion">
+                <label class="labelEvaluacion">' . $evaluacionDescripcion . '</label>
+              </div>';
+        echo '<form method="POST">';
+        // Agregar un contenedor div para las columnas
+        echo '<div class="divDescripcionEvaluacion">';
+        echo '<div class="columnas">';
+        foreach ($rows as $row) {
+            // Obtener la descripción y el ID_Resultado dentro del bucle
+            $descripcion = $row["Descripcion"];
+            $id_resultado = $row["Id_Resultado_Evaluacion"];
+
+            // Generar el input con el ID y el nombre basados en el ID_Resultado
+            echo '<div class="form-group">';
+            echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
+            echo '<input type="text" class="formulario__input" id="' . $id_resultado . '" name="' . $id_resultado . '"> <br>';
+            echo '</div>';
+        }
+        echo '</div>'; // Cerrar el contenedor de columnas
         echo '</div>';
+        echo '</form>';
+    } else {
+        echo "No se encontraron resultados.";
     }
-    echo '</div>'; // Cerrar el contenedor de columnas
-    echo '</div>';
-    echo '</form>';
-    // echo '<br>';
-} else {
-    echo "No se encontraron resultados.";
-}
-$conexion->close();
-?> 
+    $conexion->close();
+    ?>
+</div>
+
+<div class="card">
 <?php
 include('../../../Controladores/Conexion/Conexion_be.php');
 
@@ -310,7 +313,7 @@ if ($result->num_rows > 0) {
 
         echo '<div class="form-group">';
         echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
+        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '"> <br>';
         echo '</div>';
     }
     echo '</div>'; // Cerrar el contenedor de columnas
@@ -322,6 +325,9 @@ if ($result->num_rows > 0) {
 }
 $conexion->close();
 ?> 
+</div>
+
+<div class="card">
 <?php
 include('../../../Controladores/Conexion/Conexion_be.php');
 
@@ -367,7 +373,7 @@ if ($result->num_rows > 0) {
 }
 $conexion->close();
 ?>
-
+</div>
 <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>      
                             </tbody>
                         </table>
@@ -389,6 +395,7 @@ $conexion->close();
     }
 </script>
 
+
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -404,5 +411,7 @@ $conexion->close();
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
+
+    
 </body>
 </html>
