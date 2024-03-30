@@ -125,7 +125,7 @@ session_start();
 
                         <a href="components-alerts.php">
 
-                            <i class="bi bi-circle"></i><span>Gestion Paciente</span>
+                            <i class="bi bi-circle"></i><span>Historial Cita</span>
                         </a>
                     </li>
                     <li>
@@ -214,7 +214,7 @@ session_start();
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Gestión de Expediente</h1>
+        <h1>Historial de Citas</h1>
         <!-- <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="Index.php">Home</a></li>
@@ -505,6 +505,25 @@ session_start();
     </div>
 </div>
 
+<div class="card-columns">
+  <div class="card">
+    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title">MAGNETOTERAPIA</h5>
+      <p class="card-text">Valores y resultados</p>
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <div class="card">
+    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title">MAGNETOTERAPIA</h5>
+      <p class="card-text">Valores y resultados</p>
+    </div>
+  </div>
+</div>
 </main>
 <!-- dentro del main va la tabla o informacion -->
 
@@ -542,7 +561,7 @@ session_start();
             insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, nombreDoctor)
         });
         
-        $('#actualizarCita').click(function(){
+        $('#actualizarCita').click(function(){s
             actualizarCita();
         });
     });
