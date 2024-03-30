@@ -241,11 +241,16 @@
 
 /* --------------NUEVO---------------------- */
  /* Estilos para las tarjetas */
-   .card {
+   .card{
+      transition: transform 0.3s ease-in-out,  z-index 0.3s ease-in-out;
         padding: 20px;
         background-color: #ffffff;
         max-width: 900px;
         margin: -20px auto;
+    }
+    .card:hover{
+      transform: scale(1.1); /* Hace que la tarjeta se agrande al 110% */
+      z-index: 1; /* La tarjeta se muestra delante de las demás al pasar el cursor */
     }
 
     /* Estilos para los labels */
@@ -263,11 +268,6 @@
         border: 1px solid #ced4da;
         border-radius: 4px;
 
-    }
-
-    .form_group {
-      margin-top: 50px;
-      
     }
     
     
