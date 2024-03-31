@@ -268,12 +268,21 @@
         margin-top: 5px;
         border: 1px solid #ced4da;
         border-radius: 4px;
-
     }
 
     .form_group {
       margin-top: 50px;
-      
+    }
+
+   .columnas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between; /* Espacio entre columnas */
+      margin-bottom: 10px; /* Espacio entre filas */
+   }
+  .columna {
+      width: calc(50% - 10px); /* Ancho del 50% para cada columna con margen */
+      margin-bottom: 10px; /* Espacio entre elementos */
     }
    
     
