@@ -1,59 +1,60 @@
 <?php
+function mostrarFormulario($conexion, $id_evaluacion) {
+    // Consulta para obtener los datos de la evaluación
+    $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion 
+            FROM tbl_evaluacion AS E
+            INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
+            WHERE E.Id_Evaluacion = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $id_evaluacion);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        // Almacenar todos los resultados en un arreglo
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Obtener la descripción de la evaluación
+        $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
+
+        // Mostrar los datos en labels y generar inputs
+        echo '<div class="card">';
+        echo '<div class="divEvaluacion">';
+        echo '<label class="labelEvaluacion">' . $evaluacionDescripcion . '</label>';
+        echo '</div>';
+        echo '<div class="divDescripcionEvaluacion">';
+        echo '<div class="columnas">';
+        foreach ($rows as $row) {
+            $descripcion = $row["Descripcion"];
+            $id_resultado = $row["Id_Resultado_Evaluacion"];
+            echo '<div class="form-group">';
+            echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
+            echo '<input type="text" class="formulario__input" name="' . $id_resultado . '" maxlength="20">';
+            echo '</div>';
+        }
+        echo '</div>';
+        echo '</div>';
+        echo '</div>'; // Cerrar el div con la clase "card"
+    } else {
+        echo "No se encontraron resultados.";
+    }
+}
+
 function ExpedienteClinico(){
     include('../../../Controladores/Conexion/Conexion_be.php');
 
-    function mostrarFormulario($id_evaluacion) {
-        global $conexion;
-    
-        // Consulta para obtener los datos de la evaluación
-        $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion 
-                FROM tbl_evaluacion AS E
-                INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
-                WHERE E.Id_Evaluacion = $id_evaluacion";
-        $result = $conexion->query($sql);
-    
-        if ($result->num_rows > 0) {
-            // Almacenar todos los resultados en un arreglo
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-    
-            // Obtener la descripción de la evaluación
-            $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
-    
-            // Mostrar los datos en labels y generar inputs
-            echo '<div class="card">';
-            echo '<div class="divEvaluacion">';
-            echo '<label class="labelEvaluacion">' . $evaluacionDescripcion . '</label>';
-            echo '</div>';
-            echo '<div class="divDescripcionEvaluacion">';
-            echo '<div class="columnas">';
-            foreach ($rows as $row) {
-                $descripcion = $row["Descripcion"];
-                $id_resultado = $row["Id_Resultado_Evaluacion"];
-                echo '<div class="form-group">';
-                echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-                echo '<input type="text" class="formulario__input" name="' . $id_resultado . '" maxlength="20">';
-                echo '</div>';
-            }
-            echo '</div>';
-            echo '</div>';
-            echo '</div>'; // Cerrar el div con la clase "card"
-        } else {
-            echo "No se encontraron resultados.";
-        }
-    }
-    
     // Iniciar el formulario global
     echo '<form method="POST">';
     
     // Mostrar el formulario para el historial clínico
-    mostrarFormulario(1);
+    mostrarFormulario($conexion, 1);
     
     // Mostrar el formulario para el examen físico
-    mostrarFormulario(2);
+    mostrarFormulario($conexion, 2);
     
     // Mostrar el formulario para el diagnóstico
-    mostrarFormulario(3);
-    
+    mostrarFormulario($conexion, 3);
+   
     // Agregar el botón de envío global
     echo '<button type="submit">Guardar Todo</button>';
     
@@ -77,9 +78,9 @@ function ExpedienteClinico(){
     
                     $stmt->bind_param("is", $id_resultado_evaluacion, $resultado);
                     if ($stmt->execute()) {
-                        echo "<p>Los datos se han insertado correctamente para la evaluación con ID: $id_resultado_evaluacion.</p>";
+                       echo '<h6 class="alert alert-success">' . "Expediente Agregado con Exito" . '</h6>';
                     } else {
-                        echo "<p>Error al insertar datos para la evaluación con ID: $id_resultado_evaluacion.</p>";
+                        echo '<h6 class="alert alert-danger">' . "Error al agregar el expediente" . '</h6>';
                     }
                 }
             }
