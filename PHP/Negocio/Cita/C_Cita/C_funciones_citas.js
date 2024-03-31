@@ -1,10 +1,11 @@
-function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, nombreDoctor) {
+function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, subespecialidad) {
     cadena = "motivoCita=" + motivoCita +
         "&fechaCita=" + fechaCita +
         "&horaCita=" + horaCita +
         "&Id_Paciente=" + Id_Paciente +
         "&tipoCita=" + tipoCita +
-        "&nombreDoctor=" + nombreDoctor;
+        "&subespecialidad=" + subespecialidad;
+        alert(cadena);
     $.ajax({
         type: 'POST',
         url: '../C_Cita/C_guardar_cita.php',
@@ -13,6 +14,7 @@ function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, no
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
                 alertify.success("Cita registrada correctamente.");
+               
             } else {
                 alertify.error("Fallo al guardar la cita.");
             }
@@ -39,24 +41,24 @@ function cargarDatos(datos) {
     $('#tipoCita_E').val(extraerDatos[1]);
     $('#motivoCita_E').val(extraerDatos[2]);
     $('#nombrePaciente_E').val(extraerDatos[3]);
-    $('#IdFisiatra_E').val(extraerDatos[4]);
-    $('#fechaCita_E').val(extraerDatos[5]); 
+    $('#subespecialidad_E ').val(extraerDatos[4]);
     $('#horaCita_E').val(extraerDatos[6]);   
 }
 
+                        
+                
 function actualizarCita() {
-
     idCita_E = $('#idCita_E').val();
     tipoCita_E = $('#tipoCita_E').val();
     motivoCita_E = $('#motivoCita_E').val();
-    IdFisiatra_E = $('#IdFisiatra_E').val();
+   subespecialidad_E= $('#subespecialidad_E').val();
     fechaCita_E = $('#fechaCita_E').val(); 
     horaCita_E = $('#horaCita_E').val();   
 
     cadena = "idCita_E=" + idCita_E +
         "&tipoCita_E=" + tipoCita_E +
         "&motivoCita_E=" + motivoCita_E +
-        "&IdFisiatra_E=" + IdFisiatra_E +
+        "&subespecialidad_E=" + subespecialidad_E+
         "&fechaCita_E=" + fechaCita_E +
         "&horaCita_E=" + horaCita_E;
 

@@ -9,10 +9,13 @@ $horaCita = $_POST['horaCita_E'];
 // $id_Paciente = $_POST['nombrePaciente'];
 $id_Usuario = $_SESSION['id_D'];
 $id_Tipo_Cita = $_POST['tipoCita_E'];
-$IdFisiatra_E = $_POST['IdFisiatra_E'];
+$subespecialidad_E = $_POST['subespecialidad_E'];
+
+
+
 
 $sql = "UPDATE tbl_cita_terapeutica SET Descripcion_Cita = '$motivoCita', Fecha_Cita = '$fechaCita', Hora_Cita = '$horaCita',
-                                        Id_Usuario = '$id_Usuario', Id_Tipo_Cita = '$id_Tipo_Cita', Id_Doctor = '$IdFisiatra_E'
+                                        Id_Usuario = '$id_Usuario', Id_Tipo_Cita = '$id_Tipo_Cita', Id_Especialista = '$subespecialidad_E'
                                         WHERE id_Cita_Terapia = '$idCita_E'";
 
     echo $resultado = mysqli_query($conexion, $sql);

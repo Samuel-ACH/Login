@@ -35,10 +35,12 @@ session_start();
     <!-- <script type="module" src="../C_Parametros/C_validacion_parametros.js"></script> Funciones de validación -->
     <script src="../../../../librerias/bootstrap/js/bootstrap.js" ></script> <!-- libreria Bootstrap -->
     <script src="../../../../librerias/alertifyjs/js/alertify.js" ></script> <!-- libreria Alertify -->
-
+    
+    
 </head>
 
 <body>
+    
 
  <!-- ======= Header ======= -->
  <header id="header" class="header fixed-top d-flex align-items-center">
@@ -228,6 +230,7 @@ session_start();
     </div>
     
     <!-- MODAL AGENDAR CITA -->
+    
     <div class="modal fade" id="modalAgendarCita" tabindex="-1" aria-labelledby="modalAgendarCitaLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -331,28 +334,117 @@ session_start();
                     <input type="text" id="nombreDoctor" class="form-control input-sm"> -->
                     
                     <div class="doctor-options">
-                        <label for="nombreDoctor" class="formulario__label">Encargado:</label>
-                        <select type="int" autocomplete="off" name="nombreDoctor" id="nombreDoctor" class="combobox form-control input-sm">
-                            <option value="0" selected>Seleccione:</option>
-                            <?php
-                            // Conexión a la base de datos
-                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                    <label for="especialidad">Especialidad:</label>
+                    <select id="especialidad" name="especialidad" class="combobox form-control input-sm">
+                        <option value="">Seleccione una especialidad</option>
+                        <option value="fisiatra">Fisiatra</option>
+                        <option value="fisioterapeuta">Fisioterapeuta</option>
+                    </select>
+                   
+                    <label for="especialista">Especialista:</label>
+
+                    <div id="subespecialidades" class="doctor-options"></div>
+                   
+                   
+                   <script>
+                      const especialidadSelect = document.getElementById("especialidad");
+                      const subespecialidadesDiv = document.getElementById("subespecialidades");
+
+                     // Función para crear el segundo combo box
+                     function crearSegundoComboBox(especialidad) {
+                       // Limpiar el contenido del div
+                         subespecialidadesDiv.innerHTML = "";
+
+                     // Crear un nuevo elemento select
+                     const subespecialidadSelect = document.createElement("select");
+                     subespecialidadSelect.setAttribute("name", "subespecialidad");
+                     subespecialidadSelect.setAttribute("id", "subespecialidad");
+                     subespecialidadSelect.setAttribute("class","combobox form-control input-sm");
+                     const option2 = document.createElement("option");
+                              option2.setAttribute("value", "");
+                              option2.textContent =  "Seleccione especialista";
+                              option2.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect.appendChild(option2);
+
+                      // Opciones para Fisiatra
+                      if (especialidad === "fisiatra") {
+                          <?php
+                              // Conexión a la base de datos
+                              include ('../../../Controladores/Conexion/Conexion_be.php');
                             
-                            // Consulta SQL para obtener los géneros
-                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (6, 7)";
-                            $resultado = mysqli_query($conexion, $query);
+                              // Consulta SQL para obtener los géneros
+                              $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6)";
+                              $resultado = mysqli_query($conexion, $query);
                             
-                            // Iterar sobre los resultados y generar las opciones del select
-                            while ($fila = mysqli_fetch_assoc($resultado)) {
-                                echo '<option value="' . $fila['Id_Usuario'] . '">' . $fila['Nombre'] . '</option>';
-                            }
-                            // Liberar resultado
-                            mysqli_free_result($resultado);
-                            // Cerrar conexión
-                            mysqli_close($conexion);
                             ?>
-                        </select>
-                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+
+                          const subespecialidadesFisiatra = [
+                             <?php 
+                                 while ($fila = mysqli_fetch_assoc($resultado)) {
+                                     echo '["'.$fila['Id_Usuario'].'","'.$fila['Nombre'].'"],';
+                                   }
+                               ?>
+                            ] ;
+                           subespecialidadesFisiatra.forEach((subespecialidad) => {
+                              const [id, nombre] = subespecialidad;
+                              const option = document.createElement("option");
+                              option.setAttribute("value", id);
+                              option.textContent =  nombre;
+                              option.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect.appendChild(option);
+                           });
+                        }
+                       <?php
+                           // Liberar resultado
+                         mysqli_free_result($resultado);
+                         // Cerrar conexión
+                         //mysqli_close($conexion);
+                        ?>
+                         // Opciones para Fisioterapeuta
+                       if (especialidad === "fisioterapeuta") {
+                           <?php
+                              // Consulta SQL para obtener los roles
+                              $query2 = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (7)";
+                              $resultado2 = mysqli_query($conexion, $query2);
+                            
+                            ?>
+                          const subespecialidadesFisioterapeuta = [
+                             <?php 
+                                 while ($fila = mysqli_fetch_assoc($resultado2)) {
+                                     echo '["'.$fila['Id_Usuario'].'","'.$fila['Nombre'].'"],';
+                                   }
+                               ?>
+                            ] ; // Función para obtener las subespecialidades de la base de datos
+                           subespecialidadesFisioterapeuta.forEach((subespecialidad) => {
+                            const [id, nombre] = subespecialidad;
+                           const option = document.createElement("option");
+                              option.setAttribute("value", id);
+                              option.textContent = nombre;
+                              option.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect.appendChild(option);
+                           });
+                        }
+                        <?php
+                           // Liberar resultado
+                         mysqli_free_result($resultado2);
+                         // Cerrar conexión
+                         mysqli_close($conexion);
+                        ?>
+
+                     // Agregar el nuevo combo box al div
+                      subespecialidadesDiv.appendChild(subespecialidadSelect);
+                      } 
+
+                      // Agregar un evento "change" al primer combo box
+                     especialidadSelect.addEventListener("change", (event) => {
+                      const especialidadSeleccionada = event.target.value;
+                         crearSegundoComboBox(especialidadSeleccionada);
+                       });
+
+                      // Cargar el segundo combo box al cargar la página
+                      window.onload = () => {crearSegundoComboBox("");};
+                </script>
+
                     </div>
     
                     <label for="fechaCita">Fecha Cita:</label>
@@ -395,7 +487,7 @@ session_start();
                 <label for="motivoCita_L">Motivo:</label>
                 <input type="text" id="motivoCita_L" readonly class="form-control input-sm">
                 
-                <label for="nombreDoctor_L">Doctor:</label>
+                <label for="nombreDoctor_L">Especialista:</label>
                 <input type="text" id="nombreDoctor_L" readonly class="form-control input-sm">
                 
                 <label for="fechaCita_L">Fecha Cita:</label>
@@ -428,27 +520,26 @@ session_start();
                 <input type="text" id="idCita_E" name="idCita_E" hidden class="form-control input-sm">
                 
                 <label for="nombrePaciente_E">Nombre Paciente:</label>
-                <input type="text" id="nombrePaciente_E" name="nombrePaciente_E" readonly class="form-control input-sm">
+                <input type="text" id="nombrePaciente_E" name="nombrePaciente_E"  readonly class="form-control input-sm">
                 
                 <!-- <label for="tipoCita_E">Tipo Cita:</label>
                 <input type="text" id="tipoCita_E" name="tipoCita_E" class="form-control input-sm"> -->
 
                 <div class="doctor-options">
                         <label for="tipoCita_E" class="formulario__label">Tipo Cita:</label>
-                        <select type="int" autocomplete="off" name="tipoCita_E" id="tipoCita_E" class="combobox form-control input-sm">
-                            <option value="0" selected>Seleccione:</option>
-                            
+                        <select type="int" autocomplete="off" name="tipoCita_E" id="tipoCita_E" class="combobox form-control input-sm"> 
+                        
                             <?php
                             // Conexión a la base de datos
                             include ('../../../Controladores/Conexion/Conexion_be.php');
-                        
+                            
                             // Consulta SQL para obtener los géneros
                             $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
                             $resultado = mysqli_query($conexion, $query);
-                            
+        
                             // Iterar sobre los resultados y generar las opciones del select
                             while ($fila = mysqli_fetch_assoc($resultado)) {
-                                echo '<option value="' . $fila['Id_Tipo_Cita'] . '">' . $fila['Descripcion'] . '</option>';
+                                echo '<option value="' . $fila['Id_Tipo_Cita'] . '">' . $fila['Descripcion'].'</option>';
                             }
                             // Liberar resultado
                             mysqli_free_result($resultado);
@@ -466,28 +557,117 @@ session_start();
                 <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm"> -->
 
                 <div class="doctor-options">
-                        <label for="IdFisiatra_E" class="formulario__label">Fisiatra:</label>
-                        <select type="int" autocomplete="off" name="IdFisiatra_E" id="IdFisiatra_E" class="combobox form-control input-sm">
-                            <option value="0" selected>Seleccione:</option>
-                            <?php
-                            // Conexión a la base de datos
-                            include ('../../../Controladores/Conexion/Conexion_be.php');
+                    <label for="especialidad_E">Especialidad:</label>
+                    <select id="especialidad_E" name="especialidad_E" class="combobox form-control input-sm">
+                        <option value="">Seleccione una especialidad</option>
+                        <option value="fisiatra">Fisiatra</option>
+                        <option value="fisioterapeuta">Fisioterapeuta</option>
+                    </select>
+                   
+                    <label for="especialista_E">Especialista:</label>
+
+                    <div id="subespecialidades_E" class="doctor-options"> </div>
+                   
+                   
+                   <script>
+                      const especialidadSelect2 = document.getElementById("especialidad_E");
+                      const subespecialidadesDiv2 = document.getElementById("subespecialidades_E");
+
+                     // Función para crear el segundo combo box
+                     function crearSegundoComboBox2(especialidad) {
+                       // Limpiar el contenido del div
+                         subespecialidadesDiv2.innerHTML = "";
+
+                     // Crear un nuevo elemento select
+                     const subespecialidadSelect2 = document.createElement("select");
+                     subespecialidadSelect2.setAttribute("name", "subespecialidad_E");
+                     subespecialidadSelect2.setAttribute("id", "subespecialidad_E");
+                     subespecialidadSelect2.setAttribute("class","combobox form-control input-sm");
+                     const option2 = document.createElement("option");
+                              option2.setAttribute("value", "");
+                              option2.textContent =  "Seleccione especialista";
+                              option2.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect2.appendChild(option2);
+
+                      // Opciones para Fisiatra
+                      if (especialidad === "fisiatra") {
+                          <?php
+                              // Conexión a la base de datos
+                              include ('../../../Controladores/Conexion/Conexion_be.php');
                             
-                            // Consulta SQL para obtener los géneros
-                            $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol = 6";
-                            $resultado = mysqli_query($conexion, $query);
+                              // Consulta SQL para obtener los géneros
+                              $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6)";
+                              $resultado = mysqli_query($conexion, $query);
                             
-                            // Iterar sobre los resultados y generar las opciones del select
-                            while ($fila = mysqli_fetch_assoc($resultado)) {
-                                echo '<option value="' . $fila['Id_Usuario'] . '">' . $fila['Nombre'] . '</option>';
-                            }
-                            // Liberar resultado
-                            mysqli_free_result($resultado);
-                            // Cerrar conexión
-                            mysqli_close($conexion);
                             ?>
-                        </select>
-                        <!-- <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;" ></p> -->
+
+                          const subespecialidadesFisiatra2 = [
+                             <?php 
+                                 while ($fila = mysqli_fetch_assoc($resultado)) {
+                                     echo '["'.$fila['Id_Usuario'].'","'.$fila['Nombre'].'"],';
+                                   }
+                               ?>
+                            ] ;
+                           subespecialidadesFisiatra2.forEach((subespecialidad) => {
+                              const [id, nombre] = subespecialidad;
+                              const option = document.createElement("option");
+                              option.setAttribute("value", id);
+                              option.textContent =  nombre;
+                              option.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect2.appendChild(option);
+                           });
+                        }
+                       <?php
+                           // Liberar resultado
+                         mysqli_free_result($resultado);
+                         // Cerrar conexión
+                         //mysqli_close($conexion);
+                        ?>
+                         // Opciones para Fisioterapeuta
+                       if (especialidad === "fisioterapeuta") {
+                           <?php
+                              // Consulta SQL para obtener los géneros
+                              $query2 = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (7)";
+                              $resultado2 = mysqli_query($conexion, $query2);
+                            
+                            ?>
+                          const subespecialidadesFisioterapeuta2 = [
+                             <?php 
+                                 while ($fila = mysqli_fetch_assoc($resultado2)) {
+                                     echo '["'.$fila['Id_Usuario'].'","'.$fila['Nombre'].'"],';
+                                   }
+                               ?>
+                            ] ; // Función para obtener las subespecialidades de la base de datos
+                           subespecialidadesFisioterapeuta2.forEach((subespecialidad) => {
+                            const [id, nombre] = subespecialidad;
+                           const option = document.createElement("option");
+                              option.setAttribute("value", id);
+                              option.textContent = nombre;
+                              option.setAttribute("class","combobox form-control input-sm");
+                              subespecialidadSelect2.appendChild(option);
+                           });
+                        }
+                        <?php
+                           // Liberar resultado
+                         mysqli_free_result($resultado2);
+                         // Cerrar conexión
+                         mysqli_close($conexion);
+                        ?>
+
+                     // Agregar el nuevo combo box al div
+                      subespecialidadesDiv2.appendChild(subespecialidadSelect2);
+                      } 
+
+                      // Agregar un evento "change" al primer combo box
+                     especialidadSelect2.addEventListener("change", (event) => {
+                      const especialidadSeleccionada = event.target.value;
+                         crearSegundoComboBox2(especialidadSeleccionada);
+                       });
+
+                      // Cargar el segundo combo box al cargar la página
+                      window.onload = () => {crearSegundoComboBox2("");};
+                </script>
+
                     </div>
                 
                 <label for="fechaCita_E">Fecha Cita:</label>
@@ -538,8 +718,11 @@ session_start();
             horaCita = $('#horaCita').val() 
             Id_Paciente = $('#Id_Paciente').val() 
             tipoCita = $('#tipoCita').val() 
-            Id_Fisiatra = $('#Id_Fisiatra').val();
-            insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, Id_Fisiatra)
+            subespecialidad= $('#subespecialidad').val();
+            alert(motivoCita + fechaCita + horaCita + Id_Paciente + tipoCita + subespecialidad);
+            
+            insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, subespecialidad)
+            
         });
         
         $('#actualizarCita').click(function(){

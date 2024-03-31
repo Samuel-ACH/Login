@@ -3,7 +3,10 @@ include("../../../Controladores/Conexion/Conexion_be.php");
 // include("../../../../Imagenes/base64.php");
 ?>
 
+
+<script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
 <div class="row">
+
     <div class="col-sm-12">
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaCitasLoad" class="table">        
@@ -12,6 +15,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 <i class="fa-solid fa-plus"></i> Agendar Cita</button>
 
                 <thead class="encabezado bg-light table-info">
+
                 <tr>
                     <td>N°</td>
                     <td>Tipo Cita</td>
@@ -29,7 +33,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 $sql = "SELECT CT.id_Cita_Terapia, TC.Descripcion, CT.Descripcion_Cita, P.Nombre, U.Nombre, CT.Fecha_Cita, CT.Hora_Cita 
                         FROM `tbl_cita_terapeutica` AS CT 
                             LEFT JOIN tbl_tipo_cita AS TC ON CT.Id_Tipo_Cita = TC.Id_Tipo_Cita
-                            INNER JOIN tbl_ms_usuario AS U ON CT.Id_Doctor = U.Id_Usuario
+                            INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
                             INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = p.Id_Paciente";
 
                 $resultado = mysqli_query($conexion, $sql);
@@ -41,7 +45,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                         <td><?php echo $correlativo ?></td>
                         <td><?php echo $filas[1] ?></td>
                         <td><?php echo $filas[2] ?></td>
-                        <td><?php echo $filas[3] ?></td>
+                        <td><?php echo $filas[3]?></td>
                         <td><?php echo $filas[4] ?></td>
                         <td><?php echo $filas[5] ?></td>
                         <td><?php echo $filas[6] ?></td>
