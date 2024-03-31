@@ -31,13 +31,13 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#tablaAgenda').DataTable({
-            language: {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-            } //codigo para el lenguaje del archivo JSON
+        $(document).ready(function() {
+            $('#tablaAgenda').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+                } //codigo para el lenguaje del archivo JSON
+            });
         });
-       });
     </script>
 </head>
 
@@ -81,8 +81,8 @@
                         <li class="dropdown-header">
 
                             <h6><?php
-                //   echo $_SESSION['correo'];
-                  ?>
+                                //   echo $_SESSION['correo'];
+                                ?>
                             </h6>
                             <span>Rol</span>
                         </li>
@@ -118,20 +118,19 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
 
                         <!-- <a href="components-alerts.php"> -->
 
-                            <i class="bi bi-circle"></i><span>Gestion Paciente</span>
+                        <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
                         <!-- <a href="components-accordion.html"> -->
-                            <i class="bi bi-circle"></i><span>Registrar </span>
+                        <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
 
@@ -146,25 +145,24 @@
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <!-- <a href="forms-elements.html"> -->
-                            <i class="bi bi-circle"></i><span>Gestion Cita</span>
+                        <i class="bi bi-circle"></i><span>Gestion Cita</span>
                         </a>
                 </ul>
             </li><!-- Fin modulo citas -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <!-- <a href="tables-general.html"> -->
-                            <i class="bi bi-circle"></i><span>Gestion Expediente</span>
+                        <i class="bi bi-circle"></i><span>Gestion Expediente</span>
                         </a>
                     </li>
                     <li>
                         <!-- <a href="tables-data.html"> -->
-                            <i class="bi bi-circle"></i><span>Historial Expediente</span>
+                        <i class="bi bi-circle"></i><span>Historial Expediente</span>
                         </a>
                     </li>
                 </ul>
@@ -182,12 +180,12 @@
                     </li>
                     <li>
                         <!-- <a href="charts-apexcharts.html"> -->
-                            <i class="bi bi-circle"></i><span>Permisos</span>
+                        <i class="bi bi-circle"></i><span>Permisos</span>
                         </a>
                     </li>
                     <li>
                         <!-- <a href="charts-echarts.html"> -->
-                            <i class="bi bi-circle"></i><span>Roles</span>
+                        <i class="bi bi-circle"></i><span>Roles</span>
                         </a>
                     </li>
                     <li>
@@ -206,7 +204,7 @@
                             <i class="bi bi-circle"></i><span>Parametros</span>
                         </a>
                     </li>
-                                   </ul>
+                </ul>
             </li><!-- Fin modulo  Mantenimiento -->
 
 
@@ -216,184 +214,48 @@
 
     <?php
     include '../../../Controladores/Conexion/Conexion_be.php';
-    
+
     ?>
 
-<main id="main" class="table">
-    <div class="container mt-4">
-        <div class="col-12">
-            <center>
-                <h2>Expediente Clínico</h2>
-            </center>
-            <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
+    <main id="main" class="table">
+        <div class="container mt-4">
+            <div class="col-12">
+                <center>
+                    <h2>Expediente Clínico</h2>
+                </center>
+                <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
                 <!-- <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser"> -->
-                <div class="contenedor__todo" >
-                        <table class="table" style:"align-items-center">
-                            <tbody>
+                <div class="contenedor__todo">
+                    <table class="table" style:"align-items-center">
+                        <tbody>
                             <div class="py-5">
 
-<div class="card">
-    <?php
-    include('../../../Controladores/Conexion/Conexion_be.php');
+                                <?php
+                                include './C_expediente_clinico.php';
+                                ExpedienteClinico();
+                                ?>
 
-    // Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
-    $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
-    INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
-    WHERE E.Id_Evaluacion = 1";
-    $result = $conexion->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Almacenar todos los resultados en un arreglo
-        $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-        // Obtener la descripción de la evaluación fuera del bucle
-        $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
-
-        // Mostrar los datos en labels y generar inputs
-        echo '<div class="divEvaluacion">
-                <label class="labelEvaluacion">' . $evaluacionDescripcion . '</label>
-              </div>';
-        echo '<form method="POST">';
-        // Agregar un contenedor div para las columnas
-        echo '<div class="divDescripcionEvaluacion">';
-        echo '<div class="columnas">';
-        foreach ($rows as $row) {
-            // Obtener la descripción y el ID_Resultado dentro del bucle
-            $descripcion = $row["Descripcion"];
-            $id_resultado = $row["Id_Resultado_Evaluacion"];
-
-            // Generar el input con el ID y el nombre basados en el ID_Resultado
-            echo '<div class="form-group">';
-            echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-            echo '<input type="text" class="formulario__input" id="' . $id_resultado . '" name="' . $id_resultado . '"> <br>';
-            echo '</div>';
-        }
-        echo '</div>'; // Cerrar el contenedor de columnas
-        echo '</div>';
-        echo '</form>';
-    } else {
-        echo "No se encontraron resultados.";
-    }
-    $conexion->close();
-    ?>
-</div>
-
-<div class="card">
-<?php
-include('../../../Controladores/Conexion/Conexion_be.php');
-
-// Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
-$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
-INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
-WHERE E.Id_Evaluacion = 2";
-$result = $conexion->query($sql);
-
-if ($result->num_rows > 0) {
-    // Almacenar todos los resultados en un arreglo
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-    // Obtener la descripción de la evaluación fuera del bucle
-    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
-    
-    // Mostrar los datos en labels y generar inputs
-    echo '<div class="divEvaluacion">
-            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
-          </div>';
-    echo '<form method="POST">';
-    // Agregar un contenedor div para las columnas
-    echo '<div class="divDescripcionEvaluacion">';
-    echo '<div class="columnas">';
-    foreach ($rows as $row) {
-        // Obtener la descripción y el ID_Resultado dentro del bucle
-        $descripcion = $row["Descripcion"];
-        $id_resultado = $row["Id_Resultado_Evaluacion"];
-        
-        // Generar el input con el ID y el nombre basados en el ID_Resultado
-
-        echo '<div class="form-group">';
-        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '"> <br>';
-        echo '</div>';
-    }
-    echo '</div>'; // Cerrar el contenedor de columnas
-    echo '</div>';
-    echo '</form>';
-    // echo '<br>';
-} else {
-    echo "No se encontraron resultados.";
-}
-$conexion->close();
-?> 
-</div>
-
-<div class="card">
-<?php
-include('../../../Controladores/Conexion/Conexion_be.php');
-
-// Consulta para obtener los datos de la persona (por ejemplo, el primer registro)
-$sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion FROM tbl_evaluacion AS E
-INNER JOIN tbl_resultado_evaluacion AS RE ON E.Id_Evaluacion = RE.Id_Evaluacion
-WHERE E.Id_Evaluacion = 3";
-$result = $conexion->query($sql);
-
-if ($result->num_rows > 0) {
-    // Almacenar todos los resultados en un arreglo
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-    // Obtener la descripción de la evaluación fuera del bucle
-    $evaluacionDescripcion = $rows[0]["EvaluacionDescripcion"];
-    
-    // Mostrar los datos en labels y generar inputs
-    echo '<div class="divEvaluacion">
-            <label class="labelEvaluacion" for="">' . $evaluacionDescripcion . '</label>
-          </div>';
-    echo '<form method="POST">';
-    // Agregar un contenedor div para las columnas
-    echo '<div class="divDescripcionEvaluacion">';
-    echo '<div class="columnas">';
-    foreach ($rows as $row) {
-        // Obtener la descripción y el ID_Resultado dentro del bucle
-        $descripcion = $row["Descripcion"];
-        $id_resultado = $row["Id_Resultado_Evaluacion"];
-        
-        // Generar el input con el ID y el nombre basados en el ID_Resultado
-
-        echo '<div class="form-group">';
-        echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-        echo '<input type="text" class="formulario__input"' . $id_resultado . '" name="' . $id_resultado . '">';
-        echo '</div>';
-    }
-    echo '</div>'; // Cerrar el contenedor de columnas
-    echo '</div>';
-    echo '</form>';
-    // echo '<br>';
-} else {
-    echo "No se encontraron resultados.";
-}
-$conexion->close();
-?>
-</div>
-<button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>      
-                            </tbody>
-                        </table>
-                    </div>
+                                <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
+                        </tbody>
+                    </table>
+                </div>
                 <!-- </form> -->
+            </div>
         </div>
-    </div>
-</main>
-<script>
-    function confirmarCancelar() {
-        // Mostrar un cuadro de diálogo de confirmación
-        const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
+    </main>
+    <script>
+        function confirmarCancelar() {
+            // Mostrar un cuadro de diálogo de confirmación
+            const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
 
-        // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
-        if (confirmacion) {
-            // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-            window.location.href = "./V_usuario.php";
+            // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
+            if (confirmacion) {
+                // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
+                window.location.href = "./V_usuario.php";
+            }
         }
-    }
-</script>
+    </script>
 
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
@@ -401,17 +263,17 @@ $conexion->close();
 
     <!-- Datatables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="../../../../EstilosLogin/js/script.js"></script>    
+    <script src="../../../../EstilosLogin/js/script.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="../../../javascript/validacionNuevoRegistroUsuario.js"></script>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
 
-    
+
 </body>
+
 </html>
