@@ -21,7 +21,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                     <td>Tipo Cita</td>
                     <td>Motivo</td>
                     <td>Paciente</td>
-                    <td>Encargado</td>
+                    <td>Especialista</td>
                     <td>Fecha</td>
                     <td>Hora</td>
                     <td>Acciones</td>

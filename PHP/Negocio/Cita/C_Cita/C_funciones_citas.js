@@ -5,7 +5,7 @@ function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, su
         "&Id_Paciente=" + Id_Paciente +
         "&tipoCita=" + tipoCita +
         "&subespecialidad=" + subespecialidad;
-        alert(cadena);
+        
     $.ajax({
         type: 'POST',
         url: '../C_Cita/C_guardar_cita.php',
@@ -13,14 +13,18 @@ function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, su
         success: function (respuesta) {
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
+                
                 alertify.success("Cita registrada correctamente.");
+                window.location.reload();
                
             } else {
                 alertify.error("Fallo al guardar la cita.");
             }
         }
+        
     });
-}
+    
+}   
 
 function cargarDatosLectura(datos) {
     extraerDatos = datos.split('||');
@@ -70,11 +74,13 @@ function actualizarCita() {
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
                 alertify.success("Cita actualizada correctamente.");
+                
             } else {
                 alertify.error("Fallo al actualizar la cita.");
             }
         }
     });
+    window.location.reload();
 }
 
 function validarSiNo(idCita_L){
