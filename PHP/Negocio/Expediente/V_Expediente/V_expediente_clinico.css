@@ -1,19 +1,26 @@
-
 #main {
- width: 80%; /* Puedes ajustar el ancho según tus necesidades */
- height: 80vh; /* Puedes ajustar la altura según tus necesidades */
+   width: 80%;
+   /* Puedes ajustar el ancho según tus necesidades */
+   height: 80vh;
+   /* Puedes ajustar la altura según tus necesidades */
 }
+
 .col-12 {
- border-radius: 20px;
- border: 10px; /* Puedes ajustar el color y grosor del borde según tus preferencias */
- padding: 20px; /* Ajusta el espaciado interno del contenedor */
- box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Agrega sombra al contenedor */
- background: white;
+   border-radius: 20px;
+   border: 10px;
+   /* Puedes ajustar el color y grosor del borde según tus preferencias */
+   padding: 20px;
+   /* Ajusta el espaciado interno del contenedor */
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   /* Agrega sombra al contenedor */
+   background: white;
 }
 
 .row d-flex {
- margin: 0; /* Elimina el margen del contenedor */
+   margin: 0;
+   /* Elimina el margen del contenedor */
 }
+
 .formulario {
    display: grid;
    grid-template-columns: 1fr 1fr;
@@ -21,13 +28,15 @@
 }
 
 .formulario__grupo {
-   margin-bottom: 10px; /* Espacio entre los grupos de campos */
+   margin-bottom: 10px;
+   /* Espacio entre los grupos de campos */
 }
 
 .formulario__label {
    display: block;
    font-weight: 700;
-   margin-bottom: 2px; /* Espacio entre el label y el input */
+   margin-bottom: 2px;
+   /* Espacio entre el label y el input */
 }
 
 .formulario__grupo-input {
@@ -46,26 +55,26 @@
    /* border-radius: var(--bs-border-radius); */
    /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
    display: block;
- width: 100%;
- padding: 0.375rem 0.75rem;
- font-size: 1rem;
- font-weight: 400;
- line-height: 1.5;
- color: var(--bs-body-color);
- -webkit-appearance: none;
- -moz-appearance: none;
- appearance: none;
- background-color: var(--bs-body-bg);
- background-clip: padding-box;
- border: var(--bs-border-width) solid var(--bs-border-color);
- border-radius: var(--bs-border-radius);
- transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   width: 100%;
+   padding: 0.375rem 0.75rem;
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5;
+   color: var(--bs-body-color);
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   background-color: var(--bs-body-bg);
+   background-clip: padding-box;
+   border: var(--bs-border-width) solid var(--bs-border-color);
+   border-radius: var(--bs-border-radius);
+   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .formulario__input:focus {
    border: 3px solid #0075FF;
    outline: none;
-   box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+   box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
 }
 
 .formulario__input-error {
@@ -73,6 +82,7 @@
    margin-bottom: 0;
    display: none;
 }
+
 .formulario__input-error2 {
    font-size: 12px;
    margin-bottom: 0;
@@ -137,7 +147,7 @@
 }
 
 .formulario__btn:hover {
-   box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+   box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
 }
 
 .formulario__mensaje-exito {
@@ -153,11 +163,12 @@
 /* ----- -----  Estilos para Validacion ----- ----- */
 .formulario__grupo-correcto .formulario__validacion-estado {
    color: #1ed12d;
-   opacity: 1;	
+   opacity: 1;
 }
+
 .formulario__grupo-correcto2 .formulario__validacion-estado {
    color: #1ed12d;
-   opacity: 1;	
+   opacity: 1;
 }
 
 .formulario__grupo-incorrecto .formulario__label {
@@ -172,6 +183,7 @@
 .formulario__grupo-incorrecto .formulario__input {
    border: 3px solid #bb2929;
 }
+
 .formulario__grupo-incorrecto2 .formulario__label {
    color: #bb2929;
 }
@@ -188,23 +200,27 @@
 /*Logo del Login */
 .logo {
    display: block;
-   margin: -40px auto 10px auto; 
-   width: 140px; /* Ajusta el ancho de acuerdo a tu diseño */
-   
+   margin: -40px auto 10px auto;
+   width: 140px;
+   /* Ajusta el ancho de acuerdo a tu diseño */
+
 }
 
 .combobox {
    height: 30px;
    width: 330px;
-   
+
 }
+
 .fecha-nacimiento-label {
-   margin-bottom: 0; /* Elimina el margen inferior del label */
+   margin-bottom: 0;
+   /* Elimina el margen inferior del label */
    /* Otros estilos si es necesario */
 }
 
 .fecha-nacimiento-input {
-   margin-top: 0px; /* Ajusta el margen superior del input */
+   margin-top: 0px;
+   /* Ajusta el margen superior del input */
    /* Otros estilos si es necesario */
 }
 
@@ -226,7 +242,8 @@
 .divEvaluacion {
    text-align: center;
    /* border: 1px solid #000; Borde sólido de 2px */
-   padding: 1px; /* Espaciado interno */
+   padding: 1px;
+   /* Espaciado interno */
    border-radius: 5px;
    margin-bottom: 10px;
 }
@@ -238,37 +255,62 @@
    margin-bottom: 10px;
 }
 
-
 /* --------------NUEVO---------------------- */
- /* Estilos para las tarjetas */
-   .card{
-      transition: transform 0.3s ease-in-out,  z-index 0.3s ease-in-out;
-        padding: 20px;
-        background-color: #ffffff;
-        max-width: 900px;
-        margin: -20px auto;
-    }
-    .card:hover{
-      transform: scale(1.1); /* Hace que la tarjeta se agrande al 110% */
-      z-index: 1; /* La tarjeta se muestra delante de las demás al pasar el cursor */
-    }
+/* Estilos para las tarjetas */
+.card {
+   transition: transform 0.3s ease-in-out, z-index 0.3s ease-in-out;
+   padding: 20px;
+   background-color: #ffffff;
+   max-width: 100%;
+   margin: -20px auto;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+   /* Agrega una sombra suave */
+   margin-bottom: 35px !important;
+   border-radius: 10px !important; /* Agrega un borde redondeado de 10px */
+}
 
-    /* Estilos para los labels */
-    .labelEvaluacion {
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #007bff; /* Color azul representativo */
-    }
+.card:hover {
+   transform: scale(1.1);
+   /* Hace que la tarjeta se agrande al 110% */
+   z-index: 1;
+   /* La tarjeta se muestra delante de las demás al pasar el cursor */
+}
 
-    /* Estilos para los inputs */
-    .formulario__input {
-        width: calc(100% - 12px);
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
+.card-info-paciente {
+   padding: 20px;
+   background-color: #ffffff;
+   max-width: 100%;
+   margin: -20px auto;
+   border-radius: 10px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   /* Agrega una sombra suave */
+   margin-bottom: 35px;
+}
 
-    }
-    
-    
-   
+/* Estilos para los labels */
+.labelEvaluacion {
+   font-weight: bold;
+   margin-bottom: -25px;
+   color: #007bff;
+   /* Color azul representativo */
+}
+
+/* Estilos para los inputs */
+.formulario__input {
+   width: calc(100% - 12px);
+   padding: 8px;
+   margin-top: 5px;
+   border: 1px solid #ced4da;
+   border-radius: 4px;
+}
+
+.col-tarjeta-paciente {
+   column-count: 3;
+   column-gap: 30px;
+}
+
+.form-group input {
+   margin-top: -3px;
+   /* Reduce el margen superior del input */
+   margin-bottom: 12px;
+}

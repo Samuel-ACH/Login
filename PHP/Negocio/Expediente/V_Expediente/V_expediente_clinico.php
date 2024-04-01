@@ -221,7 +221,8 @@
         <div class="container mt-4">
             <div class="col-12">
                 <center>
-                    <h2>Expediente Clínico</h2>
+                    <h2>EXPEDIENTE CLÍNICO</h2>
+                    <hr>
                 </center>
                 <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
@@ -229,14 +230,44 @@
                 <div class="contenedor__todo">
                     <table class="table" style:"align-items-center">
                         <tbody>
-                            <div class="py-5">
+                            <!-- <div class="py-5"> -->
+                            <div class="card-info-paciente">
+                                <div class="divEvaluacion">
+                                    <label class="labelEvaluacion">INFORMACIÓN DEL PACIENTE</label>
+                                </div>
+                                <div class="divDescripcionEvaluacion">
+                                    <div class="col-tarjeta-paciente">
+                                        <div class="form-group">
+                                            <label for="paciente">NOMBRE:</label>
+                                            <input type="text" class="formulario__input" readonly id="paciente" name="paciente">
+                                            <label for="Numero_Documento">IDENTIFICACIÓN:</label>
+                                            <input type="text" class="formulario__input" readonly id="Numero_Documento" name="Numero_Documento">
+                                            <label for="ocupacion">OCUPACIÓN:</label>
+                                            <input type="text" class="formulario__input" readonly id="ocupacion" name="ocupacion">
+                                            <label for="direccion">DIRECCIÓN:</label>
+                                            <input type="text" class="formulario__input" readonly id="direccion" name="direccion">
+                                            <label for="telefono">TELÉFONO:</label>
+                                            <input type="text" class="formulario__input" readonly id="telefono" name="telefono">
+                                            <label for="edad">EDAD:</label>
+                                            <input type="text" class="formulario__input" readonly id="edad" name="edad">
+                                            <label for="fisiatra">EVALUADOR:</label>
+                                            <input type="text" class="formulario__input" readonly id="fisiatra" name="fisiatra">
+                                            <label for="motivoConsulta">MOTIVO DE CONSULTA:</label>
+                                            <input type="text" class="formulario__input" readonly id="motivoConsulta" name="motivoConsulta">
+                                            <label for="lateralidad">LATERALIDAD:</label>
+                                            <input type="text" class="formulario__input" id="lateralidad" name="lateralidad">
+                                            <!-- <textarea type="text" class="formulario__input" id="lateralidad" name="lateralidad"></textarea> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <?php
-                                include '../C_Expediente/C_expediente_clinico.php';
-                                ExpedienteClinico();
-                                ?>
-
-                                <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
+                            <?php
+                            include '../C_Expediente/C_expediente_clinico.php';
+                            ExpedienteClinico();
+                            ?>
+                            <!-- </div> -->
+                            <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
                         </tbody>
                     </table>
                 </div>

@@ -1,5 +1,7 @@
 <?php
 function mostrarFormulario($conexion, $id_evaluacion) {
+    
+
     // Consulta para obtener los datos de la evaluación
     $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion 
             FROM tbl_evaluacion AS E
@@ -54,6 +56,8 @@ function ExpedienteClinico(){
     
     // Mostrar el formulario para el diagnóstico
     mostrarFormulario($conexion, 3);
+
+    echo '<hr>';
    
     // Agregar el botón de envío global
     echo '<button type="submit">Guardar Todo</button>';
