@@ -28,6 +28,7 @@ if ($result->num_rows > 0) {
 echo '<div class="card" id="tarjeta_' . $idTratamiento . '">';
 echo '<div class="divEvaluacion">';
 echo '<label class="labelEvaluacion">' . $tratamiento . '</label>';
+echo '<span class="icono-x-circle" onclick="cerrarTarjeta(\'tarjeta_' . $idTratamiento . '\')"><i class="fas fa-times-circle"></i></span>';
 echo '</div>';
 
 // Iniciar la primera columna

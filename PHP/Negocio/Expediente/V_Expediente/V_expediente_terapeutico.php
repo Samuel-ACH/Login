@@ -22,6 +22,8 @@
     <link href="../../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="../../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
+
     <link href="./V_expediente_terapeutico.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="../../../../assets/css/style.css" rel="stylesheet">
@@ -305,37 +307,12 @@
         </div>
     </main>
 
-    <script>
-        document.getElementById("tratamiento").addEventListener("change", function() {
-            var selectedValue = this.value;
-
-            if (selectedValue !== "0") {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var tarjetasHTML = this.responseText;
-
-                        // Determinar en qué columna agregar las tarjetas alternadamente
-                        var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
-                        var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
-                        var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
-
-                        if (tarjetasColumna2 < tarjetasColumna1) {
-                            columnaActual = document.getElementById("contenedor-tarjetas-columna2");
-                        }
-
-                        // Agregar el contenido de las nuevas tarjetas a la columna determinada
-                        columnaActual.innerHTML += tarjetasHTML;
-                    }
-                };
-
-                xhttp.open("POST", "./V_tarjetas_expediente_terapeutico.php?tratamiento=" + selectedValue, true);
-                xhttp.send();
-            }
-        });
-    </script>
-
-
+<script>
+    function cerrarTarjeta(idTarjeta) {
+        var tarjeta = document.getElementById(idTarjeta);
+        tarjeta.parentNode.removeChild(tarjeta); // Elimina la tarjeta del DOM
+    }
+</script>
 
     <script>
         function confirmarCancelar() {
@@ -364,6 +341,7 @@
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
+    <script src="../C_Expediente/C_mostrar_tarjetas.js" ></script>
 
 
 </body>
