@@ -10,8 +10,15 @@ document.getElementById("tratamiento").addEventListener("change", function() {
             if (this.readyState == 4 && this.status == 200) {
                 var tarjetasHTML = this.responseText;
 
-                // Verificar si el ID de la tarjeta ya ha sido mostrado
-                if (!tarjetasMostradas.includes(selectedValue)) {
+                // Verificar si el tratamiento ya ha sido mostrado
+                if (tarjetasMostradas.includes(selectedValue)) {
+                    // Si el tratamiento ya ha sido mostrado, verificar si su tarjeta está oculta
+                    var tarjetaId = "tarjeta_" + selectedValue;
+                    var tarjeta = document.getElementById(tarjetaId);
+                    if (tarjeta && tarjeta.style.display === 'none') {
+                        mostrarTarjeta(tarjetaId); // Mostrar la tarjeta oculta
+                    }
+                } else {
                     // Determinar en qué columna agregar las tarjetas alternadamente
                     var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
                     var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
@@ -24,7 +31,7 @@ document.getElementById("tratamiento").addEventListener("change", function() {
                     // Agregar el contenido de las nuevas tarjetas a la columna determinada
                     columnaActual.innerHTML += tarjetasHTML;
 
-                    // Agregar el ID de la tarjeta mostrada al registro
+                    // Agregar el ID del tratamiento mostrado al registro
                     tarjetasMostradas.push(selectedValue);
                 }
             }
