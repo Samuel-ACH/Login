@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -38,28 +37,28 @@
             } //codigo para el lenguaje del archivo JSON
         });
           $('.editarBtn').click(function() {
-                var idUsuario = $(this).data('id');
+                var idPaciente = $(this).data('id');
                 // Redireccionar o hacer algo con el ID para editar
-                window.location.href = './V_editar_usuario.php?id=' + idUsuario;
+                window.location.href = './V_editar_paciente.php?id=' + idPaciente;
             });
 
             // Manejar clic en botón Eliminar
             $('.eliminarBtn').click(function() {
-                var idUsuario = $(this).data('id');
-                // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
+                var idPaciente = $(this).data('id');
+                // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
                 // Puedes usar jQuery.ajax o Fetch API para esto
              $.ajax({
-                    url: '../C_Usuario/C_eliminar_usuario.php',
+                    url: '../C_Paciente/C_eliminar_paciente.php',
                     method: 'POST',
-                    data: { id: idUsuario },
+                    data: { id: idPaciente },
                     success: function(response) {
                 //         // Actualizar la tabla o hacer algo después de eliminar
-                //         // Puedes recargar la página o actualizar la tabla usando DataTables
+                //         // Puedes recargar la página o actualizar la tabla paciente DataTables
                 // Ejemplo de recargar la página:
                    location.reload();
                 },
                 error: function(error) {
-                console.error("Error al eliminar usuario: " + error.responseText);
+                console.error("Error al eliminar paciente: " + error.responseText);
                 }
                 });
             });
@@ -149,14 +148,12 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-
-                        <!-- <a href="components-alerts.php"> -->
-
+                        <a href="V_paciente.php">
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
-                        <!-- <a href="components-accordion.html"> -->
+                        <a href="V_nuevo_paciente.php">
                             <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
@@ -242,7 +239,6 @@
 
     <?php
     include '../../../Controladores/Conexion/Conexion_be.php';
-    
     ?>
 
     <style>
@@ -463,163 +459,136 @@
 <main id="main" class="table">
     <div class="container mt-4">
             <div class="col-12">
-            <center>
-                <h2>Registro de Nuevo Usuario</h2>
-            </center>
-            <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
+                <center>
+                    <h2>Registro de Nuevo Paciente</h2>
+                </center>
+                <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
+                <form action="../C_Paciente/C_nuevo_paciente.php" method="POST" class="formulario__register" id="registerFormUser">
+                    <div class="contenedor__todo">
+                            <table class="table" style:"align-items-center">
+                                <tbody>
+                                    <tr>                                    
+                                        <!-- GRUPO NOMBRE COMPLETO -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__nombre">
+                                                <label for="nombre">Nombre Completo</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" class="formulario__input" class="form-control" name="nombre" id="nombre" autocomplete="off" style="text-transform: uppercase" placeholder="Ingrese su nombre completo." maxlength="80" required>
+                                                </div>
+                                                <p class="formulario__input-error"></p>
+                                            </div>
+                                        </td>
+                                        <?php
+                                            $sql = "SELECT * FROM tbl_genero";                                            
+                                            $genero = mysqli_query($conexion, $sql);
+                                        ?>
+                                        <!-- GRUPO GENERO -->
+                                        <td>
+                                            <div class="formulario__grupo">
+                                                <label for="genero">Género</label>
+                                                    <select type="text" class="formulario__input" name="genero" id="genero" class="form-control" autocomplete="off" placeholder="Genero" class="combobox" required>
+                                                        <option value="">Seleccione un género</option>
+                                                        <?php
+                                                            foreach ($genero as $value) {                                                        
+                                                        ?>
+                                                        <option value="<?php echo $value['IdGenero']; ?>"><?php echo $value['Descripcion']; ?></option>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                    </select>
+                                            </div>
+                                        </td>    
+                                    </tr>
+                                    <tr>
+                                        <!-- GRUPO FECHA NACIMIENTO -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__fecha">
+                                                <label for="Fechavencimiento">Fecha de Nacimiento:</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input  type="date" class="formulario__input" placeholder="Fecha de Nacimiento" autocomplete="off" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01" required>
+                                                </div>
+                                                <p id="mensajeFechaNacimiento" class="mensaje_error" style="color: red;"></p>
+                                            </div>
+                                        </td>    
+                                        <!-- GRUPO DIRECCION -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__direccion">
+                                                <label for="direccion">Dirección</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" class="formulario__input" class="form-control" name="direccion" id="direccion" autocomplete="off" style="text-transform: uppercase" placeholder="Ingrese su dirección" maxlength="80" required>
+                                                </div>
+                                                <p class="formulario__input-error"></p>
+                                            </div>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <?php
+                                            $sql = "SELECT * FROM tbl_tipo_documento";                                            
+                                            $resultado = mysqli_query($conexion, $sql);
+                                        ?>
+                                        <!-- GRUPO TIPO DE DOCUMENTO -->
+                                        <td>
+                                            <div class="gender-options">
+                                                <label for="tipo_documento">Tipo de Documento</label>
+                                                <select type="int" class="formulario__input" name="id_tipo_documento" id="id_tipo_documento" class="form-control" autocomplete="off" class="combobox" required>
+                                                    <option value="" selected>Seleccione un tipo de documento</option>
+                                                    <?php
+                                                        // Recorrer los resultados y mostrarlos en la tabla
+                                                        foreach ($resultado as $fila) {
+                                                    ?>
+                                                    <option value="<?php echo $fila['Id_Tipo_Documento']; ?>"><?php echo $fila['Descripcion']; ?></option>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!-- GRUPO NÚMERO DE DOCUMENTO -->
+                                            <div class="formulario__grupo" id="grupo__numero_de_documento">
+                                                <label for="numero_de_documento">Número de Documento</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" minlength="13" maxlength="15" pattern="[0-9]{13-15}" class="formulario__input" class="form-control" name="numero_de_documento" id="numero_de_documento" placeholder=" INGRESE SU NÚMERO DE DOCUMENTO" autocomplete="off" required>
+                                                </div>
+                                                <p class="formulario__input-error"></p>
+                                            </div>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <!-- GRUPO OCUPACIÓN -->
+                                                <div class="formulario__grupo" id="grupo__ocupacion">
+                                                    <label for="ocupacion">Ocupación</label>
+                                                    <div class="formulario__grupo-input">
+                                                        <input type="text" style="text-transform: uppercase" pattern="[A-Za-z]{1,50}" class="formulario__input" class="form-control" name="ocupacion" id="ocupacion" placeholder="INGRESE SU OCUPACIÓN" autocomplete="off" required title="Ingrese solo letras (hasta 50 caracteres).">
+                                                    </div>
+                                                    <p class="formulario__input-error"></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <!-- GRUPO ESTADO USUARIO -->
+                                                <div class="gender-options">
+                                                    <label for="estadoPaciente">Estado</label>
+                                                    <select type="int" class="formulario__input" class="form-control" name="estadoPaciente" id="estadoPaciente" autocomplete="off" class="combobox" required>
+                                                        <option value="">Seleccione un estado</option>
+                                                        <option value="1">ACTIVO</option>
+                                                        <option value="0">INACTIVO</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>  
+                                        <tr>
+                                            <td>
+                                                <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
 
-                <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser">
-                <div class="contenedor__todo">
-                        <table class="table" style:"align-items-center">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- GRUPO DNI -->
-                                        <div class="formulario__grupo" id="grupo__dni">
-                                            <label for="dni" class="formulario__label">DNI</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" maxlength="13" pattern="[0-9]{13}" class="formulario__input" class="form-control" name="dni" id="dni" placeholder="DNI" required autocomplete="off">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO NOMBRE COMPLETO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__nombre">
-                                            <label for="nombre" class="formulario__label">Nombre Completo</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="formulario__input" class="form-control" name="nombre" id="nombre" autocomplete="off" style="text-transform: uppercase" placeholder="Nombre completo" maxlength="80">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO CORREO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__correo2">
-                                            <label for="correo2" class="formulario__label">Correo Electrónico</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="email" class="formulario__input" class="form-control" name="correo2" id="correo2" autocomplete="off" placeholder="Correo Electrónico" maxlength="40">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO USUARIO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__usuario">
-                                            <label for="usuario" class="formulario__label">Usuario</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="formulario__input" class="form-control" style="text-transform: uppercase" autocomplete="off" name="usuario" id="usuario" placeholder="Usuario" maxlength="15">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO CONTRASEÑA -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__password2">
-                                            <label for="password2" class="formulario__label">Contraseña</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="password" class="formulario__input" name="password2" id="password2" autocomplete="off" placeholder="Contraseña" maxlength="30" style ="width: 585px">
-                                                <i class="ver_password fas fa-eye"></i>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO CONFIRMACION CONTRASEÑA -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__password3">
-                                            <label for="password3" class="formulario__label">Confirmar Contraseña</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="password" class="formulario__input" class="form-control" name="password3" id="password3" autocomplete="off" placeholder="Confirmar contraseña" maxlength="30" style ="width: 585px">
-                                                <i class="ver_password fas fa-eye"></i>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <!-- GRUPO DIRECCION -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__direccion">
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="formulario__input" class="form-control" name="direccion" id="direccion" autocomplete="off" style="text-transform: uppercase" placeholder="Dirección" maxlength="80">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO GENERO -->
-                                    <td>
-                                        <div class="formulario__grupo">
-                                            <select type="text" class="formulario__input" name="genero" id="genero" class="form-control" autocomplete="off" placeholder="Genero" class="combobox">
-                                                <option value="0" selected>Seleccione un género</option>
-                                                <option value="1">MASCULINO</option>
-                                                <option value="2">FEMENINO</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    
-                            <!-- GRUPO FECHA NACIMIENTO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Nacimiento:</label>
-                                            <input  type="date" class="formulario__input" placeholder="Fecha de Nacimiento" autocomplete="off" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01" >
-                                            <p id="mensajeFechaNacimiento" class="mensaje_error" style="color: red;"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO FECHA CONTRATACION -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Contratación:</label>
-                                            <input type="date" class="formulario__input" name="fechacontratacion" id="fechacontratacion" autocomplete="off" class="form-control">
-                                            <p id="mensajeFechaContratacion" class="mensaje_error" style="color: red;"></p>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO ROL -->
-                                    <td>
-                                        <div class="gender-options">
-                                            <div></div>
-                                            <select type="int" class="formulario__input" name="rol" id="rol" class="form-control" autocomplete="off" placeholder="rol" class="combobox">
-                                                <option value="0" selected>Seleccione un rol</option>
-                                                <option value="2">DEFECTO</option>
-                                                <option value="3">TERAPEUTA</option>
-                                                <option value="4">DOCTOR</option>
-                                                <option value="5">SECRETARIA</option>
-                                                <option value="6">ADMINISTRADOR</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO ESTADO USUARIO -->
-                                    <td>
-                                        <div class="gender-options">
-                                            <div></div>
-                                            <select type="int" class="formulario__input" class="form-control" name="estadoUser" id="estadoUser" autocomplete="off" placeholder="estadoUser" class="combobox">
-                                                <option value="0" selected>Seleccione un estado</option>
-                                                <option value="1">ACTIVO</option>
-                                                <option value="2">INACTIVO</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    </tr>  
-                                    <tr>
-                                    <td>
-                                    <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
-
-                                    </td>
-                                    <td>
-                                        <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>
-                                        
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                            </td>
+                                            <td>
+                                                <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
                     </div>
                 </form>
             </div>
@@ -631,10 +600,10 @@
         // Mostrar un cuadro de diálogo de confirmación
         const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
 
-        // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
+        // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarpacientesios
         if (confirmacion) {
-            // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-            window.location.href = "./V_usuario.php";
+            // Redirigir a la pantalla de pacientes (reemplaza con la URL correcta)
+            window.location.href = "./V_paciente.php";
         }
     }
 </script>

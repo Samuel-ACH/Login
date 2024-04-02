@@ -373,7 +373,7 @@ session_start();
                               include ('../../../Controladores/Conexion/Conexion_be.php');
                             
                               // Consulta SQL para obtener los géneros
-                              $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6) AND Estado_Usuario IN (1)";
+                              $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6)";
                               $resultado = mysqli_query($conexion, $query);
                             
                             ?>
@@ -404,7 +404,7 @@ session_start();
                        if (especialidad === "fisioterapeuta") {
                            <?php
                               // Consulta SQL para obtener los roles
-                              $query2 = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (7) AND Estado_Usuario IN (1)";
+                              $query2 = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN (7)";
                               $resultado2 = mysqli_query($conexion, $query2);
                             
                             ?>
@@ -719,6 +719,8 @@ session_start();
             Id_Paciente = $('#Id_Paciente').val() 
             tipoCita = $('#tipoCita').val() 
             subespecialidad= $('#subespecialidad').val();
+            alert(motivoCita + fechaCita + horaCita + Id_Paciente + tipoCita + subespecialidad);
+            
             insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, subespecialidad)
             
         });

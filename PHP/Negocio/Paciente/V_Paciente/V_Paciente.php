@@ -20,6 +20,16 @@ include '../../../../Imagenes/base64.php'
     <link href="../../../../assets/img/red-logo.jpeg" rel="icon">
     <link href="../../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+    <script>
+    $(document).ready(function() {
+        $('#tablaAgenda').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+            } //codigo para el lenguaje del archivo JSON
+        });
+    });
+    </script>
+    
     <!-- Vendor CSS Files -->
     <link href="../../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -53,6 +63,13 @@ include '../../../../Imagenes/base64.php'
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
+
+        <!-- <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form> -->
+        </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -117,18 +134,15 @@ include '../../../../Imagenes/base64.php'
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
 
-                        <a href="components-alerts.php">
-
+                        <a href="V_paciente.php">
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
-                        <a href="components-accordion.html">
+                        <a href="V_nuevo_paciente.php">
                             <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
-
-
                 </ul>
             </li><!-- Fin modulo paciente -->
 
@@ -138,7 +152,7 @@ include '../../../../Imagenes/base64.php'
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="forms-elements.html">
+                        <a href="../../Cita/V_Cita/V_modal_cita.php">
                             <i class="bi bi-circle"></i><span>Gestion Cita</span>
                         </a>
                 </ul>
@@ -208,109 +222,83 @@ include '../../../../Imagenes/base64.php'
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
-
-
-
   <div class="pagetitle ">
-    <h1>Mantenimiento de Usuarios </h1>
-    
+    <h1>Gestion de Pacientes </h1>
   </div>
-
-  <br>
 <div class="container mt-4">
   <div class="row">
     <div class="col-10">
-    <form action="./V_nuevo_usuario.php" method="post"><br>
-    <!-- <button id="agregarusuario" class="btn btn-primary float-start">Agregar Usuario</button> -->
-        <button id="agregarusuario" class="btn btn-primary" data-toggle="modal" data-target="#modalNuevoParametro"><i class="fa-solid fa-plus "></i> Agregar Usuario </button>
-    </form>
+    <form action="./V_nuevo_paciente.php" method="post">
+    <!-- <button id="agregarpaciente" class="btn btn-primary float-start">Agregar Paciente</button> -->
+    <button id="agregarusuario" class="btn btn-primary" data-toggle="modal" data-target="#modalNuevoParametro"><i class="fa-solid fa-plus"></i> Agregar Paciente</button>
+    </form><br>
       <table id="tablaAgenda" class="table">
         <thead class="encabezado bg-light table-info">
           <tr>
-               <th scope="col">Id Usuario</th>
-              <th scope="col">DNI</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Nombre</th>  
-              <th scope="col">Dirección</th>                
-              <th scope="col">Estado</th>
-              <th scope="col">Rol</th>
-              <th scope="col">Género</th>
-              <th scope="col" class="ocultar">Fecha Nacimiento</th>
-              <th scope="col" class="ocultar">Fecha Contratación</th>
-              <th scope="col" class="ocultar">Fecha Creación</th>
-              <th scope="col" class="ocultar">Fecha Vencimiento</th>
-              <th scope="col">Creado Por</th>
+              <th></th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Dirección</th>
+              <th scope="col">Fecha de Nacimiento</th>  
+              <th scope="col">Género</th>  
+              <th scope="col">Núm. de Documento</th>              
+              <th scope="col">Tipo de Documento</th>
+              <th scope="col">Ocupación</th>
+              <!--<th scope="col" class="ocultar">Fecha Nacimiento</th>-->
               <th scope="col">Acciones</th>
           </tr>
         
         </thead>
         <tbody>
           <?php
-           $sql = "SELECT
-           u.Id_Usuario,
-           u.DNI,
-           u.Usuario,
-           u.Correo,
-           u.Nombre,
-           u.Direccion,
-           e.Descripcion AS Estado,
-           r.Rol AS Rol,
-           g.Descripcion AS Genero,
-           u.Creado_Por, 
-           u.Fecha_Creacion,
-           u.Fecha_Vencimiento,
-           u.FechaNacimiento,
-           u.FechaContratacion
-       FROM tbl_ms_usuario u
-       INNER JOIN tbl_ms_roles r ON u.IdRol = r.Id_Rol
-       INNER JOIN tbl_genero g ON u.IdGenero = g.IdGenero
-       INNER JOIN tbl_estado_usuario e ON u.Estado_Usuario = e.Id_Estado
-       WHERE e.Descripcion = 'Activo' AND r.Rol != 'SUPERADMINISTRADOR' order by u.Id_Usuario asc;";
-
+            $sql = "SELECT
+            p.Id_Paciente,
+            p.Numero_Documento,
+            p.Nombre,
+            p.Direccion,
+            p.FechaNacimiento,
+            g.Descripcion AS Genero,
+            tp.Descripcion AS Tipo_de_Documento,
+            p.Ocupacion
+        FROM tbl_paciente p
+        INNER JOIN tbl_genero g ON p.IdGenero = g.IdGenero
+        INNER JOIN tbl_tipo_documento tp ON p.Id_Tipo_Documento = tp.Id_Tipo_Documento
+        WHERE p.Estado_Paciente = 1
+        ORDER BY p.Id_Paciente DESC"; 
             $resultado = mysqli_query($conexion, $sql);
             // Recorrer los resultados y mostrarlos en la tabla
             foreach ($resultado as $fila) {
               ?>
               <tr>
-                <td><?php echo $fila['Id_Usuario'] ?></td>
-                <td><?php echo $fila['DNI'] ?></td>
-                <td><?php echo $fila['Usuario'] ?></td>
-                <td><?php echo $fila['Correo'] ?></td>
-                <td><?php echo $fila['Nombre'] ?></td>
-                <td><?php echo $fila['Direccion'] ?></td>
-                <td><?php echo $fila['Estado'] ?></td>
-                <td><?php echo $fila['Rol'] ?></td>
-               <td><?php echo $fila['Genero'] ?></td>  
-               <td class="ocultar"><?php echo $fila['FechaNacimiento'] ?></td>
-               <td class="ocultar"><?php echo $fila['FechaContratacion']; ?></td>
-               <td class="ocultar"><?php echo $fila['Fecha_Creacion'] ?></td>
-                <td class="ocultar"><?php echo $fila['Fecha_Vencimiento'] ?></td>
-
-                <td><?php echo $fila['Creado_Por'] ?></td>
-
-                <!-- Botones Editar y Eliminar -->
-<!-- Dentro del bucle foreach para mostrar los usuarios -->
-<td>
-<a href="./V_editar_usuario.php?id=<?php echo $fila['Id_Usuario']; ?>" class="btn btn-warning btn-sm pencil">
-        <i class="bi bi-pencil"></i> 
-    </a>
-    <button class="btn btn-danger btn-sm eliminarBtn trash" data-id="<?php echo $fila['Id_Usuario']; ?>">
-        <i class="bi bi-trash"></i> 
-       <!--Script para manejar clic en botón Eliminar-->
-
-    </button>
-</td>          
-              </tr>
+                    <td></td>
+                    <td><?php echo $fila['Numero_Documento'] ?></td>
+                    <td><?php echo $fila['Nombre'] ?></td>
+                    <td><?php echo $fila['Direccion'] ?></td>               
+                    <!--<td class="ocultar"><?php echo $fila['FechaNacimiento'] ?></td>-->
+                    <td><?php echo $fila['FechaNacimiento'] ?></td>
+                    <td><?php echo $fila['Genero'] ?></td>  
+                    <td><?php echo $fila['Tipo_de_Documento'] ?></td>
+                    <td><?php echo $fila['Ocupacion'] ?></td>
+                    <!-- Botones Editar y Eliminar -->
+                    <!-- Dentro del bucle foreach para mostrar los pacientes -->
+                    <td>
+                        <a href="./V_editar_paciente.php?id=<?php echo $fila['Id_Paciente']; ?>" class="btn btn-warning btn-sm pencil">
+                            <i class="bi bi-pencil"></i> 
+                        </a>
+                        <button class="btn btn-danger btn-sm eliminarBtn trash" data-id="<?php echo $fila['Id_Paciente']; ?>">
+                            <i class="bi bi-trash"></i> 
+                        <!--Script para manejar clic en botón Eliminar-->
+                        </button>
+                    </td>
+                </tr>
           <?php 
             }
           ?>
         </tbody>
       </table>
-      <button id="verMasBtn" class="btn btn-primary">Ver más</button>
-      <button id="verMenosBtn" class="btn btn-">Ver menos</button>
-      <button id="verInactivosBtn" class="btn btn-warning" onclick="redirigirAUsuariosInactivos()">Usuarios eliminados</button>
-
+    <div>
+        <!--<button id="verMasBtn" class="btn btn-primary">Ver más</button>
+        <button id="verMenosBtn" class="btn btn-">Ver menos</button>-->
+        <button id="verInactivosBtn" class="btn btn-warning" onclick="redirigirPacientesInactivos()">Pacientes inactivos</button>            
     </div>
   </div>
 </div>
@@ -318,26 +306,26 @@ include '../../../../Imagenes/base64.php'
 $(document).ready(function() {
     // Manejar clic en botón Eliminar
     $('.eliminarBtn').click(function() {
-        var idUsuario = $(this).data('id');
-        var filaUsuario = $(this).closest('tr'); // Obtener la fila del usuario
+        var idPaciente = $(this).data('id');
+        var filaPaciente = $(this).closest('tr'); // Obtener la fila del paciente
 
-        // Confirmar si realmente deseas eliminar el usuario
-        if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-            // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
+        // Confirmar si realmente deseas eliminar el paciente
+        if (confirm('¿Estás seguro de que deseas eliminar este paciente?')) {
+            // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
             $.ajax({
-                url: '../C_Usuario/C_eliminar_usuario.php',
+                url: '../C_Paciente/C_eliminar_paciente.php',
                 method: 'POST',
-                data: { id: idUsuario },
+                data: { id: idPaciente },
                 success: function(response) {
                     // Ocultar la fila de usuario de la tabla
-                    filaUsuario.hide(); // Ocultar la fila de usuario de la tabla
+                    filaPaciente.hide(); // Ocultar la fila de paciente de la tabla
                     // $('#tablaAgenda').load('./V_usuario.php');
                     
                     // Notificar al usuario sobre el éxito
                     alert(response); 
                 },
                 error: function(error) {
-                    console.error("Error al eliminar usuario: " + error.statusText);
+                    console.error("Error al eliminar paciente: " + error.statusText);
                 }
             });
         }
@@ -348,10 +336,10 @@ $(document).ready(function() {
 
 
 <script>
-// Función para redirigir al hacer clic en el botón usuarios incativos
-function redirigirAUsuariosInactivos() {
-  // Redirige a la página usuariosInactivos.php
-  window.location.href = './V_usuario_inactivos.php';
+// Función para redirigir al hacer clic en el botón pacientes incativos
+function redirigirPacientesInactivos() {
+  // Redirige a la página pacientesInactivos.php
+  window.location.href = './V_Pacientes_inactivos.php';
 }
 </script>
 
@@ -387,8 +375,6 @@ function redirigirAUsuariosInactivos() {
     <script src="../../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="../../../../assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="../../../../assets/vendor/php-email-form/validate.js"></script>
-    <link href="../../../../assets/css/usuario.css" rel="stylesheet">
-
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
@@ -426,10 +412,10 @@ $(document).ready(function () {
         dom: 'lBfrtip',
         paging: true,
         buttons: [{
-            extend: 'excelHtml5',
+            extend: 'excelHtml5',            
             text: '<i class="fas fa-file-excel"> Excel </i>',
             exportOptions: {
-                columns: [0, 1, 3, 4, 5, 6, 7, 8], // Índices de las columnas que quieres exportar
+                columns: [0, 1, 2, 3, 4, 5, 6], // Índices de las columnas que quieres exportar
                 modifier: {
                     page: 'current'
                 },
@@ -437,11 +423,12 @@ $(document).ready(function () {
         },
         {
             extend: 'pdfHtml5',
+            download: 'open',
             text: '<i class="fas fa-file-pdf"> PDF </i>',
             orientation: 'landscape',
             customize: function (doc) {
                 // Agregar un título al reporte
-                var title = 'Reporte de Usuarios';
+                var title = 'Reporte de Pacientes';
                 // Obtener la fecha y hora actual
                 var now = new Date();
                 var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
@@ -484,7 +471,7 @@ $(document).ready(function () {
                 };
             },
             exportOptions: {
-                columns: [0, 1, 3, 4, 5, 6, 7, 8],
+                columns: [0, 1, 2, 3, 4, 5, 6],
                 modifier: {
                     page: 'current'
                 },

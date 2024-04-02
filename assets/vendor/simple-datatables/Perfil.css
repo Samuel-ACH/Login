@@ -1,0 +1,109 @@
+/*********** inicio de Estilos css para perfil ********/
+#btncerrarperfil{
+	background: linear-gradient(
+        90deg,
+        rgb(215, 67, 67) 25%,	
+        rgb(215, 67, 67)100%);
+        box-shadow: 0 0 20px rgba(192, 203, 251, 0.7);
+        color: #FFFFFF;
+        font-size: 18x;
+        cursor: pointer;
+		width: 200px;
+		justify-content: center;
+  		align-items: center;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		float: right;	
+		border: 1px solid black;	
+}
+#btneditarperfil{
+	background: linear-gradient(
+        90deg,
+        rgb(215, 67, 67) 25%,	
+        rgb(215, 67, 67)100%);
+        box-shadow: 0 0 20px rgba(192, 203, 251, 0.7);
+        color: #FFFFFF;
+        font-size: 18x;
+        cursor: pointer;
+		width: 200px;
+		justify-content: center;
+  		align-items: center;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		float: right;	
+		border: 1px solid black;	
+}
+#btncambiocontraseñaperfil{
+	background: linear-gradient(
+        90deg,
+        rgb(215, 67, 67) 25%,	
+        rgb(215, 67, 67)100%);
+        box-shadow: 0 0 20px rgba(192, 203, 251, 0.7);
+        color: #FFFFFF;
+        font-size: 18x;
+        cursor: pointer;
+		width: 200px;
+		justify-content: center;
+  		align-items: center;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		float: right;	
+		border: 1px solid black;	
+}
+ /* Estilos para el contenedor principal de perfil */
+.container {
+    margin-top: 50px;
+}
+
+/* Estilos para la tarjeta de perfil */
+.card {
+    width: 150%; /* Ajusta el ancho de la tarjeta */
+	max-width: 1200px; /* Establece un ancho máximo de 1200px para la tarjeta */
+	height: 550px; /* Altura de la tarjeta a 500px */
+    margin: 0 auto; /* Centra la tarjeta horizontalmente */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    background-color: #007bff;
+    color: #fff;
+    padding: 30px; /* Ajusta el padding del encabezado */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 30px; /* Ajusta el padding del cuerpo */
+}
+
+/* Estilos para la imagen de perfil */
+#imagenPerfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Estilos para los íconos de perfil*/
+.change-image-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+/* Estilos para la lista de detalles del perfil */
+.list-group-item {
+    border: none;
+    padding: 10px 0;
+    font-size: 16px;
+}
+/*********** finalizacion de Estilos css para perfil ********/

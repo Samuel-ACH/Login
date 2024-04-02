@@ -120,13 +120,13 @@ session_start();
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
 
-                        <a href="components-alerts.php">
+                        <a href="V_paciente_inactivos.php">
 
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
-                        <a href="components-accordion.html">
+                        <a href="V_nuevo_paciente.php">
                             <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
@@ -213,12 +213,10 @@ session_start();
     <main id="main" class="main">
 
   <div class="pagetitle ">
-    <h1> Usuarios Inactivos</h1>
-    <form action="./V_usuario.php" method="post"> 
-                  <br>  <button id="usuariobtn" class="btn btn-primary float-start">Usuarios Activos</button>
-
+    <h1> Pacientes Inactivos</h1>
+    <form action="./V_paciente.php" method="post"> 
+        </br><button id="usuariobtn" class="btn btn-primary float-start">Pacientes Activos</button>
     </form>
-
   </div>
 <br>
 <div class="container mt-4">
@@ -227,50 +225,44 @@ session_start();
             <table id="tablaAgenda" class="table">
                 <thead class="encabezado bg-light table-info">
                     <tr>
-                        <th scope="col">Id Usuario</th>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Correo</th>
+                        <th scope="col">Núm. de Documento</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Género</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Fecha de Nacimiento</th>  
+                        <th scope="col">Género</th>                
+                        <th scope="col">Tipo de Documento</th>
+                        <!--<th scope="col" class="ocultar">Fecha Nacimiento</th>-->
                         <th scope="col">Acciones</th>
                     </tr>
-
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT
-                        u.Id_Usuario,
-                        u.Usuario,
-                        u.Correo,
-                        u.Nombre,
-                        e.Descripcion AS Estado,
-                        r.Rol AS Rol,
-                        g.Descripcion AS Genero
-                    FROM tbl_ms_usuario u
-                    INNER JOIN tbl_ms_roles r ON u.IdRol = r.Id_Rol
-                    INNER JOIN tbl_genero g ON u.IdGenero = g.IdGenero
-                    INNER JOIN tbl_estado_usuario e ON u.Estado_Usuario = e.Id_Estado
-                    WHERE e.Descripcion = 'Inactivo' order by u.Id_Usuario asc;";
+                        $sql = "SELECT
+                        p.Id_Paciente,
+                        p.Numero_Documento,
+                        p.Nombre,
+                        p.Direccion,
+                        p.FechaNacimiento,
+                        g.Descripcion AS Genero,
+                        tp.Descripcion AS Tipo_de_Documento
+                        FROM tbl_paciente p
+                        INNER JOIN tbl_genero g ON p.IdGenero = g.IdGenero
+                        INNER JOIN tbl_tipo_documento tp ON p.Id_Tipo_Documento = tp.Id_Tipo_Documento
+                        WHERE p.Estado_Paciente = 0"; 
                     $resultado = mysqli_query($conexion, $sql);
                     // Recorrer los resultados y mostrarlos en la tabla
                     foreach ($resultado as $fila) {
                     ?>
                         <tr>
-                            <td><?php echo $fila['Id_Usuario'] ?></td>
-                            <td><?php echo $fila['Usuario'] ?></td>
-                            <td><?php echo $fila['Correo'] ?></td>
+                            <td><?php echo $fila['Numero_Documento'] ?></td>
                             <td><?php echo $fila['Nombre'] ?></td>
-                            <td><?php echo $fila['Estado'] ?></td>
-                            <td><?php echo $fila['Rol'] ?></td>
-                            <td><?php echo $fila['Genero'] ?></td>
-
-                                <!-- Dentro del bucle foreach para mostrar los usuarios -->
-                                <td>
-                                <button class="btn btn-danger btn-sm activarBtn" data-id="<?php echo $fila['Id_Usuario']; ?>">Activar</button>
-</td>
-
+                            <td><?php echo $fila['Direccion'] ?></td>
+                            <td><?php echo $fila['FechaNacimiento'] ?></td>
+                            <td><?php echo $fila['Genero'] ?></td>  
+                            <td><?php echo $fila['Tipo_de_Documento'] ?></td>
+                                <!-- Dentro del bucle foreach para mostrar los pacientes -->
+                            <td>
+                                <button class="btn btn-danger btn-sm activarBtn" data-id="<?php echo $fila['Id_Paciente']; ?>">Activar</button>
                             </td>
                         </tr>
                     <?php
@@ -281,31 +273,31 @@ session_start();
         </div>
     </div>
 </div>
-</br>
+
 
 <script>
 $(document).ready(function() {
     // Manejar clic en botón Eliminar
     $('.activarBtn').click(function() {
-        var idUsuario = $(this).data('id');
-        var filaUsuario = $(this).closest('tr'); // Obtener la fila del usuario
+        var idPaciente = $(this).data('id');
+        var filaPaciente = $(this).closest('tr'); // Obtener la fila del paciente
 
-        // Confirmar si realmente deseas eliminar el usuario
-        if (confirm('¿Estás seguro de que deseas activar este usuario?')) {
-            // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
+        // Confirmar si realmente deseas eliminar el paciente
+        if (confirm('¿Estás seguro de que deseas activar este paciente?')) {
+            // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
             $.ajax({
-                url: '../C_Usuario/C_activar_usuario.php',
+                url: '../C_Paciente/C_activar_paciente.php',
                 method: 'POST',
-                data: { id: idUsuario },
+                data: { id: idPaciente },
                 success: function(response) {
-                    // Ocultar la fila de usuario de la tabla
-                    filaUsuario.hide(); // Ocultar la fila de usuario de la tabla
+                    // Ocultar la fila de paciente de la tabla
+                    filaPaciente.hide(); // Ocultar la fila de paciente de la tabla
                     
                     // Notificar al usuario sobre el éxito
                     alert(response); 
                 },
                 error: function(error) {
-                    console.error("Error al eliminar usuario: " + error.statusText);
+                    console.error("Error al eliminar el paciente: " + error.statusText);
                 }
             });
         }

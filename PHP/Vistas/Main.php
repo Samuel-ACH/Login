@@ -68,6 +68,14 @@ if (!isset($_SESSION["correo"])) {
             } //codigo para el lenguaje del archivo JSON
         });
     });
+
+    // Definir función para redirigir al perfil
+    function redirectToProfile() {
+        // Obtener la URL del perfil
+        var profileUrl = "../V_Perfil.php?id=<?php echo $_SESSION['usuario']; ?>";
+        // Redirigir a la página de perfil
+        window.location.href = profileUrl;
+    }
     </script>
 </head>
 
@@ -115,7 +123,7 @@ if (!isset($_SESSION["correo"])) {
                             <hr class="dropdown-divider">
                         </li>
                        <li>
-                           <a class="dropdown-item d-flex align-items-center" href="Perfil.php?id=<?php echo $_SSESION['usuario']; ?>">
+                           <a class="dropdown-item d-flex align-items-center" href="../Perfil/V_Perfil/V_perfil.php?id=<?php echo $_SSESION['usuario']; ?>">
                                 <i class="bi bi-person"></i>
                                 <span>Ver Perfil</span>
                            </a>
@@ -155,15 +163,9 @@ if (!isset($_SESSION["correo"])) {
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-
                         <a href="components-alerts.php">
-
+                        <a class="dropdown-item d-flex align-items-center" href="../Negocio/Paciente/V_Paciente/V_Paciente.php">
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-accordion.html">
-                            <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
 
@@ -194,13 +196,13 @@ if (!isset($_SESSION["correo"])) {
                             <i class="bi bi-circle"></i><span>Gestion Expediente</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="tables-data.html">
                             <i class="bi bi-circle"></i><span>Historial Expediente</span>
                         </a>
                     </li>
                 </ul>
-            </li><!-- Fin modulo expediente -->
+            </li>Fin modulo expediente -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -218,7 +220,7 @@ if (!isset($_SESSION["correo"])) {
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
+                        <a href="../Seguridad/Roles_permisos/V_Roles/V_roles.php">
                             <i class="bi bi-circle"></i><span>Roles</span>
                         </a>
                     </li>

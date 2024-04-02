@@ -125,11 +125,18 @@
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
 
-                        <a href="components-alerts.php">
+                        <!-- <a href="components-alerts.php"> -->
 
                         <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
+                    <li>
+                        <!-- <a href="components-accordion.html"> -->
+                        <i class="bi bi-circle"></i><span>Registrar </span>
+                        </a>
+                    </li>
+
+
                 </ul>
             </li><!-- Fin modulo paciente -->
 
@@ -139,7 +146,7 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="forms-elements.html">
+                        <!-- <a href="forms-elements.html"> -->
                         <i class="bi bi-circle"></i><span>Gestion Cita</span>
                         </a>
                 </ul>
@@ -151,8 +158,13 @@
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="tables-general.html">
+                        <!-- <a href="tables-general.html"> -->
                         <i class="bi bi-circle"></i><span>Gestion Expediente</span>
+                        </a>
+                    </li>
+                    <li>
+                        <!-- <a href="tables-data.html"> -->
+                        <i class="bi bi-circle"></i><span>Historial Expediente</span>
                         </a>
                     </li>
                 </ul>
@@ -169,12 +181,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="charts-apexcharts.html">
+                        <!-- <a href="charts-apexcharts.html"> -->
                         <i class="bi bi-circle"></i><span>Permisos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
+                        <!-- <a href="charts-echarts.html"> -->
                         <i class="bi bi-circle"></i><span>Roles</span>
                         </a>
                     </li>
@@ -295,15 +307,12 @@
         </div>
     </main>
 
-<script>
+    <script>
     function cerrarTarjeta(idTarjeta) {
         var tarjeta = document.getElementById(idTarjeta);
-        tarjeta.style.display = 'none'; // Oculta la tarjeta cambiando su estilo de visualización
-    }
-
-    function mostrarTarjeta(idTarjeta) {
-        var tarjeta = document.getElementById(idTarjeta);
-        tarjeta.style.display = 'block'; // Muestra la tarjeta cambiando su estilo de visualización
+        tarjeta.style.display = 'none'; // Oculta la tarjeta
+        // Alternativamente, puedes eliminar la tarjeta del DOM con:
+        // tarjeta.parentNode.removeChild(tarjeta);
     }
 </script>
 

@@ -25,13 +25,13 @@ include("../../../Controladores/Conexion/Conexion_be.php");
             <tbody>
                 <?php
                 $sql = "SELECT E.Fecha_Creacion, US.Nombre AS CreadoPor, P.Nombre AS Paciente, U.Nombre AS Encargado, -- Datos que se muestran en la vista
-                               E.id_Usuario, CT.id_Cita_Terapia, CT.Id_Tipo_Cita, TC.Descripcion, P.Id_Paciente, CT.Id_Doctor -- Datos extras sobre las citas
+                               E.id_Usuario, CT.id_Cita_Terapia, CT.Id_Tipo_Cita, TC.Descripcion, P.Id_Paciente, CT.Id_Especialista -- Datos extras sobre las citas
                                FROM `tbl_expediente` AS E
                                 INNER JOIN tbl_ms_usuario AS US ON US.Id_Usuario = E.id_Usuario
                                 INNER JOIN tbl_cita_terapeutica AS CT ON e.id_Cita_Terapia = CT.id_Cita_Terapia
                                 INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
                                 INNER JOIN tbl_tipo_cita AS TC ON CT.Id_Tipo_Cita = TC.Id_Tipo_Cita
-                                INNER JOIN tbl_ms_usuario AS U ON CT.Id_Doctor = U.Id_Usuario";
+                                INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario";
 
                 $resultado = mysqli_query($conexion, $sql);
                 $correlativo = 1; // Inicializamos el correlativo en 1

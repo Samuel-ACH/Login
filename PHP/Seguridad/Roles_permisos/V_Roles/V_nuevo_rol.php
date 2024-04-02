@@ -1,8 +1,3 @@
-<?php
-include '../../../Controladores/Conexion/Conexion_be.php';
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +22,7 @@ session_start();
     <link href="../../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="../../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+    
     <!-- Template Main CSS File -->
     <link href="../../../../assets/css/style.css" rel="stylesheet">
 
@@ -35,6 +30,41 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
+    <script>
+    $(document).ready(function() {
+        $('#tablaAgenda').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+            } //codigo para el lenguaje del archivo JSON
+        });
+          $('.editarBtn').click(function() {
+                var idUsuario = $(this).data('id');
+                // Redireccionar o hacer algo con el ID para editar
+                window.location.href = './V_editar_usuario.php?id=' + idUsuario;
+            });
+
+            // Manejar clic en botón Eliminar
+            $('.eliminarBtn').click(function() {
+                var idUsuario = $(this).data('id');
+                // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
+                // Puedes usar jQuery.ajax o Fetch API para esto
+             $.ajax({
+                    url: '../C_Usuario/C_eliminar_usuario.php',
+                    method: 'POST',
+                    data: { id: idUsuario },
+                    success: function(response) {
+                //         // Actualizar la tabla o hacer algo después de eliminar
+                //         // Puedes recargar la página o actualizar la tabla usando DataTables
+                // Ejemplo de recargar la página:
+                   location.reload();
+                },
+                error: function(error) {
+                console.error("Error al eliminar usuario: " + error.responseText);
+                }
+                });
+            });
+       });
+    </script>
 </head>
 
 <body>
@@ -120,13 +150,13 @@ session_start();
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
 
-                        <a href="components-alerts.php">
+                        <!-- <a href="components-alerts.php"> -->
 
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
-                        <a href="components-accordion.html">
+                        <!-- <a href="components-accordion.html"> -->
                             <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
@@ -141,7 +171,7 @@ session_start();
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="forms-elements.html">
+                        <!-- <a href="forms-elements.html"> -->
                             <i class="bi bi-circle"></i><span>Gestion Cita</span>
                         </a>
                 </ul>
@@ -154,12 +184,12 @@ session_start();
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="tables-general.html">
+                        <!-- <a href="tables-general.html"> -->
                             <i class="bi bi-circle"></i><span>Gestion Expediente</span>
                         </a>
                     </li>
                     <li>
-                        <a href="tables-data.html">
+                        <!-- <a href="tables-data.html"> -->
                             <i class="bi bi-circle"></i><span>Historial Expediente</span>
                         </a>
                     </li>
@@ -177,19 +207,19 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="charts-apexcharts.html">
+                        <!-- <a href="charts-apexcharts.html"> -->
                             <i class="bi bi-circle"></i><span>Permisos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
+                        <!-- <a href="charts-echarts.html"> -->
                             <i class="bi bi-circle"></i><span>Roles</span>
                         </a>
                     </li>
                     <li>
                         <!-- Enlace al formulario de bitácora -->
                         <a href="../../../Vistas/Bitacora.php">
-                            <i class="bi bi-circle"></i><span>Bitácora</span>
+                            <i class="bi bi-circle"></i><span>Bitacora</span>
                         </a>
                     </li>
                     <li>
@@ -197,12 +227,12 @@ session_start();
                             <i class="bi bi-circle"></i><span>Objetos</span>
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="../../Parametros/V_modal_parametros">
                             <i class="bi bi-circle"></i><span>Parametros</span>
                         </a>
                     </li>
-                </ul>
+                                   </ul>
             </li><!-- Fin modulo  Mantenimiento -->
 
 
@@ -210,126 +240,94 @@ session_start();
 
     </aside><!-- End Sidebar-->
 
-    <main id="main" class="main">
+    <?php
+    include '../../Controladores/Conexion/Conexion_be.php';
+    
+    ?>
 
-  <div class="pagetitle ">
-    <h1> Usuarios Inactivos</h1>
-    <form action="./V_usuario.php" method="post"> 
-                  <br>  <button id="usuariobtn" class="btn btn-primary float-start">Usuarios Activos</button>
+<main id="main" class="table">
+    <div class="container mt-4">
+            <div class="col-12">
+            <center>
+                <h2>Registrar Nuevo Rol</h2>
+            </center>
+            <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
-    </form>
+                <form action="../C_Roles/C_nuevo_rol.php" method="POST" class="formulario__register" id="registerFormUser">
+                <div class="contenedor__todo">
+                        <table class="table" style:"align-items-center">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <!-- NOMBRE DE ROL -->
+                                        <div class="formulario__grupo" id="grupo__rol">
+                                            <label for="rol" class="formulario__label">ROL</label>
+                                            <div class="formulario__grupo-input">
+                                                <input type="text" class="formulario__input" class="form-control" name="rol" id="rol"  style="text-transform: uppercase" placeholder="ROL" required autocomplete="off">
+                                            </div>
+                                            <p class="formulario__input-error"></p>
+                                        </div>
+                                    </td>
+                                    <!--  DESCRIPCION DEL ROL-->
+                                    <td>
+                                        <div class="formulario__grupo" id="grupo__descripcionrol">
+                                            <label for="descripcionrol" class="formulario__label">Descripción</label>
+                                            <div class="formulario__grupo-input">
+                                                <input type="text" class="formulario__input" class="form-control" name="descripcionrol" id="descripcionrol" autocomplete="off" style="text-transform: uppercase" placeholder="DESCRIPCION" maxlength="80">
+                                            </div>
+                                            <p class="formulario__input-error"></p>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                   
+                                    <tr>
+                                    <td>
+                                    <button type="submit" id="Btnregistrarrol" class="btn btn-primary">Guardar</button>
 
-  </div>
-<br>
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-10">
-            <table id="tablaAgenda" class="table">
-                <thead class="encabezado bg-light table-info">
-                    <tr>
-                        <th scope="col">Id Usuario</th>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Género</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT
-                        u.Id_Usuario,
-                        u.Usuario,
-                        u.Correo,
-                        u.Nombre,
-                        e.Descripcion AS Estado,
-                        r.Rol AS Rol,
-                        g.Descripcion AS Genero
-                    FROM tbl_ms_usuario u
-                    INNER JOIN tbl_ms_roles r ON u.IdRol = r.Id_Rol
-                    INNER JOIN tbl_genero g ON u.IdGenero = g.IdGenero
-                    INNER JOIN tbl_estado_usuario e ON u.Estado_Usuario = e.Id_Estado
-                    WHERE e.Descripcion = 'Inactivo' order by u.Id_Usuario asc;";
-                    $resultado = mysqli_query($conexion, $sql);
-                    // Recorrer los resultados y mostrarlos en la tabla
-                    foreach ($resultado as $fila) {
-                    ?>
-                        <tr>
-                            <td><?php echo $fila['Id_Usuario'] ?></td>
-                            <td><?php echo $fila['Usuario'] ?></td>
-                            <td><?php echo $fila['Correo'] ?></td>
-                            <td><?php echo $fila['Nombre'] ?></td>
-                            <td><?php echo $fila['Estado'] ?></td>
-                            <td><?php echo $fila['Rol'] ?></td>
-                            <td><?php echo $fila['Genero'] ?></td>
-
-                                <!-- Dentro del bucle foreach para mostrar los usuarios -->
-                                <td>
-                                <button class="btn btn-danger btn-sm activarBtn" data-id="<?php echo $fila['Id_Usuario']; ?>">Activar</button>
-</td>
-
-                            </td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
+                                    </td>
+                                    <td>
+                                    <button id="Btncancelar" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-</br>
+</main>
 
 <script>
-$(document).ready(function() {
-    // Manejar clic en botón Eliminar
-    $('.activarBtn').click(function() {
-        var idUsuario = $(this).data('id');
-        var filaUsuario = $(this).closest('tr'); // Obtener la fila del usuario
-
-        // Confirmar si realmente deseas eliminar el usuario
-        if (confirm('¿Estás seguro de que deseas activar este usuario?')) {
-            // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
-            $.ajax({
-                url: '../C_Usuario/C_activar_usuario.php',
-                method: 'POST',
-                data: { id: idUsuario },
-                success: function(response) {
-                    // Ocultar la fila de usuario de la tabla
-                    filaUsuario.hide(); // Ocultar la fila de usuario de la tabla
-                    
-                    // Notificar al usuario sobre el éxito
-                    alert(response); 
-                },
-                error: function(error) {
-                    console.error("Error al eliminar usuario: " + error.statusText);
-                }
-            });
-        }
+  function cancelar() {
+    // Obtener todos los campos del formulario
+    var campos = document.querySelectorAll('input, textarea');
+    
+    // Iterar sobre los campos y limpiar su valor
+    campos.forEach(function(campo) {
+      campo.value = ''; // Limpiar el valor del campo
     });
-});
-
+  }
 </script>
 
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><iclass="bi bi-arrow-up-short"></iclass=></a>
+    <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Vendor JS Files -->
-    <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="../../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../../assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="../../../../assets/vendor/echarts/echarts.min.js"></script>
-    <script src="../../../../assets/vendor/quill/quill.min.js"></script>
-    <script src="../../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="../../../../assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="../../../../assets/vendor/php-email-form/validate.js"></script>
+    <!-- Datatables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="../../../../EstilosLogin/js/script.js"></script>    
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="../../../javascript/validacionNuevoRegistroUsuario.js"></script>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <link href="../../../../assets/vendor/simple-datatables/nuevo_rol.css" rel="stylesheet"> <!-- CSS de roles -->
+    <link href="../../../assets/css/style.css" rel="stylesheet">
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
-
 </body>
 </html>
-    </html>

@@ -1,17 +1,16 @@
 <!-- editar_usuario.php -->
 <?php
 include '../../../Controladores/Conexion/Conexion_be.php';
-require_once '../C_Usuario/C_editar_usuario.php';
+require_once '../C_Paciente/C_editar_paciente.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-    $idUsuario = $_GET["id"];
-
-    // Obtener los datos del usuario a editar
-    $obtenerUsuarioQuery = "SELECT * FROM tbl_ms_usuario WHERE Id_Usuario = ?";
-    $stmt = mysqli_prepare($conexion, $obtenerUsuarioQuery);
-    mysqli_stmt_bind_param($stmt, "i", $idUsuario);
+    $idPaciente = $_GET["id"];
+    // Obtener los datos del paciente a editar
+    $obtenerPacienteQuery = "SELECT * FROM tbl_paciente WHERE Id_Paciente = ?";
+    $stmt = mysqli_prepare($conexion, $obtenerPacienteQuery);
+    mysqli_stmt_bind_param($stmt, "i", $idPaciente);
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
-    $usuario = mysqli_fetch_assoc($resultado);
+    $paciente = mysqli_fetch_assoc($resultado);
 }
 ?>
 
@@ -132,14 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-
-                        <a href="components-alerts.php">
-
+                        <a href="V_paciente.php">
                             <i class="bi bi-circle"></i><span>Gestion Paciente</span>
                         </a>
                     </li>
                     <li>
-                        <a href="components-accordion.html">
+                        <a href="V_nuevo_paciente.php">
                             <i class="bi bi-circle"></i><span>Registrar </span>
                         </a>
                     </li>
@@ -424,163 +421,154 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
 
 <main id="main" class="table">
     <div class="container mt-4">
-            <div class="col-12">
-            <center>
-               <h2>Editar Usuario</h2>
-            </center>
-            
+        <div class="col-12">
+            <center><h2>Editar Paciente</h2></center>            
             <div class="contenedor__todo">
                 <table class="table" style:"align-items-center">
-                            <form action="../C_Usuario/C_editar_usuario" method="post" class="formulario__register" id="editFormUser">
-                                <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($usuario['Id_Usuario']); ?>">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- GRUPO DNI -->
-                                        <div class="formulario__grupo" id="grupo__dni">
-                                            <label for="dni" class="formulario__label">DNI</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" maxlength="13" pattern="[0-9]{13}" class="form-control" name="dni" id="dni" placeholder="DNI" 
-                                                value="<?php echo htmlspecialchars($usuario['DNI']); ?>" required>
+                            <form action="../C_Paciente/C_editar_paciente.php" method="post" class="formulario__register" id="editFormUser">
+                                <input type="hidden" name="idPaciente" value="<?php echo htmlspecialchars($paciente['Id_Paciente']); ?>">
+                                <tbody>
+                                    <tr>                                    
+                                        <!-- GRUPO NOMBRE COMPLETO -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__nombre">
+                                                <label for="nombre">Nombre Completo</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" style="text-transform: uppercase" placeholder="Ingrese su nombre completo." maxlength="80" value="<?php echo htmlspecialchars($paciente['Nombre']); ?>" required>
+                                                </div>
+                                                <p class="formulario__input-error"></p>
                                             </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__nombre">
-                                            <label for="nombre" class="formulario__label">Nombre Completo</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" name="nombre" id="nombre" style:"text-transform: uppercase" placeholder="Nombre completo" 
-                                                maxlength="80" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" required>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO CORREO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__correo2">
-                                            <label for="correo2" class="formulario__label">Correo Electrónico</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="email" class="form-control" name="correo" id="correo" placeholder="usuario@dominio.com" 
-                                                maxlength="40" value="<?php echo htmlspecialchars($usuario['Correo']); ?>" required>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO USUARIO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__usuario">
-                                            <label for="usuario" class="formulario__label">Usuario</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" style:"text-transform: uppercase" name="usuario" id="usuario" placeholder="Usuario" 
-                                                maxlength="15" value="<?php echo htmlspecialchars($usuario['Usuario']); ?>" required>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO DIRECCION -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__direccion">
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" 
-                                                maxlength="80" value="<?php echo htmlspecialchars($usuario['Direccion']); ?>" required>
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO GENERO -->
-                                    <td>
-                                        <div class="formulario__grupo">
-                                            <select type="text" name="genero" id="genero" class="form-control" placeholder="Genero" class="combobox"
-                                            value="<?php echo htmlspecialchars($usuario['IdGenero']); ?>" required>
-                                            <option value="0" <?php if ($usuario['IdGenero'] == 0) echo "selected"; ?>>Seleccione un género</option>
-                                            <option value="1" <?php if ($usuario['IdGenero'] == 1) echo "selected"; ?>>Masculino</option>
-                                            <option value="2" <?php if ($usuario['IdGenero'] == 2) echo "selected"; ?>>Femenino</option>
-                                            </select>
-
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO FECHA NACIMIENTO -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Nacimiento:</label>
-                                            <input  type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01" value="<?php echo htmlspecialchars($usuario['FechaNacimiento']); ?>" required>
-                                            <p id="mensajeFechaNacimiento" class="mensaje_error" style:"color: red;" > </p>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO FECHA CONTRATACION -->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Contratación:</label>
-                                            <input type="date" name="fechacontratacion" id="fechacontratacion" class="form-control"
-                                            value="<?php echo htmlspecialchars($usuario['FechaContratacion']); ?>" required>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <!-- GRUPO ROL -->
-                                    <td>
-                                        <div class="gender-options">
-                                            <div></div>
-                                            <select type="int" name="rol" id="rol" class="form-control" placeholder="rol" class="combobox"
-                                            value="<?php echo htmlspecialchars($usuario['IdRol']); ?>" required>
-                                            <option value="0" <?php if ($usuario['IdRol'] == 0) echo "selected"; ?>>Seleccione un rol</option>
-                                            <option value="2" <?php if ($usuario['IdRol'] == 2) echo "selected"; ?>>DEFECTO</option>
-                                            <option value="3" <?php if ($usuario['IdRol'] == 3) echo "selected"; ?>>TERAPEUTA</option>
-                                            <option value="4" <?php if ($usuario['IdRol'] == 4) echo "selected"; ?>>DOCTOR</option>
-                                            <option value="5" <?php if ($usuario['IdRol'] == 5) echo "selected"; ?>>SECRETARIA</option>
-                                            <option value="6" <?php if ($usuario['IdRol'] == 6) echo "selected"; ?>>ADMINISTRADOR</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <!-- GRUPO ESTADO USUARIO -->
-                                    <td>
-                                        <div class="gender-options">
-                                            <div></div>
-                                            <select type="int" class="form-control" name="estadoUser" id="estadoUser" placeholder="estadoUser" class="combobox"
-                                            value="<?php echo htmlspecialchars($usuario['Estado_Usuario']); ?>" required>
-                                            <option value="0" <?php if ($usuario['Estado_Usuario'] == 0) echo "selected"; ?>>Seleccione un estado</option>
-                                            <option value="1" <?php if ($usuario['Estado_Usuario'] == 1) echo "selected"; ?>>Activo</option>
-                                            <option value="2" <?php if ($usuario['Estado_Usuario'] == 2) echo "selected"; ?>>Inactivo</option>
-                                            </select>
-
-                                        </div>
-                                    </td>
-                                    </tr>
-
-                                     <tr>
-                                    <td>  
-                                        <button type="submit" id="registrarBtn" class="btn btn-primary">Guardar Cambios</button>
                                         </td>
-                                        <td> 
-                                         <button id="cancelarbtn" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
-                                         </td>
-                                     </tr>
-                                     </form>
-                                    </tbody>
+                                        <?php
+                                            $sql = "SELECT * FROM tbl_genero";
+                                            $genero = mysqli_query($conexion, $sql);
+                                        ?>
+                                        <!-- GRUPO GENERO -->
+                                        <td>
+                                            <div class="formulario__grupo">
+                                                <label for="genero">Género</label>
+                                                <select type="text" name="genero" id="genero" class="form-control" placeholder="Genero" class="combobox"
+                                                    value="<?php echo htmlspecialchars($paciente['IdGenero']); ?>" required>
+                                                    <option value="">Seleccione un género</option>
+                                                    <?php
+                                                        // Recorrer los resultados y mostrarlos en la tabla
+                                                        foreach ($genero as $fila) {
+                                                    ?>
+                                                    <option value="<?php echo $fila['IdGenero']; ?>" <?php if ($fila['IdGenero'] == $paciente['IdGenero']) echo "selected"; ?>><?php echo $fila['Descripcion']; ?></option>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </td>    
+                                    </tr>
+
+                                    <tr>                                        
+                                        <!-- GRUPO FECHA NACIMIENTO -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__fecha">
+                                            <label for="Fechanacimiento">Fecha de Nacimiento:</label>
+                                                <input  type="date" placeholder="Fecha de Nacimiento" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01" value="<?php echo htmlspecialchars($paciente['FechaNacimiento']); ?>" required>
+                                                <p id="mensajeFechaNacimiento" class="mensaje_error" style="color: red;"></p>
+                                            </div>
+                                        </td>
+                                        <!-- GRUPO DIRECCION -->
+                                        <td>
+                                            <div class="formulario__grupo" id="grupo__direccion">
+                                                <label for="direccion">Dirección</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" style="text-transform: uppercase"
+                                                    maxlength="80" value="<?php echo htmlspecialchars($paciente['Direccion']); ?>" required>
+                                                </div>
+                                                <p class="formulario__input-error"></p>
+                                            </div>
+                                        </td>                                                                
+                                    </tr>
+                                    <tr>
+                                        <?php
+                                            $sql = "SELECT * FROM tbl_tipo_documento";                                            
+                                            $resultado = mysqli_query($conexion, $sql);
+                                        ?>
+                                        <!-- GRUPO TIPO DE DOCUMENTO -->
+                                        <td>
+                                            <div class="gender-options">
+                                                <label for="tipo_documento">Tipo de Documento</label>
+                                                <select type="int" name="tipo_documento" id="tipo_documento" class="form-control" autocomplete="off" class="combobox">
+                                                    <option value="" selected>Seleccione un tipo de documento</option>
+                                                    <?php
+                                                        // Recorrer los resultados y mostrarlos en la tabla
+                                                        foreach ($resultado as $fila) {
+                                                    ?>
+                                                    <option value="<?php echo $fila['Id_Tipo_Documento']; ?>" <?php if ($fila['Id_Tipo_Documento'] == $paciente['Id_Tipo_Documento']) echo "selected"; ?>><?php echo $fila['Descripcion']; ?></option>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!-- GRUPO NÚMERO DE DOCUMENTO -->
+                                            <div class="formulario__grupo" id="grupo__numero_de_documento">
+                                                <label for="numero_de_documento">Número de Documento</label>
+                                                <div class="formulario__grupo-input">
+                                                    <input type="text" minlength="13" maxlength="15" pattern="[0-9]{13-15}" class="form-control" name="numero_de_documento" id="numero_de_documento" placeholder=" INGRESE SU NÚMERO DE DOCUMENTO" required autocomplete="off" value="<?php echo htmlspecialchars($paciente['Numero_Documento']); ?>">
+                                                </div>
+                                                <p class="formulario__input-error"></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                            <td>
+                                                <!-- GRUPO OCUPACIÓN -->
+                                                <div class="formulario__grupo" id="grupo__ocupacion">
+                                                    <label for="ocupacion">Ocupación</label>
+                                                    <div class="formulario__grupo-input">
+                                                        <input type="text" style="text-transform: uppercase" pattern="[A-Za-z]{1,50}" class="form-control" name="ocupacion" id="ocupacion" placeholder="INGRESE SU OCUPACIÓN" autocomplete="off" required title="Ingrese solo letras (hasta 50 caracteres)."
+                                                        value="<?php echo $paciente['Ocupacion'] ?>">
+                                                    </div>
+                                                    <p class="formulario__input-error"></p>
+                                                </div>
+                                            </td>
+                                            <!-- GRUPO ESTADO USUARIO -->
+                                            <td>
+                                                <div class="gender-options">
+                                                    <label for="estadoPaciente">Estado</label>
+                                                    <select type="int" class="form-control" name="estadoPaciente" id="estadoPaciente" autocomplete="off" class="combobox">
+                                                        <option value="">Seleccione un estado</option>
+                                                        <option value="1" <?php if ($paciente['Estado_Paciente'] == 1) echo "selected"; ?>>ACTIVO</option>
+                                                        <option value="0" <?php if ($paciente['Estado_Paciente'] == 0) echo "selected"; ?>>INACTIVO</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                    </tr>  
+                                    <tr>
+                                        <td>
+                                            <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
+                                        </td>
+                                        <td>
+                                            <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger" >Cancelar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </form>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 <script>
     function confirmarCancelar() {
         // Mostrar un cuadro de diálogo de confirmación
         const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
 
-        // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
+        // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de pacientes
         if (confirmacion) {
-            // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-            window.location.href = "./V_usuario.php";
+            // Redirigir a la pantalla de pacientes (reemplaza con la URL correcta)
+            window.location.href = "./V_paciente.php";
         }
     }
 </script>
-                
-            </div>
-        </div>
-    </div>
-</main>
 <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

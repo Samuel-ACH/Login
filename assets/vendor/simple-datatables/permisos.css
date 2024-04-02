@@ -1,0 +1,39 @@
+/* Estilo para el título de la página */
+.pagetitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el botón de agregar permiso */
+#agregarpermiso {
+    margin-bottom: 20px;
+}
+
+/* Estilo para la tabla */
+#tablaAgenda {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Estilo para el encabezado de la tabla */
+#tablaAgenda th {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Estilo para las celdas de la tabla */
+#tablaAgenda td {
+    padding: 10px;
+}
+
+/* Estilo para las filas impares de la tabla */
+#tablaAgenda tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para el botón de acción en la tabla */
+#tablaAgenda .btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+}

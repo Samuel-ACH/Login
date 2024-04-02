@@ -273,7 +273,7 @@ session_start();
                                         // Realizar consulta AJAX para buscar el nombre asociado al DNI
                                         $.ajax({
                                             type: 'POST',
-                                            url: '../C_Cita/C_buscar_paciente.php', // Ruta al script PHP para buscar el nombre
+                                            url: '../../Cita/C_Cita/C_buscar_paciente.php', // Ruta al script PHP para buscar el nombre
                                             data: {
                                                 dni: dni
                                             },
