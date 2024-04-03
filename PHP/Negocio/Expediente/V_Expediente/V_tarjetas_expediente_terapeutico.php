@@ -68,5 +68,40 @@ echo '</div>'; // Cerrar tarjeta
 } else {
     echo "No se encontraron resultados.";
 }
-$conexion->close();
+
+               // insercion de datos
+               if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Preparar la consulta de inserción
+                $sql_insert = "INSERT INTO tbl_detalle_terapia_tratamiento (Id_Detalle_Terapia, Id_Tipo_Terapia, Resultado) VALUES (1, ?, ?)";
+                $stmt = $conexion->prepare($sql_insert);
+            
+                // Iterar sobre los datos del formulario
+                foreach ($_POST as $key => $value) {
+                    // Verificar si el nombre del campo corresponde a un ID de resultado de evaluación
+                    if (is_numeric($key)) {
+                        // Validar que el campo no esté vacío y tenga menos de 20 caracteres
+                        if (!empty($value) && strlen($value) <= 20) {
+                            // Insertar los datos en la tabla tbl_detalle_terapia_tratamiento
+                            $id_tipo_terapia = $key;
+                            $resultado = $value;
+            
+                            $stmt->bind_param("is", $id_tipo_terapia, $resultado);
+                            if ($stmt->execute()) {
+                               echo '<h6 class="alert alert-success">' . "Expediente Agregado con Éxito" . '</h6>';
+                            } else {
+                                echo '<h6 class="alert alert-danger">' . "Error al agregar el expediente" . '</h6>';
+                            }
+                        }
+                    }
+                }
+                $stmt->close();
+                
+            }
+            
+            // Agregar el botón de agregar
+            echo '<form method="POST">';
+            echo '<hr>';
+            echo '<button type="submit">Guardar Todo</button>';
+            echo '</form>';
+            $conexion->close();
 ?>

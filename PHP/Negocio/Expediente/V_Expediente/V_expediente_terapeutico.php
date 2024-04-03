@@ -243,8 +243,8 @@
                                          <input type="text" class="formulario__input" readonly id="ocupacion" name="ocupacion">
                                          <label for="direccion">DIRECCIÓN:</label>
                                          <input type="text" class="formulario__input" readonly id="direccion" name="direccion"> -->
-                                    <label for="telefono">TELÉFONO:</label>
-                                    <input type="text" class="formulario__input" readonly id="telefono" name="telefono">
+                                    <!-- <label for="telefono">TELÉFONO:</label>
+                                    <input type="text" class="formulario__input" readonly id="telefono" name="telefono"> -->
                                     <label for="edad">EDAD:</label>
                                     <input type="text" class="formulario__input" readonly id="edad" name="edad">
                                     <label for="fisiatra">EVALUADOR:</label>
@@ -252,7 +252,7 @@
                                     <label for="motivoConsulta">MOTIVO DE CONSULTA:</label>
                                     <input type="text" class="formulario__input" readonly id="motivoConsulta" name="motivoConsulta">
                                     <label for="numero_sesiones">N° SESIONES:</label>
-                                    <input type="text" class="formulario__input" readonly id="numero_sesiones" name="numero_sesiones">
+                                    <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="numero_sesiones" name="numero_sesiones">
                                     <!-- <textarea type="text" class="formulario__input" id="lateralidad" name="lateralidad"></textarea> -->
                                 </div>
                             </div>
@@ -260,51 +260,51 @@
                     </div>
                 </div>
 
-                <!-- Contenedor de las tarjetas en dos columnas -->
-                <div class="row">
-                    <!-- Primera columna -->
-                    <div class="col-md-6">
-                        <div class="contenedor-tarjetas-columna">
-                            <!-- <h4>Columna 1</h4> -->
-                            <div id="contenedor-tarjetas-columna1">
-                                <!-- Las tarjetas de la columna 1 se agregarán aquí -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Segunda columna -->
-                    <div class="col-md-6">
-                        <div class="contenedor-tarjetas-columna">
-                            <!-- <h4>Columna 2</h4> -->
-                            <div id="contenedor-tarjetas-columna2">
-                                <!-- Las tarjetas de la columna 2 se agregarán aquí -->
-                            </div>
-                        </div>
+           <!-- Contenedor de las tarjetas en dos columnas -->
+        <div class="row">
+            <!-- Primera columna -->
+            <div class="col-md-6">
+                <div class="contenedor-tarjetas-columna">
+                    <div id="contenedor-tarjetas-columna1">
+                        <!-- Las tarjetas de la columna 1 se agregarán aquí -->
                     </div>
                 </div>
+            </div>
 
-                <!-- Selector de tratamientos -->
-                <div class="gender-options">
-                    <label for="genero" class="formulario__label">TRATAMIENTOS</label>
-                    <select type="int" autocomplete="off" name="tratamiento" id="tratamiento" placeholder="Tratamiento" class="combobox">
-                        <option value="0" selected>SELECCIONE</option>
-                        <?php
-                        include('../../../Controladores/Conexion/Conexion_be.php');
-                        $query = "SELECT TT.Id_Tipo_Tratamiento AS Correlativo, TT.Nombre AS Tratamiento FROM `tbl_tipo_tratamiento` AS TT";
-                        $resultado = mysqli_query($conexion, $query);
-
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
-                        }
-
-                        mysqli_free_result($resultado);
-                        mysqli_close($conexion);
-                        ?>
-                    </select>
-                    <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
+            <!-- Segunda columna -->
+            <div class="col-md-6">
+                <div class="contenedor-tarjetas-columna">
+                    <div id="contenedor-tarjetas-columna2">
+                        <!-- Las tarjetas de la columna 2 se agregarán aquí -->
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Selector de tratamientos -->
+        <div class="gender-options">
+            <label for="genero" class="formulario__label">TRATAMIENTOS</label>
+            <select type="int" autocomplete="off" name="tratamiento" id="tratamiento" placeholder="Tratamiento" class="combobox">
+                <option value="0" selected>SELECCIONE</option>
+                <?php
+                include('../../../Controladores/Conexion/Conexion_be.php');
+                $query = "SELECT TT.Id_Tipo_Tratamiento AS Correlativo, TT.Nombre AS Tratamiento FROM `tbl_tipo_tratamiento` AS TT";
+                $resultado = mysqli_query($conexion, $query);
+
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
+                }
+                mysqli_free_result($resultado);
+                // Cerrar el formulario
+                 $conexion->close();
+                ?>
+            </select>
+            <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
+        </div>
+        
+            <!-- Importar el archivo JavaScript -->
+            <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
+        
     </main>
 
     <script>
@@ -324,7 +324,7 @@
             // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
             if (confirmacion) {
                 // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-                window.location.href = "./V_usuario.php";
+                window.location.href = "../../Cita/V_Cita/V_modal_cita.php";
             }
         }
     </script>
