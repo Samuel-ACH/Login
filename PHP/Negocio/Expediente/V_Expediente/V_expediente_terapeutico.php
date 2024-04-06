@@ -133,9 +133,9 @@
             <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
         </div>
 
-            <form action="../C_Expediente/C_procesar_tarjeta.php" method="POST">
-                <button type="submit" name="guardar_todo">Guardar Todo</button>
-            </form>
+            <!-- <form action="../C_Expediente/C_procesar_tarjeta.php" method="POST"> -->
+                <button type="submit" id="guardarDatos" name="guardarDatos" onclick="guardarDatos()">Guardar Todo</button>
+             <!-- </form> -->
         
             <!-- Importar el archivo JavaScript -->
             <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>

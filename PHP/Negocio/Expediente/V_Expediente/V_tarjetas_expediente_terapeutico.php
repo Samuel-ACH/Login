@@ -69,7 +69,7 @@ echo '</div>'; // Cerrar tarjeta
 } else {
     echo "No se encontraron resultados.";
 }
-echo '<button type="button" id="guardarDatos" onclick="guardarDatos()">Guardar Datos</button>';
+// echo '<button type="button" id="guardarDatos" onclick="guardarDatos()">Guardar Datos</button>';
 $conexion->close();
 ?>
 
