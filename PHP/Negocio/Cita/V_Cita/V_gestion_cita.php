@@ -34,7 +34,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                         FROM `tbl_cita_terapeutica` AS CT 
                             LEFT JOIN tbl_tipo_cita AS TC ON CT.Id_Tipo_Cita = TC.Id_Tipo_Cita
                             INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
-                            INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = p.Id_Paciente";
+                            INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente";
 
                 $resultado = mysqli_query($conexion, $sql);
                 $correlativo = 1; // Inicializamos el correlativo en 1

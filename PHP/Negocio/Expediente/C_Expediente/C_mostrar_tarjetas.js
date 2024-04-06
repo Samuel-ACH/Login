@@ -43,5 +43,38 @@ document.getElementById("tratamiento").addEventListener("change", function() {
     if (selectedValue !== "0") {
         mostrarTarjetasYExpedienteTerapeutico(selectedValue);
     }
-    
 });
+
+// Función para recopilar y enviar los datos al servidor
+function guardarDatos() {
+    var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
+
+    // Recorrer todas las tarjetas y recopilar los datos
+    var tarjetas = document.querySelectorAll('.formulario__input');
+    tarjetas.forEach(function(tarjeta) {
+        var id = tarjeta.id;
+        var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
+        if (valor !== '') { // Verificar si el campo tiene datos
+            datosTarjetas[id] = valor; // Agregar los datos al objeto
+        }
+    });
+
+    // Verificar si hay datos para enviar al servidor
+    if (Object.keys(datosTarjetas).length > 0) {
+        // Convertir los datos a formato JSON
+        var datosJSON = JSON.stringify(datosTarjetas);
+
+        // Enviar los datos al servidor utilizando AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json'); // Especificar el tipo de contenido como JSON
+        xhr.onload = function () {
+            // Manejar la respuesta del servidor aquí si es necesario
+            console.log(xhr.responseText);
+        };
+        xhr.send(datosJSON);
+    } else {
+        // Si no hay datos, mostrar un mensaje de advertencia
+        alert('No hay datos para guardar.');
+    }
+}
