@@ -1,7 +1,3 @@
-<!-- <?php
-// include ('../../../Vistas/cache.php');
-// limpiarCache();
-?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -300,16 +296,14 @@
                 }
                 mysqli_free_result($resultado);
                 // Cerrar el formulario
-             
                  $conexion->close();
                 ?>
             </select>
-           
             <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
         </div>
-        <!-- Importar el archivo JavaScript -->
-        <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
-      
+        
+            <!-- Importar el archivo JavaScript -->
+            <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
         
     </main>
 

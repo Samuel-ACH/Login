@@ -45,35 +45,3 @@ document.getElementById("tratamiento").addEventListener("change", function() {
     }
     
 });
-
-
-const btnGuardarResultados = document.getElementById('btnGuardarResultados');
-
-btnGuardarResultados.addEventListener('click', () => {
-  // Obtener los valores de todos los campos "Resultado"
-  const resultados = document.querySelectorAll('.formulario__input');
-  const datos = {};
-
-  for (const resultado of resultados) {
-    const id = resultado.getAttribute('id');
-    const valor = resultado.value;
-
-    // Utilizamos el ID como clave y el valor como valor en el objeto datos
-    datos[id] = valor;
-  }
-
-  // Enviar los datos al servidor
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "./C_procesar_guardado.php");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify(datos));
-
-  // Mostrar un mensaje de éxito o error
-  xhr.onload = () => {
-    if (xhr.status === 200) {
-      console.log('Los datos se guardaron correctamente.');
-    } else {
-      console.log('Error al guardar los datos.');
-    }
-  };
-});
