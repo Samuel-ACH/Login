@@ -5,7 +5,7 @@
   "name": "tech-titans-red",
   "version": "1.0.0",
   "description": "RED",
-  "main": "sudo api/Index.php",
+  "main": "api/Index.php",
   "devDependencies": {},
   "scripts": {
     "start": "sudo api/Index.php"
