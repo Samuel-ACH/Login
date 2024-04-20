@@ -2,16 +2,14 @@
   "dependencies": {
     "bootstrap": "^5.3.2"
   },
-  "name": "tech-titans-red",
-  "version": "1.0.0",
-  "description": "RED",
-  "main": "api/Index.php",
-  "devDependencies": {},
-  "scripts": {
-    "start": "npm run build && php api/Index.php"
+    "name": "tech-titans-red",
+    "version": "1.0.0",
+    "description": "RED",
+    "main": "api/Index.php",
+    "scripts": {
+      "start": "php api/Index.php"
+    },
+    "author": "TechTitans",
+    "license": "ISC"
   }
-  ,
-  "author": "TechTitans",
-  "license": "ISC"
-}
-
+  
