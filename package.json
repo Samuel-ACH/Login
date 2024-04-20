@@ -5,10 +5,10 @@
   "name": "tech-titans-red",
   "version": "1.0.0",
   "description": "RED",
-  "main": "api/Index.php",
+  "main": "sudo api/Index.php",
   "devDependencies": {},
   "scripts": {
-    "start": "api/Index.php"
+    "start": "sudo api/Index.php"
   },
   "author": "TechTitans",
   "license": "ISC"
