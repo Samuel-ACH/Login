@@ -3,7 +3,7 @@
 session_start();
 
 if (isset($_SESSION["correo"])) {
-    header("location: Main.php");
+    header("location: Main.php");https://github.com/Samuel-ACH/Tech-Titans-RED/blob/main/PHP/Vistas/Index.php
 }
 include('../Controladores/Conexion/Conexion_be.php');
 ?>
@@ -231,5 +231,4 @@ include('../Controladores/Conexion/Conexion_be.php');
     <script type="module" src="../javascript/validacionAutoRegistro.js"></script>
     <script src="../javascript/captcha.js"></script>
 </body>
-
 </html>

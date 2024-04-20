@@ -5,6 +5,7 @@ include('../../Recursos/SweetAlerts.php');
 include('../../Seguridad/Roles.php');
 include('./bitacora.php');
 
+
 require_once('EnvioOTP/EnviarOTP.php');
 
 $correo = $_POST['correo'];
@@ -12,9 +13,9 @@ $clave = $_POST['password'];
 $clave_encriptada = md5($clave);
 
 if (!empty($correo) && !empty($clave_encriptada)) { // Validar que el correo y contraseña no estén vacíos.
-    $consultar_Login = "SELECT estU.Descripcion, u.Id_Usuario, u.Correo, u.Contrasena, u.Usuario, u.Nombre, r.Rol, u.primer_ingreso FROM tbl_estado_usuario AS estU INNER JOIN tbl_ms_usuario AS u ON estU.Id_Estado = u.Estado_Usuario
-                        INNER JOIN tbl_ms_roles AS r ON u.IdRol = r.Id_Rol
-                        WHERE estU.Id_Estado IN(1, 2) AND u.Correo = '$correo' AND u.Contrasena = '$clave_encriptada'";
+    $consultar_Login = "SELECT estU.Descripcion, u.Id_Usuario, u.Correo, u.Contrasena, u.Usuario, u.Nombre, u.IdRol, r.Rol, u.primer_ingreso FROM tbl_estado_usuario AS estU INNER JOIN tbl_ms_usuario AS u ON estU.Id_Estado = u.Estado_Usuario
+    INNER JOIN tbl_ms_roles AS r ON u.IdRol = r.Id_Rol
+    WHERE estU.Id_Estado IN(1, 2) AND u.Correo = '$correo' AND u.Contrasena = '$clave_encriptada'";
                         
     $verificar_login = mysqli_query($conexion, $consultar_Login); // Validar que existe una conexión a la BD y se realiza una consulta
     $fila = $verificar_login->fetch_assoc();
@@ -52,6 +53,7 @@ if (mysqli_num_rows($verificar_login) > 0) {
             $_SESSION['usuario'] = $fila['Usuario'];
             $_SESSION['nombre'] = $fila['Nombre'];
             $_SESSION['id_D'] = $fila['Id_Usuario'];
+            $_SESSION['IdRol'] = $fila['IdRol'];
             //comentar la linea de abajo y descomentar el header y el Exit de Main para desactivar el OTP
             
             $fecha = date("Y-m-d H:i:s");
@@ -59,9 +61,10 @@ if (mysqli_num_rows($verificar_login) > 0) {
             $a='INICIO DE SESIÓN';
             $d= $_SESSION['usuario']  .' INICIÓ SESIÓN';
             bitacora($n,$a,$d);
-            // enviarOTP($conexion, $correo);
-             header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
-             exit();
+            enviarOTP($conexion, $correo);
+            //  header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
+            //  exit();
+             
         }
     } else {
         $mensajeError = "Es necesario completar el captcha para el primer inicio de sesión.";

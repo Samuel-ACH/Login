@@ -17,7 +17,8 @@
 }
 
 .row d-flex {
-   margin: 0; /* Elimina el margen del contenedor */
+   margin: 0;
+   /* Elimina el margen del contenedor */
 }
 
 .formulario {
@@ -51,8 +52,8 @@
    line-height: 45px;
    padding: 0 40px 0 10px;
    transition: .3s ease all;
-   border-radius: var(--bs-border-radius); 
-   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+   border-radius: var(--bs-border-radius);
+   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
    display: block;
    width: 100%;
    padding: 0.375rem 0.75rem;
@@ -68,7 +69,7 @@
    border: var(--bs-border-width) solid var(--bs-border-color);
    border-radius: var(--bs-border-radius);
    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-} 
+}
 
 .formulario__input:focus {
    border: 3px solid #0075FF;
@@ -196,15 +197,6 @@
    border: 3px solid #bb2929;
 }
 
-/*Logo del Login */
-.logo {
-   display: block;
-   margin: -40px auto 10px auto;
-   width: 140px;
-   /* Ajusta el ancho de acuerdo a tu diseño */
-
-}
-
 .combobox {
    height: 30px;
    width: 100%;
@@ -307,17 +299,21 @@
 .columnas {
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-between; /* Espacio entre columnas */
-   margin-bottom: 5px; /* Espacio entre filas */
+   justify-content: space-between;
+   /* Espacio entre columnas */
+   margin-bottom: 5px;
+   /* Espacio entre filas */
 }
 
 .columna {
-   width: calc(50% - 10px); /* Ancho del 50% para cada columna con margen */
-   margin-bottom: 5px; /* Espacio entre elementos */
+   width: calc(50% - 10px);
+   /* Ancho del 50% para cada columna con margen */
+   margin-bottom: 5px;
+   /* Espacio entre elementos */
 }
 
 .col-tarjeta-paciente {
-   column-count: 3;
+   column-count: 2;
    column-gap: 30px;
 }
 
@@ -328,8 +324,10 @@
 }
 
 .formulario__input {
-   margin-top: -3px; /* Reduce el margen superior del input */
-   margin-bottom: 5px !important; /* Reduzca el margen inferior del input */
+   margin-top: -3px;
+   /* Reduce el margen superior del input */
+   margin-bottom: 5px !important;
+   /* Reduzca el margen inferior del input */
 }
 
 .icono-x-circle {
@@ -337,6 +335,22 @@
    top: 5px;
    right: 5px;
    cursor: pointer;
-   color: red; /* Color del icono */
-   font-size: 18px; /* Tamaño del icono */
+   color: red;
+   /* Color del icono */
+   font-size: 18px;
+   /* Tamaño del icono */
+}
+.btnguardarDatos {
+   background-color: #09b27f; /* Color de fondo */
+   color: #fff; /* Color del texto */
+   padding: 10px 20px; /* Espaciado interno */
+   border: none; /* Sin borde */
+   border-radius: 5px; /* Bordes redondeados */
+   cursor: pointer; /* Cursor al pasar el ratón */
+   font-size: 16px; /* Tamaño de la fuente */
+   transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+/* Estilos hover para el botón de cancelar */
+.btnguardarDatos:hover {
+   background-color: #056d40; /* Color de fondo al pasar el ratón */ /* Color de fondo al pasar el ratón */
 }

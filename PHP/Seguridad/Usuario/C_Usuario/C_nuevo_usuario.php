@@ -2,7 +2,7 @@
 include '../../../Controladores/Conexion/Conexion_be.php';
 include('../../../../Recursos/SweetAlerts.php');
 include('../../../Controladores/bitacora.php');
-include('../../../PHPMailer/CorreoUsuario.php');
+include('../../../PHPMailer/C_correo_usuario.php');
 session_start();
 //crear conexion
 

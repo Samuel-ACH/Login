@@ -20,3 +20,14 @@
 		margin-top: -30px;
 		padding: 10px 12px;
 }
+
+.error{
+	color: red;
+}
+p{
+	color: red;
+}
+
+.mayuscula{
+	text-transform: uppercase;
+}

@@ -37,7 +37,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                     <div class="formulario__grupo" id="grupo__correo3">
                         <!-- <label for="correo3" class="formulario__label">Confirmar Contraseña</label> -->
                         <div class="formulario__grupo-input">
-                            <input type="email" class="formulario__input" name="correo3" id="correo3" placeholder="Ingresa el correo electrónico" required maxlength="40" autocomplete="off">
+                            <input type="email" class="input_mail" name="correo3" id="correo3" placeholder="Ingresa el correo electrónico" required maxlength="40" autocomplete="off">
                         </div>
                         <p class="formulario__input-error"></p>
                     </div>

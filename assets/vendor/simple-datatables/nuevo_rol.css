@@ -185,12 +185,7 @@
   }
   
   /*Logo del Login */
-  .logo {
-      display: block;
-      margin: -40px auto 10px auto; 
-      width: 140px; /* Ajusta el ancho de acuerdo a tu diseño */
-      
-  }
+ 
   
   .combobox {
       height: 30px;

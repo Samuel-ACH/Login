@@ -197,15 +197,6 @@
    border: 3px solid #bb2929;
 }
 
-/*Logo del Login */
-.logo {
-   display: block;
-   margin: -40px auto 10px auto;
-   width: 140px;
-   /* Ajusta el ancho de acuerdo a tu diseño */
-
-}
-
 .combobox {
    height: 30px;
    width: 330px;
@@ -313,4 +304,50 @@
    margin-top: -3px;
    /* Reduce el margen superior del input */
    margin-bottom: 12px;
+}
+/* Estilos para el botón de guardar */
+.btn-guardar {
+   background-color: #09b27f; /* Color de fondo */
+   color: #fff; /* Color del texto */
+   padding: 10px 20px; /* Espaciado interno */
+   border: none; /* Sin borde */
+   border-radius: 5px; /* Bordes redondeados */
+   cursor: pointer; /* Cursor al pasar el ratón */
+   font-size: 16px; /* Tamaño de la fuente */
+   transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+/* Estilos hover para el botón de guardar */
+.btn-guardar:hover {
+   background-color: #056d40; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilos para el botón de cancelar */
+.btn-cancelar {
+   background-color: #de0d0d; /* Color de fondo */
+   color: #fff; /* Color del texto */
+   padding: 10px 20px; /* Espaciado interno */
+   border: none; /* Sin borde */
+   border-radius: 5px; /* Bordes redondeados */
+   cursor: pointer; /* Cursor al pasar el ratón */
+   font-size: 16px; /* Tamaño de la fuente */
+   transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+/* Estilos hover para el botón de cancelar */
+.btn-cancelar:hover {
+   background-color: #9e0101; /* Color de fondo al pasar el ratón */
+}
+
+.btn-primary {
+   background-color: #092ed3; /* Color de fondo */
+   color: #fff; /* Color del texto */
+   padding: 10px 20px; /* Espaciado interno */
+   border: none; /* Sin borde */
+   border-radius: 5px; /* Bordes redondeados */
+   cursor: pointer; /* Cursor al pasar el ratón */
+   font-size: 16px; /* Tamaño de la fuente */
+   transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+/* Estilos hover para el botón de cancelar */
+.btn-primary:hover {
+   background-color: #00358a; /* Color de fondo al pasar el ratón */
 }

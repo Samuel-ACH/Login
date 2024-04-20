@@ -1,5 +1,7 @@
 <?php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $Id_Detalle_Terapia = $_SESSION['Id_Detalle_Terapia'];
     // Obtener los datos del cuerpo de la solicitud POST
     $datos_json = file_get_contents("php://input");
 
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $resultado_escaped = $conexion->real_escape_string($resultado);
 
                     // Preparar la consulta SQL
-                    $sql = "INSERT INTO tbl_detalle_terapia_tratamiento (Id_Detalle_Terapia, Id_Tipo_Terapia, Resultado) VALUES (1, ?, ?)";
+                    $sql = "INSERT INTO tbl_detalle_terapia_tratamiento (Id_Detalle_Terapia, Id_Tipo_Terapia, Resultado) VALUES ('$Id_Detalle_Terapia', ?, ?)";
                     $stmt = $conexion->prepare($sql);
 
                     if ($stmt) {
@@ -43,10 +45,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     throw new Exception("Error: Datos no válidos.");
                 }
             }
-
+            
             // Confirmar la transacción si todo ha ido bien
             $conexion->commit();
-            echo "Los datos se insertaron correctamente.";
+            // echo '<h6 id="" class="alert alert-success">Datos insertados correctamente</h6>';
+            // include '../../../../Recursos/SweetAlerts.php';
+            // echo '
+            // <script>
+            // MostrarAlerta("Success", "", "Datos insertados correctamente", "../../../Vistas/Main.php");
+            // </script>
+            // ';
+            // echo '
+            // <script>
+            // Swal.fire({
+            //     position: "top-end",
+            //     icon: "success",
+            //     title: "Your work has been saved",
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // });
+            // </script>
+            // ';
         } catch (Exception $e) {
             // Si ocurre algún error, revertir la transacción y mostrar el mensaje de error
             $conexion->rollback();

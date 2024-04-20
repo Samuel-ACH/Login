@@ -9,6 +9,8 @@ include '../C_Perfil/C_editar_datos_perfil.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
+    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+
     <!-- Agregar enlaces a Bootstrap CSS -->
     <!-- Vendor CSS Files -->
     <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +35,11 @@ include '../C_Perfil/C_editar_datos_perfil.php';
     </style>
 </head>
 <body>
+
+<?php 
+include '../../../Recursos/Componentes/header.php';
+include '../../../Recursos/Componentes/SideBar.html';
+?>
 <main id="main" class="table">
     <div class="container mt-5">
         <div class="card">
@@ -91,6 +98,23 @@ include '../C_Perfil/C_editar_datos_perfil.php';
     </div>
 </main>
 
+<?php 
+include '../../../Recursos/Componentes/footer.html';
+?>
+
+<!-- Vendor JS Files -->
+<script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../../assets/vendor/quill/quill.min.js"></script>
+    <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../../assets/js/main.js"></script>
+    
     <!-- Agrega los scripts de Bootstrap (jQuery y Popper.js) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

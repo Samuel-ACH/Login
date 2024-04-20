@@ -1,3 +1,38 @@
+<?php
+session_start();
+$Id_Usuario = $_SESSION['id_D'];
+$Nombre_Usuario = $_SESSION['nombre'];
+
+include '../../../Controladores/Conexion/Conexion_be.php';
+include('../../../../Recursos/SweetAlerts.php');
+
+if (isset($_POST['atenderCita']) && isset($_POST['idCitaTerapia']) && isset($_POST['estadoCita'])) {
+    $idCitaTerapia = $_POST['idCitaTerapia'];
+    $estadoCita = $_POST['estadoCita'];
+
+    // Realizar el update del estado de la cita
+    $sql = "UPDATE tbl_cita_terapeutica SET Id_Estado_Cita = $estadoCita WHERE id_Cita_Terapia = $idCitaTerapia";
+
+    if (mysqli_query($conexion, $sql)) {
+        // La actualización fue exitosa
+        // echo "El estado de la cita ha sido actualizado correctamente";
+    } else {
+        // Hubo un error en la actualización
+        echo "Error al actualizar el estado de la cita: " . mysqli_error($conexion);
+    }
+}
+?>
+<?php
+// Verificar si la variable de sesión no está establecida
+if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
+    // Incluir el archivo solo si no se ha ejecutado antes
+    include '../../Procesos/C_procesos/C_detalle_expediente.php';
+} else {
+    // Eliminar la variable de sesión para permitir que el código se ejecute nuevamente
+    unset($_SESSION['detalle_expediente_ejecutado']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,188 +65,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#tablaAgenda').DataTable({
-                language: {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-                } //codigo para el lenguaje del archivo JSON
-            });
-        });
-    </script>
 </head>
 
 <body>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="../../../Vistas/Index.php" class="logo d-flex align-items-center">
-                <img src="../../../../assets/img/red-logo.jpeg" alt="">
-                <span class="d-none d-lg-block">CLÍNICA RED</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="../../../../assets/img/user.png" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Administrador</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-
-                            <h6><?php
-                                //   echo $_SESSION['correo'];
-                                ?>
-                            </h6>
-                            <span>Rol</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="../../../Controladores/Logout.php">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Cerrar Sesión</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link " href="../../../Vistas/Index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-
-                        <!-- <a href="components-alerts.php"> -->
-
-                        <i class="bi bi-circle"></i><span>Gestion Paciente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- <a href="components-accordion.html"> -->
-                        <i class="bi bi-circle"></i><span>Registrar </span>
-                        </a>
-                    </li>
-
-
-                </ul>
-            </li><!-- Fin modulo paciente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Citas</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <!-- <a href="forms-elements.html"> -->
-                        <i class="bi bi-circle"></i><span>Gestion Cita</span>
-                        </a>
-                </ul>
-            </li><!-- Fin modulo citas -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <!-- <a href="tables-general.html"> -->
-                        <i class="bi bi-circle"></i><span>Gestion Expediente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- <a href="tables-data.html"> -->
-                        <i class="bi bi-circle"></i><span>Historial Expediente</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- Fin modulo expediente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-tools"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="./V_usuario.php">
-                            <i class="bi bi-circle"></i><span>Usuarios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- <a href="charts-apexcharts.html"> -->
-                        <i class="bi bi-circle"></i><span>Permisos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- <a href="charts-echarts.html"> -->
-                        <i class="bi bi-circle"></i><span>Roles</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Enlace al formulario de bitácora -->
-                        <a href="../../../Vistas/Bitacora.php">
-                            <i class="bi bi-circle"></i><span>Bitacora</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>Objetos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../Parametros/V_modal_parametros">
-                            <i class="bi bi-circle"></i><span>Parametros</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- Fin modulo  Mantenimiento -->
-
-
-        </ul>
-
-    </aside><!-- End Sidebar-->
-
     <?php
     include '../../../Controladores/Conexion/Conexion_be.php';
 
@@ -239,23 +95,41 @@
                                     <div class="col-tarjeta-paciente">
                                         <div class="form-group">
                                             <label for="paciente">NOMBRE:</label>
-                                            <input type="text" class="formulario__input" readonly id="paciente" name="paciente">
+                                            <input type="text" class="formulario__input" readonly id="paciente"
+                                                name="paciente">
                                             <label for="Numero_Documento">IDENTIFICACIÓN:</label>
-                                            <input type="text" class="formulario__input" readonly id="Numero_Documento" name="Numero_Documento">
+                                            <input type="text" class="formulario__input" readonly id="Numero_Documento"
+                                                name="Numero_Documento">
                                             <label for="ocupacion">OCUPACIÓN:</label>
-                                            <input type="text" class="formulario__input" readonly id="ocupacion" name="ocupacion">
+                                            <input type="text" class="formulario__input" readonly id="ocupacion"
+                                                name="ocupacion">
                                             <label for="direccion">DIRECCIÓN:</label>
-                                            <input type="text" class="formulario__input" readonly id="direccion" name="direccion">
-                                            <label for="telefono">TELÉFONO:</label>
-                                            <input type="text" class="formulario__input" readonly id="telefono" name="telefono">
+                                            <input type="text" class="formulario__input" readonly id="direccion"
+                                                name="direccion">
+                                            <!-- <label for="telefono">TELÉFONO:</label>
+                                            <input type="text" class="formulario__input" readonly id="telefono" name="telefono"> -->
                                             <label for="edad">EDAD:</label>
                                             <input type="text" class="formulario__input" readonly id="edad" name="edad">
                                             <label for="fisiatra">EVALUADOR:</label>
-                                            <input type="text" class="formulario__input" readonly id="fisiatra" name="fisiatra">
+                                            <input type="text" class="formulario__input" readonly id="fisiatra"
+                                                name="fisiatra">
                                             <label for="motivoConsulta">MOTIVO DE CONSULTA:</label>
-                                            <input type="text" class="formulario__input" readonly id="motivoConsulta" name="motivoConsulta">
-                                            <label for="lateralidad">LATERALIDAD:</label>
-                                            <input type="text" class="formulario__input" id="lateralidad" name="lateralidad">
+                                            <input type="text" class="formulario__input" readonly id="motivoConsulta"
+                                                name="motivoConsulta">
+                                            <br><br><br><br>
+                                            <!-- <label for="lateralidad">LATERALIDAD:</label>
+                                            <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="lateralidad" name="lateralidad">
+                                            <label for="referido">REFERIDO:</label>
+                                            <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="referido" name="referido"> -->
+                                            <label for="Id_Cita" hidden>ID CITA:</label>
+                                            <input type="text" readonly hidden class="formulario__input" id="Id_Cita"
+                                                name="Id_Cita">
+                                            <label for="Id_Expediente" hidden>ID EXPEDIENTE:</label>
+                                            <input type="text" readonly hidden class="formulario__input"
+                                                id="Id_Expediente" name="Id_Expediente">
+                                            <label for="Id_Usuario" hidden>ID USUARIO:</label>
+                                            <input type="text" readonly hidden class="formulario__input" id="Id_Usuario"
+                                                name="Id_Usuario">
                                             <!-- <textarea type="text" class="formulario__input" id="lateralidad" name="lateralidad"></textarea> -->
                                         </div>
                                     </div>
@@ -266,8 +140,12 @@
                             include '../C_Expediente/C_expediente_clinico.php';
                             ExpedienteClinico();
                             ?>
+                            <a href="./V_expediente_terapeutico.php">
+                                <button class="btn-primary">Expediente Terapéutico</button>
+                            </a>
                             <!-- </div> -->
-                            <button id="Btncancelar" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
+                            <button id="btn-cancelar" onclick="confirmarCancelar()"
+                                class="btn-cancelar">Cancelar</button>
                         </tbody>
                     </table>
                 </div>
@@ -279,11 +157,10 @@
         function confirmarCancelar() {
             // Mostrar un cuadro de diálogo de confirmación
             const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
-
             // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
             if (confirmacion) {
                 // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-                window.location.href = "./V_usuario.php";
+                        window.location.href = "../../../Vistas/Main.php";
             }
         }
     </script>
@@ -299,7 +176,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="../../../javascript/validacionNuevoRegistroUsuario.js"></script>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
@@ -308,3 +186,32 @@
 </body>
 
 </html>
+
+<?php
+// Obtener los datos del formulario
+$datosPaciente = isset($_POST['datos']) ? $_POST['datos'] : '';
+
+// Procesar los datos como lo hacías anteriormente
+if ($datosPaciente) {
+    $datosPaciente = urldecode($datosPaciente);
+    $datosArray = explode('||', $datosPaciente);
+    // Llenar los campos con los datos obtenidos
+
+    // Guardar los datos del paciente en variables de sesión
+    $_SESSION['datosPaciente'] = $datosArray;
+
+    // Rellenar los campos del formulario con los datos del paciente
+    echo '<script>';
+    echo 'document.getElementById("Id_Cita").value = "' . $datosArray[0] . '";';
+    echo 'document.getElementById("paciente").value = "' . $datosArray[1] . '";';
+    echo 'document.getElementById("motivoConsulta").value = "' . $datosArray[2] . '";';
+    echo 'document.getElementById("Id_Expediente").value = "' . $datosArray[5] . '";';
+    echo 'document.getElementById("Numero_Documento").value = "' . $datosArray[6] . '";';
+    echo 'document.getElementById("ocupacion").value = "' . $datosArray[7] . '";';
+    echo 'document.getElementById("direccion").value = "' . $datosArray[8] . '";';
+    echo 'document.getElementById("edad").value = "' . $datosArray[9] . '";';
+    echo 'document.getElementById("fisiatra").value = "' . $Nombre_Usuario . '";'; // Aquí puedes poner el nombre del evaluador si lo tienes almacenado en algún lado
+    echo 'document.getElementById("Id_Usuario").value = "' . $Id_Usuario . '";';
+    echo '</script>';
+}
+?>

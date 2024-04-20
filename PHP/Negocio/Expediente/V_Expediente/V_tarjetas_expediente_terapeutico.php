@@ -44,7 +44,7 @@ foreach ($rows as $row) {
 
     // Agregar elemento a la columna actual
     echo '<div class="columna">';
-    echo '<form method="POST" onsubmit="enviarDatos(event, ' . $id . ')">'; // Agregar evento onsubmit para enviar datos
+    echo '<form method="POST">';
     echo '<div class="divDescripcionEvaluacion">';
     echo '<div class="form-group">';
     echo '<label for="' . $id . '">' . ucwords($descripcion) . ':</label>';
@@ -62,43 +62,11 @@ foreach ($rows as $row) {
     }
 }
 
-
 // Cerrar la última columna y la tarjeta después de agregar todos los inputs
 echo '</div>'; // Cerrar última columna
 echo '</div>'; // Cerrar tarjeta
 } else {
     echo "No se encontraron resultados.";
 }
-// echo '<button type="button" id="guardarDatos" onclick="guardarDatos()">Guardar Datos</button>';
 $conexion->close();
 ?>
-
-
-<script>
-function enviarDatos(event, id) {
-    event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario (recargar la página)
-
-    // Obtener el valor del campo de entrada
-    var descripcion = document.getElementById(id).value;
-
-    // Crear un objeto con los datos a enviar
-    var datos = {
-        id: id,
-        descripcion: descripcion
-    };
-
-    // Convertir el objeto a formato JSON
-    var datosJSON = JSON.stringify(datos);
-
-    // Enviar los datos al servidor utilizando AJAX
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/json'); // Especificar el tipo de contenido como JSON
-    xhr.onload = function () {
-        // Manejar la respuesta del servidor aquí si es necesario
-        console.log(xhr.responseText);
-    };
-    xhr.send(datosJSON);
-}
-
-</script>

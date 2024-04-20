@@ -5,7 +5,16 @@ include '../../../Controladores/Conexion/Conexion_be.php';
 $dni = mysqli_real_escape_string($conexion, $_POST['dni']);
 
 // Realizar la consulta preparada para obtener el nombre asociado al DNI
-$query = "SELECT Id_Paciente, Nombre FROM tbl_paciente WHERE Numero_Documento = ?";
+$query = "SELECT
+            P.Nombre,
+            P.Id_Paciente,
+            E.id_Expediente
+            FROM
+            tbl_paciente AS P
+            LEFT JOIN tbl_expediente AS E
+            ON
+            P.Id_Paciente = E.Id_Paciente
+            WHERE P.Numero_Documento = ?";
 $stmt = mysqli_prepare($conexion, $query);
 mysqli_stmt_bind_param($stmt, "s", $dni);
 mysqli_stmt_execute($stmt);
@@ -19,6 +28,7 @@ if ($resultado) {
         // Obtener el nombre del resultado
         $nombre = $fila['Nombre'];
         $id_paciente = intval($fila['Id_Paciente']);
+        $id_expediente = intval($fila['id_Expediente']);
     } else {
         // No se encontraron resultados para el DNI proporcionado
         $nombre = "No se encontró el paciente"; // Mensaje de error más descriptivo
@@ -29,7 +39,7 @@ if ($resultado) {
 }
 
 // Imprimir el nombre (o enviarlo de vuelta como JSON si prefieres)
-echo $nombre . "||" . $id_paciente;
+echo $nombre . "||" . $id_paciente . "||" . $id_expediente;
 // Liberar resultado
 mysqli_free_result($resultado);
 
@@ -38,4 +48,3 @@ mysqli_stmt_close($stmt);
 
 // Cerrar conexión
 mysqli_close($conexion);
-?>

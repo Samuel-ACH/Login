@@ -1,5 +1,9 @@
+
 <?php
+session_start();
 include '../../../Controladores/Conexion/Conexion_be.php';
+include('../../../Controladores/bitacora.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idPaciente = $_POST['idPaciente'];
@@ -10,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idtipodocumento = $_POST["tipo_documento"];
     $numerodocumento = $_POST["numero_de_documento"];
     $ocupacionpaciente = strtoupper($_POST["ocupacion"]);
-    $estado = $_POST["estadoPaciente"];
+    $estado = 1 ;
         
     //$fechamodificacion = date('Y-m-d'); // Fecha de modificación
 
@@ -19,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Nombre = ?, FechaNacimiento = ?, Direccion = ?, Ocupacion = ?, Id_Tipo_Documento = ?, 
     Numero_Documento = ?, Estado_Paciente = ?, IdGenero = ? WHERE Id_Paciente = ?";
     $stmt = mysqli_prepare($conexion, $actualizarPacienteQuery);
-    mysqli_stmt_bind_param($stmt, "ssssiiiii", $nombre,$fechanacimiento,$direccion,$ocupacionpaciente,$idtipodocumento,$numerodocumento,$estado,$genero,$idPaciente);
+    mysqli_stmt_bind_param($stmt, "ssssisiis", $nombre,$fechanacimiento,$direccion,$ocupacionpaciente,$idtipodocumento,$numerodocumento,$estado,$genero,$idPaciente);
 
     if (mysqli_stmt_execute($stmt)) {
          // Mensaje de éxito
@@ -27,11 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  
         // Redireccionar a la página principal o mostrar un mensaje de éxito
         header("Location: ../V_Paciente/V_paciente.php");
+        $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
+        $a='EDITAR';
+        $d='PACIENTE CON EL ID '. $idPaciente.' HA SIDO EDITADO ';
+        bitacora($n, $a, $d);
         exit();
     } else {
         echo "Error al guardar los cambios: " . mysqli_error($conexion);
     }
-
+   
     mysqli_stmt_close($stmt);
 }
 ?>
+
+

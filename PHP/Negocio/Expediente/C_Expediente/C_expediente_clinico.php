@@ -1,5 +1,9 @@
 <?php
-function mostrarFormulario($conexion, $id_evaluacion) {
+session_start();
+// include '../V_Expediente/V_expediente_clinico.php';
+// $Id_Detalle_Expediente = $_SESSION['Id_Detalle_Expediente'];
+function mostrarFormulario($conexion, $id_evaluacion)
+{
     // Consulta para obtener los datos de la evaluación
     $sql = "SELECT E.Descripcion AS EvaluacionDescripcion, RE.Descripcion, RE.Id_Resultado_Evaluacion 
             FROM tbl_evaluacion AS E
@@ -9,7 +13,7 @@ function mostrarFormulario($conexion, $id_evaluacion) {
     $stmt->bind_param("i", $id_evaluacion);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         // Almacenar todos los resultados en un arreglo
         $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -40,34 +44,39 @@ function mostrarFormulario($conexion, $id_evaluacion) {
     }
 }
 
-function ExpedienteClinico(){
+function ExpedienteClinico()
+{
     include('../../../Controladores/Conexion/Conexion_be.php');
 
     // Iniciar el formulario global
     echo '<form method="POST">';
-    
+
     // Mostrar el formulario para el historial clínico
     mostrarFormulario($conexion, 1);
-    
+
     // Mostrar el formulario para el examen físico
     mostrarFormulario($conexion, 2);
-    
+
     // Mostrar el formulario para el diagnóstico
     mostrarFormulario($conexion, 3);
 
     echo '<hr>';
-   
-    // Agregar el botón de envío global
-    echo '<button type="submit">Guardar Todo</button>';
-    
+
+   // Agregar el botón de envío global
+//    echo '<button type="submit" class="btn-guardar" name="guardar_todo">Guardar Todo</button>';
+// Agregar el botón de envío global con el evento onclick
+echo '<button type="button" class="btn-guardar" onclick="confirmarEnvio()">Guardar Todo</button>';
+
+
     echo '</form>'; // Cerrar el formulario global
-    
+
     // Verificar si se enviaron datos del formulario
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Preparar la consulta de inserción
-        $sql_insert = "INSERT INTO tbl_resultado_expediente (Id_Resultado_Evaluacion, Id_Detalle_Expediente, Resultado) VALUES (?, 1, ?)";
+        $Id_Detalle_Expediente = $_SESSION['Id_Detalle_Expediente'];
+        $sql_insert = "INSERT INTO tbl_resultado_expediente (Id_Resultado_Evaluacion, Id_Detalle_Expediente, Resultado) VALUES (?, '$Id_Detalle_Expediente', ?)";
         $stmt = $conexion->prepare($sql_insert);
-        
+
         // Iterar sobre los datos del formulario
         foreach ($_POST as $key => $value) {
             // Verificar si el nombre del campo corresponde a un ID de resultado de evaluación
@@ -77,10 +86,10 @@ function ExpedienteClinico(){
                     // Insertar los datos en la tabla tbl_resultado_expediente
                     $id_resultado_evaluacion = $key;
                     $resultado = $value;
-    
+
                     $stmt->bind_param("is", $id_resultado_evaluacion, $resultado);
                     if ($stmt->execute()) {
-                       echo '<h6 class="alert alert-success">' . "Expediente Agregado con Exito" . '</h6>';
+                        echo '<h6 class="alert alert-success">' . "Expediente Agregado con Exito" . '</h6>';
                     } else {
                         echo '<h6 class="alert alert-danger">' . "Error al agregar el expediente" . '</h6>';
                     }
@@ -89,7 +98,6 @@ function ExpedienteClinico(){
         }
         $stmt->close();
     }
-    
+
     $conexion->close();
 }
-?>

@@ -31,11 +31,11 @@ session_start();
     <!-- Template Main CSS File -->
     <link href="../../assets/css/style.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script> -->
 
-    <script>
+    <!-- <script>
     $(document).ready(function() {
         $('#tablaAgenda').DataTable({
             language: {
@@ -43,7 +43,7 @@ session_start();
             } //codigo para el lenguaje del archivo JSON
         });
     });
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -111,131 +111,95 @@ session_start();
 
     </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
+  <!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+<ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link " href="index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+    <li class="nav-item">
+        <a class="nav-link" href="/PHP/Vistas/Main.php">
+            <i class="bi bi-grid"></i>
+            <span>Inicio</span>
+        </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i
+                class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="/PHP/Negocio/Paciente/V_Paciente/V_Paciente.php">
+                    <i class="bi bi-circle"></i><span>Gestión Paciente</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
+        </ul>
+    </li><!-- Fin modulo paciente -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Citas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="/PHP/Negocio/Cita/V_Cita/V_modal_cita.php">
+                    <i class="bi bi-circle"></i><span>Gestión Cita</span>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
+            </li>
+        </ul>
+    </li><!-- Fin modulo citas -->
 
-                        <a href="components-alerts.php">
-
-                            <i class="bi bi-circle"></i><span>Gestion Paciente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-accordion.html">
-                            <i class="bi bi-circle"></i><span>Registrar </span>
-                        </a>
-                    </li>
-
-
-                </ul>
-            </li><!-- Fin modulo paciente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Citas</span><i class="bi bi-chevron-down ms-auto"></i>
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i
+                class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="/PHP/Negocio/Expediente/V_Expediente/V_modal_expediente.php">
+                    <i class="bi bi-circle"></i><span>Gestión Expediente</span>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="forms-elements.html">
-                            <i class="bi bi-circle"></i><span>Gestion Cita</span>
-                        </a>
-                </ul>
-            </li><!-- Fin modulo citas -->
+            </li>
+        </ul>
+    </li><!-- Fin modulo expediente -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-tools"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="/PHP/Seguridad/Usuario/V_Usuario/V_usuario.php">
+                    <i class="bi bi-circle"></i><span>Usuarios</span>
                 </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="tables-general.html">
-                            <i class="bi bi-circle"></i><span>Gestion Expediente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Historial Expediente</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- Fin modulo expediente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-tools"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
+            </li>
+            <li>
+                <a href="/PHP/Seguridad/Roles_permisos/V_Roles/V_roles.php">
+                    <i class="bi bi-circle"></i><span>Roles</span>
                 </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../../Vistas/Usuario.php">
-                            <i class="bi bi-circle"></i><span>Usuarios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-apexcharts.html">
-                            <i class="bi bi-circle"></i><span>Permisos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>Roles</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Enlace al formulario de bitácora -->
-                        <a href="Bitacora.php">
-                            <i class="bi bi-circle"></i><span>Bitacora</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>Objetos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../Seguridad/Parametros/Modal_Parametros.php">
-                            <i class="bi bi-circle"></i><span>Parametros</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- Fin modulo  Mantenimiento -->
-            </ul>
+            </li>
+            <li>
+                <a href="/PHP/Vistas/Bitacora.php">
+                    <i class="bi bi-circle"></i><span>Bitácora</span>
+                </a>
+            </li>
+            <li>
+                <a href="/PHP/Seguridad/Roles_permisos/V_Permisos/V_permisos.php">
+                    <i class="bi bi-circle"></i><span>Permisos</span>
+                </a>
+            </li>
+            <li>
+                <a href="/PHP/Seguridad/Parametros/V_Parametros/V_modal_parametros.php">
+                    <i class="bi bi-circle"></i><span>Parámetros</span>
+                </a>
+            </li>
+        </ul>
+    </li><!-- Fin modulo Mantenimiento -->
+</ul>
 
 </aside><!-- End Sidebar-->
 
-<main id="main" class="main">
-
-    <div class="pagetitle">
-        <h1>¡Bienvenido!</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="Index.php">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
-    <?php
-
-include("../PHP/Controladores/Conexion_be.php");
-
-?>
-</main> 
 <!-- dentro del main va la tabla o informacion -->
 
  <!-- ======= Footer ======= -->

@@ -29,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Prepara todo para registrar en la bitacora la información eliminada y por quién.
             if (mysqli_stmt_execute($stmt)) {
                 $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-                $a='ElIMINAR PACIENTE';
-                $d='PACIENTE '.$idPaciente .' ELIMINADO';
+                $a='HABILITAR';
+                $d='PACIENTE CON ID '.$idPaciente .' HA SIDO INHABILITADO';
                 bitacora($n, $a, $d);
                 echo "El paciente ha sido inhabilitado exitosamente";
             } else {

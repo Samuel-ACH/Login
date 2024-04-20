@@ -1,30 +1,52 @@
 <?php
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
 session_start();
-// Validar si se ha verificado el OTP y si el usuario está autenticado
-// if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
-//   echo '
-//   <script>
-//       alert("Por favor, debes iniciar sesión.")
-//       window.location = "Index.php";
-//   </script>
-// ';
-// session_destroy(); // Destruye la sesión
-// die(); 
-// }
-// // // // // Ingresa al main sin el OTP
-if (!isset($_SESSION["correo"])) {
- echo '
-          <script>
-                 alert("Por favor, debes iniciar sesión.")
-                window.location = "Index.php";
-            </script>
-       ';
-  session_destroy(); // Destruye la sesión
-  die(); // el código se detiene en esta línea 
-}
+$Id_Usuario = $_SESSION['id_D'];
+$IdRol = $_SESSION['IdRol'];
+// include '../Controladores/Conexion/Conexion_be.php';
 
- ?>
+
+// Validar si se ha verificado el OTP y si el usuario está autenticado
+if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
+  echo '
+  <script>
+      alert("Por favor, debes iniciar sesión.")
+      window.location = "Index.php";
+  </script>
+';
+session_destroy(); // Destruye la sesión
+die(); 
+}
+// // // // // Ingresa al main sin el OTP
+// if (!isset($_SESSION["correo"])) {
+//     echo '
+//           <script>
+//                  alert("Por favor, debes iniciar sesión.")
+//                 window.location = "Index.php";
+//             </script>
+//        ';
+//     session_destroy(); // Destruye la sesión
+//     die(); // el código se detiene en esta línea 
+// }
+
+// include '../../PHP/Seguridad/Roles_permisos/permisos/Obtener_Id_Objeto.php';
+// $id_rol = $_SESSION['IdRol'];
+// $id_objeto = Obtener_Id_Objeto('Main');
+// $Permisos_Objeto = Obtener_Permisos_Rol_Objeto($id_rol, $id_objeto);
+
+// if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
+//     header("Location: /PHP/Seguridad/Roles_permisos/permisos/V_error_Main.php");
+// }
+// $ocultarTerapeutico = false;
+// $ocultarClinico = false;
+
+// if ($Permisos_Objeto["Permiso_Terapeutico"] !== "1") {
+//     $ocultarTerapeutico = true;
+// }
+// if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
+//     $ocultarClinico = true;
+// }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +56,8 @@ if (!isset($_SESSION["correo"])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
+    <title>Clínica RED - Rehabilitación y Electrodiagnóstico </title>
+    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -59,208 +82,42 @@ if (!isset($_SESSION["correo"])) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#tablaAgenda').DataTable({
-            language: {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-            } //codigo para el lenguaje del archivo JSON
+        $(document).ready(function() {
+            $('#tablaAgenda').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+                } //codigo para el lenguaje del archivo JSON
+            });
         });
-    });
 
-    // Definir función para redirigir al perfil
-    function redirectToProfile() {
-        // Obtener la URL del perfil
-        var profileUrl = "../V_Perfil.php?id=<?php echo $_SESSION['usuario']; ?>";
-        // Redirigir a la página de perfil
-        window.location.href = profileUrl;
-    }
+        // Definir función para redirigir al perfil
+        function redirectToProfile() {
+            // Obtener la URL del perfil
+            var profileUrl = "../V_Perfil.php?id=<?php echo $_SESSION['usuario']; ?>";
+            // Redirigir a la página de perfil
+            window.location.href = profileUrl;
+        }
     </script>
 </head>
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.php" class="logo d-flex align-items-center">
-                <img src="../../assets/img/red-logo.jpeg" alt="">
-                <span class="d-none d-lg-block">CLÍNICA RED</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-        </div><!-- End Search Bar -->
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="../../assets/img/user.png" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Perfil</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-
-                            <h6>
-                                <?php echo $_SESSION['nombre'];?>
-                            </h6>
-                            <span>
-                                <?php echo $_SESSION['rol'];?>
-                            </span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                       <li>
-                           <a class="dropdown-item d-flex align-items-center" href="../Perfil/V_Perfil/V_perfil.php?id=<?php echo $_SSESION['usuario']; ?>">
-                                <i class="bi bi-person"></i>
-                                <span>Ver Perfil</span>
-                           </a>
-                        </li> 
-                        
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="../Controladores/Logout.php">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Cerrar Sesión</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link " href="./Main.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Inicio</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Pacientes</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="components-alerts.php">
-                        <a class="dropdown-item d-flex align-items-center" href="../Negocio/Paciente/V_Paciente/V_Paciente.php">
-                            <i class="bi bi-circle"></i><span>Gestion Paciente</span>
-                        </a>
-                    </li>
-
-
-                </ul>
-            </li><!-- Fin modulo paciente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Citas</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../Negocio/Cita/V_Cita/V_modal_cita.php">
-                            <i class="bi bi-circle"></i><span>Gestion Cita</span>
-                        </a>
-                </ul>
-            </li><!-- Fin modulo citas -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Expediente</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../Negocio/Expediente/V_Expediente/V_modal_expediente.php">
-                            <i class="bi bi-circle"></i><span>Gestion Expediente</span>
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Historial Expediente</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>Fin modulo expediente -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-tools"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../Seguridad/Usuario/V_Usuario/V_usuario.php">
-                            <i class="bi bi-circle"></i><span>Usuarios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-apexcharts.html">
-                            <i class="bi bi-circle"></i><span>Permisos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../Seguridad/Roles_permisos/V_Roles/V_roles.php">
-                            <i class="bi bi-circle"></i><span>Roles</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Enlace al formulario de bitácora -->
-                        <a href="./Bitacora.php">
-                            <i class="bi bi-circle"></i><span>Bitacora</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>Objetos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../Seguridad/Parametros/V_Parametros/V_modal_parametros.php">
-                            <i class="bi bi-circle"></i><span>Parámetros</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- Fin modulo  Mantenimiento -->
-        </ul>
-
-    </aside><!-- End Sidebar-->
+    <?php
+    include '../../Recursos/Componentes/header.php';
+    include '../../Recursos/Componentes/SideBar.html';
+    ?>
 
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>¡Bienvenido!</h1>
-            
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="Index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </nav>
+            <h1>¡Bienvenido!</h1><br>
         </div><!-- End Page Title -->
 
         <?php
-    ?>
+        ?>
         <section class="hero">
             <div class="contenido-hero">
             </div>
@@ -272,250 +129,109 @@ if (!isset($_SESSION["correo"])) {
                     <table class="table " id="tablaAgenda">
                         <thead class="encabezado bg-light table-info">
                             <tr>
-
+                                <th scope="col">N°</th>
                                 <th scope="col">Paciente</th>
-                                <th scope="col">Descripcion</th>
+                                <th scope="col">Motivo</th>
                                 <th scope="col">Fecha Cita</th>
                                 <th scope="col">Hora Cita</th>
-                                <th scope="col">Detalles</th>
-
-
+                                <th scope="col">Evaluador</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td> Juan</td>
-                                <td>Terapia</td>
-                                <td>09/02/2024</td>
-                                <td>09:14 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
+                            <?php
+                            // echo 'Rol #' . $_SESSION['IdRol'];
 
-                            </tr>
-                            <tr>
-                                <td> Pedro</td>
-                                <td>Fisioterapia</td>
-                                <td>09/02/2024</td>
-                                <td>11:59 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Javier</td>
-                                <td>Fisioterapia</td>
-                                <td>09/02/2024</td>
-                                <td>11:59 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Anthony</td>
-                                <td>Terapia</td>
-                                <td>09/02/2024</td>
-                                <td>11:59 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Anthony</td>
-                                <td>Terapia</td>
-                                <td>09/02/2024</td>
-                                <td>11:59 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10-02-2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Maria</td>
-                                <td>Terapia</td>
-                                <td>10/02/2024</td>
-                                <td>12:01 </td>
-                                <td>
-                                    <div class="iconos d-flex align-items-center">
-                                        <button type="button" class="btn btn-info">Ver</button>
-                                        <div class="ms-3">
-                                </td>
-                            </tr>
+                            if ($IdRol === '6' || $IdRol === '7') { // Si el usuario que inicia sesión tiene rol 6 o 7, realiza las 2 siguientes consultas
+                                include '../Controladores/Conexion/Conexion_be.php';
 
+                                if ($IdRol === '6') { // consulta para rol Fisiatra
+                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                            -- CAMPOS NO VISIBLES
+                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
+                                        FROM `tbl_cita_terapeutica` AS CT
+                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                        WHERE CT.Id_Estado_Cita = 2
+                                        AND U.IdRol = 6
+                                        AND U.Id_Usuario = $Id_Usuario";
+                                } else if ($IdRol === '7') { // Consulta para rol Terapeuta
+                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                            -- CAMPOS NO VISIBLES
+                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente, CT.Id_Estado_Cita
+                                        FROM `tbl_cita_terapeutica` AS CT
+                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                        WHERE (CT.Id_Estado_Cita = 2 OR CT.Id_Estado_Cita = 3)
+                                        AND U.IdRol = 7";
+                                }
+                            } else { // Caso contrario, no se realiza ninguna consulta a la base de datos
+                                $sql = '';
+                            }
+
+                            if ($sql !== '') { // Validar que la consulta no sea nula o vacía para realizar una consulta y obtener los datos
+                                $resultado = mysqli_query($conexion, $sql);
+
+                                $correlativo = 1; // Inicializamos el correlativo en 1
+                                while ($filas = mysqli_fetch_row($resultado)) {
+                                    $datos = $filas[0] . "||" . $filas[1] . "||" . $filas[2] . "||" . $filas[3] . "||" . $filas[4] . "||" . $filas[5] . "||" . $filas[6] . "||" . $filas[7] . "||" . $filas[8] . "||" . $filas[9];
+                                    // Guardar el arreglo en una variable de sesión
+                                    $_SESSION['datos'] = $datos;
+                            ?>
+                                    <tr>
+                                        <td><?php echo $correlativo ?></td>
+                                        <td><?php echo $filas[1] ?></td>
+                                        <td><?php echo $filas[2] ?></td>
+                                        <td><?php echo $filas[3] ?></td>
+                                        <td><?php echo $filas[4] ?></td>
+                                        <td><?php echo $filas[10] ?></td>
+                                        <td>
+                                            <!-- Formulario único para cada fila -->
+                                            <?php if ($IdRol === '6') : ?>
+                                                <form action="../Negocio/Expediente/V_Expediente/V_expediente_clinico.php" method="post">
+                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $filas[0]; ?>">
+                                                    <input type="hidden" name="estadoCita" value="3">
+                                                    <input type="hidden" name="datos" value="<?php echo urlencode($datos); ?>">
+                                                    <button type="submit" class="btn btn-success" id="fisiatra" name="atenderCita">Atender</button>
+                                                </form>
+                                            <?php endif; ?>
+
+                                            <!-- Boton para el rol terapeuta -->
+                                            <?php if ($IdRol === '7' && $filas[12] === '2') : ?>
+
+                                                <form action="../Negocio/Expediente/V_Historiales/V_modal_historial_cita.php" method="POST">
+
+                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $filas[0]; ?>">
+
+                                                    <!-- Agrega un campo oculto para enviar el ID de expediente -->
+                                                    <input type="hidden" name="id_expediente" value="<?php echo $filas[5]; ?>">
+
+                                                    <!-- Agrega un campo oculto para enviar el ID de paciente -->
+                                                    <input type="hidden" name="id_paciente" value="<?php echo $filas[11]; ?>">
+
+                                                    <!-- ?php if (!$ocultarTerapeutico): ?> -->
+                                                    <button id="guardarDatos" name="guardarDatos" style="margin-top: 3px;" class="btn btn-success" type="submit">Atender</button>
+                                                    <!-- ?php endif; ?> -->
+                                                </form>
+                                            <?php endif; ?>
+
+                                            <!-- Boton para el rol terapeuta -->
+                                            <?php if ($IdRol === '7' && $filas[12] === '3') : ?>
+                                                <form action="../Negocio/Procesos/C_procesos/C_estado_finalizado_cita.php" method="POST">
+                                                    <button type="submit" class="btn btn-danger" id="guardarDatos" style="margin-top: 3px;" name="guardarDatos">Finalizar</button>
+                                                    <input type="hidden" readonly name="Id_Cita_U" id="Id_Cita_U" value="<?php echo $filas[0]; ?>">
+                                                </form>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                            <?php
+                                    $correlativo++; // Incrementamos el correlativo en cada iteración
+                                } // fin del ciclo while
+                            } else {
+                            }
+                            ?>
 
                         </tbody>
                     </table>
@@ -524,17 +240,11 @@ if (!isset($_SESSION["correo"])) {
         </div>
         <!-- Fin de Citas Proximas-->
     </main><!-- End #main -->
+    <?php
+    include '../../Recursos/Componentes/footer.html';
+    ?>
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>TechTitans</span></strong>. Derechos Reservados
-        </div>
-
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -545,9 +255,14 @@ if (!isset($_SESSION["correo"])) {
     <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 
     <!-- Template Main JS File -->
     <script src="../../assets/js/main.js"></script>
 </body>
 
 </html>
+<script>
+    // Llenar el campo oculto 'datos' antes de enviar el formulario
+    document.getElementById('datos').value = '<?php echo urlencode($datos); ?>';
+</script>

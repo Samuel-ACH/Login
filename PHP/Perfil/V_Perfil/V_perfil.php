@@ -8,6 +8,7 @@ include '../C_Perfil/C_perfil.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
+    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
     <!-- Agregar enlaces a Bootstrap CSS -->
     <!-- Vendor CSS Files -->
     <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +33,12 @@ include '../C_Perfil/C_perfil.php';
     </style>
 </head>
 <body>
-<div class="container mt-5">
+<?php 
+include '../../../Recursos/Componentes/header.php';
+include '../../../Recursos/Componentes/SideBar.html';
+?>
+<main id="main" class="main">
+<div class="container mt-4">
         <div class="card">
             <h5 class="card-title"><i class="fas fa-user fa-3x mr-2"></i>Perfil de Usuario</h5>
             <div class="card-body">
@@ -61,13 +67,34 @@ include '../C_Perfil/C_perfil.php';
                             ?>
                         </ul>
                         <button id="btneditarperfil" class="btn btn-primary" onclick="editarPerfil()">Editar Perfil</button>
-                        <button id="btncambiocontraseñaperfil" class="btn btn-primary" onclick="cambiarContraseña()">Cambiar Contraseña</button>
+                        <form action="./V_CambiarcontrasenaPerfil.php" method="POST">
+                        <button id="btncambiocontraseñaperfil" class="btn btn-primary">Cambiar Contraseña</button>
+                        </form>
                         <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
+
+<?php 
+include '../../../Recursos/Componentes/footer.html';
+?>
+
+ <!-- Vendor JS Files -->
+ <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../../assets/vendor/quill/quill.min.js"></script>
+    <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../../assets/js/main.js"></script>
+
     <!-- Agrega los scripts de Bootstrap (jQuery y Popper.js) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -114,7 +141,7 @@ include '../C_Perfil/C_perfil.php';
 
         function cambiarContraseña() {
             // Redirigir al usuario a la página de cambio de contraseña
-            window.location.href = "CambioContraseña.php";
+            window.location.href = "./V_cambiarcontrasena.php";
         }
     </script>
 </body>

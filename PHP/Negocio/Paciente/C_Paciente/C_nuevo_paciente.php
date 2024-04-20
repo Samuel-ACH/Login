@@ -10,21 +10,22 @@ $nombre = strtoupper($_POST['nombre']);
 $direccion = strtoupper($_POST['direccion']);
 $fechanacimiento = date("Y-m-d", strtotime($_POST['fechanacimiento']));
 $idgenero = $_POST['genero'];
-$idtipodocumento = $_POST['id_tipo_documento'];
+$idtipodocumento = $_POST['tipo_documento'];
 $numerodocumento = $_POST['numero_de_documento'];
-$estadopaciente = $_POST['estadoPaciente'];
-$ocupacionpaciente = $_POST['ocupacion'];
+$estadopaciente = 1;
+$ocupacionpaciente = strtoupper($_POST['ocupacion']);
 
 //Insertar nuevo usuario en la base de datos
 $query = "INSERT INTO tbl_paciente (Nombre, Direccion, FechaNacimiento, IdGenero, Id_Tipo_Documento, Numero_Documento, Estado_Paciente, Ocupacion) 
-          VALUES ('$nombre', '$direccion', '$fechanacimiento','$idgenero','$idtipodocumento','$numerodocumento','$estadopaciente', '$ocupacionpaciente')";
+          VALUES ('$nombre', '$direccion', '$fechanacimiento','$idgenero','$idtipodocumento','$numerodocumento', $estadopaciente , '$ocupacionpaciente')";
 
 $resultado_query = mysqli_query($conexion, $query);
+$pacienteID = mysqli_insert_id($conexion);
 if ($resultado_query) {
-    // $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-    // $a='AGREGAR USUARIO';
-    // $d='USUARIO '. $usuario .' FUE AGREGADO';
-    // bitacora($n, $a, $d);
+     $n=$_SESSION['id_D'];          //obtiene valor de la variable session
+     $a='REGISTRAR';
+     $d='PACIENTE '. $pacienteID .' HA SIDO REGISTRADO';
+     bitacora($n, $a, $d);
     echo '
         <script>
             MostrarAlerta("success", "¡GENIAL!", "Paciente almacenado correctamente.", "../V_Paciente/V_Paciente.php");

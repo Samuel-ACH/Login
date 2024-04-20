@@ -1,3 +1,19 @@
+<?php
+session_start();
+$Id_Usuario = $_SESSION['id_D'];
+$Nombre_Usuario = $_SESSION['nombre'];
+?>
+<?php
+// Verificar si la variable de sesión no está establecida
+if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
+    // Incluir el archivo solo si no se ha ejecutado antes
+    include '../../Procesos/C_procesos/C_detalle_terapia.php';
+} else {
+    // Eliminar la variable de sesión para permitir que el código se ejecute nuevamente
+    unset($_SESSION['detalle_terapia_ejecutado']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,6 +82,7 @@
                         <div class="divDescripcionEvaluacion">
                             <div class="col-tarjeta-paciente">
                                 <div class="form-group">
+
                                     <label for="paciente">NOMBRE:</label>
                                     <input type="text" class="formulario__input" readonly id="paciente" name="paciente">
                                     <!-- <label for="Numero_Documento">IDENTIFICACIÓN:</label>
@@ -82,8 +99,16 @@
                                     <input type="text" class="formulario__input" readonly id="fisiatra" name="fisiatra">
                                     <label for="motivoConsulta">MOTIVO DE CONSULTA:</label>
                                     <input type="text" class="formulario__input" readonly id="motivoConsulta" name="motivoConsulta">
-                                    <label for="numero_sesiones">N° SESIONES:</label>
-                                    <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="numero_sesiones" name="numero_sesiones">
+                                    <!-- <label for="numero_sesiones">N° SESIONES:</label>
+                                    <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="numero_sesiones" name="numero_sesiones"> -->
+
+                                    <label for="Id_Cita" hidden>ID CITA:</label>
+                                    <input type="text" readonly hidden class="formulario__input" id="Id_Cita" name="Id_Cita">
+                                    <label for="Id_Expediente" hidden>ID EXPEDIENTE:</label>
+                                    <input type="text" readonly hidden class="formulario__input" id="Id_Expediente" name="Id_Expediente">
+                                    <label for="Id_Usuario" hidden>ID USUARIO:</label>
+                                    <input type="text" readonly hidden class="formulario__input" id="Id_Usuario" name="Id_Usuario">
+
                                     <!-- <textarea type="text" class="formulario__input" id="lateralidad" name="lateralidad"></textarea> -->
                                 </div>
                             </div>
@@ -91,65 +116,66 @@
                     </div>
                 </div>
 
-           <!-- Contenedor de las tarjetas en dos columnas -->
-        <div class="row">
-            <!-- Primera columna -->
-            <div class="col-md-6">
-                <div class="contenedor-tarjetas-columna">
-                    <div id="contenedor-tarjetas-columna1">
-                        <!-- Las tarjetas de la columna 1 se agregarán aquí -->
+                <!-- Contenedor de las tarjetas en dos columnas -->
+                <div class="row">
+                    <!-- Primera columna -->
+                    <div class="col-md-6">
+                        <div class="contenedor-tarjetas-columna">
+                            <div id="contenedor-tarjetas-columna1">
+                                <!-- Las tarjetas de la columna 1 se agregarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segunda columna -->
+                    <div class="col-md-6">
+                        <div class="contenedor-tarjetas-columna">
+                            <div id="contenedor-tarjetas-columna2">
+                                <!-- Las tarjetas de la columna 2 se agregarán aquí -->
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <hr>
 
-            <!-- Segunda columna -->
-            <div class="col-md-6">
-                <div class="contenedor-tarjetas-columna">
-                    <div id="contenedor-tarjetas-columna2">
-                        <!-- Las tarjetas de la columna 2 se agregarán aquí -->
-                    </div>
+                <!-- Selector de tratamientos -->
+                <div class="gender-options">
+                    <label for="genero" class="formulario__label">TRATAMIENTOS</label>
+                    <select type="int" autocomplete="off" name="tratamiento" id="tratamiento" placeholder="Tratamiento" class="combobox">
+                        <option value="0" selected>SELECCIONE</option>
+                        <?php
+                        include('../../../Controladores/Conexion/Conexion_be.php');
+                        $query = "SELECT TT.Id_Tipo_Tratamiento AS Correlativo, TT.Nombre AS Tratamiento FROM `tbl_tipo_tratamiento` AS TT";
+                        $resultado = mysqli_query($conexion, $query);
+
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        // Cerrar el formulario
+                        $conexion->close();
+                        ?>
+                    </select>
+                    <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
                 </div>
-            </div>
-        </div><hr>
 
-        <!-- Selector de tratamientos -->
-        <div class="gender-options">
-            <label for="genero" class="formulario__label">TRATAMIENTOS</label>
-            <select type="int" autocomplete="off" name="tratamiento" id="tratamiento" placeholder="Tratamiento" class="combobox">
-                <option value="0" selected>SELECCIONE</option>
-                <?php
-                include('../../../Controladores/Conexion/Conexion_be.php');
-                $query = "SELECT TT.Id_Tipo_Tratamiento AS Correlativo, TT.Nombre AS Tratamiento FROM `tbl_tipo_tratamiento` AS TT";
-                $resultado = mysqli_query($conexion, $query);
+                <form action="../../Procesos/C_procesos/C_estado_finalizado_cita.php" method="POST">
+                    <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guardar Todo</button>
+                    <input type="hidden" hidden readonly name="Id_Cita_U" id="Id_Cita_U">
+                </form>
 
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
-                }
-                mysqli_free_result($resultado);
-                // Cerrar el formulario
-                 $conexion->close();
-                ?>
-            </select>
-            <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
-        </div>
-
-            <!-- <form action="../C_Expediente/C_procesar_tarjeta.php" method="POST"> -->
-                <button type="submit" id="guardarDatos" name="guardarDatos" onclick="guardarDatos()">Guardar Todo</button>
-             <!-- </form> -->
-        
-            <!-- Importar el archivo JavaScript -->
-            <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
-        
+                <!-- Importar el archivo JavaScript -->
+                <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
     </main>
 
     <script>
-    function cerrarTarjeta(idTarjeta) {
-        var tarjeta = document.getElementById(idTarjeta);
-        tarjeta.style.display = 'none'; // Oculta la tarjeta
-        // Alternativamente, puedes eliminar la tarjeta del DOM con:
-        // tarjeta.parentNode.removeChild(tarjeta);
-    }
-</script>
+        function cerrarTarjeta(idTarjeta) {
+            var tarjeta = document.getElementById(idTarjeta);
+            tarjeta.style.display = 'none'; // Oculta la tarjeta
+            // Alternativamente, puedes eliminar la tarjeta del DOM con:
+            // tarjeta.parentNode.removeChild(tarjeta);
+        }
+    </script>
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -164,9 +190,30 @@
 
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
-    <script src="../C_Expediente/C_mostrar_tarjetas.js" ></script>
-
-
+    <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
 </body>
 
 </html>
+
+<?php
+// Verificar si existen los datos del paciente en las variables de sesión
+if (isset($_SESSION['datosPaciente'])) {
+    // Obtener los datos del paciente de las variables de sesión
+    $datosArray = $_SESSION['datosPaciente'];
+
+    // Llenar los campos del formulario con los datos del paciente
+    echo '<script>';
+    echo 'document.getElementById("Id_Cita").value = "' . $datosArray[0] . '";';
+    echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
+    echo 'document.getElementById("paciente").value = "' . $datosArray[1] . '";';
+    echo 'document.getElementById("motivoConsulta").value = "' . $datosArray[2] . '";';
+    echo 'document.getElementById("Id_Expediente").value = "' . $datosArray[5] . '";';
+    echo 'document.getElementById("edad").value = "' . $datosArray[9] . '";';
+    echo 'document.getElementById("fisiatra").value = "' . $Nombre_Usuario . '";';
+    echo 'document.getElementById("Id_Usuario").value = "' . $Id_Usuario . '";';
+    echo '</script>';
+
+    // Limpiar las variables de sesión después de utilizar los datos
+    unset($_SESSION['datosPaciente']);
+}
+?>

@@ -1,45 +1,45 @@
 <?php 
 class Parametro {
-    public static function dataServerEmail()
+    public static function dataServer()
     {
-        include('../Conexion_be.php');
+        include('../Conexion/Conexion_be.php');
        // $conn = $conexion;
         try {
-            $parametrosEmail = array();
+            $parametro = array();
             $query = "SELECT Parametro, Valor FROM tbl_ms_parametros WHERE Parametro 
             IN('Servidor_SMTP','Correo_SMTP','Clave_SMTP','Cifrado_SMTP','Puerto_SMTP', 'Nombre_Sistema');";
             $resultado = mysqli_query($conexion, $query);
             //Fetch assoc: solo toma una linea donde convierte un array para recibir un resultado
             while ($fila = mysqli_fetch_assoc($resultado)){
-                switch ($fila['parametro']) {
+                switch ($fila['Parametro']) {
                     case 'Servidor_SMTP':
-                        $parametrosEmail += [
-                            'Servidor_SMTP' => $fila['valor']
+                        $parametro += [
+                            'Servidor_SMTP' => $fila['Valor']
                         ];
                         break;
                     case 'Correo_SMTP':
-                        $parametrosEmail += [
-                            'Correo_SMTP' => $fila['valor']
+                        $parametro += [
+                            'Correo_SMTP' => $fila['Valor']
                         ];
                         break;
                     case 'Clave_SMTP':
-                        $parametrosEmail += [
-                            'Clave_SMTP' => $fila['valor']
+                        $parametro += [
+                            'Clave_SMTP' => $fila['Valor']
                         ];
                         break;
                         case 'Cifrado_SMTP':
-                            $parametrosEmail += [
-                                'Cifrado_SMTP' => $fila['valor']
+                            $parametro += [
+                                'Cifrado_SMTP' => $fila['Valor']
                             ];
                             break;
                             case 'Nombre_Sistema':
-                                $parametrosEmail += [
-                                    'Nombre_Sistema' => $fila['valor']
+                                $parametro += [
+                                    'Nombre_Sistema' => $fila['Valor']
                                 ];
                                 break;
                     default:
-                        $parametrosEmail += [
-                            'Puerto_SMTP' => $fila['valor']
+                        $parametro += [
+                            'Puerto_SMTP' => $fila['Valor']
                         ];
                         break;
                 }
@@ -50,7 +50,7 @@ class Parametro {
             ' . $e;
         }
         mysqli_close($conexion); //Cerrar conexion
-        return $parametrosEmail;
+        return $parametro;
     }
 
 }

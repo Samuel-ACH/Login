@@ -1,11 +1,19 @@
 <?php
-// Conexión a la base de datos
-$servername = "localhost";
+$servername = "roundhouse.proxy.rlwy.net";
 $username = "root";
-$password = "";
-$dbname = "clinica_red";
+$password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
+$dbname = "Clinica_Red";
+$Port = "48563";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $Port);
+
+// Conexión a la base de datos Local
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "clinica_red2";
+// // Local
+// $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {

@@ -36,12 +36,12 @@ function enviarCorreo3($destinatario, $correo3, $contrasenatemp) {
 
     // Enviar correo electrónico
     if (!$mail->send()) {
-      echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
+      //echo "Error al enviar el correo electrónico: " . $mail->ErrorInfo;
     } else {
      // echo "Correo electrónico enviado correctamente";
     }
   } catch (Exception $e) {
-    echo "Error al enviar el correo electrónico: " . $e->getMessage();
+   // echo "Error al enviar el correo electrónico: " . $e->getMessage();
   }
 }
 ?>
