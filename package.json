@@ -8,8 +8,9 @@
   "main": "api/Index.php",
   "devDependencies": {},
   "scripts": {
-    "start": "sudo api/Index.php"
-  },
+    "start": "npm run build && php api/Index.php"
+  }
+  ,
   "author": "TechTitans",
   "license": "ISC"
 }
