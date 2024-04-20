@@ -3,12 +3,5 @@
   "api/Index.php": {
     "runtime": "vercel-php@0.7.0"
     }
-},
-"routes": [
-    {
-      "src": "/(.*)",
-      "dest": "api/Index.php"
-    }
-  ]
-  
+} 
 }
