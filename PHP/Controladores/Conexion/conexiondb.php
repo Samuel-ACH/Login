@@ -3,9 +3,9 @@ $servername = "roundhouse.proxy.rlwy.net";
 $username = "root";
 $password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
 $dbname = "Clinica_Red";
-$Port = "48563";
+$PORT = "48563";
 
-$conn = new mysqli($servername, $username, $password, $dbname, $Port);
+$conn = new mysqli($servername, $username, $password, $dbname, $PORT);
 
 // Conexión a la base de datos Local
 // $servername = "localhost";

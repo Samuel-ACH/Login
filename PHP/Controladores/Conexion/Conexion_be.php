@@ -2,9 +2,17 @@
 // 2 formas de conectarse a la BD del proyecto:
 
 // =========================   FORMA #1   =========================
-$conexion = mysqli_connect("roundhouse.proxy.rlwy.net", "root","jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa", "Clinica_Red", "48563"); // Forma #1
+
+// $conexion = mysqli_connect("roundhouse.proxy.rlwy.net", "root","jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa", "Clinica_Red", "48563"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 
+$servername = "roundhouse.proxy.rlwy.net";
+$username = "root";
+$password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
+$dbname = "Clinica_Red";
+$PORT = "48563";
+
+$conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 
 $conexion->begin_transaction();
 
