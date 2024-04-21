@@ -74,7 +74,7 @@ if (mysqli_num_rows($verificar_login) > 0) {
 }
 
 if (!empty($mensajeError)) {
-    header("location: ../Vistas/Index.php?error=" . urlencode($mensajeError));
+    header("location: /Index.php?error=" . urlencode($mensajeError));
     exit();
 }
 }

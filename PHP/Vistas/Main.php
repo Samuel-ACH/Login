@@ -11,7 +11,7 @@ if (!isset($_SESSION['autenticado']) || !isset($_SESSION["correo"])) {
   echo '
   <script>
       alert("Por favor, debes iniciar sesión.")
-      window.location = "Index.php";
+      window.location = "/Index.php";
   </script>
 ';
 session_destroy(); // Destruye la sesión

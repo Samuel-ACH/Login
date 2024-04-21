@@ -1,11 +1,15 @@
 <?php
-$servername = "roundhouse.proxy.rlwy.net";
-$username = "root";
-$password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
-$dbname = "Clinica_Red";
-$PORT = "48563";
+// $servername = "roundhouse.proxy.rlwy.net";
+// $username = "root";
+// $password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
+// $dbname = "Clinica_Red";
+// $PORT = "48563";
 
-$conn = new mysqli($servername, $username, $password, $dbname, $PORT);
+$servername = "red-server.mysql.database.azure.com";
+$username = "adminred";
+$password = "T3chTit4n$";
+$dbname = "clinica_red";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Conexión a la base de datos Local
 // $servername = "localhost";
