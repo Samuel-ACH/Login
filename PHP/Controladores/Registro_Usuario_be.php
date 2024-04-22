@@ -51,13 +51,13 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
                                     bitacora($n2,$a,$d);
                                     echo '
                                         <script>
-                                            MostrarAlerta("success", "¡GENIAL!", "Usuario almacenado correctamente.", "../Vistas/Index.php");
+                                            MostrarAlerta("success", "¡GENIAL!", "Usuario almacenado correctamente.", "/Index.php");
                                         </script>
                                     ';
                                 } else {
                                     echo '
                                         <script>
-                                            MostrarAlerta("error", "ERROR", "Inténtalo de nuevo, usuario no almacenado.", "../Vistas/Index.php");
+                                            MostrarAlerta("error", "ERROR", "Inténtalo de nuevo, usuario no almacenado.", "/Index.php");
                                         </script>
                                     ';
                                     exit();
@@ -65,7 +65,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
                             } else {
                                 echo '
                                     <script>
-                                        MostrarAlerta("error", "ERROR", "El nombre de usuario ya está registrado, intenta con un nuevo nombre de usuario.", "../Vistas/Index.php");
+                                        MostrarAlerta("error", "ERROR", "El nombre de usuario ya está registrado, intenta con un nuevo nombre de usuario.", "/Index.php");
                                     </script>
                                 ';
                                 exit();
@@ -73,7 +73,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
                         } else {
                             echo '
                                 <script>
-                                    MostrarAlerta("error", "ERROR", "Este correo electrónico ya está registrado, intenta con otro correo electrónico diferente.", "../Vistas/Index.php");
+                                    MostrarAlerta("error", "ERROR", "Este correo electrónico ya está registrado, intenta con otro correo electrónico diferente.", "/Index.php");
                                 </script>
                             ';
                             exit();
@@ -81,7 +81,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
                     } else {
                         echo '
                             <script>
-                                MostrarAlerta("error", "ERROR", "El correo electrónico no es válido, porque finaliza con un punto.", "../Vistas/Index.php");
+                                MostrarAlerta("error", "ERROR", "El correo electrónico no es válido, porque finaliza con un punto.", "/Index.php");
                             </script>
                         ';
                         exit();
@@ -89,7 +89,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
                 } else {
                     echo '
                         <script>
-                            MostrarAlerta("error", "ERROR", "El correo electrónico no coincide con el formato establecido.", "../Vistas/Index.php");
+                            MostrarAlerta("error", "ERROR", "El correo electrónico no coincide con el formato establecido.", "/Index.php");
                         </script>
                     ';
                     exit();
@@ -97,7 +97,7 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
             } else {
                 echo '
                     <script>
-                        MostrarAlerta("error", "ERROR", "No se permiten números o caracteres especiales en el campo Nombre.", "../Vistas/Index.php");
+                        MostrarAlerta("error", "ERROR", "No se permiten números o caracteres especiales en el campo Nombre.", "/Index.php");
                     </script>
                 ';
                 exit();
@@ -105,14 +105,14 @@ if (!empty($dni) && !empty($usuario) && !empty($nombre) && !empty($correo)
         } else {
             echo '
                 <script>
-                    MostrarAlerta("error", "ERROR", "No se permiten letras en el campo DNI.", "../Vistas/Index.php");
+                    MostrarAlerta("error", "ERROR", "No se permiten letras en el campo DNI.", "/Index.php");
                 </script>
             ';
         }
 } else {
     echo '
         <script>
-            MostrarAlerta("error", "ERROR", "Por favor, llena todos los campos del registro.", "../Vistas/Index.php");
+            MostrarAlerta("error", "ERROR", "Por favor, llena todos los campos del registro.", "/Index.php");
         </script>
     ';
     exit();

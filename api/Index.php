@@ -3,7 +3,7 @@
 session_start();
 
 if (isset($_SESSION["correo"])) {
-    header("location: ../PHP/Vistas/Main.php");https://github.com/Samuel-ACH/Tech-Titans-RED/blob/main/PHP/Vistas/Index.php
+    header("location: ../PHP/Vistas/Main.php");
 }
 include('PHP/Controladores/Conexion/Conexion_be.php');
 ?>

@@ -13,12 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codigo_otp'])) {
     if ($codigo_otp_ingresado == $codigo_otp_correcto) {
         // El código OTP es correcto, iniciar sesión
         $_SESSION['autenticado'] = true; // Indicar que el usuario está autenticado
-        header("location: ../../Vistas/Main.php"); // Redirigir al usuario a la página principal
+        header("location: /PHP/Vistas/Main.php"); // Redirigir al usuario a la página principal
         exit();
     } else {
         // El código OTP es incorrecto, mostrar mensaje de error
         $_SESSION['error'] = "Codigo OTP Incorrecto";
-        header("location: ../../Vistas/Pin.php"); // Redirigir a la página de verificación de pin
+        header("location: /PHP/Vistas/Pin.php"); // Redirigir a la página de verificación de pin
     }
 }
 ?>;

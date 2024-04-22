@@ -1,7 +1,7 @@
 <?php  
 function enviarOTP($conexion, $correo) {
     require_once('GenerarOTP.php');
-    require_once('../PHPMailer/controllermail.php');
+    require_once('PHP/PHPMailer/controllermail.php');
     
 $otp = generarCodigoOTP(); // Generar OTP
 // Almacenar OTP en la sesión

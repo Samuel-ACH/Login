@@ -3,9 +3,9 @@
 session_start();
 
 if (isset($_SESSION["correo"])) {
-    header("location: /PHP/Vistas/Main.php");https://github.com/Samuel-ACH/Tech-Titans-RED/blob/main/PHP/Vistas/Index.php
+    header("location: /PHP/Vistas/Main.php");https://github.com/Samuel-ACH/Tech-Titans-RED/blob/main/Index.php
 }
-include('/PHP/Controladores/Conexion/Conexion_be.php');
+include('./PHP/Controladores/Conexion/Conexion_be.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -222,7 +222,7 @@ include('/PHP/Controladores/Conexion/Conexion_be.php');
             </div>
         </div>
     </main>
-    <script src="/EstilosLogin/js/script.js"></script>
+    <script src="./EstilosLogin/js/script.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
