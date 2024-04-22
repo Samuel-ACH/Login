@@ -61,9 +61,9 @@ if (mysqli_num_rows($verificar_login) > 0) {
             $a='INICIO DE SESIÓN';
             $d= $_SESSION['usuario']  .' INICIÓ SESIÓN';
             bitacora($n,$a,$d);
-            enviarOTP($conexion, $correo);
-            //  header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
-            //  exit();
+            //enviarOTP($conexion, $correo);
+              header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
+              exit();
              
         }
     } else {
