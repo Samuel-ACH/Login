@@ -1,6 +1,8 @@
 <?php
 function bitacora($n,$a,$d){
-    $conexion = mysqli_connect("localhost", "u452119581_adminred","T3chTit4n$2024", "u452119581_clinica_red"); 
+    // $conexion = mysqli_connect("localhost", "root","", "clinica_red"); 
+     $conexion = mysqli_connect("red-server.mysql.database.azure.com", "adminred","T3chTit4n$", "clinica_red"); 
+    // $conexion = mysqli_connect("localhost", "u452119581_adminred","T3chTit4n$2024", "u452119581_clinica_red"); 
     //$fecha = date("Y-m-d H:i:s");
     $bitacora = "INSERT INTO tbl_bitacora (Fecha, Id_Usuario, Accion, Descripcion)
                  VALUES (NOW(),$n, '$a', '$d') ORDER BY Fecha ASC";

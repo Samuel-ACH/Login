@@ -12,17 +12,17 @@
 // $dbname = "Clinica_Red";
 // $PORT = "48563";
 //Azure
-// $servername = "red-server.mysql.database.azure.com";
-// $username = "adminred";
-// $password = "T3chTit4n$";
-// $dbname = "clinica_red";
-// $conexion = mysqli_connect($servername, $username, $password, $dbname);
-//HOSTINGER
-$servername = "localhost";
-$username = "u452119581_adminred";
-$password = "T3chTit4n$2024";
-$dbname = "u452119581_clinica_red";
+$servername = "red-server.mysql.database.azure.com";
+$username = "adminred";
+$password = "T3chTit4n$";
+$dbname = "clinica_red";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
+//HOSTINGER
+// $servername = "localhost";
+// $username = "u452119581_adminred";
+// $password = "T3chTit4n$2024";
+// $dbname = "u452119581_clinica_red";
+// $conexion = mysqli_connect($servername, $username, $password, $dbname);
 
 
 $conexion->begin_transaction();
