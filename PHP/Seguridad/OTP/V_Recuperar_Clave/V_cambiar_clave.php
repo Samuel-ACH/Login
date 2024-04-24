@@ -42,7 +42,7 @@
                 </div>
                 <input class="btn" type="submit" name="register" value="Enviar"><br> 
                
-                 <a href="/Index.php">Regresar al Login</a>
+                 <a href="/index.php">Regresar al Login</a>
             </form>
         </div>
     </main>

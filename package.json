@@ -5,9 +5,9 @@
     "name": "tech-titans-red",
     "version": "1.0.0",
     "description": "RED",
-    "main": "Index.php",
+    "main": "/index.php",
     "scripts": {
-      "start": "php Index.php"
+      "start": "php /index.php"
     },
     "author": "TechTitans",
     "license": "ISC"

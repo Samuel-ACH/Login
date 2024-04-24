@@ -1,5 +1,5 @@
 <?php
-        header("refresh:2;url=/Index.php");
+        header("refresh:2;url=/index.php");
 ?>
 
 <!DOCTYPE html>

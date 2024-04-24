@@ -47,7 +47,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 <br>
                 <div class= "g-recaptcha" data-sitekey="6LfELoUpAAAAABrjWzKSh6IDaecUlUPc12AqY4nU" id="captcha" ></div>
                 <br>
-                <div style="text-align: center;"><a href="/Index.php">Regresar al Login</a> </div>
+                <div style="text-align: center;"><a href="/index.php">Regresar al Login</a> </div>
                 <br>
             </form>
         </div>

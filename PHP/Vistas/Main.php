@@ -11,7 +11,7 @@ $IdRol = $_SESSION['IdRol'];
 //   echo '
 //   <script>
 //       alert("Por favor, debes iniciar sesión.")
-//       window.location = "/Index.php";
+//       window.location = "/index.php";
 //   </script>
 // ';
 // session_destroy(); // Destruye la sesión
@@ -22,7 +22,7 @@ if (!isset($_SESSION["correo"])) {
     echo '
           <script>
                  alert("Por favor, debes iniciar sesión.")
-                window.location = "/Index.php";
+                window.location = "/index.php";
             </script>
        ';
     session_destroy(); // Destruye la sesión
