@@ -59,7 +59,7 @@ session_start();
         <div class="container mt-4">
             <div class="row">
                 <div class="col-10">
-                    <form action="./V_Paciente.php" method="post">
+                    <form action="./V_paciente.php" method="post">
                         <button id="agregarusuario" class="btn btn-primary float-start">Regresar</button>
                     </form>
                     <table id="tablaAgenda" class="table">

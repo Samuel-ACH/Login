@@ -11,7 +11,7 @@ $IdRol = $_SESSION['IdRol'];
 //   echo '
 //   <script>
 //       alert("Por favor, debes iniciar sesión.")
-//       window.location = "/index.php";
+//       window.location = "Index.php";
 //   </script>
 // ';
 // session_destroy(); // Destruye la sesión
@@ -22,14 +22,13 @@ if (!isset($_SESSION["correo"])) {
     echo '
           <script>
                  alert("Por favor, debes iniciar sesión.")
-                window.location = "/index.php";
+                window.location = "Index.php";
             </script>
        ';
     session_destroy(); // Destruye la sesión
     die(); // el código se detiene en esta línea 
 }
 
-//Roles y Permisoss
 // include '../../PHP/Seguridad/Roles_permisos/permisos/Obtener_Id_Objeto.php';
 // $id_rol = $_SESSION['IdRol'];
 // $id_objeto = Obtener_Id_Objeto('Main');

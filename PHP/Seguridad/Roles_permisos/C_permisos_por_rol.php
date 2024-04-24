@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Usuario o contraseña incorrectos, redirigir al login con un mensaje de error
-        header("Location: /index.php?error=1");
+        header("Location: ../../../Index.php?error=1");
     }
 }
 
