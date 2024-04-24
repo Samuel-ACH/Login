@@ -6,17 +6,17 @@
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 //RAILWAY
-// $servername = "roundhouse.proxy.rlwy.net";
-// $username = "root";
-// $password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
-// $dbname = "Clinica_Red";
-// $PORT = "48563";
+$servername = "roundhouse.proxy.rlwy.net";
+$username = "root";
+$password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
+$dbname = "Clinica_Red";
+$PORT = "48563";
 //Azure
-$servername = "red-server.mysql.database.azure.com";
-$username = "adminred";
-$password = "T3chTit4n$";
-$dbname = "clinica_red";
-$conexion = mysqli_connect($servername, $username, $password, $dbname);
+// $servername = "red-server.mysql.database.azure.com";
+// $username = "adminred";
+// $password = "T3chTit4n$";
+// $dbname = "clinica_red";
+$conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 //HOSTINGER
 // $servername = "localhost";
 // $username = "u452119581_adminred";
