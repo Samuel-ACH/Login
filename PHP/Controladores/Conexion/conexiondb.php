@@ -1,27 +1,33 @@
 <?php
+//Railwai
 // $servername = "roundhouse.proxy.rlwy.net";
 // $username = "root";
 // $password = "jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa";
 // $dbname = "Clinica_Red";
 // $PORT = "48563";
-
-$servername = "red-server.mysql.database.azure.com";
-$username = "adminred";
-$password = "T3chTit4n$";
-$dbname = "clinica_red";
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+//AZURE
+// $servername = "red-server.mysql.database.azure.com";
+// $username = "adminred";
+// $password = "T3chTit4n$";
+// $dbname = "clinica_red";
+// $conn = new mysqli($servername, $username, $password, $dbname);
+//local
 // Conexión a la base de datos Local
 // $servername = "localhost";
 // $username = "root";
 // $password = "";
-// $dbname = "clinica_red2";
+// $dbname = "clinica_red";
 // // Local
 // $conn = new mysqli($servername, $username, $password, $dbname);
-
+//hostinger
+$servername = "localhost";
+$username = "u452119581_adminred";
+$password = "T3chTit4n$2024";
+$dbname = "u452119581_clinica_red";
+$conn = new mysqli($servername, $username, $password, $dbname);
 // Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+if ($conn->connect_errno) {
+    die("Conexión fallida: " . $conn->connect_errno);
 }
 
 $conn->begin_transaction();

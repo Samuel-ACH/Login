@@ -2,8 +2,8 @@
 // 2 formas de conectarse a la BD del proyecto:
 
 // =========================   FORMA #1   =========================
-
-// $conexion = mysqli_connect("roundhouse.proxy.rlwy.net", "root","jPaDrwRuxJgKeZgRjCmjQxqaKcCORJDa", "Clinica_Red", "48563"); // Forma #1
+//local
+// $conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 //RAILWAY
 // $servername = "roundhouse.proxy.rlwy.net";
@@ -12,11 +12,18 @@
 // $dbname = "Clinica_Red";
 // $PORT = "48563";
 //Azure
-$servername = "red-server.mysql.database.azure.com";
-$username = "adminred";
-$password = "T3chTit4n$";
-$dbname = "clinica_red";
+// $servername = "red-server.mysql.database.azure.com";
+// $username = "adminred";
+// $password = "T3chTit4n$";
+// $dbname = "clinica_red";
+// $conexion = mysqli_connect($servername, $username, $password, $dbname);
+//HOSTINGER
+$servername = "localhost";
+$username = "u452119581_adminred";
+$password = "T3chTit4n$2024";
+$dbname = "u452119581_clinica_red";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
+
 
 $conexion->begin_transaction();
 
