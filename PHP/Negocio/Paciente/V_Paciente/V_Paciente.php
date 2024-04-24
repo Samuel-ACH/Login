@@ -180,13 +180,13 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
 
                         // Confirmar si realmente deseas eliminar el paciente
                         Swal.fire({
-                            title: "Eliminar Paciente",
-                            text: "¿Estás seguro de que deseas eliminar este paciente?",
+                            title: "Inhabilitar Paciente",
+                            text: "¿Estás seguro de que deseas inhabilitar este paciente?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Sí, Eliminar"
+                            confirmButtonText: "Sí, Inhabilitar"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
@@ -320,6 +320,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                         extend: 'pdfHtml5',
                         download: 'open',
                         text: '<i class="fas fa-file-pdf"> PDF </i>',
+                        title: 'CLINICA RED',
                         orientation: 'landscape',
                     <?php endif; ?>
                     customize: function (doc) {

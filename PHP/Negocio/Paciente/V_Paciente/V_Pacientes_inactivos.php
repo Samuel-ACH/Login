@@ -1,5 +1,6 @@
 <?php
 include '../../../Controladores/Conexion/Conexion_be.php';
+include ('../../../../Recursos/SweetAlerts.php');
 session_start();
 ?>
 
@@ -122,26 +123,43 @@ session_start();
                     var filaPaciente = $(this).closest('tr'); // Obtener la fila del paciente
 
                     // Confirmar si realmente deseas eliminar el paciente
-                    if (confirm('¿Estás seguro de que deseas activar este paciente?')) {
-                        // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
-                        $.ajax({
-                            url: '../C_Paciente/C_activar_paciente.php',
-                            method: 'POST',
-                            data: {
-                                id: idPaciente
-                            },
-                            success: function(response) {
-                                // Ocultar la fila de paciente de la tabla
-                                filaPaciente.hide(); // Ocultar la fila de paciente de la tabla
-
-                                // Notificar al usuario sobre el éxito
-                                alert(response);
-                            },
-                            error: function(error) {
-                                console.error("Error al eliminar el paciente: " + error.statusText);
-                            }
-                        });
-                    }
+                    Swal.fire({
+                        title: "Activar Paciente",
+                        text: "¿Estás seguro de que deseas activar este paciente?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Sí, Activar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Realizar una solicitud AJAX para eliminar el paciente con el ID proporcionado
+                            $.ajax({
+                                url: '../C_Paciente/C_activar_paciente.php',
+                                method: 'POST',
+                                data: {
+                                    id: idPaciente
+                                },
+                                success: function(response) {
+                                    // Ocultar la fila de paciente de la tabla
+                                    filaPaciente.hide(); // Ocultar la fila de paciente de la tabla
+                                    // Mostrar la alerta de éxito
+                                    Swal.fire({
+                                        title: "Éxito",
+                                        text: "Paciente Activado",
+                                        icon: "success"
+                                    }).then(() => {
+                                        setTimeout(function() {
+                                            window.location.href = "./V_Paciente.php";
+                                        }, 2000);
+                                    });
+                                },
+                                error: function(error) {
+                                    console.error("Error al eliminar el paciente: " + error.statusText);
+                                }
+                            });
+                        }
+                    });
                 });
             });
         </script>

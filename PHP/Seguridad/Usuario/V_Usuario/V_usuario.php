@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../../../Controladores/Conexion/Conexion_be.php';
+include ('../../../../Recursos/SweetAlerts.php');
 include '../../../../Imagenes/base64.php';
 include '../..//Roles_permisos/permisos/Obtener_Id_Objeto.php';
 $id_rol = $_SESSION['IdRol'];
@@ -199,9 +200,16 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                     var idUsuario = $(this).data('id');
                     var filaUsuario = $(this).closest('tr'); // Obtener la fila del usuario
 
-                    // Confirmar si realmente deseas eliminar el usuario
-                    if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-                        // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
+                    Swal.fire({
+                            title: "Inhabilitar Usuario",
+                            text: "¿Estás seguro de que deseas inhabilitar este usuario?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Sí, Inhabilitar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
                         $.ajax({
                             url: '../C_Usuario/C_eliminar_usuario.php',
                             method: 'POST',
@@ -213,14 +221,23 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                 filaUsuario.hide(); // Ocultar la fila de usuario de la tabla
                                 // $('#tablaAgenda').load('./V_usuario.php');
 
-                                // Notificar al usuario sobre el éxito
-                                alert(response);
+                                // Mostrar la alerta de éxito
+                                Swal.fire({
+                                            title: "Éxito",
+                                            text: "Registro Inactivo",
+                                            icon: "success"
+                                        }).then(() => {
+                                            setTimeout(function () {
+                                                window.location.href = "./V_Paciente.php";
+                                            }, 2000);
+                                        });
                             },
                             error: function (error) {
                                 console.error("Error al eliminar usuario: " + error.statusText);
                             }
                         });
                     }
+                });
                 });
             });
         </script>
