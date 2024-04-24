@@ -5,8 +5,8 @@ $id_rol = $_SESSION['IdRol'];
 $id_objeto = Obtener_Id_Objeto('V_modal_parametros');
 $Permisos_Objeto = Obtener_Permisos_Rol_Objeto($id_rol, $id_objeto);
 
-if ($Permisos_Objeto["Permiso_Consultar"] !== "1"){
-        header("Location: /PHP/Seguridad/Roles_permisos/permisos/V_error_permiso.php");   
+if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
+    header("Location: /PHP/Seguridad/Roles_permisos/permisos/V_error_permiso.php");
 }
 ?>
 <!DOCTYPE html>
@@ -55,22 +55,16 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1"){
 </head>
 
 <body>
-<?php 
-include '../../../../Recursos/Componentes/SideBar.html';
-include '../../../../Recursos/Componentes/header.php';
-?>
+    <?php
+    include '../../../../Recursos/Componentes/SideBar.html';
+    include '../../../../Recursos/Componentes/header.php';
+    ?>
     <!-- ======= Header ======= -->
 
     <main id="main" class="main">
 
         <div class="pagetitle">
             <h1>Mantenimiento de Parámetros</h1>
-            <!-- <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="Index.php">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav> -->
         </div><!-- End Page Title -->
 
         <div class="container mt-4">
@@ -87,18 +81,18 @@ include '../../../../Recursos/Componentes/header.php';
                     </div>
                     <!-- <form id="formularioParametros"> -->
 
-                        <div class="modal-body">
-                            <label for="parametro">Parámetro:</label>
-                            <input type="text" id="parametro" class="form-control input-sm mayuscula" placeholder="Nombre del parámetro">
-                            <p class="error" id="mensaje_error"></p>
-                            <label for="valorParametro">Valor:</label>
-                            <input type="text" id="valorParametro" class="form-control input-sm mayuscula" placeholder="Valor del parámetro">
-    
-                        </div>
-                        <div class="modal-footer">
-                            <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
-                            <button type="button" id="guardarParametro" class="btn btn-primary btn-block">Guardar</button>
-                        </div>
+                    <div class="modal-body">
+                        <label for="parametro">Parámetro:</label>
+                        <input type="text" id="parametro" class="form-control input-sm mayuscula" placeholder="Nombre del parámetro">
+                        <p class="error" id="mensaje_error"></p>
+                        <label for="valorParametro">Valor:</label>
+                        <input type="text" id="valorParametro" class="form-control input-sm mayuscula" placeholder="Valor del parámetro">
+
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> -->
+                        <button type="button" id="guardarParametro" class="btn btn-primary btn-block">Guardar</button>
+                    </div>
                     <!-- </form> -->
                 </div>
             </div>
@@ -161,9 +155,9 @@ include '../../../../Recursos/Componentes/header.php';
     </main>
     <!-- dentro del main va la tabla o informacion -->
 
-    <?php 
-include '../../../../Recursos/Componentes/footer.html';
-?>
+    <?php
+    include '../../../../Recursos/Componentes/footer.html';
+    ?>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

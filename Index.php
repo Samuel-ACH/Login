@@ -17,12 +17,12 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica RED</title>
-    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./EstilosLogin/images/pestana.png" type="image/x-icon">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/EstilosLogin/css/estilos.css">
+    <link rel="stylesheet" href="./EstilosLogin/css/estilos.css">
 
    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 
@@ -48,7 +48,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
             <div class="contenedor__login-register" id="formulario">
                 <!--Login-->
                 <form action="/PHP/Controladores/LoginController_be.php" method="POST" class="formulario__login"id="loginForm" >
-                    <img src="/EstilosLogin/images/logo.png" alt="Logo" class="logo">
+                    <img src="./EstilosLogin/images/logo.png" alt="Logo" class="logo">
                     <h2>Iniciar Sesión</h2>
                     <!-- Grupo: Correo -->
                     <div class="formulario__grupo" id="grupo__correo">
@@ -229,7 +229,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- <script type="module" src="/javascript/validacionIndex.js"></script> -->
-    <script type="module" src="/javascript/validacionAutoRegistro.js"></script>
-    <script src="/PHP/javascript/captcha.js"></script>
+    <script type="module" src="./PHP/javascript/validacionAutoRegistro.js"></script>
+    <script src="./PHP/javascript/captcha.js"></script>
 </body>
 </html>
