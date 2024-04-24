@@ -7,5 +7,5 @@ $a='CIERRE DE SESIÓN';
 $d= $_SESSION['usuario'].' FINALIZÓ SESIÓN.';
 session_destroy();
 bitacora($n,$a,$d); 
-header("location: ../Vistas/Index.php");
+header("location: /index.php");
 

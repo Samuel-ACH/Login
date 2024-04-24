@@ -71,12 +71,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
 
     <div class="pagetitle">
         <h1>Citas Canceladas</h1>
-        <!-- <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="Index.php">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav> -->
+        
     </div><!-- End Page Title -->
 
     <div class="container mt-4">

@@ -28,12 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          // Mensaje de éxito
          echo '
          <script>
-             MostrarAlerta("Exito", "EXITO", "Se Guardo correctamente", "../../../Vistas/Index.php");
+             MostrarAlerta("Exito", "EXITO", "Se Guardo correctamente", "/index.php");
          </script>
        ';
         
         // Redireccionar a la página principal o mostrar un mensaje de éxito
-        header("Location: ../../../Vistas/Index.php");
+        header("Location: /index.php");
         exit();
     } else {
         echo "Error al guardar los cambios: " . mysqli_error($conexion);
