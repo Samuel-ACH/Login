@@ -2,7 +2,7 @@
 session_start();
 include '../../../Controladores/Conexion/Conexion_be.php';
 include '../../../../Imagenes/base64.php';
- include '../../../Seguridad/Roles_permisos/permisos/Obtener_Id_Objeto.php';
+include '../../../Seguridad/Roles_permisos/permisos/Obtener_Id_Objeto.php';
 // include '../C_nuevo_permiso.php';
 
 $id_rol = $_SESSION['IdRol'];
@@ -104,16 +104,17 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                             // Recorrer los resultados y mostrarlos en la tabla
                             while ($fila = mysqli_fetch_assoc($resultado)) {
                             ?>
-                            <tr>
-                                <td> </td>
-                                <td><?php echo $fila['Rol']; ?></td>
-                                <td><?php echo $fila['Objeto']; ?></td>
-                                <td><?php echo $fila['Permiso_Insercion']; ?></td>
-                                <td><?php echo $fila['Permiso_Eliminacion']; ?></td>
-                                <td><?php echo $fila['Permiso_Actualizacion']; ?></td>
-                                <td><?php echo $fila['Permiso_Consultar']; ?></td>
-                                <td><?php echo $fila['Permiso_Reportes']; ?></td>
-                            </tr>
+                                <tr>
+                                    <td> </td>
+                                    <td><?php echo $fila['Rol']; ?></td>
+                                    <td><?php echo $fila['Id_Rol']; ?></td>
+                                    <td><?php echo $fila['Objeto']; ?></td>
+                                    <td><?php echo $fila['Permiso_Insercion']; ?></td>
+                                    <td><?php echo $fila['Permiso_Eliminacion']; ?></td>
+                                    <td><?php echo $fila['Permiso_Actualizacion']; ?></td>
+                                    <td><?php echo $fila['Permiso_Consultar']; ?></td>
+                                    <td><?php echo $fila['Permiso_Reportes']; ?></td>
+                                </tr>
 
                             <?php
                                 //  $correlativo++;
@@ -122,28 +123,26 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         </tbody>
                     </table>
                     <div>
-                        <button title="Editar permisos" class="btn btn-warning btn-sm pencil" id="editarpermisosbtn"
-                            onclick="abrirVentanaPermisos(<?php echo $fila['Id_Rol']; ?>)">
-                            <i class="bi bi-pencil"></i>Editar permisos</button>
+                        <button title="Editar permisos" class="btn btn-warning btn-sm pencil" id="editarpermisosbtn" onclick="abrirVentanaPermisos(<?php echo $fila['Id_Rol']; ?>)">
+                            <i class="bi bi-pencil"></i> Editar permisos</button>
                     </div>
                 </div>
             </div>
     </main>
 
     <script>
-    // Función para redirigir al hacer clic en el botón usuarios incativos
-    function abrirVentanaPermisos(idRol) {
-        // Redirige a la página usuariosInactivos.php
-        window.location.href = './V_editar_permisos.php';
-    }
+        // Función para redirigir al hacer clic en el botón usuarios incativos
+        function abrirVentanaPermisos(idRol) {
+            // Redirige a la página usuariosInactivos.php
+            window.location.href = './V_editar_permisos.php';
+        }
     </script>
 
     <?php
     include '../../../../Recursos/Componentes/footer.html';
     ?>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -185,149 +184,150 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
     }
     ?>
     <script type="text/javascript">
-    // REPORTE DE USUARIOS 
-    $(document).ready(function() {
-        $('#tablaPermisos').DataTable({
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
-            },
-            dom: 'lBfrtip',
-            paging: true,
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel"> Excel </i>',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6,
-                        7], // Índices de las columnas que quieres exportar
-                        modifier: {
-                            page: 'current'
-                        },
-                    }
+        // REPORTE DE USUARIOS 
+        $(document).ready(function() {
+            $('#tablaPermisos').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
                 },
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open',
-                    text: '<i class="fas fa-file-pdf"> PDF </i>',
-                    orientation: 'portrait',
-                    customize: function(doc) {
-                        // Calcula la longitud máxima de los datos por columna
-                        const maxLengths = [];
-                        doc.content.forEach(function(section) {
-                            if (section.table) {
-                                const tableData = section.table.body;
-
-                                // Inicializa la longitud máxima de cada columna
-                                if (maxLengths.length === 0) {
-                                    for (let i = 0; i < tableData[0].length; i++) {
-                                        maxLengths.push(0);
-                                    }
-                                }
-
-                                // Calcula la longitud máxima de los datos por columna
-                                tableData.forEach(function(row) {
-                                    row.forEach(function(cell, index) {
-                                        const cellLength = cell.text ?
-                                            cell.text.length : 0;
-                                        if (cellLength > maxLengths[
-                                                index]) {
-                                            maxLengths[index] =
-                                                cellLength;
-                                        }
-                                    });
-                                });
-                            }
-                        });
-
-                        // Establece los anchos de las columnas en función de las longitudes máximas
-                        doc.content.forEach(function(section) {
-                            if (section.table) {
-                                const totalLength = maxLengths.reduce((sum, length) =>
-                                    sum + length, 0);
-                                const columnWidths = maxLengths.map(length => (length /
-                                    totalLength) * 100 + '%');
-
-                                // Aplica los anchos calculados a la tabla
-                                section.table.widths = columnWidths;
-                                section.table.widths = columnWidths;
-                                section.table.body.forEach(row => {
-                                    row.forEach(cell => {
-                                        cell.alignment = 'center';
-                                    });
-                                });
-                            }
-                        });
-
-                        // Agregar un título al reporte
-                        var title = 'Reporte de Permisos';
-                        // Obtener la fecha y hora actual
-                        var now = new Date();
-                        var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now
-                            .getFullYear();
-                        var horas = now.getHours() + ':' + now.getMinutes() + ':' + now
-                            .getSeconds();
-                        // Agregar el título y la fecha/hora al PDF
-                        doc.content.splice(1, 0, {
-                            text: title,
-                            fontSize: 15,
-                            alignment: 'center'
-                        });
-                        doc.content.splice(2, 0, {
-                            text: 'Fecha: ' + date + '\nHora: ' + horas,
-                            alignment: 'left',
-                            margin: [0, 10, 0, -70], // [left, top, right, bottom]
-                        });
-                        doc.content.splice(3, 0, {
-                            margin: [0, -40, 0, 20],
-                            alignment: 'right',
-                            image: 'data:image/jpeg;base64,<?php echo $ImagenBase64; ?> ',
-                            width: 85,
-                            height: 100,
-                        });
-
-
-                        doc["footer"] = function(currentPage, pageCount) {
-                            return {
-                                margin: 10,
-                                columns: [{
-                                    fontSize: 10,
-                                    text: [{
-                                        text: "Página " +
-                                            currentPage.toString() +
-                                            " de " +
-                                            pageCount,
-                                        alignment: "center",
-                                        bold: true
-                                    }, ],
-                                    alignment: "center",
-                                }, ],
-                            };
-                        };
+                dom: 'lBfrtip',
+                paging: true,
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"> Excel </i>',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6,
+                                7
+                            ], // Índices de las columnas que quieres exportar
+                            modifier: {
+                                page: 'current'
+                            },
+                        }
                     },
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
-                        modifier: {
-                            page: 'current'
-                        },
-                    }
-                },
-            ],
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "Todos"]
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "defaultContent": "",
-                "title": "N°", // Título de la columna
-                "render": function(data, type, row, meta) {
-                    // Renderiza el número de fila
-                    return meta.row + 1;
-                }
-            }]
+                    {
+                        extend: 'pdfHtml5',
+                        download: 'open',
+                        text: '<i class="fas fa-file-pdf"> PDF </i>',
+                        orientation: 'portrait',
+                        customize: function(doc) {
+                            // Calcula la longitud máxima de los datos por columna
+                            const maxLengths = [];
+                            doc.content.forEach(function(section) {
+                                if (section.table) {
+                                    const tableData = section.table.body;
 
+                                    // Inicializa la longitud máxima de cada columna
+                                    if (maxLengths.length === 0) {
+                                        for (let i = 0; i < tableData[0].length; i++) {
+                                            maxLengths.push(0);
+                                        }
+                                    }
+
+                                    // Calcula la longitud máxima de los datos por columna
+                                    tableData.forEach(function(row) {
+                                        row.forEach(function(cell, index) {
+                                            const cellLength = cell.text ?
+                                                cell.text.length : 0;
+                                            if (cellLength > maxLengths[
+                                                    index]) {
+                                                maxLengths[index] =
+                                                    cellLength;
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+
+                            // Establece los anchos de las columnas en función de las longitudes máximas
+                            doc.content.forEach(function(section) {
+                                if (section.table) {
+                                    const totalLength = maxLengths.reduce((sum, length) =>
+                                        sum + length, 0);
+                                    const columnWidths = maxLengths.map(length => (length /
+                                        totalLength) * 100 + '%');
+
+                                    // Aplica los anchos calculados a la tabla
+                                    section.table.widths = columnWidths;
+                                    section.table.widths = columnWidths;
+                                    section.table.body.forEach(row => {
+                                        row.forEach(cell => {
+                                            cell.alignment = 'center';
+                                        });
+                                    });
+                                }
+                            });
+
+                            // Agregar un título al reporte
+                            var title = 'Reporte de Permisos';
+                            // Obtener la fecha y hora actual
+                            var now = new Date();
+                            var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now
+                                .getFullYear();
+                            var horas = now.getHours() + ':' + now.getMinutes() + ':' + now
+                                .getSeconds();
+                            // Agregar el título y la fecha/hora al PDF
+                            doc.content.splice(1, 0, {
+                                text: title,
+                                fontSize: 15,
+                                alignment: 'center'
+                            });
+                            doc.content.splice(2, 0, {
+                                text: 'Fecha: ' + date + '\nHora: ' + horas,
+                                alignment: 'left',
+                                margin: [0, 10, 0, -70], // [left, top, right, bottom]
+                            });
+                            doc.content.splice(3, 0, {
+                                margin: [0, -40, 0, 20],
+                                alignment: 'right',
+                                image: 'data:image/jpeg;base64,<?php echo $ImagenBase64; ?> ',
+                                width: 85,
+                                height: 100,
+                            });
+
+
+                            doc["footer"] = function(currentPage, pageCount) {
+                                return {
+                                    margin: 10,
+                                    columns: [{
+                                        fontSize: 10,
+                                        text: [{
+                                            text: "Página " +
+                                                currentPage.toString() +
+                                                " de " +
+                                                pageCount,
+                                            alignment: "center",
+                                            bold: true
+                                        }, ],
+                                        alignment: "center",
+                                    }, ],
+                                };
+                            };
+                        },
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            modifier: {
+                                page: 'current'
+                            },
+                        }
+                    },
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "defaultContent": "",
+                    "title": "N°", // Título de la columna
+                    "render": function(data, type, row, meta) {
+                        // Renderiza el número de fila
+                        return meta.row + 1;
+                    }
+                }]
+
+            });
         });
-    });
     </script>
 
 
