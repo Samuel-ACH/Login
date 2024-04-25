@@ -134,7 +134,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
     // Función para redirigir al hacer clic en el botón usuarios incativos
     function abrirVentanaPermisos(idRol) {
         // Redirige a la página usuariosInactivos.php
-        window.location.href = './V_editar_permisos.php';
+        window.location.href = '../permisos/V_editar_permisos.php';
     }
     </script>
 
@@ -172,19 +172,19 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 
 
     <?php
-    // // Ruta de la imagen
-    // $ruta_imagen = '../../../../Imagenes/logo3.jpeg';
+    // Ruta de la imagen
+    $ruta_imagen = '../../../../Imagenes/logo3.jpeg';
 
-    // // Verificar si el archivo existe
-    // if (file_exists($ruta_imagen)) {
-    //     // Leer el contenido de la imagen
-    //     $contenido_imagen = file_get_contents($ruta_imagen);
+    // Verificar si el archivo existe
+    if (file_exists($ruta_imagen)) {
+        // Leer el contenido de la imagen
+        $contenido_imagen = file_get_contents($ruta_imagen);
 
-    //     // Codificar la imagen en base64
-    //     $ImagenBase64 = base64_encode($contenido_imagen);
-    // }
+        // Codificar la imagen en base64
+        $ImagenBase64 = base64_encode($contenido_imagen);
+    }
     ?>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
     // REPORTE DE USUARIOS 
     $(document).ready(function() {
         $('#tablaPermisos').DataTable({
@@ -328,7 +328,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 
         });
     });
-    </script> -->
+    </script>
 
 
 </body>
