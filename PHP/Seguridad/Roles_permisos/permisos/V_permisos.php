@@ -124,7 +124,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                     <div>
                         <button title="Editar permisos" class="btn btn-warning btn-sm pencil" id="editarpermisosbtn"
                             onclick="abrirVentanaPermisos(<?php echo $fila['Id_Rol']; ?>)">
-                            <i class="bi bi-pencil"></i>Editar Permisos</button>
+                            <i class="bi bi-pencil"></i> Editar Permisos</button>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
     // Función para redirigir al hacer clic en el botón usuarios incativos
     function abrirVentanaPermisos(idRol) {
         // Redirige a la página usuariosInactivos.php
-        window.location.href = './V_editar_permisos.php';
+        window.location.href = '/PHP/Seguridad/Roles_permisos/permisos/V_editar_permisos.php';
     }
     </script>
 
