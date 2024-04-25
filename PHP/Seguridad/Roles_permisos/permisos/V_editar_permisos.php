@@ -155,22 +155,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
   <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
+  <script src="ruta/a/jspdf.min.js"></script>
 
   <?php
 // Ruta de la imagen
-// $ruta_imagen = '../../../../Imagenes/logo3.jpeg';
+$ruta_imagen = '../../../../Imagenes/logo3.jpeg';
 
-// // Verificar si el archivo existe
-// if (file_exists($ruta_imagen)) {
-//     // Leer el contenido de la imagen
-//     $contenido_imagen = file_get_contents($ruta_imagen);
+// Verificar si el archivo existe
+if (file_exists($ruta_imagen)) {
+    // Leer el contenido de la imagen
+    $contenido_imagen = file_get_contents($ruta_imagen);
 
-//     // Codificar la imagen en base64
-//     $ImagenBase64 = base64_encode($contenido_imagen);
-// }
+    // Codificar la imagen en base64
+    $ImagenBase64 = base64_encode($contenido_imagen);
+}
 ?>
 
-<!-- <script>
+<script>
     // REPORTE DE PARAMETROS 
     $(document).ready(function() {
         $('#tablaEditarPermisos').DataTable({
@@ -264,7 +265,7 @@
             }]
         });
     });
-</script> -->
+</script>
 </body>
 
 </html>
