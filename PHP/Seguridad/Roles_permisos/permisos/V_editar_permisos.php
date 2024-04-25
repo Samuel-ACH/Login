@@ -13,7 +13,7 @@ include '../../../Controladores/Conexion/Conexion_be.php';
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>CLÍNICA RED</title>
-    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./EstilosLogin/images/pestana.png" type="image/x-icon">
 
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -119,14 +119,12 @@ include '../../../Controladores/Conexion/Conexion_be.php';
                                 }
                                 ?>
                             </tbody>
+                        </form>
                     </table>
-                    </form>
                 </div>
             </div>
         </div>
     </main>
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
