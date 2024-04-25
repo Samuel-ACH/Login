@@ -109,7 +109,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                 </form>
 
                 <!--Register-->
-                <form action="/PHP/Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register" id="registerForm">
+                <form action="./PHP/Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register" id="registerForm">
                     <h2>Regístrate</h2>
                     <!-- GRUPO DNI -->
                     <div class="formulario__grupo" id="grupo__dni">
