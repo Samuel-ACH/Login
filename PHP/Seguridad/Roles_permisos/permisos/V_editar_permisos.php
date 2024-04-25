@@ -1,15 +1,15 @@
 <?php
-                    // session_start();
-                    include '../../../Controladores/Conexion/Conexion_be.php';
-                    // Verificar si el usuario está logueado
-                    ?>
+session_start();
+include '../../../Controladores/Conexion/Conexion_be.php';
+// Verificar si el usuario está logueado
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>CLÍNICA RED</title>
@@ -45,7 +45,7 @@
 
 <body>
 
-<?php
+    <?php
     include '../../../../Recursos/Componentes/header.php';
     include '../../../../Recursos/Componentes/SideBar.html';
     ?>
@@ -60,23 +60,23 @@
                 <div class="col-10">
                     <form action="../C_Permisos/C_editar_permiso.php" method="post">
                         <button id="guardarpermisobtn" class="btn btn-primary float-start">Guardar cambios</button>
-                    <table id="tablaEditarPermisos" class="table">
-                        <thead class="encabezado bg-light table-info">
-                            <tr>
-                                <th></th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Objeto</th>
-                                <th scope="col">Agregar</th>
-                                <th scope="col">Eliminar</th>
-                                <th scope="col">Actualizar</th>
-                                <th scope="col">Consultar</th>
-                                <th scope="col">Reportes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                // Realizar la consulta SQL para seleccionar los permisos de la base de datos
-                $sql = "SELECT 
+                        <table id="tablaEditarPermisos" class="table">
+                            <thead class="encabezado bg-light table-info">
+                                <tr>
+                                    <th></th>
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Objeto</th>
+                                    <th scope="col">Agregar</th>
+                                    <th scope="col">Eliminar</th>
+                                    <th scope="col">Actualizar</th>
+                                    <th scope="col">Consultar</th>
+                                    <th scope="col">Reportes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Realizar la consulta SQL para seleccionar los permisos de la base de datos
+                                $sql = "SELECT 
                             r.Rol AS Rol,
                             o.Objeto AS Objeto,
                             p.Permiso_Insercion AS Permiso_Insercion,
@@ -88,38 +88,38 @@
                         INNER JOIN tbl_ms_roles r ON p.Id_Rol = r.Id_Rol
                         INNER JOIN tbl_ms_objetos o ON p.Id_Objeto = o.Id_Objetos WHERE r.Id_Rol <> 1;";
 
-                $resultado = mysqli_query($conexion, $sql);
+                                $resultado = mysqli_query($conexion, $sql);
 
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    echo '<tr>';
-                    echo '<td></td>';
-                    echo '<td>' . $fila['Rol'] . '</td>';
-                    echo '<td>' . $fila['Objeto'] . '</td>';
-                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][agregar]">
+                                while ($fila = mysqli_fetch_assoc($resultado)) {
+                                    echo '<tr>';
+                                    echo '<td></td>';
+                                    echo '<td>' . $fila['Rol'] . '</td>';
+                                    echo '<td>' . $fila['Objeto'] . '</td>';
+                                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][agregar]">
                             <option value="1"' . ($fila['Permiso_Insercion'] == 1 ? 'selected' : '') . '>SI</option>
                             <option value="0"' . ($fila['Permiso_Insercion'] == 0 ? 'selected' : '') . '>NO</option>
                           </select></td>';
-                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][eliminar]">
+                                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][eliminar]">
                             <option value="1"' . ($fila['Permiso_Eliminacion'] == 1 ? 'selected' : '') . '>SI</option>
                             <option value="0"' . ($fila['Permiso_Eliminacion'] == 0 ? 'selected' : '') . '>NO</option>
                           </select></td>';
-                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][actualizar]">
+                                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][actualizar]">
                             <option value="1"' . ($fila['Permiso_Actualizacion'] == 1 ? 'selected' : '') . '>SI</option>
                             <option value="0"' . ($fila['Permiso_Actualizacion'] == 0 ? 'selected' : '') . '>NO</option>
                           </select></td>';
-                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][consultar]">
+                                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][consultar]">
                             <option value="1"' . ($fila['Permiso_Consultar'] == 1 ? 'selected' : '') . '>SI</option>
                             <option value="0"' . ($fila['Permiso_Consultar'] == 0 ? 'selected' : '') . '>NO</option>
                           </select></td>';
-                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][reportes]">
+                                    echo '<td><select name="permisos[' . $fila['Rol'] . '][' . $fila['Objeto'] . '][reportes]">
                             <option value="1"' . ($fila['Permiso_Reportes'] == 1 ? 'selected' : '') . '>SI</option>
                             <option value="0"' . ($fila['Permiso_Reportes'] == 0 ? 'selected' : '') . '>NO</option>
                           </select></td>';
-                    echo '</tr>';
-                }
-                ?>
-                        </tbody>
-                    </table>
+                                    echo '</tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </div>
@@ -129,11 +129,10 @@
 
 
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-   <!-- Vendor JS Files -->
-   <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="../../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../../../../assets/vendor/chart.js/chart.umd.js"></script>
     <script src="../../../../assets/vendor/echarts/echarts.min.js"></script>
@@ -147,125 +146,124 @@
     <script src="../../../../assets/js/main.js"></script>
     <!-- <link href="../../../../assets/vendor/simple-datatables/permisos.css" rel="stylesheet">  -->
 
-   <!-- ----------------CODIGO PARA GENERAR REPORTES------------------>
-  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> <!-- ESTILOS DE LA TABLA -->
-  <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> <!-- MOSTRAR BOTONES DE REPORTE -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> LIBRERIA DE EXCEL  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> <!-- IMPRIME PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
-  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
-  <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
-  <script src="ruta/a/jspdf.min.js"></script>
+    <!-- ----------------CODIGO PARA GENERAR REPORTES------------------>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> <!-- ESTILOS DE LA TABLA -->
+    <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> MOSTRAR BOTONES DE REPORTE -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> LIBRERIA DE EXCEL  -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> IMPRIME PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
 
-  <?php
-// Ruta de la imagen
-$ruta_imagen = '../../../../Imagenes/logo3.jpeg';
+    <?php
+    // // Ruta de la imagen
+    // $ruta_imagen = '../../../../Imagenes/logo3.jpeg';
 
-// Verificar si el archivo existe
-if (file_exists($ruta_imagen)) {
-    // Leer el contenido de la imagen
-    $contenido_imagen = file_get_contents($ruta_imagen);
+    // // Verificar si el archivo existe
+    // if (file_exists($ruta_imagen)) {
+    //     // Leer el contenido de la imagen
+    //     $contenido_imagen = file_get_contents($ruta_imagen);
 
-    // Codificar la imagen en base64
-    $ImagenBase64 = base64_encode($contenido_imagen);
-}
-?>
+    //     // Codificar la imagen en base64
+    //     $ImagenBase64 = base64_encode($contenido_imagen);
+    // }
+    ?>
 
-<script>
-    // REPORTE DE PARAMETROS 
-    $(document).ready(function() {
-        $('#tablaEditarPermisos').DataTable({
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
-            },
-            dom: 'lBfrtip',
-            paging: true,
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel"> Excel </i>',
-                    exportOptions: {
-                        columns: [0, 1, 2], // Índices de las columnas que quieres exportar
-                        modifier: {
-                            page: 'current'
-                        },
-                    }
+    <script>
+        // REPORTE DE PARAMETROS 
+        $(document).ready(function() {
+            $('#tablaEditarPermisos').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
                 },
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open',
-                    text: '<i class="fas fa-file-pdf">  PDF </i>',
-                    orientation: 'landscape',
-                    customize: function(doc) {
-                       
-                        // Agregar un título al reporte
-                        var title = 'Reporte Permisos Asignados';
-                        // Obtener la fecha y hora actual
-                        var now = new Date();
-                        var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
-                        var horas = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-                        // Agregar el título y la fecha/hora al PDF
-                        doc.content.splice(1, 0, {
-                            text: title,
-                            fontSize: 15,
-                            alignment: 'center'
-                        });
-                        doc.content.splice(2, 0, {
-                            text: 'Fecha: ' + date + '\nHora: ' + horas,
-                            alignment: 'left',
-                            margin: [0, 10, 0, -70], // [left, top, right, bottom]
-                        });
-                        doc.content.splice(3, 0, {
-
-                            margin: [0, -40, 0, 20],
-                            alignment: 'right',
-                            image: 'data:image/jpeg;base64,<?php echo $ImagenBase64; ?> ',
-                            width: 85,
-                            height: 100,
-                        });
-
-                        doc["footer"] = function(currentPage, pageCount) {
-                            return {
-                                margin: 10,
-                                columns: [{
-                                    fontSize: 10,
-                                    text: [{
-                                        text: "Página " +
-                                            currentPage.toString() +
-                                            " de " +
-                                            pageCount,
-                                        alignment: "center",
-                                        bold: true
-                                    }, ],
-                                    alignment: "center",
-                                }, ],
-                            };
-                        };
+                dom: 'lBfrtip',
+                paging: true,
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"> Excel </i>',
+                        exportOptions: {
+                            columns: [0, 1, 2], // Índices de las columnas que quieres exportar
+                            modifier: {
+                                page: 'current'
+                            },
+                        }
                     },
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
-                        modifier: {
-                            page: 'current'
+                    {
+                        extend: 'pdfHtml5',
+                        download: 'open',
+                        text: '<i class="fas fa-file-pdf">  PDF </i>',
+                        orientation: 'landscape',
+                        customize: function(doc) {
+
+                            // Agregar un título al reporte
+                            var title = 'Reporte Permisos Asignados';
+                            // Obtener la fecha y hora actual
+                            var now = new Date();
+                            var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+                            var horas = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+                            // Agregar el título y la fecha/hora al PDF
+                            doc.content.splice(1, 0, {
+                                text: title,
+                                fontSize: 15,
+                                alignment: 'center'
+                            });
+                            doc.content.splice(2, 0, {
+                                text: 'Fecha: ' + date + '\nHora: ' + horas,
+                                alignment: 'left',
+                                margin: [0, 10, 0, -70], // [left, top, right, bottom]
+                            });
+                            doc.content.splice(3, 0, {
+
+                                margin: [0, -40, 0, 20],
+                                alignment: 'right',
+                                image: 'data:image/jpeg;base64,<?php echo $ImagenBase64; ?> ',
+                                width: 85,
+                                height: 100,
+                            });
+
+                            doc["footer"] = function(currentPage, pageCount) {
+                                return {
+                                    margin: 10,
+                                    columns: [{
+                                        fontSize: 10,
+                                        text: [{
+                                            text: "Página " +
+                                                currentPage.toString() +
+                                                " de " +
+                                                pageCount,
+                                            alignment: "center",
+                                            bold: true
+                                        }, ],
+                                        alignment: "center",
+                                    }, ],
+                                };
+                            };
                         },
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            modifier: {
+                                page: 'current'
+                            },
+                        }
+                    },
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "defaultContent": "",
+                    "title": "N°", // Título de la columna
+                    "render": function(data, type, row, meta) {
+                        // Renderiza el número de fila
+                        return meta.row + 1;
                     }
-                },
-            ],
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "Todos"]
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "defaultContent": "",
-                "title": "N°", // Título de la columna
-                "render": function(data, type, row, meta) {
-                    // Renderiza el número de fila
-                    return meta.row + 1;
-                }
-            }]
+                }]
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

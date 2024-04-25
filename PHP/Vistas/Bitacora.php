@@ -111,7 +111,7 @@ include '../Controladores/Conexion/Conexion_be.php';
                 </div>
 
               </div>
-            </form>
+            </form><br><br>
 
             <!-- <button type="button" class="btn btn-danger">
               <i class="fas fa-trash btn-depurar"></i> Depurar</button> -->
@@ -134,7 +134,7 @@ include '../Controladores/Conexion/Conexion_be.php';
             b.Accion,
             b.Descripcion
         FROM tbl_bitacora b
-        INNER JOIN tbl_ms_usuario u ON b.Id_Usuario = u.Id_Usuario ORDER BY b.fecha DESC";
+        INNER JOIN tbl_ms_usuario u ON b.Id_Usuario = u.Id_Usuario ORDER BY b.Fecha DESC";
                 $resultado = mysqli_query($conexion, $sql);
                 // Recorrer los resultados y mostrarlos en la tabla
                 foreach ($resultado as $fila) {
@@ -197,7 +197,7 @@ include '../Controladores/Conexion/Conexion_be.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> <!-- LIBRERIA PDF -->
   <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> <!-- LIBRERIA HTML -->
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
-  <script src="ruta/a/jspdf.min.js"></script>
+  <!-- <script src="ruta/a/jspdf.min.js"></script> -->
 
   <?php
   // Ruta de la imagen
