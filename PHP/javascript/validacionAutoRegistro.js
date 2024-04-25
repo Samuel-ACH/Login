@@ -200,7 +200,7 @@ let validarInputDireccion = (e) => {
 
     return estadoValidacion;
 };
-
+ 
 document.addEventListener('DOMContentLoaded', function () {
   var estadoValidacion = { isDniExist: false };
   var dniInput = document.getElementById('dni');
