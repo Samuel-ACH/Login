@@ -113,8 +113,8 @@ include '../Controladores/Conexion/Conexion_be.php';
               </div>
             </form>
 
-            <button type="button" class="btn btn-danger">
-              <i class="fas fa-trash btn-depurar"></i> Depurar</button>
+            <!-- <button type="button" class="btn btn-danger">
+              <i class="fas fa-trash btn-depurar"></i> Depurar</button> -->
             <table class="table " id="tablaAgenda">
               <thead class="encabezado bg-light table-info">
                 <tr>
@@ -213,10 +213,10 @@ include '../Controladores/Conexion/Conexion_be.php';
   }
   ?>
 
-<script>
-$(document).ready(function () {
-   inicializarTable();
-}); 
-</script>
+  <script>
+    $(document).ready(function() {
+      inicializarTable();
+    });
+  </script>
 
 </html>

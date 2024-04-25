@@ -124,7 +124,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                     <div>
                         <button title="Editar permisos" class="btn btn-warning btn-sm pencil" id="editarpermisosbtn"
                             onclick="abrirVentanaPermisos(<?php echo $fila['Id_Rol']; ?>)">
-                            <i class="bi bi-pencil"></i>Editar permisos</button>
+                            <i class="bi bi-pencil"></i>Editar Permisos</button>
                     </div>
                 </div>
             </div>
