@@ -58,9 +58,9 @@ include '../../../Controladores/Conexion/Conexion_be.php';
         <div class="container mt-4">
             <div class="row">
                 <div class="col-10">
-                    <form action="../C_Permisos/C_editar_permiso.php" method="post">
-                        <button id="guardarpermisobtn" class="btn btn-primary float-start">Guardar cambios</button>
-                        <table id="tablaEditarPermisos" class="table">
+                    <table id="tablaEditarPermisos" class="table">
+                        <form action="../C_Permisos/C_editar_permiso.php" method="post">
+                            <button id="guardarpermisobtn" class="btn btn-primary float-start">Guardar cambios</button>
                             <thead class="encabezado bg-light table-info">
                                 <tr>
                                     <th></th>
@@ -119,15 +119,12 @@ include '../../../Controladores/Conexion/Conexion_be.php';
                                 }
                                 ?>
                             </tbody>
-                        </table>
+                    </table>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-
-
-
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

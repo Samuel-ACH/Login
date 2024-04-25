@@ -131,13 +131,13 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
             </div>
     </main>
 
-    <script>
+    <!-- <script>
         // Función para redirigir al hacer clic en el botón usuarios incativos
         function abrirVentanaPermisos(idRol) {
             // Redirige a la página usuariosInactivos.php
             window.location.href = '/PHP/Seguridad/Roles_permisos/permisos/V_editar_permisos.php';
         }
-    </script>
+    </script> -->
 
     <?php
     include '../../../../Recursos/Componentes/footer.html';
