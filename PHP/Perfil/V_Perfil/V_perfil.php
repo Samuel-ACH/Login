@@ -68,7 +68,7 @@ include '../../../Recursos/Componentes/SideBar.html';
                         </ul>
                         <button id="btneditarperfil" class="btn btn-primary" onclick="editarPerfil()">Editar Perfil</button>
                         <form action="./V_CambiarcontrasenaPerfil.php" method="POST">
-                        <button id="btncambiocontraseñaperfil" class="btn btn-primary" onclick="cambiarContraseña()">Cambiar Contraseña</button>
+                        <button id="btncambiocontraseñaperfil" class="btn btn-primary">Cambiar Contraseña</button>
                         </form>
                         <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
                     </div>
