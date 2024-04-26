@@ -33,7 +33,7 @@ if (isset($_POST['atenderCita']) && isset($_POST['idCitaTerapia']) && isset($_PO
 // Verificar si la variable de sesión no está establecida
 if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
     // Incluir el archivo solo si no se ha ejecutado antes
-    include '/PHP/Negocio/Procesos/C_procesos/C_detalle_expediente.php';
+    include '../../Procesos/C_procesos/C_detalle_expediente.php';
 } else {
     // Eliminar la variable de sesión para permitir que el código se ejecute nuevamente
     unset($_SESSION['detalle_expediente_ejecutado']);
