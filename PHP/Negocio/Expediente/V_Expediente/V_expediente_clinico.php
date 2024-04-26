@@ -178,14 +178,11 @@ if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
 
     <!-- Datatables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="../../../../EstilosLogin/js/script.js"></script>
+   
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="module" src="../../../javascript/validacionNuevoRegistroUsuario.js"></script>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
+   
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
 
