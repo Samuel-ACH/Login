@@ -57,7 +57,7 @@ if (!isset($_SESSION["correo"])) {
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Clínica RED - Rehabilitación y Electrodiagnóstico </title>
-    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../EstilosLogin/images/pestana.png" type="image/x-icon">
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -220,8 +220,8 @@ if (!isset($_SESSION["correo"])) {
                                             <!-- Boton para el rol terapeuta -->
                                             <?php if ($IdRol === '7' && $filas[12] === '3') : ?>
                                                 <form action="../Negocio/Procesos/C_procesos/C_estado_finalizado_cita.php" method="POST">
-                                                    <button type="submit" class="btn btn-danger" id="guardarDatos" style="margin-top: 3px;" name="guardarDatos">Finalizar</button>
                                                     <input type="hidden" readonly name="Id_Cita_U" id="Id_Cita_U" value="<?php echo $filas[0]; ?>">
+                                                    <button type="submit" class="btn btn-danger" id="guardarDatos" style="margin-top: 3px;" name="guardarDatos">Finalizar</button>
                                                 </form>
                                             <?php endif; ?>
                                         </td>
