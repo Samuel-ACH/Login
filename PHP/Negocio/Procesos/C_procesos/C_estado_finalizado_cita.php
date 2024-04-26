@@ -1,10 +1,10 @@
 <?php
 session_start();
-include('../../../Controladores/bitacora.php');
+include('/PHP/Controladores/bitacora.php');
 // Verificar si se ha confirmado el envío
 if (isset($_POST['guardarDatos'])) {
     // Realizar la actualización del estado de la cita en la base de datos
-    include '../../../Controladores/Conexion/Conexion_be.php';
+    include '/PHP/Controladores/Conexion/Conexion_be.php';
     
 
     // Obtener el ID de la cita
@@ -16,7 +16,7 @@ if (isset($_POST['guardarDatos'])) {
     if (mysqli_query($conexion, $sql)) {
         $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
         $a='FINALIZAR';
-        $d="LA CITA CON ID ". $idCita." SE HA FINALIZADO.";
+        $d="LA CITA CON ID ". $idCita ." SE HA FINALIZADO.";
         bitacora($n, $a, $d);
         // echo "El estado de la cita se ha actualizado correctamente.";
         header("Location: ../../../Vistas/Main.php");
