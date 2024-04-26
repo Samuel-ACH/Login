@@ -173,89 +173,11 @@ include '../../../Controladores/Conexion/Conexion_be.php';
                 },
                 dom: 'lBfrtip',
                 paging: true,
-                buttons: [{
-                        extend: 'excelHtml5',
-                        text: '<i class="fas fa-file-excel"> Excel </i>',
-                        exportOptions: {
-                            columns: [0, 1, 2], // Índices de las columnas que quieres exportar
-                            modifier: {
-                                page: 'current'
-                            },
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        download: 'open',
-                        text: '<i class="fas fa-file-pdf">  PDF </i>',
-                        orientation: 'landscape',
-                        customize: function(doc) {
-
-                            // Agregar un título al reporte
-                            var title = 'Reporte Permisos Asignados';
-                            // Obtener la fecha y hora actual
-                            var now = new Date();
-                            var date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
-                            var horas = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-                            // Agregar el título y la fecha/hora al PDF
-                            doc.content.splice(1, 0, {
-                                text: title,
-                                fontSize: 15,
-                                alignment: 'center'
-                            });
-                            doc.content.splice(2, 0, {
-                                text: 'Fecha: ' + date + '\nHora: ' + horas,
-                                alignment: 'left',
-                                margin: [0, 10, 0, -70], // [left, top, right, bottom]
-                            });
-                            doc.content.splice(3, 0, {
-
-                                margin: [0, -40, 0, 20],
-                                alignment: 'right',
-                                image: 'data:image/jpeg;base64,<?php echo $ImagenBase64; ?> ',
-                                width: 85,
-                                height: 100,
-                            });
-
-                            doc["footer"] = function(currentPage, pageCount) {
-                                return {
-                                    margin: 10,
-                                    columns: [{
-                                        fontSize: 10,
-                                        text: [{
-                                            text: "Página " +
-                                                currentPage.toString() +
-                                                " de " +
-                                                pageCount,
-                                            alignment: "center",
-                                            bold: true
-                                        }, ],
-                                        alignment: "center",
-                                    }, ],
-                                };
-                            };
-                        },
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
-                            modifier: {
-                                page: 'current'
-                            },
-                        }
-                    },
-                ],
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "Todos"]
                 ],
-                "columnDefs": [{
-                    "targets": 0,
-                    "data": null,
-                    "defaultContent": "",
-                    "title": "N°", // Título de la columna
-                    "render": function(data, type, row, meta) {
-                        // Renderiza el número de fila
-                        return meta.row + 1;
-                    }
-                }]
+
             });
         });
     </script>
