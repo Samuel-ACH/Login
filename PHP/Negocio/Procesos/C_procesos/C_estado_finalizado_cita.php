@@ -1,5 +1,12 @@
 <?php
-session_start();
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
+
 include('/PHP/Controladores/bitacora.php');
 // Verificar si se ha confirmado el envío
 if (isset($_POST['guardarDatos'])) {
