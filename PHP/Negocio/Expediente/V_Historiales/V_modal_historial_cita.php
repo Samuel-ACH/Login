@@ -73,7 +73,7 @@ if (isset($_POST['guardarDatos']) && isset($_POST['idCitaTerapia'])) {
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"> </script> <!-- ICONOS -->
 
     <!-- librerias javascript -->
-    <script src="../C_Cita/C_funciones_citas.js"></script> <!-- Funciones para el CRUD -->
+    <script src="/PHP/Negocio/Cita/C_Cita/C_funciones_citas.js"></script> <!-- Funciones para el CRUD -->
     <!-- <script type="module" src="../C_Parametros/C_validacion_parametros.js"></script> Funciones de validación -->
     <script src="../../../../librerias/bootstrap/js/bootstrap.js"></script> <!-- libreria Bootstrap -->
     <script src="../../../../librerias/alertifyjs/js/alertify.js"></script> <!-- libreria Alertify -->
