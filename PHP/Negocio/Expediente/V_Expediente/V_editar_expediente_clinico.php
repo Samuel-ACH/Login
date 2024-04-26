@@ -189,8 +189,8 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Expediente'])) {
             const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
             // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
             if (confirmacion) {
-                // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)
-               
+                // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta.
+                windows.location.href = "./V_modal_expediente.php";
             }
         }
     </script>

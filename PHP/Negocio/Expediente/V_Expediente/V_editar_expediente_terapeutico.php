@@ -106,7 +106,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
 
     <?php
     include '../../../../Recursos/Componentes/header.php';
-    include '../../../../Recursos/Componentes/Sidebar.html';
+    include '/Recursos/Componentes/Sidebar.html';
     ?>
 
     <main id="main" class="table">
