@@ -93,7 +93,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
 					
                     <div id="captcha" class="text-center captcha">
 						<div class="g-recaptcha"
-							data-sitekey="6LfELoUpAAAAABrjWzKSh6IDaecUlUPc12AqY4nU">
+							data-sitekey="6Le8iccpAAAAANRyKJx0fktHpHcKx7vR4kzaAD-G">
 						</div>
 					</div>
 					<!-- fin del recaptcha-->

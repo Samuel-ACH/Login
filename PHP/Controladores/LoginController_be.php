@@ -30,7 +30,7 @@ if (mysqli_num_rows($verificar_login) > 0) {
                 $mensajeError = "Es necesario completar el captcha para el primer inicio de sesión.";
             } else {
                 $captcha = $_POST['g-recaptcha-response'];
-                $secret = '6LfELoUpAAAAALBmm46pJrsG3JndwpjHS1GvJbNk';
+                $secret = '6Le8iccpAAAAANluE70ZCc5iLDvhxxT-UxnBESih';
                 $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
                 var_dump($response);
                 $arr = json_decode($response, TRUE);
