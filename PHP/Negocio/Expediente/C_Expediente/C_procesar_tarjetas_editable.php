@@ -1,5 +1,12 @@
 <?php
-session_start();
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
+
 if (isset($_SESSION['Detalle_Terapia'])) {
     // $Id_Detalle_Terapia = $_SESSION['Detalle_Terapia'];
 } else {

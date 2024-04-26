@@ -1,5 +1,12 @@
 <?php
-session_start();
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Id_Detalle_Terapia = $_SESSION['Id_Detalle_Terapia'];
     // Obtener los datos del cuerpo de la solicitud POST
