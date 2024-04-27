@@ -6,11 +6,13 @@ include("../../../Controladores/Conexion/Conexion_be.php");
 <div class="row">
 
     <div class="col-sm-12">
-        <a href="../V_Cita/V_modal_cita.php"> 
-            <button type="button" class="btn btn-primary btn_regresar">Regresar</button>
-        </a>
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaCitasCanceladasLoad" class="table">
+        <a href="./V_modal_cita.php">
+                <button class="btn btn-primary btn-agregar">
+                    <i class="fa-solid fa-plus"></i> Agendar Cita
+                </button>
+            </a>
             <thead class="encabezado bg-light table-info">
 
                 <tr>
