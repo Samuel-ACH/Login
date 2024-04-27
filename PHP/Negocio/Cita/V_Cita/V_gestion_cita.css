@@ -22,4 +22,9 @@
   .btn-cambio-estado{
     max-width: 100%;
   }
+
+  .btn_regresar {
+    width: 60%;
+    height: 50%;
+  }
   

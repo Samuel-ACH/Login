@@ -2,12 +2,12 @@
 include("../../../Controladores/Conexion/Conexion_be.php");
 // include("../../../../Imagenes/base64.php");
 ?>
-
+<link href="./V_gestion_cita.css" rel="stylesheet">
 <div class="row">
 
     <div class="col-sm-12">
         <a href="../V_Cita/V_modal_cita.php"> 
-            <button type="button" class="btn btn-primary" style= width: 60px>Regresar</button>
+            <button type="button" class="btn btn-primary btn_regresar">Regresar</button>
         </a>
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaCitasCanceladasLoad" class="table">
