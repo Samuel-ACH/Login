@@ -22,7 +22,7 @@ if (!empty($correo2)) {
           
          // $correo3 = $_POST ['correo3'];
           $captcha = $_POST ['g-recaptcha-response'];
-          $secret = '6LfELoUpAAAAALBmm46pJrsG3JndwpjHS1GvJbNk';
+          $secret = '6LclhcgpAAAAALXq-MUx0XdFl3MI3YhnbKTyYsmJ';
           $response = file_get_contents(
             "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
 
