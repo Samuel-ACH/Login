@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../../../Recursos/SweetAlerts.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 //crear conexion
 require_once '../../../Controladores/Conexion/Conexion_be.php';
 
@@ -22,15 +22,15 @@ $query = "INSERT INTO tbl_paciente (Nombre, Direccion, FechaNacimiento, IdGenero
 $resultado_query = mysqli_query($conexion, $query);
 $pacienteID = mysqli_insert_id($conexion);
 if ($resultado_query) {
-     $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-     $a='REGISTRAR';
-     $d='PACIENTE '. $pacienteID .' HA SIDO REGISTRADO';
-     bitacora($n, $a, $d);
-    // echo '
-    //     <script>
-    //         MostrarAlerta("success", "¡GENIAL!", "Paciente almacenado correctamente.", "../V_Paciente/V_Paciente.php");
-    //     </script>
-    // ';
+    //  $n=$_SESSION['id_D'];          //obtiene valor de la variable session
+    //  $a='REGISTRAR';
+    //  $d='PACIENTE '. $pacienteID .' HA SIDO REGISTRADO';
+    //  bitacora($n, $a, $d);
+    echo '
+        <script>
+            MostrarAlerta("success", "¡GENIAL!", "Paciente almacenado correctamente.", "../V_Paciente/V_Paciente.php");
+        </script>
+    ';
 } else {
     echo '
         <script>
