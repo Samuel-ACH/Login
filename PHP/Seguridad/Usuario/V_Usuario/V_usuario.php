@@ -228,7 +228,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                             icon: "success"
                                         }).then(() => {
                                             setTimeout(function () {
-                                                window.location.href = "./V_Paciente.php";
+                                                //window.location.href = "./V_Paciente.php";
                                             }, 2000);
                                         });
                             },
