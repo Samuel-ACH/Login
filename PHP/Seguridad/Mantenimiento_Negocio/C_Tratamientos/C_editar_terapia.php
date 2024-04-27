@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../../Controladores/Conexion/Conexion_be.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 
 
 $idTipoTerapia = $_POST['idTipoTerapia'];
@@ -10,7 +10,7 @@ $tratamiento = strtoupper($_POST['tratamiento_E']);
 $sql = "UPDATE tbl_tipo_terapia SET Nombre = '$tratamiento' WHERE idTipoTerapia = '$idTipoTerapia'";
 
     echo $resultado = mysqli_query($conexion, $sql);
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
-    $a='EDITAR';
-    $d="SE HA EDITADO EL TIPO DE TRATAMIENTO ". $tratamiento.".";
-    bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
+    // $a='EDITAR';
+    // $d="SE HA EDITADO EL TIPO DE TRATAMIENTO ". $tratamiento.".";
+    // bitacora($n, $a, $d);

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../../Controladores/Conexion/Conexion_be.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 
 // Verificar si las variables de sesión existen
 if (isset($_SESSION['Id_Tipo_Tratamiento'])) {
@@ -24,9 +24,9 @@ $tratamiento = strtoupper($_POST['tratamiento']);
 $sql = "INSERT INTO tbl_tipo_terapia (Nombre, Id_Tipo_Tratamiento) VALUES ('$tratamiento', '$Id_Tipo_Tratamiento')";
 
     echo $resultado = mysqli_query($conexion, $sql);
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
-    $a='AGREGAR';
-    $d="SE HA AGREGADO EL TIPO DE EXAMEN ". $tratamiento.".";
-    bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
+    // $a='AGREGAR';
+    // $d="SE HA AGREGADO EL TIPO DE EXAMEN ". $tratamiento.".";
+    // bitacora($n, $a, $d);
    
 ?>
