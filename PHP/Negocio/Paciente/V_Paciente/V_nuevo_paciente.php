@@ -1,5 +1,6 @@
 <?php
 include('../../../../Recursos/SweetAlerts.php');
+include '../../../Controladores/Conexion/Conexion_be.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ include('../../../../Recursos/SweetAlerts.php');
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>ClÍNICA RED</title>
-    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./EstilosLogin/images/pestana.png" type="image/x-icon">
 
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -47,9 +48,6 @@ include('../../../../Recursos/SweetAlerts.php');
     include '../../../../Recursos/Componentes/SideBar.html';
     ?>
 
-    <?php
-    include '../../../Controladores/Conexion/Conexion_be.php';
-    ?>
 
     <main id="main" class="table">
         <div class="container mt-4">
@@ -232,7 +230,7 @@ include('../../../../Recursos/SweetAlerts.php');
                                     </div>
                                     </td>
                                     <td>
-                                        <button id="Btncancelar" class="btn btn-danger">Cancelar</button>
+                                        <button id="Btncancelar" class="btn btn-danger" href="./V_Paciente">Cancelar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -244,7 +242,7 @@ include('../../../../Recursos/SweetAlerts.php');
         </div>
     </main>
 
-    <script>
+    <!-- <script>
     var Btncancelar = document.getElementById('Btncancelar');
     Btncancelar.addEventListener('click', confirmarCancelar);
 
@@ -271,7 +269,7 @@ include('../../../../Recursos/SweetAlerts.php');
             }
         });
     }
-</script>
+</script> -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <br><br><br>
@@ -298,7 +296,6 @@ include('../../../../Recursos/SweetAlerts.php');
 
     <!-- Datatables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="../../../../EstilosLogin/js/script.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

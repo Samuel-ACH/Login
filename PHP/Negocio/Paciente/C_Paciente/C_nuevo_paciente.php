@@ -1,9 +1,9 @@
 <?php
-include '../../../Controladores/Conexion/Conexion_be.php';
+session_start();
 include('../../../../Recursos/SweetAlerts.php');
 include('../../../Controladores/bitacora.php');
-session_start();
 //crear conexion
+require_once '../../../Controladores/Conexion/Conexion_be.php';
 
 // Recibir datos del formulario de nuevo paciente
 $nombre = strtoupper($_POST['nombre']);
@@ -26,11 +26,11 @@ if ($resultado_query) {
      $a='REGISTRAR';
      $d='PACIENTE '. $pacienteID .' HA SIDO REGISTRADO';
      bitacora($n, $a, $d);
-    echo '
-        <script>
-            MostrarAlerta("success", "¡GENIAL!", "Paciente almacenado correctamente.", "../V_Paciente/V_Paciente.php");
-        </script>
-    ';
+    // echo '
+    //     <script>
+    //         MostrarAlerta("success", "¡GENIAL!", "Paciente almacenado correctamente.", "../V_Paciente/V_Paciente.php");
+    //     </script>
+    // ';
 } else {
     echo '
         <script>
