@@ -271,8 +271,11 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(90, 5, utf8_decode($fila3['Resultado']), 0, 1, 'L');
 }
 
-
-$nombre_archivo_pdf = 'Expediente Clinico ' . $nombre['PACIENTE'] . '.pdf';
+if (isset($nombre) && isset($nombre['PACIENTE'])) {
+    $nombre_archivo_pdf = 'Expediente Clinico ' . $nombre['PACIENTE'] . '.pdf';
+} else {
+    $nombre_archivo_pdf = 'Expediente Clinico Sin Nombre.pdf';
+}
 
 $pdf->Output($nombre_archivo_pdf, 'I');
 ?>

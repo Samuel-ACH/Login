@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 }
 
 include('../../../Controladores/Conexion/Conexion_be.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 
 $idCita =$_POST['$idCita'];
 $motivoCita = strtoupper($_POST['motivoCita']);
@@ -25,8 +25,8 @@ $sql = "INSERT INTO tbl_cita_terapeutica (Descripcion_Cita, Fecha_Registro, Fech
    
    echo $resultado = mysqli_query($conexion, $sql);  
     $citaID = mysqli_insert_id($conexion);
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
-    $a='AGENDAR';
-    $d='CITA '. $citaID.' FUE AGENDADA PARA EL '.$fechaCita.' A LAS '.$horaCita.' PARA EL PACIENTE '.$id_Paciente;
-    bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
+    // $a='AGENDAR';
+    // $d='CITA '. $citaID.' FUE AGENDADA PARA EL '.$fechaCita.' A LAS '.$horaCita.' PARA EL PACIENTE '.$id_Paciente;
+    // bitacora($n, $a, $d);
 ?>
