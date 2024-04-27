@@ -41,7 +41,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
                 CT.Id_Especialista = U.Id_Usuario
             INNER JOIN tbl_paciente AS P
             ON
-                CT.Id_Paciente = p.Id_Paciente
+                CT.Id_Paciente = P.Id_Paciente
             WHERE
                 CT.Id_Estado_Cita = 5
             ORDER BY CT.Id_Estado_Cita = 2 DESC, CT.Hora_Cita ASC";
