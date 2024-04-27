@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 if (isset($_POST['guardarDatos'])) {
     // Realizar la actualización del estado de la cita en la base de datos
     include '../../../Controladores/Conexion/Conexion_be.php';
-    include('../../../Controladores/bitacora.php');
+    // include('../../../Controladores/bitacora.php');
 
     if (isset($_SESSION['datosPaciente'])) {
         // Obtener los datos del paciente de las variables de sesión
@@ -26,10 +26,10 @@ if (isset($_POST['guardarDatos'])) {
         if (mysqli_query($conexion, $sql)) {
             // echo "El estado de la cita se ha actualizado correctamente.";
             header("Location: ../../../Vistas/Main.php");
-            $n = $_SESSION['id_D'];          //obtiene valor de la variable sesion
-            $a = 'FINALIZAR';
-            $d = "LA CITA CON ID " . $idCita . " SE HA FINALIZADO.";
-            bitacora($n, $a, $d);
+            // $n = $_SESSION['id_D'];          //obtiene valor de la variable sesion
+            // $a = 'FINALIZAR';
+            // $d = "LA CITA CON ID " . $idCita . " SE HA FINALIZADO.";
+            // bitacora($n, $a, $d);
         } else {
             echo "Error al actualizar el estado de la cita: " . mysqli_error($conexion);
         }
