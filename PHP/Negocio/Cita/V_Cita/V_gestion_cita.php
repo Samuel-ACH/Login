@@ -163,7 +163,7 @@ if (file_exists($ruta_imagen)) {
                 {
                     download: 'open',
 
-                    <?php if (!$ocultarActualizacion) : ?>
+                    <?php if (!$ocultarReportes) : ?>
                         extend: 'pdfHtml5',
                         text: '<i class="fas fa-file-pdf">  PDF </i>',
                     <?php endif; ?>
