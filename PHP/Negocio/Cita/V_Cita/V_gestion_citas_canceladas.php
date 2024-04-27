@@ -6,8 +6,8 @@ include("../../../Controladores/Conexion/Conexion_be.php");
 <div class="row">
 
     <div class="col-sm-12">
-        <a href="./V_modal_cita"> 
-            <button type="button" aria-label="Close">Regresar</button>
+        <a href="../V_Cita/V_modal_cita.php"> 
+            <button type="button" class="btn btn-primary">Regresar</button>
         </a>
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaCitasCanceladasLoad" class="table">
