@@ -1,5 +1,5 @@
 <?php
-include '/PHP/Controladores/Conexion/Conexion_be.php';
+include '../../../Controladores/Conexion/Conexion_be.php';
 include('../../../../Recursos/SweetAlerts.php');
 include('../../../Controladores/bitacora.php');
 session_start();
