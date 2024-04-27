@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 }
 
 include('../../../Controladores/Conexion/Conexion_be.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 
 $idCita_E = $_POST['idCita_E'];
 $motivoCita = strtoupper($_POST['motivoCita_E']);
@@ -24,8 +24,8 @@ $sql = "UPDATE tbl_cita_terapeutica SET Descripcion_Cita = '$motivoCita', Fecha_
                                         WHERE id_Cita_Terapia = '$idCita_E'";
 
     echo $resultado = mysqli_query($conexion, $sql);
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-        $a='EDITAR';
-        $d='CITA '. $idCita_E .' HA SIDO EDITADA';
-        bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable session
+    //     $a='EDITAR';
+    //     $d='CITA '. $idCita_E .' HA SIDO EDITADA';
+    //     bitacora($n, $a, $d);
 ?>
