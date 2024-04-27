@@ -8,9 +8,9 @@ include("../../../Controladores/Conexion/Conexion_be.php");
     <div class="col-sm-12">
         <!-- <table class="table table-hover table-condensed table-bordered" id="tablaParametrosLoad"> -->
         <table id="tablaCitasCanceladasLoad" class="table">
-        <a href="./V_modal_cita.php">
+            <a href="./V_modal_cita.php">
                 <button class="btn btn-primary btn-agregar">
-                    <i class="fa-solid fa-plus"></i> Agendar Cita
+                    <i class="fa-solid fa-arrow-left"></i> Regresar
                 </button>
             </a>
             <thead class="encabezado bg-light table-info">
@@ -50,7 +50,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
             WHERE
                 CT.Id_Estado_Cita = 5
             ORDER BY CT.Id_Estado_Cita = 2 DESC, CT.Hora_Cita ASC";
-            
+
 
 
                 $resultado = mysqli_query($conexion, $sql);
@@ -116,46 +116,46 @@ if (file_exists($ruta_imagen)) {
                     customize: function(doc) {
 
                         // Calcula la longitud máxima de los datos por columna
-        const maxLengths = [];
-        doc.content.forEach(function(section) {
-            if (section.table) {
-                const tableData = section.table.body;
+                        const maxLengths = [];
+                        doc.content.forEach(function(section) {
+                            if (section.table) {
+                                const tableData = section.table.body;
 
-                // Inicializa la longitud máxima de cada columna
-                if (maxLengths.length === 0) {
-                    for (let i = 0; i < tableData[0].length; i++) {
-                        maxLengths.push(0);
-                    }
-                }
+                                // Inicializa la longitud máxima de cada columna
+                                if (maxLengths.length === 0) {
+                                    for (let i = 0; i < tableData[0].length; i++) {
+                                        maxLengths.push(0);
+                                    }
+                                }
 
-                // Calcula la longitud máxima de los datos por columna
-                tableData.forEach(function(row) {
-                    row.forEach(function(cell, index) {
-                        const cellLength = cell.text ? cell.text.length : 0;
-                        if (cellLength > maxLengths[index]) {
-                            maxLengths[index] = cellLength;
-                        }
-                    });
-                });
-            }
-        });
+                                // Calcula la longitud máxima de los datos por columna
+                                tableData.forEach(function(row) {
+                                    row.forEach(function(cell, index) {
+                                        const cellLength = cell.text ? cell.text.length : 0;
+                                        if (cellLength > maxLengths[index]) {
+                                            maxLengths[index] = cellLength;
+                                        }
+                                    });
+                                });
+                            }
+                        });
 
-        // Establece los anchos de las columnas en función de las longitudes máximas
-        doc.content.forEach(function(section) {
-            if (section.table) {
-                const totalLength = maxLengths.reduce((sum, length) => sum + length, 0);
-                const columnWidths = maxLengths.map(length => (length / totalLength) * 100 + '%');
-                
-                // Aplica los anchos calculados a la tabla
-                section.table.widths = columnWidths;
-                section.table.widths = columnWidths;
+                        // Establece los anchos de las columnas en función de las longitudes máximas
+                        doc.content.forEach(function(section) {
+                            if (section.table) {
+                                const totalLength = maxLengths.reduce((sum, length) => sum + length, 0);
+                                const columnWidths = maxLengths.map(length => (length / totalLength) * 100 + '%');
+
+                                // Aplica los anchos calculados a la tabla
+                                section.table.widths = columnWidths;
+                                section.table.widths = columnWidths;
                                 section.table.body.forEach(row => {
                                     row.forEach(cell => {
                                         cell.alignment = 'center';
                                     });
                                 });
-            }
-        });
+                            }
+                        });
 
                         // Agregar un título al reporte
                         var title = 'Reporte de Citas Canceladas';
