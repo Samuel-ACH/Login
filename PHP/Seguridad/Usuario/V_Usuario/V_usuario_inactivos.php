@@ -154,7 +154,7 @@ session_start();
                                         icon: "success"
                                     }).then(() => {
                                         setTimeout(function() {
-                                            window.location.href = "./V_Paciente.php";
+                                            window.location.href = "./V_usuario.php";
                                         }, 2000);
                                     });
                                 },
