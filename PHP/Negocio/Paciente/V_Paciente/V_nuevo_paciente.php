@@ -230,7 +230,7 @@ include '../../../Controladores/Conexion/Conexion_be.php';
                                     </div>
                                     </td>
                                     <td>
-                                        <button id="Btncancelar" class="btn btn-danger" href="./V_Paciente">Cancelar</button>
+                                        <button id="Btncancelar" class="btn btn-danger" onclick="confirmarCancelar()">Cancelar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -242,7 +242,7 @@ include '../../../Controladores/Conexion/Conexion_be.php';
         </div>
     </main>
 
-    <!-- <script>
+     <script>
     var Btncancelar = document.getElementById('Btncancelar');
     Btncancelar.addEventListener('click', confirmarCancelar);
 
@@ -269,7 +269,7 @@ include '../../../Controladores/Conexion/Conexion_be.php';
             }
         });
     }
-</script> -->
+</script> 
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <br><br><br>
