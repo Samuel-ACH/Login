@@ -63,11 +63,12 @@ include '../../../Recursos/Componentes/SideBar.html';
                                 <li class="list-group-item"><strong>DNI:</strong> <?php echo $fila['DNI'] ?></li>
                                 <li class="list-group-item"><strong>Dirección:</strong> <?php echo $fila['Direccion'] ?></li>
                             <?php
-                            } 
+                            }
                             ?>
                         </ul>
                         <button id="btneditarperfil" class="btn btn-primary" onclick="editarPerfil()">Editar Perfil</button>
-                        <form action="./V_cambiarcontrasenaPerfil.php" method="POST">
+                      
+                        <form action="./V_CambiarcontrasenaPerfil.php" method="POST">
                         <button id="btncambiocontraseñaperfil" class="btn btn-primary">Cambiar Contraseña</button>
                         </form>
                         <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
@@ -105,15 +106,14 @@ include '../../../Recursos/Componentes/footer.html';
             window.location.href = "../../Vistas/Main.php";
         }
         function editarPerfil() {
-        // Obtener los datos del perfil
-        var nombre = "<?php echo $fila['Nombre']; ?>";
-        var usuario = "<?php echo $fila['Usuario']; ?>";
-        var correo = "<?php echo $fila['Correo']; ?>";
-        var dni = "<?php echo $fila['DNI']; ?>";
-        var direccion = "<?php echo $fila['Direccion']; ?>";
-
-        // Redirigir a la página de edición con los datos del perfil como parámetros en la URL
-        window.location.href = "./V_editar_datos_perfil.php?nombre=" + nombre + "&usuario=" + usuario + "&correo=" + correo + "&dni=" + dni + "&direccion=" + direccion;
+            // Obtener los datos del perfil
+            var nombre = "<?php echo $fila['Nombre']; ?>";
+            var usuario = "<?php echo $fila['Usuario']; ?>";
+            var correo = "<?php echo $fila['Correo']; ?>";
+            var direccion = "<?php echo $fila['Direccion']; ?>";
+            
+            // Redirigir a la página de edición con los datos del perfil como parámetros en la URL
+            window.location.href = "../Perfil/V_editar_datos_perfil.php?nombre=" + nombre + "&usuario=" + usuario + "&correo=" + correo + "&direccion=" + direccion;
     }
 
         function cambiarImagen() {
