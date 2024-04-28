@@ -59,6 +59,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
     <!-- Template Main CSS File -->
     <link href="../../../../assets/css/style.css" rel="stylesheet">
+    <link href="../../../../assets/vendor/simple-datatables/nuevo_rol.css" rel="stylesheet"> <!-- CSS de roles -->
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
