@@ -49,6 +49,12 @@ document.getElementById("tratamiento").addEventListener("change", function() {
 function guardarDatos() {
     var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
 
+    // Obtener el ID de la cita
+    var idCita = document.getElementById("Id_Cita").value;
+
+    // Agregar el ID de la cita al objeto de datos
+    datosTarjetas["Id_Cita"] = idCita;
+
     // Recorrer todas las tarjetas y recopilar los datos
     var tarjetas = document.querySelectorAll('.formulario__input');
     tarjetas.forEach(function(tarjeta) {
@@ -119,6 +125,3 @@ botonGuardar.addEventListener('click', function(event) {
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
-
-
-  
