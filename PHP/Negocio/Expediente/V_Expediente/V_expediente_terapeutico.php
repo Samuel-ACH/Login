@@ -54,16 +54,6 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#tablaAgenda').DataTable({
-                language: {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-                } //codigo para el lenguaje del archivo JSON
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -167,10 +157,10 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                     <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
                 </div>
 
-                <form action="../../Procesos/C_procesos/C_estado_finalizado_cita_F.php" method="POST">
-                    <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U">
+                <!-- <form action="../../Procesos/C_procesos/C_estado_finalizado_cita_F.php" method="POST"> -->
+                    <!-- <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U"> -->
                     <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guadar Todo</button>
-                </form>
+                <!-- </form> -->
 
                 <!-- Importar el archivo JavaScript -->
                 <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
