@@ -1,5 +1,11 @@
 <?php
-session_start();
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Si ya existe una sesión autenticada, redirigir al usuario a la página principal
 if (isset($_SESSION['autenticado']) && $_SESSION['correo'] === true) {
     header("Location: Main.php");
