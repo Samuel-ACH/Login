@@ -84,26 +84,9 @@ include '../../../Recursos/Componentes/SideBar.html';
 include '../../../Recursos/Componentes/footer.html';
 ?>
 
- <!-- Vendor JS Files -->
- <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
-    <script src="../../../assets/vendor/quill/quill.min.js"></script>
-    <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="../../../assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../../../assets/js/main.js"></script>
-
-    <!-- Agrega los scripts de Bootstrap (jQuery y Popper.js) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function cerrarPerfil() {
-            // Redirigir al usuario a la página de cierre de sesión
+<script>
+    function cerrarPerfil() {
+        // Redirigir al usuario a la página de cierre de sesión
             window.location.href = "../../Vistas/Main.php";
             
         }
@@ -123,29 +106,46 @@ include '../../../Recursos/Componentes/footer.html';
             // Obtener el input de tipo file
             var inputFile = document.createElement('input');
             inputFile.type = 'file';
-
+            
             // Escuchar cambios en el input de tipo file
             inputFile.addEventListener('change', function(event) {
                 var imagenPerfil = document.getElementById('imagenPerfil');
                 var file = event.target.files[0];
                 var reader = new FileReader();
-
+                
                 reader.onload = function(e) {
                     imagenPerfil.querySelector('img').src = e.target.result;
                 };
-
+                
                 reader.readAsDataURL(file);
             });
-
+            
             // Simular click en el input de tipo file
             inputFile.click();
         }
-
-
+        
+        
         function cambiarContraseña() {
             // Redirigir al usuario a la página de cambio de contraseña
             window.location.href = "./V_cambiarcontrasenaPerfil.php";
         }
-    </script>
+        </script>
+<!-- Vendor JS Files -->
+<script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+   <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="../../../assets/vendor/chart.js/chart.umd.js"></script>
+   <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
+   <script src="../../../assets/vendor/quill/quill.min.js"></script>
+   <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+   <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
+   <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+
+   <!-- Template Main JS File -->
+   <script src="../../../assets/js/main.js"></script>
+
+   <!-- Agrega los scripts de Bootstrap (jQuery y Popper.js) -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
