@@ -4,7 +4,7 @@ var tarjetasMostradas = [];
 // Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var tarjetasHTML = this.responseText;
 
@@ -37,7 +37,7 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
 }
 
 // Manejar el evento de cambio en el combobox de tratamientos
-document.getElementById("tratamiento").addEventListener("change", function() {
+document.getElementById("tratamiento").addEventListener("change", function () {
     var selectedValue = this.value;
 
     if (selectedValue !== "0") {
@@ -51,7 +51,7 @@ function guardarDatos() {
 
     // Recorrer todas las tarjetas y recopilar los datos
     var tarjetas = document.querySelectorAll('.formulario__input');
-    tarjetas.forEach(function(tarjeta) {
+    tarjetas.forEach(function (tarjeta) {
         var id = tarjeta.id;
         var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
         // Verificar si el input no tiene el atributo 'readonly'
@@ -81,15 +81,19 @@ function guardarDatos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Si el usuario confirma, enviar los datos al servidor
-                var datosJSON = JSON.stringify(datosTarjetas);
+                var idCita = document.getElementById('Id_Cita').value;
+                
+                // Enviar el valor de Id_Cita al controlador PHP
+                enviarIdCitaAControladorPHP(idCita);
 
+                var datosJSON = JSON.stringify(datosTarjetas);
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/json'); // Especificar el tipo de contenido como JSON
-                xhr.onload = function() {
+                xhr.onload = function () {
                     // Manejar la respuesta del servidor aquí si es necesario
                     console.log(xhr.responseText);
-                    
+
                     // Mostrar alerta de éxito después de guardar los datos
                     Swal.fire({
                         title: 'Éxito',
@@ -108,17 +112,40 @@ function guardarDatos() {
     }
 }
 
+// Función para enviar el valor de Id_Cita al controlador PHP
+function enviarIdCitaAControladorPHP(idCita) {
+    // Crear un objeto FormData para enviar datos al servidor
+    var formData = new FormData();
+
+    // Agregar el valor de Id_Cita al formData
+    formData.append('Id_Cita', idCita);
+
+    // Realizar una solicitud AJAX para enviar los datos al controlador PHP
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php'); // Reemplaza 'ruta/a/tu/controlador.php' con la ruta correcta a tu controlador PHP
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Manejar la respuesta del servidor si es necesario
+            console.log(xhr.responseText);
+        } else {
+            // Manejar errores si ocurren
+            console.error('Error al enviar datos al servidor');
+        }
+    };
+    xhr.send(formData);
+}
+
+
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
 
 // Agregar el evento 'click' al botón de guardar
-botonGuardar.addEventListener('click', function(event) {
+botonGuardar.addEventListener('click', function (event) {
     // Prevenir el comportamiento predeterminado del formulario (si el botón está dentro de un formulario)
     event.preventDefault();
-    
+
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
 
 
-  
