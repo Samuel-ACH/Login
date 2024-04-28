@@ -9,7 +9,7 @@ session_start();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
+    <title>Clínica RED - Rehabilitación y Electrodiagnóstico </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -43,7 +43,7 @@ session_start();
     ?>
 
     <?php
-    include '../../Controladores/Conexion/Conexion_be.php';
+    include '../../../Controladores/Conexion/Conexion_be.php';
 
     ?>
 

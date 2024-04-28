@@ -85,13 +85,13 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                         <input type="hidden" name="id_rol" value="<?php echo $rol['Id_Rol']; ?>">
                         <div class="mb-3">
                             <label for="rol" class="form-label">Rol</label>
-                            <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $rol['Rol']; ?>">
+                            <input type="text" class="form-control" readonly id="rol" name="rol" value="<?php echo $rol['Rol']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción</label>
                             <textarea class="form-control" id="descripcion" name="descripcion" rows="3"><?php echo $rol['Descripcion']; ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" id="Btnregistrarrol" class="btn btn-primary">Actualizar</button>
                     </form>
                 </div>
             </div>
