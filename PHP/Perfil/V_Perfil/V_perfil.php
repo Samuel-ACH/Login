@@ -102,7 +102,7 @@ include '../../../Recursos/Componentes/footer.html';
     <script>
         function cerrarPerfil() {
             // Redirigir al usuario a la página de cierre de sesión
-            window.location.href = "../../../Vistas/Main.php";
+            window.location.href = "../../Vistas/Main.php";
         }
         function editarPerfil() {
         // Obtener los datos del perfil
