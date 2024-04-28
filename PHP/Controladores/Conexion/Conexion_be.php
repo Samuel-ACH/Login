@@ -3,7 +3,7 @@
 
 // =========================   FORMA #1   =========================
 //local
-//$conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
+//$conexion = mysqli_connect("localhost", "root","", "clinica_red_host"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 //RAILWAY
 // $servername = "roundhouse.proxy.rlwy.net";
@@ -18,13 +18,17 @@
 // $dbname = "clinica_red";
 // $conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 //HOSTINGER
+// $servername = "localhost";
+// $username = "u452119581_adminred";
+// $password = "T3chTit4n$2024";
+// $dbname = "u452119581_clinica_red";
+// $conexion = mysqli_connect($servername, $username, $password, $dbname);
+// Base para Capacitacion
 $servername = "localhost";
-$username = "u452119581_adminred";
+$username = "u452119581_admin";
 $password = "T3chTit4n$2024";
-$dbname = "u452119581_clinica_red";
+$dbname = "u452119581_capacitacion";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
-
-
 $conexion->begin_transaction();
 
 try {
