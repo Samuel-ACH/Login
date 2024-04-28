@@ -24,7 +24,7 @@ $sql = "INSERT INTO tbl_cita_terapeutica (Descripcion_Cita, Fecha_Registro, Fech
         VALUES ('$motivoCita', NOW(), '$fechaCita', '$horaCita', '$id_Paciente', '$id_Usuario', '$id_Tipo_Cita', '$subespecialidad', 1, '$id_Expediente')";
    
    echo $resultado = mysqli_query($conexion, $sql);  
-    $citaID = mysqli_insert_id($conexion);
+    // $citaID = mysqli_insert_id($conexion);
     // $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
     // $a='AGENDAR';
     // $d='CITA '. $citaID.' FUE AGENDADA PARA EL '.$fechaCita.' A LAS '.$horaCita.' PARA EL PACIENTE '.$id_Paciente;
