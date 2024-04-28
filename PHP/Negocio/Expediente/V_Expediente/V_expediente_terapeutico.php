@@ -159,6 +159,7 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                             echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
                         }
                         mysqli_free_result($resultado);
+
                         // Cerrar el formulario
                         $conexion->close();
                         ?>
@@ -167,8 +168,8 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                 </div>
 
                 <form action="../../Procesos/C_procesos/C_estado_finalizado_cita.php" method="POST">
-                    <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guardar Todo</button>
-                    <input type="hidden" hidden readonly name="Id_Cita_U" id="Id_Cita_U">
+                    <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U" value="<?php echo $datosArray[0]; ?>">
+                    <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guadar Todo</button>
                 </form>
 
                 <!-- Importar el archivo JavaScript -->
@@ -189,7 +190,6 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
 
     <!-- Datatables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="../../../../EstilosLogin/js/script.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -211,7 +211,7 @@ if (isset($_SESSION['datosPaciente'])) {
     // Llenar los campos del formulario con los datos del paciente
     echo '<script>';
     echo 'document.getElementById("Id_Cita").value = "' . $datosArray[0] . '";';
-    echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
+    // echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
     echo 'document.getElementById("paciente").value = "' . $datosArray[1] . '";';
     echo 'document.getElementById("motivoConsulta").value = "' . $datosArray[2] . '";';
     echo 'document.getElementById("Id_Expediente").value = "' . $datosArray[5] . '";';
