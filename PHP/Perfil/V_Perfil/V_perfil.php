@@ -82,7 +82,6 @@ include '../../../Recursos/Componentes/SideBar.html';
 
 <?php 
 include '../../../Recursos/Componentes/footer.html';
-include ''
 ?>
 
 <script>
@@ -100,7 +99,7 @@ include ''
         var direccion = "<?php echo $fila['Direccion']; ?>";
 
         // Redirigir a la página de edición con los datos del perfil como parámetros en la URL
-        window.location.href = "../../Perfil/V_Perfil/V_editar_datos_perfil.php?nombre=" + nombre + "&usuario=" + usuario + "&correo=" + correo + "&dni=" + dni + "&direccion=" + direccion;
+        window.location.href = "./V_editar_datos_perfil.php?nombre=" + nombre + "&usuario=" + usuario + "&correo=" + correo + "&dni=" + dni + "&direccion=" + direccion;
     }
 
         function cambiarImagen() {
