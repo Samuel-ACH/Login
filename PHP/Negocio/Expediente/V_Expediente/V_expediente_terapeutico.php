@@ -29,7 +29,9 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ClínicaRED - Rehabilitación y Electrodiagnóstico </title>
+    <title>Clínica RED</title>
+    <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
+
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -110,7 +112,7 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                                     <input type="text" class="formulario__input" placeholder="Por favor, llenar este campo" id="numero_sesiones" name="numero_sesiones"> -->
 
                                     <label for="Id_Cita" hidden>ID CITA:</label>
-                                    <input type="text" readonly hidden class="formulario__input" id="Id_Cita" name="Id_Cita">
+                                    <input type="text" readonly class="formulario__input" id="Id_Cita" name="Id_Cita">
                                     <label for="Id_Expediente" hidden>ID EXPEDIENTE:</label>
                                     <input type="text" readonly hidden class="formulario__input" id="Id_Expediente" name="Id_Expediente">
                                     <label for="Id_Usuario" hidden>ID USUARIO:</label>

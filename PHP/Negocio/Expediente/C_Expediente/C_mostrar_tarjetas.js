@@ -4,7 +4,7 @@ var tarjetasMostradas = [];
 // Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var tarjetasHTML = this.responseText;
 
@@ -37,7 +37,7 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
 }
 
 // Manejar el evento de cambio en el combobox de tratamientos
-document.getElementById("tratamiento").addEventListener("change", function() {
+document.getElementById("tratamiento").addEventListener("change", function () {
     var selectedValue = this.value;
 
     if (selectedValue !== "0") {
@@ -51,7 +51,7 @@ function guardarDatos() {
 
     // Recorrer todas las tarjetas y recopilar los datos
     var tarjetas = document.querySelectorAll('.formulario__input');
-    tarjetas.forEach(function(tarjeta) {
+    tarjetas.forEach(function (tarjeta) {
         var id = tarjeta.id;
         var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
         // Verificar si el input no tiene el atributo 'readonly'
@@ -81,15 +81,29 @@ function guardarDatos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Si el usuario confirma, enviar los datos al servidor
+                var idCita = document.getElementById('Id_Cita').value; // Obtener el valor del input oculto
+                datosTarjetas.idCita = idCita; // Agregar el ID de la cita al objeto datosTarjetas
+
                 var datosJSON = JSON.stringify(datosTarjetas);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/json'); // Especificar el tipo de contenido como JSON
-                xhr.onload = function() {
+                // Primera solicitud XMLHttpRequest a la primera ruta
+                var xhr1 = new XMLHttpRequest();
+                xhr1.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php', true);
+                xhr1.setRequestHeader('Content-Type', 'application/json');
+                xhr1.onload = function () {
+                    // console.log(xhr1.responseText);
+                    // Puedes manejar la respuesta aquí si es necesario
+                };
+                xhr1.send(datosJSON);
+
+                // Segunda solicitud XMLHttpRequest a la segunda ruta
+                var xhr2 = new XMLHttpRequest();
+                xhr2.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true); // Cambiar la URL de la segunda solicitud
+                xhr2.setRequestHeader('Content-Type', 'application/json');
+                xhr2.onload = function () {
                     // Manejar la respuesta del servidor aquí si es necesario
-                    console.log(xhr.responseText);
-                    
+                    // console.log(xhr2.responseText);
+
                     // Mostrar alerta de éxito después de guardar los datos
                     Swal.fire({
                         title: 'Éxito',
@@ -102,23 +116,22 @@ function guardarDatos() {
                         window.location.href = '/PHP/Vistas/Main.php';
                     });
                 };
-                xhr.send(datosJSON);
+                xhr2.send(datosJSON);
             }
         });
     }
-}
 
+}
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
 
 // Agregar el evento 'click' al botón de guardar
-botonGuardar.addEventListener('click', function(event) {
+botonGuardar.addEventListener('click', function (event) {
     // Prevenir el comportamiento predeterminado del formulario (si el botón está dentro de un formulario)
     event.preventDefault();
-    
+
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
 
 
-  
