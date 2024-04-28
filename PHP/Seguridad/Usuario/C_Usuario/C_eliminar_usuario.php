@@ -2,8 +2,13 @@
 // Incluye el archivo de conexión a la base de datos
 include '../../../Controladores/Conexion/Conexion_be.php';
 include('../../../Controladores/bitacora.php');
-session_start();
-
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Verifica si se recibió una solicitud POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verifica si se proporcionó el ID de usuario

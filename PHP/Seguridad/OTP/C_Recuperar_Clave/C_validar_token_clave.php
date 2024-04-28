@@ -1,6 +1,11 @@
 <?php
-session_start();
-
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Verificar si se ha enviado el formulario con el código OTP
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codigo_otp2'])) {
     // Obtener el código OTP enviado por el usuario

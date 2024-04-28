@@ -1,6 +1,11 @@
 <?php
-session_start(); // Inicia la sesión si no ha sido iniciada aún
-
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 include '../../Controladores/Conexion/Conexion_be.php';
 
 // Verificar si la conexión a la base de datos se realizó correctamente

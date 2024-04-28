@@ -1,8 +1,13 @@
 <?php
 include '../../../Controladores/Conexion/Conexion_be.php';
 
-session_start();
-
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Conexión a la base de datos (debes reemplazar estos valores con los tuyos)
 $servername = "localhost";
 $username = "Id_Usuario";

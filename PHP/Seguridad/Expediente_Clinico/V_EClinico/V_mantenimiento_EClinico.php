@@ -4,7 +4,13 @@ include("../../../Controladores/Conexion/Conexion_be.php");
 ?>
 
 <?php
-session_start(); // Iniciar la sesión para poder acceder a las variables de sesión
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}// Iniciar la sesión para poder acceder a las variables de sesión
 
 // Verificar si las variables de sesión existen
 if (isset($_SESSION['Id_Evaluacion'])) {

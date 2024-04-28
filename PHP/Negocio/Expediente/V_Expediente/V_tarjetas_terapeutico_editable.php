@@ -1,7 +1,4 @@
 <?php
-// Código para generar las tarjetas dinámicamente
-include('../../../Controladores/Conexion/Conexion_be.php');
-
 // Verificar si la sesión ya está activa
 if (session_status() === PHP_SESSION_ACTIVE) {
     // La sesión ya está iniciada, no necesitas iniciarla nuevamente
@@ -9,6 +6,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     // La sesión aún no está iniciada, entonces la inicias
     session_start();
 }
+// Código para generar las tarjetas dinámicamente
+include('../../../Controladores/Conexion/Conexion_be.php');
+
 
 if (isset($_SESSION['Detalle_Terapia'])) {
     $Id_Detalle_Terapia = $_SESSION['Detalle_Terapia'];

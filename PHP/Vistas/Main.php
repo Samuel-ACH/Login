@@ -1,6 +1,12 @@
 <?php
 // Valida que el usuario debe iniciar sesión forzosamente para acceder al sistema
-session_start();
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 $Id_Usuario = $_SESSION['id_D'];
 $IdRol = $_SESSION['IdRol'];
 // include '../Controladores/Conexion/Conexion_be.php';

@@ -3,9 +3,13 @@ include '../../../Controladores/Conexion/Conexion_be.php';
 include('../../../../Recursos/SweetAlerts.php');
 include('../../../Controladores/bitacora.php');
 include('../../../PHPMailer/C_correo_usuario.php');
-session_start();
-//crear conexion
-
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Recibir datos del formulario
 $dni = $_POST['dni'];
 $usuario = strtoupper($_POST['usuario']);

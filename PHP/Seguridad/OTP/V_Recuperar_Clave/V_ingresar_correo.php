@@ -1,10 +1,11 @@
 <?php
-session_start();
-// Si ya existe una sesión autenticada, redirigir al usuario a la página principal
-// if (isset($_SESSION['autenticado']) && $_SESSION['correo'] === true) {
-//     header("Location: Main.php");
-//     exit();
-// }
+// Verificar si la sesión ya está activa
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La sesión ya está iniciada, no necesitas iniciarla nuevamente
+} else {
+    // La sesión aún no está iniciada, entonces la inicias
+    session_start();
+}
 // Incluir el script verificarOTP.php
 include('../C_Recuperar_Clave/C_enviar_token_clave.php');
 include("../../../Controladores/Conexion/Conexion_be.php");
