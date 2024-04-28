@@ -122,7 +122,7 @@ function enviarIdCitaAControladorPHP(idCita) {
 
     // Realizar una solicitud AJAX para enviar los datos al controlador PHP
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php'); // Reemplaza 'ruta/a/tu/controlador.php' con la ruta correcta a tu controlador PHP
+    xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php');
     xhr.onload = function () {
         if (xhr.status === 200) {
             // Manejar la respuesta del servidor si es necesario
@@ -134,6 +134,7 @@ function enviarIdCitaAControladorPHP(idCita) {
     };
     xhr.send(formData);
 }
+
 
 
 // Seleccionar el botón de guardar por su ID
