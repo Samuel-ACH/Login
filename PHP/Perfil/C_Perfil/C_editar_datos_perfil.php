@@ -17,11 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $usuario = $_POST['usuario'];
     $correo = $_POST['correo'];
-    $dni = $_POST['dni'];
     $direccion = $_POST['direccion'];
 
     // Prepara la consulta SQL para actualizar los datos en la base de datos
-    $actualizarUsuarioQuery= "UPDATE tbl_ms_usuario SET Nombre = '$nombre', Usuario = '$usuario', Correo = '$correo', DNI = '$dni', Direccion = '$direccion' WHERE WHERE id_usuario = $id_usuario;"; // Cambia 'tabla_perfil' y 'id' según la estructura de tu base de datos
+    $actualizarUsuarioQuery= "UPDATE tbl_ms_usuario SET Nombre = '$nombre', Usuario = '$usuario', Correo = '$correo', Direccion = '$direccion' WHERE WHERE id_usuario = $id_usuario;"; // Cambia 'tabla_perfil' y 'id' según la estructura de tu base de datos
     // Ejecuta la consulta
     $resultado = mysqli_query($conexion, $query);
 
