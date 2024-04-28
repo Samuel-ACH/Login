@@ -67,7 +67,7 @@ include '../../../Recursos/Componentes/SideBar.html';
                             ?>
                         </ul>
                         <button id="btneditarperfil" class="btn btn-primary" onclick="editarPerfil()">Editar Perfil</button>
-                        <form action="./V_CambiarcontrasenaPerfil.php" method="POST">
+                        <form action="./V_cambiarcontrasenaPerfil.php" method="POST">
                         <button id="btncambiocontraseñaperfil" class="btn btn-primary">Cambiar Contraseña</button>
                         </form>
                         <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
@@ -102,7 +102,7 @@ include '../../../Recursos/Componentes/footer.html';
     <script>
         function cerrarPerfil() {
             // Redirigir al usuario a la página de cierre de sesión
-            window.location.href = "../../Vistas/Main.php";
+            window.location.href = "../../../Vistas/Main.php";
         }
         function editarPerfil() {
         // Obtener los datos del perfil
