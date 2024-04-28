@@ -879,14 +879,12 @@ if (mysqli_num_rows($destrezas) > 0) {
     imprimirTerapia($pdf, "DESTREZAS MANUALES", $destrezas);
 }
 
-
-
 if (isset($nombre) && isset($nombre['PACIENTE'])) {
     $nombre_archivo_pdf = 'Expediente Terapeutico ' . $fila['PACIENTE'] . '.pdf';
     } else {
         // Manejar el caso en el que $nombre o $nombre['PACIENTE'] no están definidos
         // Por ejemplo, puedes asignar un valor predeterminado al nombre del archivo
-        $nombre_archivo_pdf = 'Expediente Terapeutico Sin Nombre.pdf';
+        $nombre_archivo_pdf = 'Expediente Terapeutico.pdf';
     }
     
 $pdf->Output($nombre_archivo_pdf, 'I');

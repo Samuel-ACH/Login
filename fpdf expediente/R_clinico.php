@@ -274,7 +274,7 @@ $pdf->Cell(90, 5, utf8_decode($fila3['Resultado']), 0, 1, 'L');
 if (isset($nombre) && isset($nombre['PACIENTE'])) {
     $nombre_archivo_pdf = 'Expediente Clinico ' . $nombre['PACIENTE'] . '.pdf';
 } else {
-    $nombre_archivo_pdf = 'Expediente Clinico Sin Nombre.pdf';
+    $nombre_archivo_pdf = 'Expediente Clinico.pdf';
 }
 
 $pdf->Output($nombre_archivo_pdf, 'I');
