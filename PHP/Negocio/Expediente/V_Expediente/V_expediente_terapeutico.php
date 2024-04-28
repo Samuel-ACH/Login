@@ -167,8 +167,8 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                     <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
                 </div>
 
-                <form action="../../Procesos/C_procesos/C_estado_finalizado_cita.php" method="POST">
-                    <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U" value="<?php echo $datosArray[0]; ?>">
+                <form action="../../Procesos/C_procesos/C_estado_finalizado_cita_F.php" method="POST">
+                    <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U">
                     <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guadar Todo</button>
                 </form>
 
@@ -211,7 +211,7 @@ if (isset($_SESSION['datosPaciente'])) {
     // Llenar los campos del formulario con los datos del paciente
     echo '<script>';
     echo 'document.getElementById("Id_Cita").value = "' . $datosArray[0] . '";';
-    // echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
+    echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
     echo 'document.getElementById("paciente").value = "' . $datosArray[1] . '";';
     echo 'document.getElementById("motivoConsulta").value = "' . $datosArray[2] . '";';
     echo 'document.getElementById("Id_Expediente").value = "' . $datosArray[5] . '";';
