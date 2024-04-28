@@ -32,7 +32,7 @@ include("../../../Controladores/Conexion/Conexion_be.php");
             <img src="../../../../EstilosLogin/images/logo.png" alt="">
                 <H4>¿No Recuerdas tu Contraseña?</h4><br>
                 <div class="" id="">
-                        <label for="correo3">Ingrese su Correo Electrónico:</label>
+                        <!-- <label for="correo3">Ingrese su Correo Electrónico:</label> -->
                         <div class="">
                     <!-- GRUPO CORREO ELECTRÓNICO -->
                     <div class="formulario__grupo" id="grupo__correo3">
