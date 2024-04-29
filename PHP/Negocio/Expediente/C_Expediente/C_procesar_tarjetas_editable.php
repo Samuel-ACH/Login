@@ -8,13 +8,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 }
 
 if (isset($_SESSION['Detalle_Terapia'])) {
-    // $Id_Detalle_Terapia = $_SESSION['Detalle_Terapia'];
+    $Id_Detalle_Terapia = $_SESSION['Detalle_Terapia'];
 } else {
-    unset($_SESSION['Detalle_Terapia']);
+    // Si el ID de detalle de terapia no está definido en la sesión, puedes manejarlo según tus requisitos.
+    // Aquí, por ejemplo, lo estableceré en 0 si no está definido.
+    $Id_Detalle_Terapia = 0;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $Id_Detalle_Terapia = $_SESSION['Detalle_Terapia'];
     // Obtener los datos del cuerpo de la solicitud POST
     $datos_json = file_get_contents("php://input");
 
@@ -29,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conexion->begin_transaction();
 
         try {
-            // Preparar la consulta de actualización una sola vez
+            // Preparar la consulta de actualización una sola vez fuera del bucle foreach
             $sql = "UPDATE tbl_detalle_terapia_tratamiento
                     SET Resultado = ?
                     WHERE Id_Detalle_Terapia = ? AND Id_Tipo_Terapia = ?";
@@ -84,3 +85,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // La solicitud no es de tipo POST
     echo "Error: La solicitud debe ser de tipo POST.";
 }
+?>

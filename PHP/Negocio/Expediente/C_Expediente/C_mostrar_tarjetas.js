@@ -46,7 +46,7 @@ document.getElementById("tratamiento").addEventListener("change", function () {
 });
 
 // Función para recopilar y enviar los datos al servidor
-function guardarDatos() {
+function guardarDatos(e) {
     var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
 
     // Recorrer todas las tarjetas y recopilar los datos
@@ -80,11 +80,12 @@ function guardarDatos() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
+                e.preventDefault();
                 // Si el usuario confirma, enviar los datos al servidor
                 var idCita = document.getElementById('Id_Cita').value;
                 
                 // Enviar el valor de Id_Cita al controlador PHP
-                enviarIdCitaAControladorPHP(idCita);
+                enviarIdCita(idCita);
 
                 var datosJSON = JSON.stringify(datosTarjetas);
                 var xhr = new XMLHttpRequest();
@@ -113,7 +114,7 @@ function guardarDatos() {
 }
 
 // Función para enviar el valor de Id_Cita al controlador PHP
-function enviarIdCitaAControladorPHP(idCita) {
+function enviarIdCita(idCita) {
     // Crear un objeto FormData para enviar datos al servidor
     var formData = new FormData();
 

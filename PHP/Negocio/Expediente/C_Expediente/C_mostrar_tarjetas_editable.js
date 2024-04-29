@@ -109,12 +109,10 @@ function guardarDatos() {
 
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
-
 // Agregar el evento 'click' al botón de guardar
 botonGuardar.addEventListener('click', function(event) {
     // Prevenir el comportamiento predeterminado del formulario (si el botón está dentro de un formulario)
     event.preventDefault();
-    
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });

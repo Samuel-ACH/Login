@@ -68,7 +68,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Clínica RED - Rehabilitación y Electrodiagnóstico </title>
+    <title>Clínica RED</title>
     <link rel="shortcut icon" href="/EstilosLogin/images/pestana.png" type="image/x-icon">
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -91,9 +91,9 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
     <!-- Template Main CSS File -->
     <link href="../../../../assets/css/style.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script> -->
     <!-- Enlaza los archivos CSS de Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTnh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -106,7 +106,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
 
     <?php
     include '../../../../Recursos/Componentes/header.php';
-    include '/Recursos/Componentes/Sidebar.html';
+    include '../../../../Recursos/Componentes/Sidebar.html';
     ?>
 
     <main id="main" class="table">
