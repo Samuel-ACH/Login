@@ -598,9 +598,9 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
             subespecialidad = $('#subespecialidad').val();
             Id_Expediente = $('#Id_Expediente').val()
             insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, subespecialidad, Id_Expediente);
-            setTimeout(function () {
-                window.location.reload();
-            }, 270);
+            // setTimeout(function () {
+            //     window.location.reload();
+            // }, 270);
         });
 
         $('#actualizarCita').click(function () {
