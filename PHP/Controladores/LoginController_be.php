@@ -45,7 +45,7 @@ if (mysqli_num_rows($verificar_login) > 0) {
                     $mensajeError = "Por favor verifica el captcha.";
                 } else {
                     // Si no hay mensaje de error después de verificar el captcha, actualizar primer_ingreso a 1
-                    $actualizar_primer_ingreso = "UPDATE tbl_ms_usuario SET primer_ingreso = 1, Primer_Inicio_Sesion = NOW(), Estado_Usuario = 1, IdRol = 3 WHERE Correo = '$correo'";
+                    $actualizar_primer_ingreso = "UPDATE tbl_ms_usuario SET primer_ingreso = 1, Primer_Inicio_Sesion = NOW(), Estado_Usuario = 1 WHERE Correo = '$correo'";
                     mysqli_query($conexion, $actualizar_primer_ingreso);
                 }
             }
