@@ -80,7 +80,6 @@ function guardarDatos() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                // e.preventDefault();
                 // Si el usuario confirma, enviar los datos al servidor
                 var idCita = document.getElementById('Id_Cita').value;
                 
