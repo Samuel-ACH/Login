@@ -63,7 +63,7 @@ anchoPage();
         }
 }
 
-const tipodni = document.getElementById("tipodni");
+const tipodni = document.getElementById("dni");
 
 tipodni.addEventListener("change", function() {
   const selectedValue = this.value;

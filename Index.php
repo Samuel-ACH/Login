@@ -1,11 +1,9 @@
 <?php
 // Sí existe una sesión iniciada, no permite regresar al login sin antes cerrar la sesión
 session_start();
-
-if (isset($_SESSION["correo"])) {
-    header("location: /PHP/Vistas/Main.php");
-   
-}
+// if (isset($_SESSION["correo"])) {
+//     header("location: /PHP/Vistas/Main.php");
+// }
 include('./PHP/Controladores/Conexion/Conexion_be.php');
 ?>
 <!DOCTYPE html>
