@@ -88,7 +88,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 
         <div class="pagetitle">
             <h1>Gestión de Citas</h1>
-         
+
         </div><!-- End Page Title -->
 
         <div class="container mt-4">
@@ -97,16 +97,14 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 
         <!-- MODAL AGENDAR CITA -->
 
-        <div class="modal fade" id="modalAgendarCita" tabindex="-1" aria-labelledby="modalAgendarCitaLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="modalAgendarCita" tabindex="-1" aria-labelledby="modalAgendarCitaLabel" aria-hidden="true">
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                       
-                            <h1 class="modal-title fs-5" id="modalAgendarCitaLabel">Agendar Cita</h1>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-             
+
+                        <h1 class="modal-title fs-5" id="modalAgendarCitaLabel">Agendar Cita</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
                     </div>
 
                     <div class="modal-body">
@@ -115,20 +113,17 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         <input type="text" name="DNI" id="DNI" placeholder="DNI Paciente" class="form-control input-sm">
 
                         <label for="Id_Paciente" hidden>Id Paciente:</label>
-                        <input type="text" id="Id_Paciente" hidden name="Id_Paciente" placeholder="Id del paciente"
-                            class="form-control input-sm" readonly>
+                        <input type="text" id="Id_Paciente" hidden name="Id_Paciente" placeholder="Id del paciente" class="form-control input-sm" readonly>
 
                         <label for="Id_Expediente" hidden>Id Expediente:</label>
-                        <input type="text" id="Id_Expediente" name="Id_Expediente" hidden
-                            placeholder="Id del Expediente" class="form-control input-sm" readonly>
+                        <input type="text" id="Id_Expediente" name="Id_Expediente" hidden placeholder="Id del Expediente" class="form-control input-sm" readonly>
 
                         <label for="nombrePaciente">Nombre Paciente:</label>
-                        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" name="nombrePaciente"
-                            class="form-control input-sm mayuscula" readonly>
+                        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" name="nombrePaciente" class="form-control input-sm mayuscula" readonly>
 
                         <script>
-                            $(document).ready(function () {
-                                $('#DNI').on('input', function () {
+                            $(document).ready(function() {
+                                $('#DNI').on('input', function() {
                                     var dni = $(this).val();
                                     if (dni !== '') {
                                         // Realizar consulta AJAX para buscar el nombre asociado al DNI
@@ -138,7 +133,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                             data: {
                                                 dni: dni
                                             },
-                                            success: function (response) {
+                                            success: function(response) {
                                                 var datos = response.split("||");
                                                 // Asignar el nombre y el ID del paciente a los campos correspondientes
                                                 $('#nombrePaciente').val(datos[0]); // Asignar el nombre al campo nombrePaciente
@@ -146,7 +141,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                                 $('#Id_Expediente').val(datos[2]); // Asignar el ID del paciente al campo Id_Paciente
 
                                             },
-                                            error: function () {
+                                            error: function() {
                                                 alert('Error al buscar el paciente.');
                                             }
                                         });
@@ -164,13 +159,12 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 
                         <div class="doctor-options">
                             <label for="tipoCita" class="formulario__label">Tipo Cita:</label>
-                            <select type="int" autocomplete="off" name="tipoCita" id="tipoCita"
-                                class="combobox form-control input-sm">
+                            <select type="int" autocomplete="off" name="tipoCita" id="tipoCita" class="combobox form-control input-sm">
                                 <option value="0" selected>Seleccione:</option>
 
                                 <?php
                                 // Conexión a la base de datos
-                                include ('../../../Controladores/Conexion/Conexion_be.php');
+                                include('../../../Controladores/Conexion/Conexion_be.php');
 
                                 // Consulta SQL para obtener los géneros
                                 $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
@@ -190,8 +184,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         </div>
 
                         <label for="motivoCita">Motivo:</label>
-                        <input type="text" id="motivoCita" placeholder="Motivo de la cita"
-                            class="form-control input-sm mayuscula">
+                        <input type="text" id="motivoCita" placeholder="Motivo de la cita" class="form-control input-sm mayuscula">
 
                         <!-- <label for="nombreDoctor">Doctor:</label>
                     <input type="text" id="nombreDoctor" class="form-control input-sm"> -->
@@ -233,7 +226,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                     if (especialidad === "fisiatra") {
                                         <?php
                                         // Conexión a la base de datos
-                                        include ('../../../Controladores/Conexion/Conexion_be.php');
+                                        include('../../../Controladores/Conexion/Conexion_be.php');
 
                                         // Consulta SQL para obtener los géneros
                                         $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6)";
@@ -305,7 +298,9 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                 });
 
                                 // Cargar el segundo combo box al cargar la página
-                                window.onload = () => { crearSegundoComboBox(""); };
+                                window.onload = () => {
+                                    crearSegundoComboBox("");
+                                };
                             </script>
 
                         </div>
@@ -331,8 +326,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalVerCitaLabel">Ver Cita</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
 
@@ -370,14 +364,12 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
         </div>
 
         <!-- MODAL PARA EDITAR CITA -->
-        <div class="modal fade" id="modalEditarCita" tabindex="-1" aria-labelledby="modalEditarCitaLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="modalEditarCita" tabindex="-1" aria-labelledby="modalEditarCitaLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalEditarCitaLabel">Editar Cita</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
 
                     <div class="modal-body">
@@ -386,20 +378,18 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         <input type="text" id="idCita_E" name="idCita_E" hidden class="form-control input-sm">
 
                         <label for="nombrePaciente_E">Nombre Paciente:</label>
-                        <input type="text" id="nombrePaciente_E" name="nombrePaciente_E" readonly
-                            class="form-control input-sm">
+                        <input type="text" id="nombrePaciente_E" name="nombrePaciente_E" readonly class="form-control input-sm">
 
                         <!-- <label for="tipoCita_E">Tipo Cita:</label>
                 <input type="text" id="tipoCita_E" name="tipoCita_E" class="form-control input-sm"> -->
 
                         <div class="doctor-options">
                             <label for="tipoCita_E" class="formulario__label">Tipo Cita:</label>
-                            <select type="int" autocomplete="off" name="tipoCita_E" id="tipoCita_E"
-                                class="combobox form-control input-sm">
+                            <select type="int" autocomplete="off" name="tipoCita_E" id="tipoCita_E" class="combobox form-control input-sm">
 
                                 <?php
                                 // Conexión a la base de datos
-                                include ('../../../Controladores/Conexion/Conexion_be.php');
+                                include('../../../Controladores/Conexion/Conexion_be.php');
 
                                 // Consulta SQL para obtener los géneros
                                 $query = "SELECT Id_Tipo_Cita, Descripcion FROM tbl_tipo_cita";
@@ -419,8 +409,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         </div>
 
                         <label for="motivoCita_E">Motivo:</label>
-                        <input type="text" id="motivoCita_E" name="motivoCita_E"
-                            class="form-control input-sm mayuscula">
+                        <input type="text" id="motivoCita_E" name="motivoCita_E" class="form-control input-sm mayuscula">
 
                         <!-- <label for="nombreDoctor_E">Doctor:</label>
                 <input type="text" id="nombreDoctor_E" name="nombreDoctor_E" class="form-control input-sm"> -->
@@ -462,7 +451,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                     if (especialidad === "fisiatra") {
                                         <?php
                                         // Conexión a la base de datos
-                                        include ('../../../Controladores/Conexion/Conexion_be.php');
+                                        include('../../../Controladores/Conexion/Conexion_be.php');
 
                                         // Consulta SQL para obtener los géneros
                                         $query = "SELECT Id_Usuario, Nombre FROM tbl_ms_usuario WHERE IdRol IN ( 6)";
@@ -534,7 +523,9 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                                 });
 
                                 // Cargar el segundo combo box al cargar la página
-                                window.onload = () => { crearSegundoComboBox2(""); };
+                                window.onload = () => {
+                                    crearSegundoComboBox2("");
+                                };
                             </script>
 
                         </div>
@@ -561,8 +552,7 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
     include '../../../../Recursos/Componentes/footer.html';
     ?>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     </a>
     <!-- Vendor JS Files -->
     <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -581,15 +571,15 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
 </html>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
     });
 </script>
 
 <script>
-    $(document).ready(function () {
-        $('#guardarCita').click(function () {
-            //('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
+    $(document).ready(function() {
+        $('#guardarCita').click(function() {
+            ('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
             motivoCita = $('#motivoCita').val();
             fechaCita = $('#fechaCita').val()
             horaCita = $('#horaCita').val()
@@ -598,14 +588,11 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
             subespecialidad = $('#subespecialidad').val();
             Id_Expediente = $('#Id_Expediente').val()
             insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, subespecialidad, Id_Expediente);
-            setTimeout(function () {
-                window.location.reload();
-            }, 270);
         });
 
-        $('#actualizarCita').click(function () {
+        $('#actualizarCita').click(function() {
             actualizarCita();
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location.reload();
             }, 270);
         });
