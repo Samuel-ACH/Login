@@ -201,7 +201,6 @@ if (isset($_SESSION['datosPaciente'])) {
     // Llenar los campos del formulario con los datos del paciente
     echo '<script>';
     echo 'document.getElementById("Id_Cita").value = "' . $datosArray[0] . '";';
-    echo 'document.getElementById("Id_Cita_U").value = "' . $datosArray[0] . '";';
     echo 'document.getElementById("paciente").value = "' . $datosArray[1] . '";';
     echo 'document.getElementById("motivoConsulta").value = "' . $datosArray[2] . '";';
     echo 'document.getElementById("Id_Expediente").value = "' . $datosArray[5] . '";';
