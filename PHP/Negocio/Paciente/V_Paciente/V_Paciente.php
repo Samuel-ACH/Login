@@ -146,7 +146,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                     <!-- Dentro del bucle foreach para mostrar los pacientes -->
                                     <td>
                                         <?php if (!$ocultarActualizacion): ?>
-                                            <a href="./V_editar_paciente.php?id=<?php echo $fila['Id_Paciente']; ?>"
+                                            <a href="./V_Editar_Paciente.php?id=<?php echo $fila['Id_Paciente']; ?>"
                                                 class="btn btn-warning btn-sm pencil">
                                                 <i class="bi bi-pencil"></i>
                                             <?php endif; ?>
