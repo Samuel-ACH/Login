@@ -46,7 +46,7 @@ document.getElementById("tratamiento").addEventListener("change", function () {
 });
 
 // Función para recopilar y enviar los datos al servidor
-function guardarDatos(e) {
+function guardarDatos() {
     var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
 
     // Recorrer todas las tarjetas y recopilar los datos
@@ -80,7 +80,7 @@ function guardarDatos(e) {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                e.preventDefault();
+                // e.preventDefault();
                 // Si el usuario confirma, enviar los datos al servidor
                 var idCita = document.getElementById('Id_Cita').value;
                 
