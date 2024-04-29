@@ -194,7 +194,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                     <button id="verMenosBtn" class="btn btn-">Ver menos</button>
                     <?php if (!$ocultarEliminacion): ?>
                         <button id="verInactivosBtn" class="btn btn-warning"
-                            onclick="redirigirAUsuariosInactivos()">Usuarios eliminados</button>
+                            onclick="redirigirAUsuariosInactivos()">Usuarios inactivos</button>
                     <?php endif; ?>
                 </div>
             </div>
