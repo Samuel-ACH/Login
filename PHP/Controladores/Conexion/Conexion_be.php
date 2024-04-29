@@ -3,7 +3,7 @@
 
 // =========================   FORMA #1   =========================
 //local
-//$conexion = mysqli_connect("localhost", "root","", "clinica_red_host"); // Forma #1
+// $conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 //RAILWAY
 // $servername = "roundhouse.proxy.rlwy.net";
@@ -25,7 +25,7 @@
 // $conexion = mysqli_connect($servername, $username, $password, $dbname);
 // Base para Capacitacion
 $servername = "localhost";
-$username = "u452119581_admin";
+$username = "u452119581_adminred1";
 $password = "T3chTit4n$2024";
 $dbname = "u452119581_capacitacion";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
