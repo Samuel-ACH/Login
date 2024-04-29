@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // });
             // </script>
             // ';
-            unset($_SESSION['Id_Detalle_Terapia']);
+            $Id_Detalle_Terapia = '';
         } catch (Exception $e) {
             // Si ocurre algún error, revertir la transacción y mostrar el mensaje de error
             $conexion->rollback();
