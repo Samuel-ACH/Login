@@ -170,7 +170,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                     <!-- Dentro del bucle foreach para mostrar los usuarios -->
                                     <td>
                                         <?php if (!$ocultarActualizacion): ?>
-                                            <a href="../V_Usuario/V_editar_usuario.php?id=<?php echo $fila['Id_Usuario']; ?>"
+                                            <a href="./V_editar_usuario.php?id=<?php echo $fila['Id_Usuario']; ?>"
                                                 class="btn btn-warning btn-sm pencil">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
