@@ -33,14 +33,14 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                 VALUES (0, NOW(), $id_cita, $Id_Usuario, $id_expediente)";
 
         if (mysqli_query($conexion, $sql)) {
-            // Recuperar el último ID insertado
-            $Id_Detalle_Terapia = mysqli_insert_id($conexion);
-
-            // Almacenar el ID del detalle del expediente en una variable de sesión
-            $_SESSION['Id_Detalle_Terapia'] = $Id_Detalle_Terapia;
+            // Recuperar el último ID insertado solo si no está establecido
+            if (!isset($_SESSION['Id_Detalle_Terapia'])) {
+                // Almacenar el ID del detalle del expediente en una variable de sesión
+                $_SESSION['Id_Detalle_Terapia'] = mysqli_insert_id($conexion);
+            }
 
             // Puedes utilizar el ID insertado según sea necesario
-            // echo "Último ID insertado: " . $Id_Detalle_Expediente;
+            // echo "Último ID insertado: " . $_SESSION['Id_Detalle_Terapia'];
         } else {
             // Manejar errores si la consulta de inserción falla
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
