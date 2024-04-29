@@ -24,6 +24,9 @@ $resultado = mysqli_stmt_get_result($stmt);
 if ($resultado) {
     // Obtener el primer (y único) resultado
     $fila = mysqli_fetch_assoc($resultado);
+    // Valor predeterminado si no se encuentra el paciente
+    $id_paciente = 1;
+    $id_expediente = 1; 
     if ($fila) {
         // Obtener el nombre del resultado
         $nombre = $fila['Nombre'];
