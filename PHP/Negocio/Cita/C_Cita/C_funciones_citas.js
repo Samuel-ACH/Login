@@ -14,9 +14,6 @@ function insertarCita(motivoCita, fechaCita, horaCita, Id_Paciente, tipoCita, su
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
                 alertify.success("Cita registrada correctamente.");
-                setTimeout(function () {
-                    window.location.reload();
-                }, 370);
             } else {
                 alertify.error("Fallo al guardar la cita.");
             }
