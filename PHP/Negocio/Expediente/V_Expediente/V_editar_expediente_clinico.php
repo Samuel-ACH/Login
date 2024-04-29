@@ -64,7 +64,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Expediente'])) {
     // También puedes realizar cualquier otra lógica que necesites con estas variables
 } else {
     // Si las variables de sesión no existen, puedes redirigir o mostrar un mensaje de error
-    echo "Las variables de sesión no están disponibles.";
+    echo "";
 }
 ?>
 
