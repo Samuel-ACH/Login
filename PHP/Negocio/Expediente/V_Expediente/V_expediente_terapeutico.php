@@ -157,10 +157,10 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                     <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
                 </div>
 
-                <!-- <form action="../../Procesos/C_procesos/C_estado_finalizado_cita_F.php" method="POST"> -->
+                <form action="" method="POST">
                     <!-- <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U"> -->
                     <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guadar Todo</button>
-                <!-- </form> -->
+                </form>
 
                 <!-- Importar el archivo JavaScript -->
                 <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
