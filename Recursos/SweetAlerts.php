@@ -71,4 +71,24 @@ function confirmarEnvio() {
 //-------------------------------------------------------------------------------//
 //                          PROHIBIDO MODIFICAR                                 //
 //-----------------------------------------------------------------------------//
+
+function cancelar() {
+        // Mostrar la alerta de confirmación antes de enviar el formulario
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro que deseas Cancelar?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario hace clic en "Guardar", se envía el formulario
+                document.querySelector('form').submit();
+                
+            }
+            
+        });
+
+}
 </script>
