@@ -64,7 +64,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Expediente'])) {
     // También puedes realizar cualquier otra lógica que necesites con estas variables
 } else {
     // Si las variables de sesión no existen, puedes redirigir o mostrar un mensaje de error
-    echo "";
+    echo "Las variables de sesión no están disponibles.";
 }
 ?>
 
@@ -176,7 +176,6 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Expediente'])) {
                             ?>
                             <!-- </div> -->
                             <a href="./V_modal_expediente.php">
-
                                 <button style="margin-left: 3px;" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
                             </a>
                         </tbody>
@@ -186,17 +185,17 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Expediente'])) {
             </div>
         </div>
     </main>
-    <!-- <script>
+    <script>
         function confirmarCancelar() {
             // Mostrar un cuadro de diálogo de confirmación
-            const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
+            const confirmacion = confirm("¿Estás seguro de que deseas actualizar?");
             // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
             if (confirmacion) {
                 // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta.
                  "./V_modal_expediente.php";
             }
         }
-    </script> -->
+    </script>
 
 
     <!-- Vendor JS Files -->
