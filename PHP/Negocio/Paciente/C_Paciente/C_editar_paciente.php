@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          // $mensajeExito = "¡Los cambios se han guardado exitosamente!";
                  
         // Redireccionar a la página principal o mostrar un mensaje de éxito
-        header("Location: ../V_Paciente/V_paciente.php");
+        header("Location: ../V_Paciente/V_Paciente.php");
         $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
         $a='EDITAR';
         $d='PACIENTE CON EL ID '. $idPaciente.' HA SIDO EDITADO ';
