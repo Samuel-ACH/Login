@@ -226,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
             // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de pacientes
             if (confirmacion) {
                 // Redirigir a la pantalla de pacientes (reemplaza con la URL correcta)
-                window.location.href = "./V_paciente.php";
+                window.location.href = "./V_Paciente.php";
             }
         }
     </script>
