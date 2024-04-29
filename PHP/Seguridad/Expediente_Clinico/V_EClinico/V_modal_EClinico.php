@@ -209,6 +209,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
            // $('#tablaEvaluacionR').load('./V_mantenimiento_EClinico.php');
             evaluacionR = $('#evaluacionR').val();
             insertarTipoEvaluacionR(evaluacionR);
+            setTimeout(function() {
+                    window.location.reload();
+                }, 800);
             
         });
 

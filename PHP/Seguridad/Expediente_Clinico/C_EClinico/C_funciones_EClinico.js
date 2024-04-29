@@ -73,9 +73,7 @@ function insertarTipoEvaluacionR(evaluacionR) {
                 $('#tablaEvaluacionR').load('../V_EClinico/V_mantenimiento_EClinico.php');
                 alertify.success("Evaluación registrada correctamente.");
                 $('#modalEditarEvaluacionR').modal('hide'); // Cerrar el modal
-                setTimeout(function() {
-                    window.location.reload();
-                }, 800);
+               
             } else {
                 alertify.error("Fallo al guardar la evaluación.");
                 
