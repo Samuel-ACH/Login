@@ -55,15 +55,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
             // Confirmar la transacción si todo ha ido bien
             $conexion->commit();
-            
-            // Liberar la variable de sesión después de usarla
-            unset($_SESSION['Id_Detalle_Terapia']);
-
-            // Cerrar la conexión a la base de datos
-            $conexion->close();
-
-            // Respondemos con un mensaje de éxito
-            echo "Datos insertados correctamente.";
+            // echo '<h6 id="" class="alert alert-success">Datos insertados correctamente</h6>';
+            // include '../../../../Recursos/SweetAlerts.php';
+            // echo '
+            // <script>
+            // MostrarAlerta("Success", "", "Datos insertados correctamente", "../../../Vistas/Main.php");
+            // </script>
+            // ';
+            // echo '
+            // <script>
+            // Swal.fire({
+            //     position: "top-end",
+            //     icon: "success",
+            //     title: "Your work has been saved",
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // });
+            // </script>
+            // ';
         } catch (Exception $e) {
             // Si ocurre algún error, revertir la transacción y mostrar el mensaje de error
             $conexion->rollback();
