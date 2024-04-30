@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idUsuario = $_POST['idUsuario'];
     $dni = $_POST["dni"];
     $usuario = $_POST["usuario"];
+    $direccion = $_POST["direccion"];
     $correo = $_POST["correo"];
     $nombre = $_POST["nombre"];
     $estado = $_POST["estadoUser"];
@@ -21,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechamodificacion = date('Y-m-d'); // Fecha de modificación
 
     // Consulta de actualización con marcadores de posición corregidos
-    $actualizarUsuarioQuery = "UPDATE tbl_ms_usuario SET DNI = ?, Usuario = ?, Correo = ?, Nombre = ?, Estado_Usuario = ?, 
+    $actualizarUsuarioQuery = "UPDATE tbl_ms_usuario SET DNI = ?, Usuario = ?, Direccion = ?, Correo = ?, Nombre = ?, Estado_Usuario = ?, 
     IdRol = ?, FechaNacimiento = ?, FechaContratacion = ?, Fecha_Creacion = ? WHERE Id_Usuario = ?";
     
     $stmt = mysqli_prepare($conexion, $actualizarUsuarioQuery);
-    mysqli_stmt_bind_param($stmt, "sssssiissi", $dni, $usuario, $correo, $nombre, $estado, $rol,
+    mysqli_stmt_bind_param($stmt, "sssssiissi", $dni, $usuario, $direccion, $correo, $nombre, $estado, $rol,
         $fechanacimiento, $fechacontratacion, $fechamodificacion, $idUsuario);
 
     if (mysqli_stmt_execute($stmt)) {
