@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $idRol = $_POST['id_rol'];
     $rol = $_POST['rol'];
-    $descripcion = $_POST['descripcion'];
+    $descripcion =  strtoupper($_POST['descripcion']);
 
     // Preparar la consulta SQL para actualizar el rol
     $sql = "UPDATE tbl_ms_roles SET Rol = ?, Descripcion = ? WHERE Id_Rol = ?";
