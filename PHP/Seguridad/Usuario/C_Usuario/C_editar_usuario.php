@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $estado = $_POST["estadoUser"];
     $rol = $_POST["rol"];
-    $fechanacimiento = $_POST["FechaNacimiento"];
-    $fechacontratacion = $_POST["FechaContratacion"];
+    $fechanacimiento = $_POST["fechanacimiento"];
+    $fechacontratacion = $_POST["fechacontratacion"];
     $fechamodificacion = date('Y-m-d'); // Fecha de modificación
 
     // Consulta de actualización con marcadores de posición corregidos
