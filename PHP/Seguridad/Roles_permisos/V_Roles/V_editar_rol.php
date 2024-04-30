@@ -93,7 +93,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"><?php echo $rol['Descripcion']; ?></textarea>
+                            <textarea class="form-control" style="text-transform: uppercase;" id="descripcion" name="descripcion" rows="3"><?php echo $rol['Descripcion']; ?></textarea>
                         </div>
                         <button type="submit" id="Btnregistrarrol" class="btn btn-primary">Actualizar</button>
                     </form>
