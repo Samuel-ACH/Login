@@ -10,7 +10,7 @@ if (isset($_POST["correo"])) {
     $correo = $_POST["correo"];
 
     // Ejecutar la consulta SQL
-    $sql = "SELECT primer_ingreso FROM tbl_ms_usuario WHERE Correo = ?";
+    $sql = "SELECT primer_ingreso FROM tbl_ms_usuario WHERE Correo = $correo";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $correo);
     $stmt->execute();
