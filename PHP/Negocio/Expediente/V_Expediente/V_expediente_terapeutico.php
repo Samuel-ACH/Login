@@ -14,7 +14,7 @@ $Nombre_Usuario = $_SESSION['nombre'];
 // Verificar si la variable de sesión no está establecida
 if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
     // Incluir el archivo solo si no se ha ejecutado antes
-    include '../../Procesos/C_procesos/C_detalle_terapia.php';
+    include_once '../../Procesos/C_procesos/C_detalle_terapia.php';
 } else {
     // Eliminar la variable de sesión para permitir que el código se ejecute nuevamente
     unset($_SESSION['detalle_terapia_ejecutado']);
