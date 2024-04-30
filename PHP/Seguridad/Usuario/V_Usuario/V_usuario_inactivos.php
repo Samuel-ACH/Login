@@ -161,7 +161,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                                     }).then(() => {
                                         setTimeout(function() {
                                             window.location.href = "./V_usuario.php";
-                                        }, 2000);
+                                        }, 500);
                                     });
                                 },
                                 error: function(error) {

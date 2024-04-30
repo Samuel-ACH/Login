@@ -1,7 +1,7 @@
 <?php
 // Incluye el archivo de conexión a la base de datos
 include '../../../Controladores/Conexion/Conexion_be.php';
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 // Verificar si la sesión ya está activa
 if (session_status() === PHP_SESSION_ACTIVE) {
     // La sesión ya está iniciada, no necesitas iniciarla nuevamente
@@ -32,10 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Vincula los parámetros y ejecuta la consulta
             mysqli_stmt_bind_param($stmt, "ii", $estado, $idUsuario);
             if (mysqli_stmt_execute($stmt)) {
-                $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-                $a='ElIMINAR USUARIO';
-                $d='USUARIO '.$IdUsuario .' ELIMINADO';
-                bitacora($n, $a, $d);
+                // $n=$_SESSION['id_D'];          //obtiene valor de la variable session
+                // $a='ElIMINAR USUARIO';
+                // $d='USUARIO '.$IdUsuario .' ELIMINADO';
+                // bitacora($n, $a, $d);
                 echo "El usuario ha sido inhabilitado exitosamente";
             } else {
                 echo "Error al inhabilitar al usuario: " . mysqli_error($conexion);

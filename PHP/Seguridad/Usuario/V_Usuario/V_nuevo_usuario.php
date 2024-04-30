@@ -232,25 +232,22 @@
                                         <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
 
                                     </td>
+                                </form>
                                     <td>
-
-
+                                        <!-- <a href="./V_usuario.php"> -->
+                                            <button id="Btncancelar" class="btn btn-danger">Cancelar</button>
+                                        <!-- </a> -->
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </form>
-                <a href="./V_usuario.php">
-
-                    <button id="Btncancelar" class="btn btn-danger">Cancelar</button>
-                </a>
             </div>
         </div>
         </div>
     </main>
 
-    <!-- <script>
+     <script>
     var Btncancelar = document.getElementById('Btncancelar');
     Btncancelar.addEventListener('click', confirmarCancelar);
 
@@ -277,7 +274,7 @@
             }
         });
     }
-</script> -->
+</script> 
 
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->

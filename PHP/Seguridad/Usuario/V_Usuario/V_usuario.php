@@ -225,7 +225,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                             success: function (response) {
                                 // Ocultar la fila de usuario de la tabla
                                 filaUsuario.hide(); // Ocultar la fila de usuario de la tabla
-                                // $('#tablaAgenda').load('./V_usuario.php');
+                                //  $('#tablaAgenda').load('./V_usuario.php');
 
                                 // Mostrar la alerta de éxito
                                 Swal.fire({
@@ -234,8 +234,8 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                             icon: "success"
                                         }).then(() => {
                                             setTimeout(function () {
-                                                //window.location.href = "./V_Paciente.php";
-                                            }, 2000);
+                                               // window.location.href = "../V_Usuario/V_usuario.php";
+                                            }, 200);
                                         });
                             },
                             error: function (error) {
@@ -250,7 +250,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
 
 
         <script>
-            // Función para redirigir al hacer clic en el botón usuarios incativos
+            // Función para redirigir al hacer clic en el botón usuarios inactivos
             function redirigirAUsuariosInactivos() {
                 // Redirige a la página usuariosInactivos.php
                 window.location.href = './V_usuario_inactivos.php';
