@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
       contenedorCaptcha.style.display = "none";
     } else {
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', '../Consultas/ConsultaCaptcha.php', true);
+      xhr.open('POST', '../../PHP/Consultas/ConsultaCaptcha.php', true);
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       };
       xhr.send('correo=' + correo);
-      xhr.open('POST', '../Consultas/ConsultaCaptcha.php?timestamp=' + new Date().getTime(), true);
+    //  xhr.open('POST', '../Consultas/ConsultaCaptcha.php?timestamp=' + new Date().getTime(), true);
     }
   });
 });

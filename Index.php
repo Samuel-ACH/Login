@@ -84,7 +84,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                             if (mensajeError) {
                                 mensajeError.style.display = 'none';
                             }
-                        }, 5000); // 5000 milisegundos = 5 segundos
+                        }, 3000); // 5000 milisegundos = 5 segundos
                     </script>
 
                     <!--codigo del recaptcha  de google -->
