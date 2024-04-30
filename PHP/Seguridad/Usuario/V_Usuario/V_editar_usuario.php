@@ -156,7 +156,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                     <td>
                                         <div class="formulario__grupo" id="grupo__fecha">
                                         <label for="FechaContratacion">Fecha de Contratación:</label>
-                                            <input type="date" name="fechacontratacion" id="fechacontratacion" class="form-control"
+                                            <input type="datetime" name="fechacontratacion" id="fechacontratacion" class="form-control"
                                             value="<?php echo htmlspecialchars($usuario['FechaContratacion']); ?>" required>
                                         </div>
                                     </td>

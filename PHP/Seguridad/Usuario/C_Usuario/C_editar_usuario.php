@@ -11,15 +11,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idUsuario = $_POST['idUsuario'];
     $dni = $_POST["dni"];
-    $usuario = $_POST["usuario"];
-    $direccion = $_POST["direccion"];
+    $usuario = strtoupper($_POST["usuario"]);
+    $direccion = strtoupper($_POST["direccion"]);
     $correo = $_POST["correo"];
-    $nombre = $_POST["nombre"];
+    $nombre = strtoupper($_POST["nombre"]);
     $estado = $_POST["estadoUser"];
     $rol = $_POST["rol"];
     $fechanacimiento = $_POST["fechanacimiento"];
     $fechacontratacion = $_POST["fechacontratacion"];
-    $fechamodificacion = date('Y-m-d'); // Fecha de modificación
 
     // Consulta de actualización con marcadores de posición corregidos
     $actualizarUsuarioQuery = "UPDATE tbl_ms_usuario SET DNI = ?, Usuario = ?, Direccion = ?, Correo = ?, Nombre = ?, Estado_Usuario = ?, 
