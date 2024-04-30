@@ -1,7 +1,7 @@
 <?php
 include '../../../Controladores/Conexion/Conexion_be.php';
 include('../../../../Recursos/SweetAlerts.php');
-include('../../../Controladores/bitacora.php');
+// include('../../../Controladores/bitacora.php');
 include('../../../PHPMailer/C_correo_usuario.php');
 // Verificar si la sesión ya está activa
 if (session_status() === PHP_SESSION_ACTIVE) {
@@ -35,10 +35,10 @@ $idgenero = $_POST['genero'];
 $resultado_query = mysqli_query($conexion, $query);
 if ($resultado_query) {
     enviarCorreo3($correo, $correo, $contrasena); // Validar que se insertó correctamente el registro
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable session
-    $a='AGREGAR USUARIO';
-    $d='USUARIO '. $usuario .' FUE AGREGADO';
-    bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable session
+    // $a='AGREGAR USUARIO';
+    // $d='USUARIO '. $usuario .' FUE AGREGADO';
+    // bitacora($n, $a, $d);
     
     echo '
         <script>
