@@ -11,8 +11,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-     <!-- Vendor CSS Files -->
-     <link href="../../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="../../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="../../../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="../../../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
@@ -29,13 +29,13 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#tablaAgenda').DataTable({
-            language: {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-            } //codigo para el lenguaje del archivo JSON
-        });
-          $('.editarBtn').click(function() {
+        $(document).ready(function() {
+            $('#tablaAgenda').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+                } //codigo para el lenguaje del archivo JSON
+            });
+            $('.editarBtn').click(function() {
                 var idUsuario = $(this).data('id');
                 // Redireccionar o hacer algo con el ID para editar
                 window.location.href = './V_editar_usuario.php?id=' + idUsuario;
@@ -46,46 +46,48 @@
                 var idUsuario = $(this).data('id');
                 // Realizar una solicitud AJAX para eliminar el usuario con el ID proporcionado
                 // Puedes usar jQuery.ajax o Fetch API para esto
-             $.ajax({
+                $.ajax({
                     url: '../C_Usuario/C_eliminar_usuario.php',
                     method: 'POST',
-                    data: { id: idUsuario },
+                    data: {
+                        id: idUsuario
+                    },
                     success: function(response) {
-                //         // Actualizar la tabla o hacer algo después de eliminar
-                //         // Puedes recargar la página o actualizar la tabla usando DataTables
-                // Ejemplo de recargar la página:
-                   location.reload();
-                },
-                error: function(error) {
-                console.error("Error al eliminar usuario: " + error.responseText);
-                }
+                        //         // Actualizar la tabla o hacer algo después de eliminar
+                        //         // Puedes recargar la página o actualizar la tabla usando DataTables
+                        // Ejemplo de recargar la página:
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.error("Error al eliminar usuario: " + error.responseText);
+                    }
                 });
             });
-       });
+        });
     </script>
 </head>
 
 <body>
-<?php 
-include '../../../../Recursos/Componentes/header.php';
-include '../../../../Recursos/Componentes/SideBar.html';
-?>
+    <?php
+    include '../../../../Recursos/Componentes/header.php';
+    include '../../../../Recursos/Componentes/SideBar.html';
+    ?>
     <?php
     include '../../../Controladores/Conexion/Conexion_be.php';
-    
+
     ?>
 
 
-<main id="main" class="table">
-    <div class="container mt-4">
+    <main id="main" class="table">
+        <div class="container mt-4">
             <div class="col-12">
-            <center>
-                <h2>Registro de Nuevo Usuario</h2>
-            </center>
-            <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
+                <center>
+                    <h2>Registro de Nuevo Usuario</h2>
+                </center>
+                <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
 
                 <form action="../C_Usuario/C_nuevo_usuario.php" method="POST" class="formulario__register" id="registerFormUser">
-                <div class="contenedor__todo">
+                    <div class="contenedor__todo">
                         <table class="table" style:"align-items-center">
                             <tbody>
                                 <tr>
@@ -109,8 +111,8 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                             <p class="formulario__input-error"></p>
                                         </div>
                                     </td>
-                                    </tr>
-                                    <tr>
+                                </tr>
+                                <tr>
                                     <!-- GRUPO CORREO -->
                                     <td>
                                         <div class="formulario__grupo" id="grupo__correo2">
@@ -131,14 +133,14 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                             <p class="formulario__input-error"></p>
                                         </div>
                                     </td>
-                                    </tr>
-                                    <tr>
+                                </tr>
+                                <tr>
                                     <!-- GRUPO CONTRASEÑA -->
                                     <td>
                                         <div class="formulario__grupo" id="grupo__password2">
                                             <label for="password2" class="formulario__label">Contraseña</label>
                                             <div class="formulario__grupo-input">
-                                                <input type="password" class="formulario__input" name="password2" id="password2" autocomplete="off" placeholder="Contraseña" maxlength="30" style ="width: 620px">
+                                                <input type="password" class="formulario__input" name="password2" id="password2" autocomplete="off" placeholder="Contraseña" maxlength="30" style="width: 620px">
                                                 <i class="ver_password fas fa-eye"></i>
                                             </div>
                                             <p class="formulario__input-error"></p>
@@ -149,7 +151,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                         <div class="formulario__grupo" id="grupo__password3">
                                             <label for="password3" class="formulario__label">Confirmar Contraseña</label>
                                             <div class="formulario__grupo-input">
-                                                <input type="password" class="formulario__input" class="form-control" name="password3" id="password3" autocomplete="off" placeholder="Confirmar contraseña" maxlength="30" style ="width: 585px">
+                                                <input type="password" class="formulario__input" class="form-control" name="password3" id="password3" autocomplete="off" placeholder="Confirmar contraseña" maxlength="30" style="width: 585px">
                                                 <i class="ver_password fas fa-eye"></i>
                                             </div>
                                             <p class="formulario__input-error"></p>
@@ -177,27 +179,27 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                             </select>
                                         </div>
                                     </td>
-                                    </tr>
-                                    <tr>
-                                    
-                            <!-- GRUPO FECHA NACIMIENTO -->
+                                </tr>
+                                <tr>
+
+                                    <!-- GRUPO FECHA NACIMIENTO -->
                                     <td>
                                         <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Nacimiento:</label>
-                                            <input  type="date" class="formulario__input" placeholder="Fecha de Nacimiento" autocomplete="off" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01" >
+                                            <label for="Fechavencimiento">Fecha de Nacimiento:</label>
+                                            <input type="date" class="formulario__input" placeholder="Fecha de Nacimiento" autocomplete="off" name="fechanacimiento" id="fechanacimiento" class="form-control" min="1900-01-01" max="2006-01-01">
                                             <p id="mensajeFechaNacimiento" class="mensaje_error" style="color: red;"></p>
                                         </div>
                                     </td>
                                     <!-- GRUPO FECHA CONTRATACION -->
                                     <td>
                                         <div class="formulario__grupo" id="grupo__fecha">
-                                        <label for="Fechavencimiento">Fecha de Contratación:</label>
+                                            <label for="Fechavencimiento">Fecha de Contratación:</label>
                                             <input type="date" class="formulario__input" name="fechacontratacion" id="fechacontratacion" autocomplete="off" class="form-control">
                                             <p id="mensajeFechaContratacion" class="mensaje_error" style="color: red;"></p>
                                         </div>
                                     </td>
-                                    </tr>
-                                    <tr>
+                                </tr>
+                                <tr>
                                     <!-- GRUPO ROL -->
                                     <td>
                                         <div class="gender-options">
@@ -224,30 +226,31 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                             </select>
                                         </div>
                                     </td>
-                                    </tr>  
-                                    <tr>
+                                </tr>
+                                <tr>
                                     <td>
-                                    <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" id="Btnregistrar" class="btn btn-primary">Guardar</button>
 
                                     </td>
                                     <td>
-                                        <a href="./V_usuario.php">
 
-                                            <button id="Btncancelar" class="btn btn-danger" >Cancelar</button>
-                                        </a>
-                                        
+
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </form>
+                <a href="./V_usuario.php">
+
+                    <button id="Btncancelar" class="btn btn-danger">Cancelar</button>
+                </a>
             </div>
         </div>
-    </div>
-</main>
+        </div>
+    </main>
 
-<!-- <script>
+    <!-- <script>
     var Btncancelar = document.getElementById('Btncancelar');
     Btncancelar.addEventListener('click', confirmarCancelar);
 
@@ -282,14 +285,13 @@ include '../../../../Recursos/Componentes/SideBar.html';
 
     <!-- Datatables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="../../../../EstilosLogin/js/script.js"></script>    
+    <script src="../../../../EstilosLogin/js/script.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="../../../javascript/validacionNuevoRegistroUsuario.js"></script>
-   
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="../../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -304,4 +306,5 @@ include '../../../../Recursos/Componentes/SideBar.html';
     <!-- Template Main JS File -->
     <script src="../../../../assets/js/main.js"></script>
 </body>
+
 </html>
