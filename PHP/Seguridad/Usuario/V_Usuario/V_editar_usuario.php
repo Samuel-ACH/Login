@@ -88,7 +88,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                         <div class="formulario__grupo" id="grupo__nombre">
                                             <label for="nombre" class="formulario__label">Nombre Completo</label>
                                             <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" name="nombre" id="nombre" style:"text-transform: uppercase" placeholder="Nombre completo" 
+                                                <input type="text" class="form-control mayuscula" name="nombre" id="nombre" style:"text-transform: uppercase" placeholder="Nombre completo" 
                                                 maxlength="80" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" required>
                                             </div>
                                             <p class="formulario__input-error"></p>
@@ -112,7 +112,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                         <div class="formulario__grupo" id="grupo__usuario">
                                             <label for="usuario" class="formulario__label">Usuario</label>
                                             <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" style:"text-transform: uppercase" name="usuario" id="usuario" placeholder="Usuario" 
+                                                <input type="text" class="form-control mayuscula" style:"text-transform: uppercase" name="usuario" id="usuario" placeholder="Usuario" 
                                                 maxlength="15" value="<?php echo htmlspecialchars($usuario['Usuario']); ?>" required>
                                             </div>
                                             <p class="formulario__input-error"></p>
@@ -124,7 +124,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                     <td>
                                         <div class="formulario__grupo" id="grupo__direccion">
                                             <div class="formulario__grupo-input">
-                                                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" 
+                                                <input type="text" class="form-control mayuscula" name="direccion" id="direccion" placeholder="Dirección" 
                                                 maxlength="80" value="<?php echo htmlspecialchars($usuario['Direccion']); ?>" required>
                                             </div>
                                             <p class="formulario__input-error"></p>
@@ -136,8 +136,8 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                             <select type="text" name="genero" id="genero" class="form-control" placeholder="Genero" class="combobox"
                                             value="<?php echo htmlspecialchars($usuario['IdGenero']); ?>" required>
                                             <option value="0" <?php if ($usuario['IdGenero'] == 0) echo "selected"; ?>>Seleccione un género</option>
-                                            <option value="1" <?php if ($usuario['IdGenero'] == 1) echo "selected"; ?>>Masculino</option>
-                                            <option value="2" <?php if ($usuario['IdGenero'] == 2) echo "selected"; ?>>Femenino</option>
+                                            <option value="1" <?php if ($usuario['IdGenero'] == 1) echo "selected"; ?>>MASCULINO</option>
+                                            <option value="2" <?php if ($usuario['IdGenero'] == 2) echo "selected"; ?>>FEMENINO</option>
                                             </select>
 
                                         </div>
@@ -207,7 +207,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
     function confirmarCancelar() {
         // Mostrar un cuadro de diálogo de confirmación
         const confirmacion = confirm("¿Estás seguro de que deseas cancelar?");
-        window.location.href = "./V_usuario.php";
+       
         // Si el usuario hace clic en "Aceptar", redirigir a la pantalla de usuarios
         if (confirmacion) {
             // Redirigir a la pantalla de usuarios (reemplaza con la URL correcta)

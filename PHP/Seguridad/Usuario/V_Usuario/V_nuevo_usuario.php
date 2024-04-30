@@ -235,7 +235,7 @@
                                 </form>
                                     <td>
                                         <!-- <a href="./V_usuario.php"> -->
-                                            <button id="Btncancelar" class="btn btn-danger">Cancelar</button>
+                                        <button id="Btncancelar" class="btn btn-danger" type="button">Cancelar</button>
                                         <!-- </a> -->
                                     </td>
                                 </tr>
