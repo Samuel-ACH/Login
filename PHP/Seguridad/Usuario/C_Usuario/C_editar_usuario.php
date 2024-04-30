@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     IdRol = ?, FechaNacimiento = ?, FechaContratacion = ?  WHERE Id_Usuario = ?";
     
     $stmt = mysqli_prepare($conexion, $actualizarUsuarioQuery);
-    mysqli_stmt_bind_param($stmt, "sssssiiss", $dni, $usuario, $direccion, $correo, $nombre, $estado, $rol,
-        $fechanacimiento, $fechacontratacion, $fechamodificacion, $idUsuario);
+    mysqli_stmt_bind_param($stmt, "sssssiissi", $dni, $usuario, $direccion, $correo, $nombre, $estado, $rol,
+        $fechanacimiento, $fechacontratacion, $idUsuario);
 
     if (mysqli_stmt_execute($stmt)) {
         // Mensaje de éxito
