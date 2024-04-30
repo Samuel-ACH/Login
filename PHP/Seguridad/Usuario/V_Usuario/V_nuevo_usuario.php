@@ -231,7 +231,10 @@ include '../../../../Recursos/Componentes/SideBar.html';
 
                                     </td>
                                     <td>
-                                        <button id="Btncancelar" class="btn btn-danger" >Cancelar</button>
+                                        <a href="./V_usuario.php">
+
+                                            <button id="Btncancelar" class="btn btn-danger" >Cancelar</button>
+                                        </a>
                                         
                                     </td>
                                 </tr>
@@ -244,7 +247,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
     </div>
 </main>
 
-<script>
+<!-- <script>
     var Btncancelar = document.getElementById('Btncancelar');
     Btncancelar.addEventListener('click', confirmarCancelar);
 
@@ -271,7 +274,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
             }
         });
     }
-</script>
+</script> -->
 
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
