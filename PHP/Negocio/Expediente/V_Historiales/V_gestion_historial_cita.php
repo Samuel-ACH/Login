@@ -133,7 +133,7 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
                                 <!-- Agrega un campo oculto para enviar el ID de paciente -->
                                 <input type="hidden" name="Detalle_Expediente" value="<?php echo $Detalle_Expediente ?>">
                                 <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarReportes): ?>
+                                <?php if (!$ocultarClinico): ?>
                                 <button  title="Expediente clínico" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> PDF</button>
                                 <?php endif; ?>
                             </form>
@@ -155,7 +155,7 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
                                 <!-- Agrega un campo oculto para enviar el ID de paciente -->
                                 <input type="hidden" name="Detalle_Terapia" value="<?php echo $Detalle_Terapia ?>">
                                 <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarReportes): ?>
+                                <?php if (!$ocultarTerapeutico): ?>
                                 <button style="margin-top: 3px;" title="Expediente terapéutico" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> PDF</button>
                                 <?php endif; ?>
                             </form>
