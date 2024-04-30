@@ -228,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
                 // Redirigir a la pantalla de pacientes (reemplaza con la URL correcta)
                 window.location.href = "./V_Paciente.php";
             }
-           
+            
         }
     </script>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
