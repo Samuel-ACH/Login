@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       };
       xhr.send('correo=' + correo);
-    //  xhr.open('POST', '../Consultas/ConsultaCaptcha.php?timestamp=' + new Date().getTime(), true);
+      xhr.open('POST', '../../PHP/Consultas/ConsultaCaptcha.php?timestamp=' + new Date().getTime(), true);
     }
   });
 });
