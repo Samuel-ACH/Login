@@ -198,7 +198,7 @@ include '../../../../Recursos/Componentes/SideBar.html';
                                         <button type="submit" id="registrarBtn" class="btn btn-primary">Guardar Cambios</button>
                                         </td>
                                         <td> 
-                                         <button id="cancelarbtn" onclick="confirmarCancelar()" class="btn btn-danger">Cancelar</button>
+                                         <button id="cancelarbtn" onclick="confirmarCancelar()" class="btn btn-danger" type="button">Cancelar</button>
                                          </td>
                                      </tr>
                                      </form>
