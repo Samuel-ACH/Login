@@ -3,6 +3,7 @@
 if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
     // Incluir el archivo solo si no se ha ejecutado antes
     include '../../Procesos/C_procesos/C_detalle_terapia.php';
+    unset($_SESSION['detalle_terapia_ejecutado']);
 } else {
     // Eliminar la variable de sesión para permitir que el código se ejecute nuevamente
     unset($_SESSION['detalle_terapia_ejecutado']);
