@@ -4,14 +4,14 @@ header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
 header("Pragma: no-cache"); // HTTP 1.0.
 header("Expires: 0"); // Proxies.
 
-require_once('../Controladores/Conexion/conexiondb.php');
+require_once('../Controladores/Conexion/Conexion_be.php');
 
 if (isset($_POST["correo"])) {
     $correo = $_POST["correo"];
 
     // Ejecutar la consulta SQL
     $sql = "SELECT primer_ingreso FROM tbl_ms_usuario WHERE Correo = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $correo);
     $stmt->execute();
     $stmt->bind_result($NumeroSesion);
@@ -33,4 +33,4 @@ if (isset($_POST["correo"])) {
 }
 
 // Cerrar la conexión a la base de datos
-$conn->close();
+$conexion->close();
