@@ -28,7 +28,7 @@
 // Base para Capacitacion
 $servername = "localhost";
 $username = "u452119581_adminred1";
-$password = "T3chTit4n$2024";
+$password = "T3chTit4ns2024";
 $dbname = "u452119581_capacitacion";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
 $conexion->begin_transaction();
