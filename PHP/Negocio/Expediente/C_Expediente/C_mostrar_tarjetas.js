@@ -28,9 +28,6 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
                 // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
                 var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
                 document.dispatchEvent(tarjetasMostradasEvent);
-
-                // Guardar los datos del formulario en el almacenamiento local
-                guardarDatosFormulario();
             }
         }
     };
@@ -137,39 +134,6 @@ function enviarIdCita(idCita) {
     };
     xhr.send(formData);
 }
-
-// Función para guardar los datos del formulario en el almacenamiento local
-function guardarDatosFormulario() {
-    var datosFormulario = {}; // Objeto para almacenar los datos del formulario
-
-    // Recorrer todas las tarjetas y recopilar los datos
-    var tarjetas = document.querySelectorAll('.formulario__input');
-    tarjetas.forEach(function (tarjeta) {
-        var id = tarjeta.id;
-        var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
-        datosFormulario[id] = valor; // Agregar los datos al objeto
-    });
-
-    // Convertir el objeto a una cadena JSON y almacenarlo en el almacenamiento local
-    localStorage.setItem('datosFormulario', JSON.stringify(datosFormulario));
-}
-
-// Función para cargar los datos del formulario desde el almacenamiento local
-function cargarDatosFormulario() {
-    var datosFormulario = localStorage.getItem('datosFormulario');
-
-    // Verificar si hay datos en el almacenamiento local
-    if (datosFormulario) {
-        datosFormulario = JSON.parse(datosFormulario); // Convertir la cadena JSON a un objeto
-        // Recorrer los datos y asignarlos a los campos del formulario
-        Object.keys(datosFormulario).forEach(function (id) {
-            document.getElementById(id).value = datosFormulario[id];
-        });
-    }
-}
-
-// Cargar los datos del formulario al cargar la página
-window.addEventListener('DOMContentLoaded', cargarDatosFormulario);
 
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
