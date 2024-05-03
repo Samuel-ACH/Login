@@ -19,9 +19,11 @@ if (isset($_SESSION['id_expediente']) && isset($_SESSION['id_paciente'])) {
     // Ahora puedes usar $id_expediente y $id_paciente según lo necesites
     // echo "ID de expediente: $id_expediente <br>";
     // echo "ID de paciente: $id_paciente <br>";
-
+    unset($_SESSION['id_expediente']);
+    unset($_SESSION['id_paciente']);
     // También puedes realizar cualquier otra lógica que necesites con estas variables
 } else {
+
     // Si las variables de sesión no existen, puedes redirigir o mostrar un mensaje de error
     echo "Las variables de sesión no están disponibles.";
 }
