@@ -1,22 +1,7 @@
 // Variable para almacenar los IDs de las tarjetas mostradas
 var tarjetasMostradas = [];
 
-// Al cargar la página, cargar los datos del formulario desde el almacenamiento local si están disponibles
-window.onload = function() {
-    var formData = localStorage.getItem('formData');
-    if (formData) {
-        // Si se encuentran datos en el almacenamiento local, llenar el formulario con esos datos
-        document.getElementById('formulario').innerHTML = formData;
-    }
-}
-
-// Función para guardar los datos del formulario en el almacenamiento local
-function guardarDatosFormulario() {
-    var formData = document.getElementById('formulario').innerHTML;
-    localStorage.setItem('formData', formData);
-}
-
-// Función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
+// Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -35,7 +20,7 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
                 }
 
                 // Agregar el contenido de las nuevas tarjetas a la columna determinada
-                columnaActual.innerHTML += tarjetasHTML;
+                columnaActual.insertAdjacentHTML('beforeend', tarjetasHTML);
 
                 // Agregar el ID de la tarjeta mostrada al registro
                 tarjetasMostradas.push(selectedValue);
@@ -152,6 +137,39 @@ function enviarIdCita(idCita) {
     };
     xhr.send(formData);
 }
+
+// Función para guardar los datos del formulario en el almacenamiento local
+function guardarDatosFormulario() {
+    var datosFormulario = {}; // Objeto para almacenar los datos del formulario
+
+    // Recorrer todas las tarjetas y recopilar los datos
+    var tarjetas = document.querySelectorAll('.formulario__input');
+    tarjetas.forEach(function (tarjeta) {
+        var id = tarjeta.id;
+        var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
+        datosFormulario[id] = valor; // Agregar los datos al objeto
+    });
+
+    // Convertir el objeto a una cadena JSON y almacenarlo en el almacenamiento local
+    localStorage.setItem('datosFormulario', JSON.stringify(datosFormulario));
+}
+
+// Función para cargar los datos del formulario desde el almacenamiento local
+function cargarDatosFormulario() {
+    var datosFormulario = localStorage.getItem('datosFormulario');
+
+    // Verificar si hay datos en el almacenamiento local
+    if (datosFormulario) {
+        datosFormulario = JSON.parse(datosFormulario); // Convertir la cadena JSON a un objeto
+        // Recorrer los datos y asignarlos a los campos del formulario
+        Object.keys(datosFormulario).forEach(function (id) {
+            document.getElementById(id).value = datosFormulario[id];
+        });
+    }
+}
+
+// Cargar los datos del formulario al cargar la página
+window.addEventListener('DOMContentLoaded', cargarDatosFormulario);
 
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
