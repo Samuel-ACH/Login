@@ -1,3 +1,6 @@
+// Objeto para almacenar los datos de las tarjetas
+var datosTarjetas = {};
+
 // Variable para almacenar los IDs de las tarjetas mostradas
 var tarjetasMostradas = [];
 
@@ -47,8 +50,6 @@ document.getElementById("tratamiento").addEventListener("change", function () {
 
 // Función para recopilar y enviar los datos al servidor
 function guardarDatos() {
-    var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
-
     // Recorrer todas las tarjetas y recopilar los datos
     var tarjetas = document.querySelectorAll('.formulario__input');
     tarjetas.forEach(function (tarjeta) {
@@ -56,7 +57,7 @@ function guardarDatos() {
         var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
         // Verificar si el input no tiene el atributo 'readonly'
         if (!tarjeta.hasAttribute('readonly') && valor !== '') { // Verificar si el campo tiene datos y no es de solo lectura
-            datosTarjetas[id] = valor; // Agregar los datos al objeto
+            datosTarjetas[id] = valor; // Actualizar los datos en el objeto
         }
     });
 
@@ -146,3 +147,15 @@ botonGuardar.addEventListener('click', function (event) {
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
+
+// Función para cerrar una tarjeta
+function cerrarTarjeta(idTarjeta) {
+    var tarjeta = document.getElementById(idTarjeta);
+    tarjeta.style.display = 'none'; // Oculta la tarjeta
+}
+
+// Función para abrir una tarjeta cerrada
+function abrirTarjeta(idTarjeta) {
+    var tarjeta = document.getElementById(idTarjeta);
+    tarjeta.style.display = 'block'; // Muestra la tarjeta
+}

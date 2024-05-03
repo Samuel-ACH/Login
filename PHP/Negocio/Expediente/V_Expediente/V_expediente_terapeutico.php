@@ -166,14 +166,14 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                 <script src="../C_Expediente/C_mostrar_tarjetas.js"></script>
     </main>
 
-    <script>
+    <!-- <script>
         function cerrarTarjeta(idTarjeta) {
             var tarjeta = document.getElementById(idTarjeta);
             tarjeta.style.display = 'none'; // Oculta la tarjeta
             // Alternativamente, puedes eliminar la tarjeta del DOM con:
             // tarjeta.parentNode.removeChild(tarjeta);
         }
-    </script>
+    </script> -->
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
