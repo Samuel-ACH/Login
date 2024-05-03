@@ -1,7 +1,22 @@
 // Variable para almacenar los IDs de las tarjetas mostradas
 var tarjetasMostradas = [];
 
-// Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
+// Al cargar la página, cargar los datos del formulario desde el almacenamiento local si están disponibles
+window.onload = function() {
+    var formData = localStorage.getItem('formData');
+    if (formData) {
+        // Si se encuentran datos en el almacenamiento local, llenar el formulario con esos datos
+        document.getElementById('formulario').innerHTML = formData;
+    }
+}
+
+// Función para guardar los datos del formulario en el almacenamiento local
+function guardarDatosFormulario() {
+    var formData = document.getElementById('formulario').innerHTML;
+    localStorage.setItem('formData', formData);
+}
+
+// Función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -28,6 +43,9 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
                 // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
                 var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
                 document.dispatchEvent(tarjetasMostradasEvent);
+
+                // Guardar los datos del formulario en el almacenamiento local
+                guardarDatosFormulario();
             }
         }
     };
@@ -135,8 +153,6 @@ function enviarIdCita(idCita) {
     xhr.send(formData);
 }
 
-
-
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
 
@@ -148,5 +164,3 @@ botonGuardar.addEventListener('click', function (event) {
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
-
-
