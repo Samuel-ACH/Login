@@ -31,6 +31,7 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
         // Ejecutar la inserción con los valores de cita y expediente
         $sql = "INSERT INTO tbl_detalle_terapia (Numero_Sesiones, Fecha_Terapia, Id_Cita_Terapia, Id_Usuario, Id_Expediente)
                 VALUES (0, NOW(), $id_cita, $Id_Usuario, $id_expediente)";
+        unset($_SESSION['datos']);
 
         if (mysqli_query($conexion, $sql)) {
             // Recuperar el último ID insertado
@@ -49,4 +50,3 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
         echo "No se han encontrado datos en la sesión.";
     }
 }
-?>
