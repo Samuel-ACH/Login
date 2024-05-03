@@ -36,25 +36,14 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     xhttp.send();
 }
 
-// Variable para almacenar el valor seleccionado del combobox
-var valorSeleccionado = "0"; // Por defecto, elige la opción "SELECCIONE"
-
 // Manejar el evento de cambio en el combobox de tratamientos
 document.getElementById("tratamiento").addEventListener("change", function () {
-    valorSeleccionado = this.value;
-    if (valorSeleccionado !== "0") {
-        mostrarTarjetasYExpedienteTerapeutico(valorSeleccionado);
+    var selectedValue = this.value;
+
+    if (selectedValue !== "0") {
+        mostrarTarjetasYExpedienteTerapeutico(selectedValue);
     }
 });
-
-// Función para mostrar tarjetas y expediente terapéutico
-function mostrarTarjetasYExpedienteTerapeutico(valorSeleccionado) {
-    // Lógica para mostrar las tarjetas aquí
-    // ...
-    // Una vez que se han mostrado las tarjetas, selecciona automáticamente el valor en el combobox
-    document.getElementById("tratamiento").value = valorSeleccionado;
-}
-
 
 // Función para recopilar y enviar los datos al servidor
 function guardarDatos() {
