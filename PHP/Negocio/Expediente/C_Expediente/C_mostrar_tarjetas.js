@@ -12,7 +12,7 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
             var tarjetasHTML = this.responseText;
 
             // Verificar si el ID de la tarjeta ya ha sido mostrado
-            if (!tarjetasMostradas.includes(selectedValue)) {
+            if (tarjetasMostradas.includes(selectedValue)) {
                 // Determinar en qué columna agregar las tarjetas alternadamente
                 var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
                 var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
@@ -148,14 +148,14 @@ botonGuardar.addEventListener('click', function (event) {
     guardarDatos();
 });
 
-// Función para cerrar una tarjeta
-function cerrarTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'none'; // Oculta la tarjeta
-}
+// // Función para cerrar una tarjeta
+// function cerrarTarjeta(idTarjeta) {
+//     var tarjeta = document.getElementById(idTarjeta);
+//     tarjeta.style.display = 'none'; // Oculta la tarjeta
+// }
 
-// Función para abrir una tarjeta cerrada
-function abrirTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'block'; // Muestra la tarjeta
-}
+// // Función para abrir una tarjeta cerrada
+// function abrirTarjeta(idTarjeta) {
+//     var tarjeta = document.getElementById(idTarjeta);
+//     tarjeta.style.display = 'block'; // Muestra la tarjeta
+// }

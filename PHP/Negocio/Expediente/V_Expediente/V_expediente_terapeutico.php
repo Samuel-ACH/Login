@@ -173,6 +173,12 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
             // Alternativamente, puedes eliminar la tarjeta del DOM con:
             // tarjeta.parentNode.removeChild(tarjeta);
         }
+
+        // Función para abrir una tarjeta cerrada
+        function abrirTarjeta(idTarjeta) {
+            var tarjeta = document.getElementById(idTarjeta);
+            tarjeta.style.display = 'block'; // Muestra la tarjeta
+        }
     </script>
 
     <!-- Bootstrap JS Bundle (Bootstrap JS + Popper.js) -->
