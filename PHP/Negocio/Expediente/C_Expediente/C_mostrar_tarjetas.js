@@ -1,15 +1,15 @@
-// Variable para almacenar los IDs de las tarjetas mostradas y sus datos asociados
-var tarjetasMostradas = {};
+// Variable para almacenar los IDs de las tarjetas mostradas
+var tarjetasMostradas = [];
 
 // Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            var tarjetaHTML = this.responseText;
+            var tarjetasHTML = this.responseText;
 
             // Verificar si el ID de la tarjeta ya ha sido mostrado
-            if (!tarjetasMostradas[selectedValue]) {
+            if (!tarjetasMostradas.includes(selectedValue)) {
                 // Determinar en qué columna agregar las tarjetas alternadamente
                 var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
                 var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
@@ -19,15 +19,15 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
                     columnaActual = document.getElementById("contenedor-tarjetas-columna2");
                 }
 
-                // Agregar el contenido de la nueva tarjeta a la columna determinada
-                columnaActual.insertAdjacentHTML('beforeend', tarjetaHTML);
+                // Agregar el contenido de las nuevas tarjetas a la columna determinada
+                columnaActual.insertAdjacentHTML('beforeend', tarjetasHTML);
 
-                // Agregar los datos de la tarjeta mostrada al registro
-                tarjetasMostradas[selectedValue] = true;
+                // Agregar el ID de la tarjeta mostrada al registro
+                tarjetasMostradas.push(selectedValue);
 
-                // Disparar un evento personalizado para indicar que la tarjeta se ha mostrado
-                var tarjetaMostradaEvent = new CustomEvent('tarjetaMostrada', { detail: selectedValue });
-                document.dispatchEvent(tarjetaMostradaEvent);
+                // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
+                var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
+                document.dispatchEvent(tarjetasMostradasEvent);
             }
         }
     };
@@ -45,24 +45,20 @@ document.getElementById("tratamiento").addEventListener("change", function () {
     }
 });
 
-// Función para recopilar los datos del formulario
-function obtenerDatosFormulario() {
-    var datosFormulario = {};
+// Función para recopilar y enviar los datos al servidor
+function guardarDatos() {
+    var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
 
     // Recorrer todas las tarjetas y recopilar los datos
     var tarjetas = document.querySelectorAll('.formulario__input');
     tarjetas.forEach(function (tarjeta) {
         var id = tarjeta.id;
         var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
-        datosFormulario[id] = valor;
+        // Verificar si el input no tiene el atributo 'readonly'
+        if (!tarjeta.hasAttribute('readonly') && valor !== '') { // Verificar si el campo tiene datos y no es de solo lectura
+            datosTarjetas[id] = valor; // Agregar los datos al objeto
+        }
     });
-
-    return datosFormulario;
-}
-
-// Función para guardar los datos del formulario
-function guardarDatos() {
-    var datosTarjetas = obtenerDatosFormulario();
 
     // Verificar si hay datos para enviar al servidor
     if (Object.keys(datosTarjetas).length === 0) {
@@ -86,7 +82,7 @@ function guardarDatos() {
             if (result.isConfirmed) {
                 // Si el usuario confirma, enviar los datos al servidor
                 var idCita = document.getElementById('Id_Cita').value;
-
+                
                 // Enviar el valor de Id_Cita al controlador PHP
                 enviarIdCita(idCita);
 
@@ -150,17 +146,3 @@ botonGuardar.addEventListener('click', function (event) {
     // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
     guardarDatos();
 });
-
-// Función para cerrar una tarjeta
-function cerrarTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'none'; // Oculta la tarjeta
-    tarjetasMostradas[idTarjeta] = false; // Marca la tarjeta como cerrada en el registro
-}
-
-// Función para abrir una tarjeta cerrada
-function abrirTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'block'; // Muestra la tarjeta
-    tarjetasMostradas[idTarjeta] = true; // Marca la tarjeta como abierta en el registro
-}
