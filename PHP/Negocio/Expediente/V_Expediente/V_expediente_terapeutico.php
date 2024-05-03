@@ -157,25 +157,6 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
                     <p id="mensajeGenero2" class="mensaje_error" style="color: #bb2929;"></p>
                 </div>
 
-                <!-- Selector de tratamientos -->
-                <select type="int" autocomplete="off" name="tratamiento" id="tratamiento" placeholder="Tratamiento" class="combobox" onchange="abrirTarjeta('tarjeta_' + this.value)">
-                    <option value="0" selected>SELECCIONE</option>
-                    <?php
-                    include('../../../Controladores/Conexion/Conexion_be.php');
-                    $query = "SELECT TT.Id_Tipo_Tratamiento AS Correlativo, TT.Nombre AS Tratamiento FROM `tbl_tipo_tratamiento` AS TT";
-                    $resultado = mysqli_query($conexion, $query);
-
-                    while ($fila = mysqli_fetch_assoc($resultado)) {
-                        echo '<option value="' . $fila['Correlativo'] . '">' . $fila['Tratamiento'] . '</option>';
-                    }
-                    mysqli_free_result($resultado);
-
-                    // Cerrar el formulario
-                    $conexion->close();
-                    ?>
-                </select>
-
-
                 <form action="" method="POST">
                     <!-- <input type="text" readonly name="Id_Cita_U" id="Id_Cita_U"> -->
                     <button type="submit" class="btnguardarDatos" id="guardarDatos" name="guardarDatos">Guadar Todo</button>
