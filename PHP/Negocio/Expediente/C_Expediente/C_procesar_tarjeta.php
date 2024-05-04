@@ -73,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // });
             // </script>
             // ';
-            session_unset();
         } catch (Exception $e) {
             // Si ocurre algún error, revertir la transacción y mostrar el mensaje de error
             $conexion->rollback();
