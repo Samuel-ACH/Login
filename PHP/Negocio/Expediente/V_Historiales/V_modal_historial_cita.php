@@ -57,6 +57,7 @@ if (isset($_POST['guardarDatos']) && isset($_POST['idCitaTerapia'])) {
     <link href="../../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="../../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./V_gestion_historial_cita.css">
 
     <!-- Template Main CSS File -->
     <link href="../../../../assets/css/style.css" rel="stylesheet">

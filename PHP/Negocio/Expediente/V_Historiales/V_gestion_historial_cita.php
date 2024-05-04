@@ -23,7 +23,7 @@ if (isset($_SESSION['id_expediente']) && isset($_SESSION['id_paciente'])) {
 } else {
     unset($_SESSION['id_expediente']);
     unset($_SESSION['id_paciente']);
-    
+
     // Si las variables de sesión no existen, puedes redirigir o mostrar un mensaje de error
     // echo "Las variables de sesión no están disponibles.";
 }
@@ -32,8 +32,8 @@ $id_rol = $_SESSION['IdRol'];
 $id_objeto = Obtener_Id_Objeto('V_modal_historial_cita');
 $Permisos_Objeto = Obtener_Permisos_Rol_Objeto($id_rol, $id_objeto);
 
-if ($Permisos_Objeto["Permiso_Consultar"] !== "1"){
-        header("Location: /PHP/Seguridad/Roles_permisos/permisos/V_error_permiso.php");   
+if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
+    header("Location: /PHP/Seguridad/Roles_permisos/permisos/V_error_permiso.php");
 }
 
 $ocultarInsercion = false;
@@ -135,8 +135,8 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
                                 <!-- Agrega un campo oculto para enviar el ID de paciente -->
                                 <input type="hidden" name="Detalle_Expediente" value="<?php echo $Detalle_Expediente ?>">
                                 <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarClinico): ?>
-                                <button  title="Expediente clínico" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+                                <?php if (!$ocultarClinico) : ?>
+                                    <button title="Expediente clínico" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> PDF</button>
                                 <?php endif; ?>
                             </form>
 
@@ -146,34 +146,33 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
                                 <!-- Agrega un campo oculto para enviar el ID de paciente -->
                                 <input type="hidden" name="Detalle_Expediente" value="<?php echo $Detalle_Expediente ?>">
                                 <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarActualizacion): ?>
-                                <button style="margin-top: 3px;" title="Editar Expediente clínico" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <?php if (!$ocultarActualizacion) : ?>
+                                    <button title="Editar Expediente clínico" class="btn btn-warning editar__expediente"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <?php endif; ?>
                             </form>
+                            <div class="fila__botones-terapeutico" >
+                                <form action="../../../../fpdf%20expediente/R_terapeutico.php" target="_blank" method="POST">
+                                    <!-- Agrega un campo oculto para enviar el ID de expediente -->
+                                    <input type="hidden" name="id_Cita_Terapia" value="<?php echo $id_Cita_Terapia ?>">
+                                    <!-- Agrega un campo oculto para enviar el ID de paciente -->
+                                    <input type="hidden" name="Detalle_Terapia" value="<?php echo $Detalle_Terapia ?>">
+                                    <!-- Botón para enviar el formulario -->
+                                    <?php if (!$ocultarTerapeutico) : ?>
+                                        <button title="Expediente terapéutico" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+                                    <?php endif; ?>
+                                </form>
 
-                            <form action="../../../../fpdf%20expediente/R_terapeutico.php" target="_blank" method="POST">
-                                <!-- Agrega un campo oculto para enviar el ID de expediente -->
-                                <input type="hidden" name="id_Cita_Terapia" value="<?php echo $id_Cita_Terapia ?>">
-                                <!-- Agrega un campo oculto para enviar el ID de paciente -->
-                                <input type="hidden" name="Detalle_Terapia" value="<?php echo $Detalle_Terapia ?>">
-                                <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarTerapeutico): ?>
-                                <button style="margin-top: 3px;" title="Expediente terapéutico" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> PDF</button>
-                                <?php endif; ?>
-                            </form>
-
-                            <form action="../V_Expediente/V_editar_expediente_terapeutico.php" method="POST">
-                                <!-- Agrega un campo oculto para enviar el ID de expediente -->
-                                <input type="hidden" name="id_Cita_Terapia" value="<?php echo $id_Cita_Terapia ?>">
-                                <!-- Agrega un campo oculto para enviar el ID de paciente -->
-                                <input type="hidden" name="Detalle_Terapia" value="<?php echo $Detalle_Terapia ?>">
-                                <!-- Botón para enviar el formulario -->
-                                <?php if (!$ocultarActualizacion): ?>
-                                <button style="margin-top: 3px;" title="Expediente terapéutico" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i> </button>
-                                <?php endif; ?>
-                            </form>
-
-
+                                <form action="../V_Expediente/V_editar_expediente_terapeutico.php" method="POST">
+                                    <!-- Agrega un campo oculto para enviar el ID de expediente -->
+                                    <input type="hidden" name="id_Cita_Terapia" value="<?php echo $id_Cita_Terapia ?>">
+                                    <!-- Agrega un campo oculto para enviar el ID de paciente -->
+                                    <input type="hidden" name="Detalle_Terapia" value="<?php echo $Detalle_Terapia ?>">
+                                    <!-- Botón para enviar el formulario -->
+                                    <?php if (!$ocultarActualizacion) : ?>
+                                        <button title="Expediente terapéutico" class="btn btn-success editar__expediente"><i class="fa-solid fa-pen-to-square"></i> </button>
+                                    <?php endif; ?>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php
@@ -219,11 +218,11 @@ if (file_exists($ruta_imagen)) {
                     }
                 },
                 {
-                    <?php if (!$ocultarReportes): ?>
-                    extend: 'pdfHtml5',
-                    download: 'open',
-                    text: '<i class="fas fa-file-pdf">  PDF </i>',
-                    orientation: 'portrait',
+                    <?php if (!$ocultarReportes) : ?>
+                        extend: 'pdfHtml5',
+                        download: 'open',
+                        text: '<i class="fas fa-file-pdf">  PDF </i>',
+                        orientation: 'portrait',
                     <?php endif; ?>
                     customize: function(doc) {
                         // Calcula la longitud máxima de los datos por columna
