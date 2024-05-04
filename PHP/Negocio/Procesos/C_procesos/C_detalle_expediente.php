@@ -38,6 +38,7 @@ if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
 
             // Almacenar el ID del detalle del expediente en una variable de sesión
             $_SESSION['Id_Detalle_Expediente'] = $Id_Detalle_Expediente;
+            unset($_SESSION['Id_Detalle_Expediente']);
 
             // Puedes utilizar el ID insertado según sea necesario
             // echo "Último ID insertado: " . $Id_Detalle_Expediente;
