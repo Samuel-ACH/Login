@@ -55,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
             // Confirmar la transacción si todo ha ido bien
             $conexion->commit();
+            $_SESSION['Id_Detalle_Terapia'] = null; // Asignar un valor null
+            $Id_Detalle_Terapia = null;
             // echo '<h6 id="" class="alert alert-success">Datos insertados correctamente</h6>';
             // include '../../../../Recursos/SweetAlerts.php';
             // echo '
