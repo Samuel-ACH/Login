@@ -126,6 +126,7 @@ function CambiarEstadoEnEspera(idCita_L) {
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
                 alertify.success("Se actualizó el estado de la cita");
+                cadena = '';
             } else {
                 alertify.error("Fallo al cambiar el estado de la cita.");
             }
@@ -154,6 +155,7 @@ function CambiarEstadoPendiente(idCita_L) {
             if (respuesta == 1) {
                 $('#tablaCitas').load('../V_Cita/V_gestion_cita.php');
                 alertify.success("Se actualizó el estado de la cita");
+                cadena = '';
             } else {
                 alertify.error("Fallo al cambiar el estado de la cita.");
             }
