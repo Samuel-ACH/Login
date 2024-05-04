@@ -79,7 +79,7 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
 
             <tbody>
                 <?php
-                $sql = "SELECT
+                $sql = "SELECT DISTINCT
                             E.id_Expediente,
                             CT.id_Cita_Terapia,
                             P.Numero_Documento,

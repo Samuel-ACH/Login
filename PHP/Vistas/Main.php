@@ -148,6 +148,7 @@ if (!isset($_SESSION["correo"])) {
                             // echo 'Rol #' . $_SESSION['IdRol'];
 
                             if ($IdRol === '6') { // consulta para rol Fisiatra
+                                include '../Controladores/Conexion/Conexion_be.php';
                                 $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
                                         -- CAMPOS NO VISIBLES
                                         P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
