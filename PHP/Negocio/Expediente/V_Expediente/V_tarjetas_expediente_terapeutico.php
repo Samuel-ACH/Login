@@ -48,7 +48,7 @@ foreach ($rows as $row) {
     echo '<div class="divDescripcionEvaluacion">';
     echo '<div class="form-group">';
     echo '<label for="' . $id . '">' . ucwords($descripcion) . ':</label>';
-    echo '<input type="text" class="formulario__input" id="' . $id . '" name="' . $id . '">';
+    echo '<input type="text" autocomplete="off" class="formulario__input" id="' . $id . '" name="' . $id . '">';
     echo '</div>';
     echo '</div>';
     echo '</form>';

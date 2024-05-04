@@ -169,15 +169,7 @@ if (!isset($_SESSION['detalle_terapia_ejecutado'])) {
     <script>
         function cerrarTarjeta(idTarjeta) {
             var tarjeta = document.getElementById(idTarjeta);
-            tarjeta.style.display = 'none'; // Oculta la tarjeta
-            // Alternativamente, puedes eliminar la tarjeta del DOM con:
-            // tarjeta.parentNode.removeChild(tarjeta);
-        }
-
-        // Función para abrir una tarjeta cerrada
-        function abrirTarjeta(idTarjeta) {
-            var tarjeta = document.getElementById(idTarjeta);
-            tarjeta.style.display = 'block'; // Muestra la tarjeta
+            tarjeta.parentNode.removeChild(tarjeta); // Elimina la tarjeta del DOM
         }
     </script>
 

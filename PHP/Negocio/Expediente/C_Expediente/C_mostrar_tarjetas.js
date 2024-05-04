@@ -1,161 +1,169 @@
-// Objeto para almacenar los datos de las tarjetas
-var datosTarjetas = {};
-
-// Variable para almacenar los IDs de las tarjetas mostradas
 var tarjetasMostradas = [];
+
+// Definir una variable para almacenar el ID del tratamiento actual
+var tratamientoActual = null;
 
 // Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var tarjetasHTML = this.responseText;
+  // Verificar si el tratamiento seleccionado ya ha sido mostrado
+  if (tarjetasMostradas.includes(selectedValue)) {
+    alert("El tratamiento seleccionado ya ha sido mostrado.");
+    return;
+  }
 
-            // Verificar si el ID de la tarjeta ya ha sido mostrado
-            if (!tarjetasMostradas.includes(selectedValue)) {
-                // Determinar en qué columna agregar las tarjetas alternadamente
-                var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
-                var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
-                var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var tarjetasHTML = this.responseText;
 
-                if (tarjetasColumna2 < tarjetasColumna1) {
-                    columnaActual = document.getElementById("contenedor-tarjetas-columna2");
-                }
+      // Verificar si el ID de la tarjeta ya ha sido mostrado
+      if (!tarjetasMostradas.includes(selectedValue)) {
+        // Determinar en qué columna agregar las tarjetas alternadamente
+        var columnaActual = document.getElementById(
+          "contenedor-tarjetas-columna1"
+        );
+        var tarjetasColumna1 = document.querySelectorAll(
+          "#contenedor-tarjetas-columna1 .card"
+        ).length;
+        var tarjetasColumna2 = document.querySelectorAll(
+          "#contenedor-tarjetas-columna2 .card"
+        ).length;
 
-                // Agregar el contenido de las nuevas tarjetas a la columna determinada
-                columnaActual.insertAdjacentHTML('beforeend', tarjetasHTML);
-
-                // Agregar el ID de la tarjeta mostrada al registro
-                tarjetasMostradas.push(selectedValue);
-
-                // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
-                var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
-                document.dispatchEvent(tarjetasMostradasEvent);
-            }
+        if (tarjetasColumna2 < tarjetasColumna1) {
+          columnaActual = document.getElementById(
+            "contenedor-tarjetas-columna2"
+          );
         }
-    };
 
-    xhttp.open("POST", "../V_Expediente/V_tarjetas_expediente_terapeutico.php?tratamiento=" + selectedValue, true);
-    xhttp.send();
+        // Crear un nuevo elemento de tarjeta
+        var nuevaTarjeta = document.createElement("div");
+        // nuevaTarjeta.classList.add("card");
+        // Agregar el contenido HTML a la nueva tarjeta
+        nuevaTarjeta.innerHTML = tarjetasHTML;
+        // Agregar la nueva tarjeta al contenedor de tarjetas
+        columnaActual.appendChild(nuevaTarjeta);
+
+        // Agregar el ID de la tarjeta mostrada al registro
+        // tarjetasMostradas.push(selectedValue);
+
+        // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
+        var tarjetasMostradasEvent = new CustomEvent("tarjetasMostradas", {
+          detail: selectedValue,
+        });
+        document.dispatchEvent(tarjetasMostradasEvent);
+
+        // Agregar evento de clic a las nuevas tarjetas
+        var nuevasTarjetas = columnaActual.querySelectorAll(".card");
+        nuevasTarjetas.forEach(function (tarjeta) {
+          tarjeta.addEventListener("click", function () {
+            abrirTarjeta(this);
+          });
+        });
+      }
+    }
+  };
+
+  xhttp.open(
+    "POST",
+    "../V_Expediente/V_tarjetas_expediente_terapeutico.php?tratamiento=" +
+      selectedValue,
+    true
+  );
+  xhttp.send();
+}
+
+// Función para abrir una tarjeta
+function abrirTarjeta(tarjeta) {
+  tarjeta.classList.toggle("active");
 }
 
 // Manejar el evento de cambio en el combobox de tratamientos
 document.getElementById("tratamiento").addEventListener("change", function () {
-    var selectedValue = this.value;
+  var selectedValue = this.value;
 
-    if (selectedValue !== "0") {
-        mostrarTarjetasYExpedienteTerapeutico(selectedValue);
+  if (selectedValue !== "0") {
+    // Verificar si el tratamiento actual es diferente al seleccionado
+    if (selectedValue !== tratamientoActual) {
+      mostrarTarjetasYExpedienteTerapeutico(selectedValue);
+      tratamientoActual = selectedValue; // Actualizar la variable del tratamiento actual
+      this.value = "0";
+      //   tratamientoActual = "0";
     }
+  }
 });
 
 // Función para recopilar y enviar los datos al servidor
 function guardarDatos() {
-    // Recorrer todas las tarjetas y recopilar los datos
-    var tarjetas = document.querySelectorAll('.formulario__input');
-    tarjetas.forEach(function (tarjeta) {
-        var id = tarjeta.id;
-        var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
-        // Verificar si el input no tiene el atributo 'readonly'
-        if (!tarjeta.hasAttribute('readonly') && valor !== '') { // Verificar si el campo tiene datos y no es de solo lectura
-            datosTarjetas[id] = valor; // Actualizar los datos en el objeto
-        }
-    });
+  var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas
 
-    // Verificar si hay datos para enviar al servidor
-    if (Object.keys(datosTarjetas).length === 0) {
-        // Si no hay datos para guardar, mostrar alerta de SweetAlert2
-        Swal.fire({
-            title: 'Atención',
-            text: 'No hay datos para guardar.',
-            icon: 'warning', // Ícono de advertencia
-            confirmButtonText: 'Aceptar' // Texto del botón de confirmación
-        });
-    } else {
-        // Si hay datos para guardar, mostrar alerta de confirmación de SweetAlert2
-        Swal.fire({
-            title: 'Confirmación',
-            text: '¿Estás seguro que deseas guardar los datos?',
-            icon: 'question', // Ícono de pregunta
-            showCancelButton: true, // Mostrar botón de cancelación
-            confirmButtonText: 'Guardar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, enviar los datos al servidor
-                var idCita = document.getElementById('Id_Cita').value;
-                
-                // Enviar el valor de Id_Cita al controlador PHP
-                enviarIdCita(idCita);
-
-                var datosJSON = JSON.stringify(datosTarjetas);
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '../C_Expediente/C_procesar_tarjeta.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/json'); // Especificar el tipo de contenido como JSON
-                xhr.onload = function () {
-                    // Manejar la respuesta del servidor aquí si es necesario
-                    console.log(xhr.responseText);
-
-                    // Mostrar alerta de éxito después de guardar los datos
-                    Swal.fire({
-                        title: 'Éxito',
-                        text: 'Los datos se han guardado correctamente.',
-                        icon: 'success',
-                        timer: 2000, // Cerrar automáticamente después de 2 segundos
-                        showConfirmButton: false // Ocultar botón de confirmación
-                    }).then(() => {
-                        // Redirigir al usuario a una nueva página después de guardar los datos
-                        window.location.href = '/PHP/Vistas/Main.php';
-                    });
-                };
-                xhr.send(datosJSON);
-            }
-        });
+  // Recorrer todas las tarjetas y recopilar los datos
+  var tarjetas = document.querySelectorAll(".formulario__input");
+  tarjetas.forEach(function (tarjeta) {
+    var id = tarjeta.id;
+    var valor = tarjeta.value.trim(); // Obtener el valor del campo y eliminar espacios en blanco
+    // Verificar si el input no tiene el atributo 'readonly'
+    if (!tarjeta.hasAttribute("readonly") && valor !== "") {
+      // Verificar si el campo tiene datos y no es de solo lectura
+      datosTarjetas[id] = valor; // Agregar los datos al objeto
     }
-}
+  });
 
-// Función para enviar el valor de Id_Cita al controlador PHP
-function enviarIdCita(idCita) {
-    // Crear un objeto FormData para enviar datos al servidor
-    var formData = new FormData();
+  // Verificar si hay datos para enviar al servidor
+  if (Object.keys(datosTarjetas).length === 0) {
+    // Si no hay datos para guardar, mostrar alerta de SweetAlert2
+    Swal.fire({
+      title: "Atención",
+      text: "No hay datos para guardar.",
+      icon: "warning", // Ícono de advertencia
+      confirmButtonText: "Aceptar", // Texto del botón de confirmación
+    });
+  } else {
+    // Si hay datos para guardar, mostrar alerta de confirmación de SweetAlert2
+    Swal.fire({
+      title: "Confirmación",
+      text: "¿Estás seguro que deseas guardar los datos?",
+      icon: "question", // Ícono de pregunta
+      showCancelButton: true, // Mostrar botón de cancelación
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, enviar los datos al servidor
+        var datosJSON = JSON.stringify(datosTarjetas);
 
-    // Agregar el valor de Id_Cita al formData
-    formData.append('Id_Cita', idCita);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../C_Expediente/C_procesar_tarjeta.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json"); // Especificar el tipo de contenido como JSON
+        xhr.onload = function () {
+          // Manejar la respuesta del servidor aquí si es necesario
+          console.log(xhr.responseText);
 
-    // Realizar una solicitud AJAX para enviar los datos al controlador PHP
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php');
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Manejar la respuesta del servidor si es necesario
-            console.log(xhr.responseText);
-        } else {
-            // Manejar errores si ocurren
-            console.error('Error al enviar datos al servidor');
-        }
-    };
-    xhr.send(formData);
+          // Mostrar alerta de éxito después de guardar los datos
+          Swal.fire({
+            title: "Éxito",
+            text: "Los datos se han guardado correctamente.",
+            icon: "success",
+            timer: 2000, // Cerrar automáticamente después de 2 segundos
+            showConfirmButton: false, // Ocultar botón de confirmación
+          }).then(() => {
+            // Redirigir al usuario a una nueva página después de guardar los datos
+            window.location.href = "/PHP/Vistas/Main.php";
+          });
+        };
+        xhr.send(datosJSON);
+      }
+    });
+  }
 }
 
 // Seleccionar el botón de guardar por su ID
-var botonGuardar = document.getElementById('guardarDatos');
+var botonGuardar = document.getElementById("guardarDatos");
 
 // Agregar el evento 'click' al botón de guardar
-botonGuardar.addEventListener('click', function (event) {
-    // Prevenir el comportamiento predeterminado del formulario (si el botón está dentro de un formulario)
-    event.preventDefault();
+botonGuardar.addEventListener("click", function (event) {
+  // Prevenir el comportamiento predeterminado del formulario (si el botón está dentro de un formulario)
+  event.preventDefault();
 
-    // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
-    guardarDatos();
+  // Llamar a la función 'guardarDatos' cuando se haga clic en el botón
+  guardarDatos();
 });
-
-// Función para cerrar una tarjeta
-function cerrarTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'none'; // Oculta la tarjeta
-}
-
-// Función para abrir una tarjeta cerrada
-function abrirTarjeta(idTarjeta) {
-    var tarjeta = document.getElementById(idTarjeta);
-    tarjeta.style.display = 'block'; // Muestra la tarjeta
-}

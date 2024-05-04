@@ -39,7 +39,7 @@ function mostrarFormulario($conexion, $id_evaluacion)
             $id_resultado = $row["Id_Resultado_Evaluacion"];
             echo '<div class="form-group">';
             echo '<label for="' . $id_resultado . '">' . ucwords($descripcion) . ':</label>';
-            echo '<input type="text" class="formulario__input" name="' . $id_resultado . '" maxlength="20">';
+            echo '<input type="text" autocomplete="off" class="formulario__input" name="' . $id_resultado . '" maxlength="20">';
             echo '</div>';
         }
         echo '</div>';
