@@ -68,10 +68,10 @@ function ExpedienteClinico()
 
     echo '<hr>';
 
-   // Agregar el botón de envío global
-//    echo '<button type="submit" class="btn-guardar" name="guardar_todo">Guardar Todo</button>';
-// Agregar el botón de envío global con el evento onclick
-echo '<button type="button" class="btn-guardar" onclick="confirmarEnvio()">Guardar Todo</button>';
+    // Agregar el botón de envío global
+    //    echo '<button type="submit" class="btn-guardar" name="guardar_todo">Guardar Todo</button>';
+    // Agregar el botón de envío global con el evento onclick
+    echo '<button type="button" class="btn-guardar" onclick="confirmarEnvio()">Guardar Todo</button>';
 
 
     echo '</form>'; // Cerrar el formulario global

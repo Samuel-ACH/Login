@@ -31,6 +31,8 @@ if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
         // Ejecutar la inserción con los valores de cita y expediente
         $sql = "INSERT INTO tbl_detalle_expediente (Fecha_Evaluacion, Lateralidad, Referido, Id_Usuario, Id_Cita_Terapia, Id_Expediente)
                 VALUES (NOW(), 0, 0, $Id_Usuario, $id_cita, $id_expediente)";
+        unset($_SESSION['datos']);
+
 
         if (mysqli_query($conexion, $sql)) {
             // Recuperar el último ID insertado
@@ -38,7 +40,7 @@ if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
 
             // Almacenar el ID del detalle del expediente en una variable de sesión
             $_SESSION['Id_Detalle_Expediente'] = $Id_Detalle_Expediente;
-             unset($_SESSION['detalle_expediente_ejecutado']);
+            unset($_SESSION['detalle_expediente_ejecutado']);
 
             // Puedes utilizar el ID insertado según sea necesario
             // echo "Último ID insertado: " . $Id_Detalle_Expediente;
@@ -50,4 +52,3 @@ if (!isset($_SESSION['detalle_expediente_ejecutado'])) {
         echo "No se han encontrado datos en la sesión.";
     }
 }
-?>
