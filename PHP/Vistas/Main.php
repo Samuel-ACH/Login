@@ -88,7 +88,7 @@ if (!isset($_SESSION["correo"])) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"> </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    
+
     <script>
         $(document).ready(function() {
             $('#tablaAgenda').DataTable({
@@ -147,31 +147,28 @@ if (!isset($_SESSION["correo"])) {
                             <?php
                             // echo 'Rol #' . $_SESSION['IdRol'];
 
-                            if ($IdRol === '6' || $IdRol === '7') { // Si el usuario que inicia sesión tiene rol 6 o 7, realiza las 2 siguientes consultas
-                                include '../Controladores/Conexion/Conexion_be.php';
-
-                                if ($IdRol === '6') { // consulta para rol Fisiatra
-                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
-                                            -- CAMPOS NO VISIBLES
-                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
-                                        FROM `tbl_cita_terapeutica` AS CT
-                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
-                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
-                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
-                                        WHERE CT.Id_Estado_Cita = 2
-                                        AND U.IdRol = 6
-                                        AND U.Id_Usuario = $Id_Usuario";
-                                } else if ($IdRol === '7') { // Consulta para rol Terapeuta
-                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
-                                            -- CAMPOS NO VISIBLES
-                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente, CT.Id_Estado_Cita
-                                        FROM `tbl_cita_terapeutica` AS CT
-                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
-                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
-                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
-                                        WHERE (CT.Id_Estado_Cita = 2 OR CT.Id_Estado_Cita = 3)
-                                        AND U.IdRol = 7";
-                                }
+                            if ($IdRol === '6') { // consulta para rol Fisiatra
+                                $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                        -- CAMPOS NO VISIBLES
+                                        P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
+                                    FROM `tbl_cita_terapeutica` AS CT
+                                    INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                    INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                    INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                    WHERE CT.Id_Estado_Cita = 2
+                                    AND U.IdRol = 6
+                                    AND CT.Id_Especialista = $Id_Usuario"; // Solo las citas en estado '2' y que correspondan al especialista
+                            } else if ($IdRol === '7') { // Consulta para rol Terapeuta
+                                $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                        -- CAMPOS NO VISIBLES
+                                        P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente, CT.Id_Estado_Cita
+                                    FROM `tbl_cita_terapeutica` AS CT
+                                    INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                    INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                    INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                    WHERE (CT.Id_Estado_Cita = 2 OR CT.Id_Estado_Cita = 3)
+                                    AND U.IdRol = 7
+                                    AND CT.Id_Especialista = $Id_Usuario"; // Solo las citas en estado '2' o '3' y que correspondan al especialista
                             } else { // Caso contrario, no se realiza ninguna consulta a la base de datos
                                 $sql = '';
                             }
