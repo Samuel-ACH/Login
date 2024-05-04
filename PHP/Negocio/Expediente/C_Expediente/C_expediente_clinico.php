@@ -96,6 +96,8 @@ echo '<button type="button" class="btn-guardar" onclick="confirmarEnvio()">Guard
                     $stmt->bind_param("is", $id_resultado_evaluacion, $resultado);
                     if ($stmt->execute()) {
                         echo '<h6 class="alert alert-success">' . "Expediente Agregado con Exito" . '</h6>';
+                        $Id_Detalle_Expediente = '';
+                        unset($_SESSION['Id_Detalle_Expediente']);
                     } else {
                         echo '<h6 class="alert alert-danger">' . "Error al agregar el expediente" . '</h6>';
                     }
