@@ -227,7 +227,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- <script type="module" src="/javascript/validacionIndex.js"></script> -->
-    <script type="module" src="PHP/javascript/validacionAutoRegistro.js"></script>
+    <script type="module" src="/PHP/javascript/validacionAutoRegistro.js"></script>
     <script src="./PHP/javascript/captcha.js"></script>
 </body>
 </html>
