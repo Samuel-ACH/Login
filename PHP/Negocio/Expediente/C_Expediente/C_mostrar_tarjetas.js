@@ -1,13 +1,23 @@
 var tarjetasMostradas = [];
-
 // Definir una variable para almacenar el ID del tratamiento actual
-var tratamientoActual = null;
+var tratamientoActual = "";
+
+// Función para eliminar un tratamiento del array tarjetasMostradas
+function eliminarTratamiento(tratamiento) {
+  var index = tarjetasMostradas.indexOf(tratamiento);
+  if (index !== -1) {
+    tarjetasMostradas.splice(index, 1); // Eliminar el tratamiento de la lista
+    console.log("Tratamiento eliminado:", tratamiento);
+    console.log("Tratamientos restantes:", tarjetasMostradas);
+  }
+}
 
 // Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
 function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
   // Verificar si el tratamiento seleccionado ya ha sido mostrado
   if (tarjetasMostradas.includes(selectedValue)) {
-    alert("El tratamiento seleccionado ya ha sido mostrado.");
+    // Resto del código para mostrar el mensaje y retornar
+    Swal.fire("Ya has seleccionado este tratamiento");
     return;
   }
 
@@ -16,40 +26,41 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
     if (this.readyState == 4 && this.status == 200) {
       var tarjetasHTML = this.responseText;
 
-      // Verificar si el ID de la tarjeta ya ha sido mostrado
-      if (!tarjetasMostradas.includes(selectedValue)) {
-        // Determinar en qué columna agregar las tarjetas alternadamente
-        var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
-        var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
-        var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
+      // Determinar en qué columna agregar las tarjetas alternadamente
+      var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
+      var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
+      var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
 
-        if (tarjetasColumna2 < tarjetasColumna1) {
-          columnaActual = document.getElementById("contenedor-tarjetas-columna2");
-        }
-
-        // Crear un nuevo elemento de tarjeta
-        var nuevaTarjeta = document.createElement("div");
-        // nuevaTarjeta.classList.add("card");
-        // Agregar el contenido HTML a la nueva tarjeta
-        nuevaTarjeta.innerHTML = tarjetasHTML;
-        // Agregar la nueva tarjeta al contenedor de tarjetas
-        columnaActual.appendChild(nuevaTarjeta);
-
-        // Agregar el ID de la tarjeta mostrada al registro
-        // tarjetasMostradas.push(selectedValue);
-
-        // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
-        var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
-        document.dispatchEvent(tarjetasMostradasEvent);
-
-        // Agregar evento de clic a las nuevas tarjetas
-        var nuevasTarjetas = columnaActual.querySelectorAll('.card');
-        nuevasTarjetas.forEach(function(tarjeta) {
-          tarjeta.addEventListener('click', function() {
-            abrirTarjeta(this);
-          });
-        });
+      if (tarjetasColumna2 < tarjetasColumna1) {
+        columnaActual = document.getElementById("contenedor-tarjetas-columna2");
       }
+
+      var nuevaTarjeta = document.createElement("div");
+      // nuevaTarjeta.classList.add("card");
+      nuevaTarjeta.dataset.tratamiento = selectedValue; // Asignar el tratamiento como un atributo de datos
+      nuevaTarjeta.innerHTML = tarjetasHTML;
+
+      columnaActual.appendChild(nuevaTarjeta);
+
+      var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
+      document.dispatchEvent(tarjetasMostradasEvent);
+
+      // Agregar evento de clic a las nuevas tarjetas
+      // nuevaTarjeta.addEventListener('click', function() {
+      //   var tratamiento = this.dataset.tratamiento; // Recuperar el tratamiento asociado a la tarjeta
+      //   eliminarTratamiento(tratamiento); // Eliminar el tratamiento del array tarjetasMostradas
+      //   this.remove(); // Eliminar la tarjeta del DOM
+      // });
+      var closeButton = nuevaTarjeta.querySelector('.icono-x-circle');
+      closeButton.addEventListener('click', function() {
+        var tratamiento = nuevaTarjeta.dataset.tratamiento;
+        eliminarTratamiento(tratamiento);
+        nuevaTarjeta.remove();
+      });
+
+      // Agregar el tratamiento actual a la lista de tratamientos mostrados
+      tarjetasMostradas.push(selectedValue);
+      console.log(tarjetasMostradas);
     }
   };
 
@@ -57,25 +68,26 @@ function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
   xhttp.send();
 }
 
-// Función para abrir una tarjeta
-function abrirTarjeta(tarjeta) {
-  tarjeta.classList.toggle('active');
-}
-
 // Manejar el evento de cambio en el combobox de tratamientos
 document.getElementById("tratamiento").addEventListener("change", function() {
   var selectedValue = this.value;
 
-  if (selectedValue !== "0") {
+  if (selectedValue != "0") {
     // Verificar si el tratamiento actual es diferente al seleccionado
-    if (selectedValue !== tratamientoActual) {
+    if (selectedValue != tratamientoActual) {
       mostrarTarjetasYExpedienteTerapeutico(selectedValue);
       tratamientoActual = selectedValue; // Actualizar la variable del tratamiento actual
       this.value = "0";
-    //   tratamientoActual = "0";
-    } 
+    } else {
+      // Si el tratamiento ya ha sido mostrado, limpiar el tratamiento actual
+      tratamientoActual = "";
+    }
   }
 });
+
+
+
+
 
 
 
@@ -115,6 +127,10 @@ function guardarDatos() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
+              var idCita = document.getElementById('Id_Cita').value;
+                
+              // Enviar el valor de Id_Cita al controlador PHP
+              enviarIdCita(idCita);
                 // Si el usuario confirma, enviar los datos al servidor
                 var datosJSON = JSON.stringify(datosTarjetas);
 
@@ -142,6 +158,29 @@ function guardarDatos() {
         });
     }
 }
+
+// Función para enviar el valor de Id_Cita al controlador PHP
+function enviarIdCita(idCita) {
+  // Crear un objeto FormData para enviar datos al servidor
+  var formData = new FormData();
+
+  // Agregar el valor de Id_Cita al formData
+  formData.append('Id_Cita', idCita);
+
+  // Realizar una solicitud AJAX para enviar los datos al controlador PHP
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php');
+  xhr.onload = function () {
+      if (xhr.status === 200) {
+          // Manejar la respuesta del servidor si es necesario
+          console.log(xhr.responseText);
+      } else {
+          // Manejar errores si ocurren
+          console.error('Error al enviar datos al servidor');
+      }
+  };
+  xhr.send(formData);
+  }
 
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
