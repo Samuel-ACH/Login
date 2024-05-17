@@ -85,12 +85,28 @@ document.getElementById("tratamiento").addEventListener("change", function() {
   }
 });
 
+// Función para enviar el valor de Id_Cita al controlador PHP
+function enviarIdCita(idCita) {
+  // Crear un objeto FormData para enviar datos al servidor
+  var formData = new FormData();
 
+  // Agregar el valor de Id_Cita al formData
+  formData.append('Id_Cita', idCita);
 
-
-
-
-
+  // Realizar una solicitud AJAX para enviar los datos al controlador PHP
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php');
+  xhr.onload = function () {
+      if (xhr.status === 200) {
+          // Manejar la respuesta del servidor si es necesario
+          console.log(xhr.responseText);
+      } else {
+          // Manejar errores si ocurren
+          console.error('Error al enviar datos al servidor');
+      }
+  };
+  xhr.send(formData);
+  }
 
 // Función para recopilar y enviar los datos al servidor
 function guardarDatos() {
@@ -158,29 +174,6 @@ function guardarDatos() {
         });
     }
 }
-
-// Función para enviar el valor de Id_Cita al controlador PHP
-function enviarIdCita(idCita) {
-  // Crear un objeto FormData para enviar datos al servidor
-  var formData = new FormData();
-
-  // Agregar el valor de Id_Cita al formData
-  formData.append('Id_Cita', idCita);
-
-  // Realizar una solicitud AJAX para enviar los datos al controlador PHP
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '../../Procesos/C_procesos/C_estado_finalizado_cita_F.php');
-  xhr.onload = function () {
-      if (xhr.status === 200) {
-          // Manejar la respuesta del servidor si es necesario
-          console.log(xhr.responseText);
-      } else {
-          // Manejar errores si ocurren
-          console.error('Error al enviar datos al servidor');
-      }
-  };
-  xhr.send(formData);
-  }
 
 // Seleccionar el botón de guardar por su ID
 var botonGuardar = document.getElementById('guardarDatos');
