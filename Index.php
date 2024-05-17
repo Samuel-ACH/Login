@@ -87,9 +87,9 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                         }, 3000); // 5000 milisegundos = 5 segundos
                     </script>
 
-                    <!--codigo del recaptcha  de google -->
+                        <!--codigo del recaptcha  de google -->
 					
-                    <div id="captcha" class="text-center captcha">
+                        <div id="captcha" class="text-center captcha">
 						<div class="g-recaptcha"
 							data-sitekey="6LclhcgpAAAAAHoe1nZb2Tlln0LYFawAKqpVI93z">
 						</div>
@@ -222,7 +222,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
         </div>
     </main>
     <script src="./EstilosLogin/js/script.js"></script>
-    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/439f5d6d39.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
