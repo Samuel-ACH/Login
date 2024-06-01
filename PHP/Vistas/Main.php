@@ -35,6 +35,14 @@ if (!isset($_SESSION["correo"])) {
     die(); // el código se detiene en esta línea 
 }
 
+if (isset($_SESSION['array_IdCita'])) {
+    $idCita = $array();
+    $idCita = $_SESSION['array_IdCita'];
+} else {
+    unset($_SESSION['array_IdCita']);
+    $idCita = "";
+}
+
 // include '../../PHP/Seguridad/Roles_permisos/permisos/Obtener_Id_Objeto.php';
 // $id_rol = $_SESSION['IdRol'];
 // $id_objeto = Obtener_Id_Objeto('Main');
@@ -52,6 +60,7 @@ if (!isset($_SESSION["correo"])) {
 // if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
 //     $ocultarClinico = true;
 // }
+
 ?>
 
 <!DOCTYPE html>
@@ -147,29 +156,31 @@ if (!isset($_SESSION["correo"])) {
                             <?php
                             // echo 'Rol #' . $_SESSION['IdRol'];
 
-                            if ($IdRol === '6') { // consulta para rol Fisiatra
+                            if ($IdRol === '6' || $IdRol === '7') { // Si el usuario que inicia sesión tiene rol 6 o 7, realiza las 2 siguientes consultas
                                 include '../Controladores/Conexion/Conexion_be.php';
-                                $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
-                                        -- CAMPOS NO VISIBLES
-                                        P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
-                                    FROM `tbl_cita_terapeutica` AS CT
-                                    INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
-                                    INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
-                                    INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
-                                    WHERE CT.Id_Estado_Cita = 2
-                                    AND U.IdRol = 6
-                                    AND CT.Id_Especialista = $Id_Usuario"; // Solo las citas en estado '2' y que correspondan al especialista
-                            } else if ($IdRol === '7') { // Consulta para rol Terapeuta
-                                $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
-                                        -- CAMPOS NO VISIBLES
-                                        P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente, CT.Id_Estado_Cita
-                                    FROM `tbl_cita_terapeutica` AS CT
-                                    INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
-                                    INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
-                                    INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
-                                    WHERE (CT.Id_Estado_Cita = 2 OR CT.Id_Estado_Cita = 3)
-                                    AND U.IdRol = 7
-                                    AND CT.Id_Especialista = $Id_Usuario"; // Solo las citas en estado '2' o '3' y que correspondan al especialista
+
+                                if ($IdRol === '6') { // consulta para rol Fisiatra
+                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                            -- CAMPOS NO VISIBLES
+                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente
+                                        FROM `tbl_cita_terapeutica` AS CT
+                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                        WHERE CT.Id_Estado_Cita = 2
+                                        AND U.IdRol = 6
+                                        AND U.Id_Usuario = $Id_Usuario";
+                                } else if ($IdRol === '7') { // Consulta para rol Terapeuta
+                                    $sql = "SELECT CT.id_Cita_Terapia, P.Nombre AS Paciente, CT.Descripcion_Cita AS Motivo, CT.Fecha_Cita, CT.Hora_Cita, E.id_Expediente,
+                                            -- CAMPOS NO VISIBLES
+                                            P.Numero_Documento, P.Ocupacion, P.Direccion, TIMESTAMPDIFF(YEAR, P.FechaNacimiento, CURDATE()) AS Edad, U.Nombre, P.Id_Paciente, CT.Id_Estado_Cita
+                                        FROM `tbl_cita_terapeutica` AS CT
+                                        INNER JOIN tbl_paciente AS P ON CT.Id_Paciente = P.Id_Paciente
+                                        INNER JOIN tbl_expediente AS E ON CT.Id_Expediente = E.id_Expediente
+                                        INNER JOIN tbl_ms_usuario AS U ON CT.Id_Especialista = U.Id_Usuario
+                                        WHERE (CT.Id_Estado_Cita = 2 OR CT.Id_Estado_Cita = 3)
+                                        AND U.IdRol = 7";
+                                }
                             } else { // Caso contrario, no se realiza ninguna consulta a la base de datos
                                 $sql = '';
                             }
@@ -194,7 +205,9 @@ if (!isset($_SESSION["correo"])) {
                                             <!-- Formulario único para cada fila -->
                                             <?php if ($IdRol === '6') : ?>
                                                 <form action="../Negocio/Expediente/V_Expediente/V_expediente_clinico.php" method="post">
-                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $filas[0]; ?>">
+                                                    
+                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $idCita; ?>">
+                                                    <!-- arreglo que se recibe con el id cita que viene de gestión citas -->
                                                     <input type="hidden" name="estadoCita" value="3">
                                                     <input type="hidden" name="datos" value="<?php echo urlencode($datos); ?>">
                                                     <button type="submit" class="btn btn-success" id="fisiatra" name="atenderCita">Atender</button>
@@ -205,8 +218,7 @@ if (!isset($_SESSION["correo"])) {
                                             <?php if ($IdRol === '7' && $filas[12] === '2') : ?>
 
                                                 <form action="../Negocio/Expediente/V_Historiales/V_modal_historial_cita.php" method="POST">
-
-                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $filas[0]; ?>">
+                                                    <input type="hidden" name="idCitaTerapia" value="<?php echo $idCita; ?>">
 
                                                     <!-- Agrega un campo oculto para enviar el ID de expediente -->
                                                     <input type="hidden" name="id_expediente" value="<?php echo $filas[5]; ?>">
