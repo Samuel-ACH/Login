@@ -358,7 +358,20 @@ if ($Permisos_Objeto["Permiso_Consultar"] !== "1") {
                         <input type="date" id="fechaCita_L" readonly class="form-control input-sm">
 
                         <label for="horaCita_L">Hora Cita:</label>
-                        <input type="time" id="horaCita_L" readonly class="form-control input-sm">
+                        <input type="text" id="horaCita_L" readonly class="form-control input-sm">
+
+                        <!-- Estado Cita -->
+                        <label for="Id_Estado_Cita" hidden >Estado Cita:</label>
+                        <input type="hidden" id="Id_Estado_Cita" readonly class="form-control input-sm">
+                        
+                        <!-- Id Especialista -->
+                        <label for="Id_Especialista" hidden >Id Especialista:</label>
+                        <input type="hidden" id="Id_Especialista" readonly class="form-control input-sm">
+
+                        <!-- Id Usuario -->
+                        <label for="Id_Usuario" hidden >Id Usuario:</label>
+                        <input type="hidden" id="Id_Usuario_L" readonly class="form-control input-sm">
+
                     </div>
 
                     <div class="modal-footer">

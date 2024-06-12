@@ -1,10 +1,11 @@
 <?php
 // Sí existe una sesión iniciada, no permite regresar al login sin antes cerrar la sesión
 session_start();
-// if (isset($_SESSION["correo"])) {
-//     header("location: /PHP/Vistas/Main.php");
-// }
-include('./PHP/Controladores/Conexion/Conexion_be.php');
+
+if (isset($_SESSION["correo"])) {
+    header("location: Main.php");
+}
+include('../Controladores/Conexion/Conexion_be.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +16,12 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica RED</title>
-    <link rel="shortcut icon" href="./EstilosLogin/images/pestana.PNG" type="image/x-icon">
+    <link rel="shortcut icon" href="../../EstilosLogin/images/pestana.png" type="image/x-icon">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./EstilosLogin/css/estilos.css">
+    <link rel="stylesheet" href="../../EstilosLogin/css/estilos.css">
 
    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 
@@ -45,8 +46,8 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
             <!--Formulario de Login y registro-->
             <div class="contenedor__login-register" id="formulario">
                 <!--Login-->
-                <form action="/PHP/Controladores/LoginController_be.php" method="POST" class="formulario__login"id="loginForm" >
-                    <img src="./EstilosLogin/images/logo.png" alt="Logo" class="logo">
+                <form action="../Controladores/LoginController_be.php" method="POST" class="formulario__login"id="loginForm" >
+                    <img src="../../EstilosLogin/images/logo.png" alt="Logo" class="logo">
                     <h2>Iniciar Sesión</h2>
                     <!-- Grupo: Correo -->
                     <div class="formulario__grupo" id="grupo__correo">
@@ -84,17 +85,8 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                             if (mensajeError) {
                                 mensajeError.style.display = 'none';
                             }
-                        }, 3000); // 5000 milisegundos = 5 segundos
+                        }, 5000); // 5000 milisegundos = 5 segundos
                     </script>
-
-                        <!--codigo del recaptcha  de google -->
-					
-                        <!-- <div id="captcha" class="text-center captcha">
-						<div class="g-recaptcha"
-							data-sitekey="6LclhcgpAAAAAHoe1nZb2Tlln0LYFawAKqpVI93z">
-						</div>
-					</div> -->
-					<!-- fin del recaptcha-->
 
                     <!--codigo del recaptcha  de google -->
 					
@@ -111,12 +103,12 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                     </div>
 
                     <div>  
-                    <a href="/PHP/Seguridad/OTP/V_Recuperar_Clave/V_ingresar_correo.php">¿No recuerdas tu contraseña?</a>
+                    <a href="../Seguridad/OTP/V_Recuperar_Clave/V_ingresar_correo.php">¿No recuerdas tu contraseña?</a>
                     </div>
                 </form>
 
                 <!--Register-->
-                <form action="./PHP/Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register" id="registerForm">
+                <form action="../Controladores/Registro_Usuario_be.php" method="POST" class="formulario__register" id="registerForm">
                     <h2>Regístrate</h2>
                     <!-- GRUPO DNI -->
                     <div class="formulario__grupo" id="grupo__dni">
@@ -230,13 +222,13 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
             </div>
         </div>
     </main>
-    <script src="./EstilosLogin/js/script.js"></script>
-    <script src="https://kit.fontawesome.com/439f5d6d39.js" crossorigin="anonymous"></script>
+    <script src="../../EstilosLogin/js/script.js"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!-- <script type="module" src="/javascript/validacionIndex.js"></script> -->
-    <script type="module" src="/PHP/javascript/validacionAutoRegistro.js"></script>
-    <script src="./PHP/javascript/captcha.js"></script>
+    <!-- <script type="module" src="../javascript/validacionIndex.js"></script> -->
+    <script type="module" src="../javascript/validacionAutoRegistro.js"></script>
+    <script src="../javascript/captcha.js"></script>
 </body>
 </html>

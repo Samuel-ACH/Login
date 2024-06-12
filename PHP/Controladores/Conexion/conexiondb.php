@@ -20,18 +20,18 @@
 // $conn = new mysqli($servername, $username, $password, $dbname);
 
 // //hostinger
-// $servername = "localhost";
-// $username = "u452119581_adminred";
-// $password = "T3chTit4n$2024";
-// $dbname = "u452119581_clinica_red";
-// $conn = new mysqli($servername, $username, $password, $dbname);
-// Base para Capacitacion
 $servername = "localhost";
-$username = "u452119581_adminred1";
-$password = "T3chTit4ns2024";
-$dbname = "u452119581_capacitacion";
-$conexion = mysqli_connect($servername, $username, $password, $dbname);
-$conexion->begin_transaction();
+$username = "u452119581_adminred";
+$password = "T3chTit4n$2024";
+$dbname = "u452119581_clinica_red";
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Base para Capacitacion
+// $servername = "localhost";
+// $username = "u452119581_adminred1";
+// $password = "T3chTit4ns2024";
+// $dbname = "u452119581_capacitacion";
+// $conexion = mysqli_connect($servername, $username, $password, $dbname);
+// $conexion->begin_transaction();
 
 // // Verificar la conexión
 // if ($conn->connect_errno) {

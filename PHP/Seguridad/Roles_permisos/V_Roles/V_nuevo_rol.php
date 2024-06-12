@@ -53,57 +53,31 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     ?>
 
-    <main id="main" class="table">
-        <div class="container mt-4">
-            <div class="col-12">
-                <center>
-                    <h2>Registrar Nuevo Rol</h2>
-                </center>
-                <!-- <img src="../../Imagenes/logo2.jpg" style="align-items-left; width: 100px; height: 100px; border-radius: 50%;"> -->
-
-                <form action="../C_Roles/C_nuevo_rol.php" method="POST" class="formulario__register" id="registerFormUser">
-                    <div class="contenedor__todo">
-                        <table class="table" style:"align-items-center">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- NOMBRE DE ROL -->
-                                        <div class="formulario__grupo" id="grupo__rol">
-                                            <label for="rol" class="formulario__label">ROL</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="formulario__input" class="form-control" name="rol" id="rol" style="text-transform: uppercase" placeholder="ROL" required autocomplete="off">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                    <!--  DESCRIPCION DEL ROL-->
-                                    <td>
-                                        <div class="formulario__grupo" id="grupo__descripcionrol">
-                                            <label for="descripcionrol" class="formulario__label">Descripción</label>
-                                            <div class="formulario__grupo-input">
-                                                <input type="text" class="formulario__input" class="form-control" name="descripcionrol" id="descripcionrol" autocomplete="off" style="text-transform: uppercase" placeholder="DESCRIPCION" maxlength="80">
-                                            </div>
-                                            <p class="formulario__input-error"></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                <tr>
-                                    <td>
-                                        <button type="submit" id="Btnregistrarrol" class="btn btn-primary">Guardar</button>
-
-                                    </td>
-                                    <td>
-                                        <button id="Btncancelar" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <main id="main" class="container mt-4">
+          <div class="row justify-content-center">
+              <div class="col-md-8">
+                  <div class="card">
+                       <div class="card-body">
+                            <h2 class="card-title text-center">Registrar Nuevo Rol</h2>
+                            <form action="../C_Roles/C_nuevo_rol.php" method="POST" class="mt-4" id="registerFormUser">
+                               <div class="mb-3">
+                                    <label for="rol" class="form-label">ROL:</label>
+                                   <input type="text" class="form-control" name="rol" id="rol" style="text-transform: uppercase" placeholder="ROL" required autocomplete="off">
+                                  <div class="formulario__input-error"></div>
+                                 </div>
+                            <div class="mb-3">
+                                <label for="descripcionrol" class="form-label">DESCRIPCIóN:</label>
+                                <input type="text" class="form-control" name="descripcionrol" id="descripcionrol" style="text-transform: uppercase" placeholder="DESCRIPCION" maxlength="80" autocomplete="off">
+                                <div class="formulario__input-error"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" id="Btnregistrarrol" class="btn btn-primary">Guardar</button>
+                                <button type="button" id="Btncancelar" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
         </div>
     </main>
 

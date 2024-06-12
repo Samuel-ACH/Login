@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = md5($password3);
 
     // Preparar la consulta SQL usando sentencias preparadas para evitar inyección SQL
-    $actualizarUsuarioQuery2 = "UPDATE tbl_ms_usuario SET Contrasena = ? WHERE Correo = ?";
+    $actualizarUsuarioQuery2 = "UPDATE tbl_ms_usuario SET Contrasena = ?, Estado_Usuario = 1, intentos_fallidos = 0 WHERE Correo = ?";
     $stmt = mysqli_prepare($conexion, $actualizarUsuarioQuery2);
 
     // "ss" indica que ambos parámetros son cadenas (string)

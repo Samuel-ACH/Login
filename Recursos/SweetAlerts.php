@@ -62,6 +62,7 @@ function confirmarEnvio() {
             if (result.isConfirmed) {
                 // Si el usuario hace clic en "Guardar", se envía el formulario
                 document.querySelector('form').submit();
+                // window.location.href = './V_modal_expediente.php';
                 
             }
             

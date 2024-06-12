@@ -64,7 +64,9 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
             U.Nombre,
             CT.Fecha_Cita,
             CT.Hora_Cita,
-            CT.Id_Estado_Cita
+            CT.Id_Estado_Cita,
+            CT.Id_Especialista,
+            U.Id_Usuario
         FROM
             `tbl_cita_terapeutica` AS CT
         LEFT JOIN tbl_tipo_cita AS TC
@@ -78,20 +80,23 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
             CT.Id_Paciente = P.Id_Paciente
         WHERE
             CT.Id_Estado_Cita NOT IN(4, 5)
-        ORDER BY CT.Id_Estado_Cita = 3 DESC, CT.Id_Estado_Cita = 2 DESC, CT.Id_Estado_Cita = 1 DESC, CT.Hora_Cita ASC";
+        ORDER BY CT.Id_Estado_Cita = 3 DESC, CT.Id_Estado_Cita = 2 DESC, CT.Id_Estado_Cita = 1 DESC, CT.Fecha_Cita ASC, CT.Hora_Cita ASC";
 
                 $resultado = mysqli_query($conexion, $sql);
 
                 // Verificar si hay resultados
                 if ($resultado->num_rows > 0) {
                     // Crear un arreglo para guardar los ids
-                    $id_citas_terapia = array();
+                    // $id_citas_terapia = array();
 
                     $correlativo = 1; // Inicializamos el correlativo en 1
                     while ($filas = mysqli_fetch_row($resultado)) {
-                        $id_citas_terapia[] = $filas[0];
+                        // $id_citas_terapia[] = $filas[0];
 
-                        $datos = $filas[0] . "||" . $filas[1] . "||" . $filas[2] . "||" . $filas[3] . "||" . $filas[4] . "||" . $filas[5] . "||" . $filas[6];
+                        $datos = $filas[0] . "||" . $filas[1] . "||" . $filas[2] . "||" . $filas[3] . "||" . $filas[4] . "||" . $filas[5] . "||" . $filas[6] . "||" . $filas[7] . "||" . $filas[8] . "||" . $filas[9];
+
+                        // echo '<br>id especialista ' . $filas[8] . '<br>';
+                        // echo 'id usuario ' . $filas[9];
                 ?>
                         <tr>
                             <td><?php echo $correlativo ?></td>
@@ -116,7 +121,16 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                     </button>
                                 <?php endif; ?>
                                 <?php if (!$ocultarActualizacion && $filas[7] === '1') : ?>
-                                    <button id="btn-pendiente" style="margin-top: 3px;" class="btn btn-secondary" title="Estado Pendiente" onclick="cambiarEstado_EnEspera('<?php echo $filas[0]; ?>')">
+                                    <!-- 
+
+
+                                    if($filas[8] = $Id_Usuario && $filas[7] === '3'){
+                                        echo 'El fisiatra está atendiendo a un paciente, por favor esperar que termine la cita.'
+                                        return;
+                                    }
+
+                                     -->
+                                    <button id="btn-pendiente" style="margin-top: 3px;" class="btn btn-secondary" title="Estado Pendiente" onclick="cambiarEstado_EnEspera('<?php echo $filas[0];?>'); cargarDatosLectura('<?php echo $datos;?>')">
                                         <i class="fa-solid fa-rotate"></i>
                                     </button>
                                 <?php endif; ?>
@@ -139,7 +153,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                     // Imprimir el arreglo de ids
                     // print_r($id_citas_terapia);
                     // Almacenar el arreglo en la sesión
-                    $_SESSION['array_IdCita'] = $id_citas_terapia;
+                    // $_SESSION['array_IdCita'] = $id_citas_terapia;
                 } else {
                     echo "<tr><td colspan='9'>0 resultados</td></tr>";
                 }

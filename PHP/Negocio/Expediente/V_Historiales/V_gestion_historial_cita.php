@@ -79,7 +79,7 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
 
             <tbody>
                 <?php
-                $sql = "SELECT DISTINCT
+                $sql = "SELECT 
                             E.id_Expediente,
                             CT.id_Cita_Terapia,
                             P.Numero_Documento,
@@ -109,7 +109,8 @@ if ($Permisos_Objeto["Permiso_Clinico"] !== "1") {
                             ON
                             CT.id_Cita_Terapia = DT.Id_Cita_Terapia
                         WHERE
-                            E.id_Expediente = $id_expediente AND P.Id_Paciente = $id_paciente";
+                            E.id_Expediente = $id_expediente AND P.Id_Paciente = $id_paciente
+                            order by CT.Fecha_Cita ASC, CT.Hora_Cita ASC";
 
                 $resultado = mysqli_query($conexion, $sql);
                 $correlativo = 1; // Inicializamos el correlativo en 1

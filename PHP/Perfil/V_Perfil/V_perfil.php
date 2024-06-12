@@ -38,41 +38,37 @@ include '../../../Recursos/Componentes/header.php';
 include '../../../Recursos/Componentes/SideBar.html';
 ?>
 <main id="main" class="main">
-<div class="container mt-4">
-        <div class="card">
-            <h5 class="card-title"><i class="fas fa-user fa-3x mr-2"></i>Perfil de Usuario</h5>
+    <div class="container mt-4">
+        <div class="card profile-card">
+            <div class="card-header bg-primary text-white text-center">
+                <h5 class="card-title"><i class="fas fa-user fa-2x mr-1"></i>PERFIL DE USUARIO</h5>
+            </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div id="imagenPerfil" class="rounded-circle position-relative">
+                    <div class="col-md-4 text-center">
+                        <div id="imagenPerfil" class="position-relative">
+                            
+                        <img src="../../../assets/img/user-profile.png" class="img-fluid" >
                             <i class="fas fa-camera camera-icon" onclick="cambiarImagen()"></i>
-                            <img src="../../../assets/img/user-profile.png" class="img-fluid rounded-circle">
                         </div>
                     </div>
                     <div class="col-md-8">
                         <ul class="list-group list-group-flush">
                             <?php
-                            // Asegurémonos de que el puntero del resultado esté al principio del conjunto de resultados
                             mysqli_data_seek($resultado, 0);
-                            // Recorrer los resultados y mostrarlos en la lista
-                             while ($fila = mysqli_fetch_assoc($resultado)) {
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
                             ?>
-                                <li class="list-group-item"><strong>Nombre completo:</strong> <?php echo $fila['Nombre'] ?></li>
-                                <li class="list-group-item"><strong>Usuario:</strong> <?php echo $fila['Usuario'] ?></li>
-                                <li class="list-group-item"><strong>Correo electrónico:</strong> <?php echo $fila['Correo'] ?></li>
-                                <li class="list-group-item"><strong>DNI:</strong> <?php echo $fila['DNI'] ?></li>
-                                <li class="list-group-item"><strong>Dirección:</strong> <?php echo $fila['Direccion'] ?></li>
+                                <li class="list-group-item"><i class="fas fa-user"></i><strong> Nombre completo:</strong> <?php echo $fila['Nombre'] ?></li>
+                                <li class="list-group-item"><i class="fas fa-user-tag"></i><strong> Usuario:</strong> <?php echo $fila['Usuario'] ?></li>
+                                <li class="list-group-item"><i class="fas fa-envelope"></i><strong> Correo electrónico:</strong> <?php echo $fila['Correo'] ?></li>
                             <?php
                             } 
                             ?>
                         </ul>
-                        <button id="btneditarperfil" class="btn btn-primary" onclick="editarPerfil()"> Editar Perfil </button>
-                        <form action="./V_cambiarcontrasenaPerfil.php" method="POST">
-                        <button id="btncambiocontraseñaperfil" class="btn btn-primary">Cambiar Contraseña</button>
+                        <form action="./V_CambiarcontrasenaPerfil.php" method="POST" class="mt-2">
+                            <button id="btncambiocontraseñaperfil" class="btn btn-warning">Cambiar Contraseña</button>
                         </form>
-                        <a href="../../Vistas/Main.php"> 
-                            <button id="btncerrarperfil" class="btn btn-danger" >Cerrar Perfil</button>
-                        </a>
+                        <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
                     </div>
                 </div>
             </div>

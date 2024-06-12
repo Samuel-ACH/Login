@@ -1,49 +1,70 @@
-// Variable para almacenar los IDs de las tarjetas mostradas
 var tarjetasMostradas = [];
+var tratamientoActual = "";
 
-// Definir una función para llamar a ExpedienteTerapeutico después de mostrar las tarjetas
-function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var tarjetasHTML = this.responseText;
-
-            // Verificar si el ID de la tarjeta ya ha sido mostrado
-            if (!tarjetasMostradas.includes(selectedValue)) {
-                // Determinar en qué columna agregar las tarjetas alternadamente
-                var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
-                var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
-                var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
-
-                if (tarjetasColumna2 < tarjetasColumna1) {
-                    columnaActual = document.getElementById("contenedor-tarjetas-columna2");
-                }
-
-                // Agregar el contenido de las nuevas tarjetas a la columna determinada
-                columnaActual.innerHTML += tarjetasHTML;
-
-                // Agregar el ID de la tarjeta mostrada al registro
-                tarjetasMostradas.push(selectedValue);
-
-                // Disparar un evento personalizado para indicar que las tarjetas se han mostrado
-                var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
-                document.dispatchEvent(tarjetasMostradasEvent);
-            }
-        }
-    };
-
-    xhttp.open("POST", "../V_Expediente/V_tarjetas_terapeutico_editable.php?tratamiento=" + selectedValue, true);
-    xhttp.send();
+// Función para eliminar un tratamiento del array tarjetasMostradas
+function eliminarTratamiento(tratamiento) {
+  var index = tarjetasMostradas.indexOf(tratamiento);
+  if (index !== -1) {
+    tarjetasMostradas.splice(index, 1);
+    tratamientoActual = ""; // Actualizar tratamientoActual
+    console.log("Tratamiento eliminado:", tratamiento);
+    console.log("Tratamientos restantes:", tarjetasMostradas);
+  }
 }
 
-// Manejar el evento de cambio en el combobox de tratamientos
-document.getElementById("tratamiento").addEventListener("change", function () {
-    var selectedValue = this.value;
+function mostrarTarjetasYExpedienteTerapeutico(selectedValue) {
+  if (tarjetasMostradas.includes(selectedValue)) {
+    Swal.fire("Ya has seleccionado este tratamiento");
+    return;
+  }
 
-    if (selectedValue !== "0") {
-        mostrarTarjetasYExpedienteTerapeutico(selectedValue);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var tarjetasHTML = this.responseText;
+
+      var columnaActual = document.getElementById("contenedor-tarjetas-columna1");
+      var tarjetasColumna1 = document.querySelectorAll("#contenedor-tarjetas-columna1 .card").length;
+      var tarjetasColumna2 = document.querySelectorAll("#contenedor-tarjetas-columna2 .card").length;
+
+      if (tarjetasColumna2 < tarjetasColumna1) {
+        columnaActual = document.getElementById("contenedor-tarjetas-columna2");
+      }
+
+      var nuevaTarjeta = document.createElement("div");
+      nuevaTarjeta.dataset.tratamiento = selectedValue;
+      nuevaTarjeta.innerHTML = tarjetasHTML;
+      columnaActual.appendChild(nuevaTarjeta);
+
+      var tarjetasMostradasEvent = new CustomEvent('tarjetasMostradas', { detail: selectedValue });
+      document.dispatchEvent(tarjetasMostradasEvent);
+
+      var closeButton = nuevaTarjeta.querySelector('.icono-x-circle');
+      closeButton.addEventListener('click', function() {
+        var tratamiento = nuevaTarjeta.dataset.tratamiento;
+        eliminarTratamiento(tratamiento);
+        nuevaTarjeta.remove();
+      });
+
+      tarjetasMostradas.push(selectedValue);
+      tratamientoActual = selectedValue; // Actualizar tratamientoActual aquí
+      console.log(tarjetasMostradas);
     }
+  };
+
+  xhttp.open("POST", "../V_Expediente/V_tarjetas_terapeutico_editable.php?tratamiento=" + selectedValue, true);
+  xhttp.send();
+}
+
+document.getElementById("tratamiento").addEventListener("change", function() {
+  var selectedValue = this.value;
+
+  if (selectedValue != "0") {
+    mostrarTarjetasYExpedienteTerapeutico(selectedValue);
+    this.value = "0";
+  }
 });
+/////////////////////////////////////
 
 function guardarDatos() {
     var datosTarjetas = {}; // Objeto para almacenar los datos de las tarjetas

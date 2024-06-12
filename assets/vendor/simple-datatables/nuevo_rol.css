@@ -287,3 +287,90 @@ h2 {
 .formulario__label {
     font-weight: bold;
 }
+
+
+/*nuevo codigo*/
+
+/* CSS personalizado */
+body {
+    background-color: #f8f9fa; /* Fondo claro para toda la página */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.card-container {
+    margin-top: 2rem; /* Margen superior adicional para mover la tarjeta más abajo */
+}
+
+.card {
+    border-radius: 0.5rem; /* Bordes redondeados para la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: none; /* Eliminar el borde predeterminado */
+}
+
+.card-title {
+    font-size: 1.5rem; /* Tamaño de fuente mayor para el título */
+    color: #007bff; /* Color azul para el título */
+    margin-bottom: 1rem; /* Espacio debajo del título */
+}
+
+.form-label {
+    font-weight: bold; /* Negrita para etiquetas */
+}
+
+.form-control {
+    border-radius: 0.25rem; /* Bordes ligeramente redondeados */
+    border: 1px solid #ced4da; /* Borde gris claro */
+    padding: 0.75rem; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave en el color del borde */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Color azul en foco */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra en foco */
+}
+
+.formulario__input-error {
+    color: red; /* Color rojo para errores */
+    font-size: 0.875em; /* Tamaño de fuente pequeño */
+    margin-top: 0.25rem; /* Espacio encima del mensaje de error */
+}
+
+.btn {
+    padding: 0.5rem 1rem; /* Espaciado interno para botones */
+    font-size: 1rem; /* Tamaño de fuente */
+    border-radius: 0.25rem; /* Bordes ligeramente redondeados */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave en colores */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Azul Bootstrap */
+    border: none; /* Sin borde */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Gris Bootstrap */
+    border: none; /* Sin borde */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Gris más oscuro en hover */
+}
+
+/* Responsividad */
+@media (max-width: 576px) {
+    .card {
+        margin: 1rem; /* Espacio alrededor de la tarjeta en pantallas pequeñas */
+    }
+    
+    .form-control {
+        padding: 0.5rem; /* Espaciado interno reducido en pantallas pequeñas */
+    }
+}
+

@@ -93,7 +93,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                     INNER JOIN tbl_ms_roles r ON u.IdRol = r.Id_Rol
                     INNER JOIN tbl_genero g ON u.IdGenero = g.IdGenero
                     INNER JOIN tbl_estado_usuario e ON u.Estado_Usuario = e.Id_Estado
-                    WHERE e.Descripcion = 'Inactivo' order by u.Id_Usuario asc;";
+                    WHERE e.Descripcion = 'Inactivo' OR e.Descripcion = 'BLOQUEADO' order by u.Id_Usuario asc;";
                             $resultado = mysqli_query($conexion, $sql);
                             // Recorrer los resultados y mostrarlos en la tabla
                             foreach ($resultado as $fila) {

@@ -12,6 +12,7 @@ $Nombre_Usuario = $_SESSION['nombre'];
 ?>
 <?php
 include '../../../Controladores/Conexion/Conexion_be.php';
+include '../../../../Recursos/SweetAlerts.php';
 // Verificar si las variables de sesión existen
 if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
     // Acceder a las variables de sesión
@@ -215,9 +216,7 @@ if (isset($_POST['id_Cita_Terapia']) && isset($_POST['Detalle_Terapia'])) {
     <script>
         function cerrarTarjeta(idTarjeta) {
             var tarjeta = document.getElementById(idTarjeta);
-            tarjeta.style.display = 'none'; // Oculta la tarjeta
-            // Alternativamente, puedes eliminar la tarjeta del DOM con:
-            // tarjeta.parentNode.removeChild(tarjeta);
+            tarjeta.parentNode.removeChild(tarjeta); // Elimina la tarjeta del DOM
         }
     </script>
 

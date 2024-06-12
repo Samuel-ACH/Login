@@ -122,7 +122,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                                     <td><?php echo $fila['Descripcion'] ?></td>
                                     <td>
                                         <?php if (!$ocultarActualizacion) : ?>
-                                            <a href="./V_editar_rol.php?id=<?php echo $fila['Id_Rol'] ?>" id="editarrol-btn" class="bi bi-pencil" title="Editar rol"></a>
+                                            <a href="./V_editar_rol.php?id=<?php echo $fila['Id_Rol'] ?>" id="editarrol-btn" class="bi bi-pencil " title="Editar rol"></a>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

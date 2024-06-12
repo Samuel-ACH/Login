@@ -329,3 +329,11 @@
     font-size: 16px;
     margin-right: 4px;
 }
+
+.color-btn {  
+    background-color: #0075FF;
+}
+
+.color-btn:hover {  
+    background-color: darkkhaki ;
+}
