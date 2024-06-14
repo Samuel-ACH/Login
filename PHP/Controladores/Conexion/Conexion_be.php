@@ -27,9 +27,9 @@
 
 //////////////////////////////// Base para pruebas de evaluacion Hostinger ////////////////////////////////////
 $servername = "localhost";
-$username = "u452119581_adminred1";
-$password = "T3chTit4ns2024";
-$dbname = "u452119581_capacitacion";
+$username = "u452119581_adminred";
+$password = "T3chTit4n$2024";
+$dbname = "u452119581_clinica_red";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
 $conexion->begin_transaction();
 
