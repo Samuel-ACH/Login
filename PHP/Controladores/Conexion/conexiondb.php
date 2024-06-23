@@ -22,7 +22,7 @@
 // //hostinger
 $servername = "localhost";
 $username = "u452119581_red_2";
-$password = "M3$$i2024";
+$password = "TechTitans2024";
 $dbname = "u452119581_evaluacion_red";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Base para Capacitacion
