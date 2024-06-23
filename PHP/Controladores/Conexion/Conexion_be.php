@@ -3,7 +3,7 @@
 
 // =========================   FORMA #1   =========================
 //local
-$conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
+// $conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
 // $conexion = mysqli_connect("localhost", "root","", "clinica_red2"); // Forma #1
 //RAILWAY
 // $servername = "roundhouse.proxy.rlwy.net";
@@ -18,11 +18,11 @@ $conexion = mysqli_connect("localhost", "root","", "clinica_red"); // Forma #1
 // $dbname = "clinica_red";
 // $conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 //HOSTINGER
-// $servername = "localhost";
-// $username = "u452119581_adminred";
-// $password = "T3chTit4n$2024";
-// $dbname = "u452119581_clinica_red";
-// $conexion = mysqli_connect($servername, $username, $password, $dbname);
+$servername = "localhost";
+$username = "u452119581_adminred";
+$password = "T3chTit4n$2024";
+$dbname = "u452119581_clinica_red";
+$conexion = mysqli_connect($servername, $username, $password, $dbname);
 // Base para Capacitacion
 // $servername = "localhost";
 // $username = "u452119581_adminred1";
