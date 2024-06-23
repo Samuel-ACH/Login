@@ -19,9 +19,9 @@
 // $conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 //HOSTINGER
 $servername = "localhost";
-$username = "u452119581_adminred";
-$password = "T3chTit4n$2024";
-$dbname = "u452119581_clinica_red";
+$username = "u452119581_evaluacion_red";
+$password = "M3$$i2024";
+$dbname = "u452119581_evaluacion_red";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
 // Base para Capacitacion
 // $servername = "localhost";
