@@ -19,7 +19,7 @@
 // $conexion = mysqli_connect($servername, $username, $password, $dbname, $PORT);
 //HOSTINGER
 $servername = "localhost";
-$username = "u452119581_evaluacion_red";
+$username = "u452119581_red_2";
 $password = "M3$$i2024";
 $dbname = "u452119581_evaluacion_red";
 $conexion = mysqli_connect($servername, $username, $password, $dbname);
