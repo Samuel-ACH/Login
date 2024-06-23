@@ -17,9 +17,9 @@ $sql = "UPDATE tbl_resultado_evaluacion SET Descripcion = '$Descripcion'
         WHERE Id_Resultado_Evaluacion = '$Id_Resultado_Evaluacion'";
 
     echo $resultado = mysqli_query($conexion, $sql);
-    $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
-    $a='EDITAR';
-    $d="SE HA EDITADO EL TIPO DE EXAMEN ". $Descripcion.".";
-    bitacora($n, $a, $d);
+    // $n=$_SESSION['id_D'];          //obtiene valor de la variable sesion
+    // $a='EDITAR';
+    // $d="SE HA EDITADO EL TIPO DE EXAMEN ". $Descripcion.".";
+    // bitacora($n, $a, $d);
     
 ?>

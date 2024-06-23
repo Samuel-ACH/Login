@@ -155,7 +155,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                     // Almacenar el arreglo en la sesión
                     // $_SESSION['array_IdCita'] = $id_citas_terapia;
                 } else {
-                    echo "<tr><td colspan='9'>0 resultados</td></tr>";
+                    // echo "<tr><td colspan='9'>0 resultados</td></tr>";
                 }
                 ?>
             </tbody>

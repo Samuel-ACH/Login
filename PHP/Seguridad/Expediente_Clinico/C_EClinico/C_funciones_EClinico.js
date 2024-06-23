@@ -40,7 +40,7 @@ function verificarEvaluacion() {
             // Si el campo está vacío, oculta el mensaje de error
             $('#mensaje_error').text('').removeClass('error').hide();
         }
-    }, 300); // Retraso de 300 ms antes de la solicitud
+    }, ); // Retraso de 300 ms antes de la solicitud
 }
 
 $(document).ready(function () {
@@ -72,7 +72,7 @@ function insertarTipoEvaluacionR(evaluacionR) {
             if (respuesta == 1) {
                 $('#tablaEvaluacionR').load('../V_EClinico/V_mantenimiento_EClinico.php');
                 alertify.success("Evaluación registrada correctamente.");
-                $('#modalEditarEvaluacionR').modal('hide'); // Cerrar el modal
+                // $('#modalEditarEvaluacionR').modal('hide'); // Cerrar el modal
                
             } else {
                 alertify.error("Fallo al guardar la evaluación.");
@@ -123,6 +123,9 @@ function actualizarTipoEvaluacionR() {
                 $('#tablaEvaluacionR').load('../V_EClinico/V_mantenimiento_EClinico.php');
                 alertify.success("Evaluación actualizada correctamente.");
                 $('#modalEditarEvaluacionR').modal('hide'); // Cerrar el modal
+                setTimeout(function() {
+                    window.location.reload();
+                }, 800);
             } else {
                 alertify.error("Fallo al actualizar la evaluación.");
             }

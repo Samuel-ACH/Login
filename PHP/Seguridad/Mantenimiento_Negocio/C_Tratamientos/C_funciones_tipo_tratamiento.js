@@ -40,7 +40,7 @@ function verificarTratamiento() {
             // Si el campo está vacío, oculta el mensaje de error
             $('#mensaje_error').text('').removeClass('error').hide();
         }
-    }, 300); // Retraso de 300 ms antes de la solicitud
+    }, ); // Retraso de 300 ms antes de la solicitud
 }
 
 $(document).ready(function() {
@@ -73,7 +73,9 @@ function insertarTipoTratamiento(tratamiento) {
             if (respuesta == 1) {
                 $('#tablaTipoTratamiento').load('../V_ETerapeutico/V_mantenimiento_tratamiento.php');
                 alertify.success("Tratamiento registrado correctamente.");
-
+                setTimeout(function() {
+                    window.location.reload();
+                }, 800);
             } else {
                 alertify.error("Fallo al guardar el tratamiento.");
             }
@@ -123,6 +125,9 @@ function actualizarTipoTratamiento() {
                 $('#tablaTipoTratamiento').load('../V_ETerapeutico/V_mantenimiento_tratamiento.php');
                 alertify.success("Tratamiento actualizado correctamente.");
                 $('#modalEditarTratamiento').modal('hide'); // Cerrar el modal
+                setTimeout(function() {
+                    window.location.reload();
+                }, 800);
             } else {
                 alertify.error("Fallo al actualizar el tratamiento.");
             }

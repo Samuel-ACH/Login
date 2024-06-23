@@ -13,26 +13,25 @@
 // $conn = new mysqli($servername, $username, $password, $dbname);
 //local
 // Conexión a la base de datos Local
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "clinica_red";
-// $conn = new mysqli($servername, $username, $password, $dbname);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "clinica_red";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-////////////////////////BD Principal Hostinger//////////////////////////////
+// //hostinger
 // $servername = "localhost";
 // $username = "u452119581_adminred";
 // $password = "T3chTit4n$2024";
 // $dbname = "u452119581_clinica_red";
 // $conn = new mysqli($servername, $username, $password, $dbname);
-
-//////////////////////////////// Base para pruebas de evaluacion Hostinger ////////////////////////////////////
-$servername = "localhost";
-$username = "u452119581_adminred";
-$password = "T3chTit4n$2024";
-$dbname = "u452119581_clinica_red";
-$conexion = mysqli_connect($servername, $username, $password, $dbname);
-$conexion->begin_transaction();
+// Base para Capacitacion
+// $servername = "localhost";
+// $username = "u452119581_adminred1";
+// $password = "T3chTit4ns2024";
+// $dbname = "u452119581_capacitacion";
+// $conexion = mysqli_connect($servername, $username, $password, $dbname);
+// $conexion->begin_transaction();
 
 // // Verificar la conexión
 // if ($conn->connect_errno) {

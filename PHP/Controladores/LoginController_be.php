@@ -81,9 +81,9 @@ if (!empty($correo) && !empty($clave_encriptada)) { // Validar que el correo y c
                     $a = 'INICIO DE SESIÓN';
                     $d = $_SESSION['usuario'] . ' INICIÓ SESIÓN';
                     bitacora($n, $a, $d);
-                    // enviarOTP($conexion, $correo);
-                    header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
-                    exit();
+                     enviarOTP($conexion, $correo);
+                   // header("location: ../Vistas/Main.php"); // Redirecciona al usuario a la página principal
+                   // exit();
                 }
             } else {
                 $mensajeError = "Es necesario completar el captcha para el primer inicio de sesión.";

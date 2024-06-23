@@ -33,7 +33,7 @@ function verificarTipoTerapia() {
             // Si el campo está vacío, oculta el mensaje de error
             $('#mensaje_error').text('').removeClass('error').hide();
         }
-    }, 300); // Retraso de 300 ms antes de la solicitud
+    }, ); // Retraso de 300 ms antes de la solicitud
 }
 
 $(document).ready(function() {
