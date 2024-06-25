@@ -65,9 +65,9 @@ include '../../../Recursos/Componentes/SideBar.html';
                             } 
                             ?>
                         </ul>
-                        <form action="./V_CambiarcontrasenaPerfil.php" method="POST" class="mt-2">
-                            <button id="btncambiocontraseñaperfil" class="btn btn-warning">Cambiar Contraseña</button>
-                        </form>
+                        <!-- <form action="./V_CambiarcontrasenaPerfil.php" method="POST" class="mt-2"> -->
+                            <button id="btncambiocontraseñaperfil" onclick="cambiarContrasena()" class="btn btn-warning">Cambiar Contraseña</button>
+                        <!-- </form> -->
                         <button id="btncerrarperfil" class="btn btn-danger" onclick="cerrarPerfil()">Cerrar Perfil</button>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ include '../../../Recursos/Componentes/footer.html';
         }
         
         
-        function cambiarContraseña() {
+        function cambiarContrasena() {
             // Redirigir al usuario a la página de cambio de contraseña
             window.location.href = "./V_cambiarcontrasenaPerfil.php";
         }
