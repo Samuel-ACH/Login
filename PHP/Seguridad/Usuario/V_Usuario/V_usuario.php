@@ -343,6 +343,7 @@ if ($Permisos_Objeto["Permiso_Reportes"] !== "1") {
                         extend: 'pdfHtml5',
                         download: 'open',
                         text: '<i class="fas fa-file-pdf"> PDF </i>',
+                        title: 'CLINICA RED',
                         orientation: 'landscape',
                         <?php endif; ?>
                         customize: function (doc) {
