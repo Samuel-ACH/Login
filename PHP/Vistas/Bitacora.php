@@ -140,7 +140,7 @@ include '../Controladores/Conexion/Conexion_be.php';
             u.Usuario AS Usuario,
             b.Accion,
             b.Descripcion
-            o.Objeto AS Objeto
+            o.Objetos AS Objeto
         FROM tbl_bitacora b
         INNER JOIN tbl_ms_usuario u ON b.Id_Usuario = u.Id_Usuario 
          INNER JOIN tbl_ms_objetos o ON b.Id_Objeto = o.Id_Objetos ORDER BY b.Fecha DESC";
