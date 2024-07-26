@@ -154,7 +154,7 @@ include '../Controladores/Conexion/Conexion_be.php';
                     <td><?php echo $fila['Accion'] ?></td>
                     <td><?php echo $fila['Fecha'] ?></td>
                     <td><?php echo $fila['Descripcion'] ?></td>
-                    <td><?php echo $fila['Objeto'] ?></td>
+                    <td><?php echo $fila['Id_Objeto'] ?></td>
                     <!-- Botones Editar y Eliminar -->
                     <!-- Dentro del bucle foreach para mostrar los usuarios -->
 
