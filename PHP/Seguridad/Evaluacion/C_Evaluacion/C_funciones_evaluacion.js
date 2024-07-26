@@ -135,7 +135,7 @@ function actualizarEvaluacion() {
         "&descripcionE=" + descripcionE;
 
     if (descripcionE.trim() === '') {
-        alertify.error("Los campos no pueden estar vacíosss.");
+        alertify.error("Los campos no pueden estar vacíos.");
         return false;
     }
 
