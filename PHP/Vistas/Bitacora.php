@@ -126,9 +126,10 @@ include '../Controladores/Conexion/Conexion_be.php';
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Usuario</th>
-                  <th scope="col">Accion</th>
+                  <th scope="col">Acción</th>
                   <th scope="col">Fecha </th>
-                  <th scope="col">Descripcion</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Objeto</th>
                 </tr>
               </thead>
               <tbody>
@@ -139,8 +140,10 @@ include '../Controladores/Conexion/Conexion_be.php';
             u.Usuario AS Usuario,
             b.Accion,
             b.Descripcion
+            o.Objeto AS Objeto
         FROM tbl_bitacora b
-        INNER JOIN tbl_ms_usuario u ON b.Id_Usuario = u.Id_Usuario ORDER BY b.Fecha DESC";
+        INNER JOIN tbl_ms_usuario u ON b.Id_Usuario = u.Id_Usuario 
+         INNER JOIN tbl_ms_objetos o ON b.Id_Objeto = o.Id_Objetos ORDER BY b.Fecha DESC";
                 $resultado = mysqli_query($conexion, $sql);
                 // Recorrer los resultados y mostrarlos en la tabla
                 foreach ($resultado as $fila) {
@@ -151,6 +154,7 @@ include '../Controladores/Conexion/Conexion_be.php';
                     <td><?php echo $fila['Accion'] ?></td>
                     <td><?php echo $fila['Fecha'] ?></td>
                     <td><?php echo $fila['Descripcion'] ?></td>
+                    <td><?php echo $fila['Objeto'] ?></td>
                     <!-- Botones Editar y Eliminar -->
                     <!-- Dentro del bucle foreach para mostrar los usuarios -->
 
