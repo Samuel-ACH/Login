@@ -41,7 +41,7 @@ include('./PHP/Controladores/Conexion/Conexion_be.php');
                     <button id="btn__registrarse">Registrarme</button>
                 </div>
             </div>
-
+<!--  -->
             <!--Formulario de Login y registro-->
             <div class="contenedor__login-register" id="formulario">
                 <!--Login-->
